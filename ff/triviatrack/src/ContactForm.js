@@ -20,7 +20,6 @@ const ContactForm = () => {
 
     return (
         <div className="contact-page">
-            {/* Contact Form */}
             <div className="contact-form-container">
                 <h2>Contact Us</h2>
                 <form className="contact-form" onSubmit={handleSubmit}>
