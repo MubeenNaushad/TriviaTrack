@@ -1,9 +1,13 @@
 import React from 'react';
 import './App.css';
 import placeholderImage from './work.png';
+import { useNavigate } from 'react-router-dom';
+
 
 const LandingPage = () => {
+    const navigate = useNavigate();
     return (
+        
         <div className="landing-page">
             <nav className="navbar">
                 <div className="logo">
@@ -21,8 +25,8 @@ const LandingPage = () => {
                     <a href="#">About</a>
                 </div>
                 <div className="auth-container">
-                    <button className="sign-in-button">Sign In</button>
-                    <button className="sign-up-button">Sign Up</button>
+                   <button className="sign-in-button" onClick={() => navigate('/login')}>Login</button>
+                     <button className="sign-up-button" onClick={() => navigate('/signup')}>Register</button>
                 </div>
             </nav>
 
