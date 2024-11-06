@@ -12,7 +12,6 @@ import {
     ArcElement,
 } from 'chart.js';
 
-// Register necessary Chart.js components
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -51,7 +50,6 @@ const TeacherDashboardPage = () => {
 
     return (
         <div className="teacher-dashboard-page">
-            {/* Sidebar */}
             <div className="sidebar">
                 <div className="sidebar-item active">
                     <i className="fas fa-chalkboard-teacher"></i>
@@ -67,7 +65,6 @@ const TeacherDashboardPage = () => {
                 </div>
             </div>
 
-            {/* Main Content */}
             <div className="main-content">
                 <div className="header compact-header">
                     <div className="dashboard-title">
@@ -79,9 +76,7 @@ const TeacherDashboardPage = () => {
                     </div>
                 </div>
 
-                {/* Dashboard Content */}
                 <div className="dashboard-content move-down">
-                    {/* Left Column */}
                     <div className="left-column">
                         <div className="teacher-summary spaced-section">
                             <div className="summary-card">
@@ -106,7 +101,6 @@ const TeacherDashboardPage = () => {
                         </div>
                     </div>
 
-                    {/* Right Column */}
                     <div className="right-column">
                         <div className="quiz-status spaced-section padded-right">
                             <h3>Quiz Status</h3>
