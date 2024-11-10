@@ -1,6 +1,8 @@
-import React from 'react';
 import './Dashboard.css';
 import { Line, Doughnut } from 'react-chartjs-2';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -25,6 +27,7 @@ ChartJS.register(
 );
 
 const DashboardPage = () => {
+    
     const lineChartData = {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         datasets: [
@@ -38,6 +41,20 @@ const DashboardPage = () => {
             },
         ],
     };
+    const [message,setMessage] = useState();
+    const navigate = useNavigate();
+    axios.defaults.withCredentials = true;  
+    useEffect(()=>{
+        axios.get('http://localhost:3001/Dashboard')
+        .then(res=> {
+            if(res.data.valid){
+                setMessage(res.data.Message)
+            }else{
+                navigate('/')
+            }
+        })
+        .catch(err=> console.log(err))
+    })
 
     const doughnutChartData = {
         labels: ['Trivia Games Played', 'Users Online', 'New Sign-Ups'],

@@ -1,11 +1,11 @@
 import React from 'react';
-import LandingPage from './LandingPage';
+import LandingPage from './LandingPage.js';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Login from './Login';
-import Signup from './Signup';
-import Dashboard from './DashboardPage';
-import TeacherDashboard from './TeacherDashboardPage';
-import ContactForm from './ContactForm';
+import Login from './Login.js';
+import Signup from './Signup.js';
+import Dashboard from './DashboardPage.js';
+import TeacherDashboard from './TeacherDashboardPage.js';
+import ContactForm from './ContactForm.js';
 
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
