@@ -34,9 +34,10 @@ body {
 }
 
 .search-bar input {
-  padding: 10px;
+  padding: 17px;
   border: 1px solid #ccc;
-  border-radius: 25px 0 0 0px;
+  border-radius: 25px 25px 25px 25px
+  ;
   outline: none;
 }
 
