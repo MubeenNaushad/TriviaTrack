@@ -26,16 +26,16 @@ app.post("/login", (req, res) => {
     if (user) {
       if (password === user.password) {
         const accesstoken = jwt.sign({ email }, process.env.JWT_ACCESS_TOKEN, {
-          expiresIn: "1m",
+          expiresIn: "10m",
         });
         const refreshtoken = jwt.sign(
           { email },
           process.env.JWT_REFRESH_TOKEN,
-          { expiresIn: "5m" }
+          { expiresIn: "50m" }
         );
-        res.cookie("accesstoken", accesstoken, { maxAge: 60000 });
+        res.cookie("accesstoken", accesstoken, { maxAge: 600000 });
         res.cookie("refreshtoken", refreshtoken, {
-          maxAge: 300000,
+          maxAge: 3000000,
           httpOnly: true,
           secure: true,
           sameSite: "strict",
@@ -60,6 +60,12 @@ app.post("/signup", (req, res) => {
         .catch((err) => res.json(err));
     }
   });
+});
+
+app.post("/logout", (req, res) => {
+  res.clearCookie("accesstoken");
+  res.clearCookie("refreshtoken");
+  res.json({ success: true });
 });
 
 const verifyuser = (req, res, next) => {
@@ -106,6 +112,28 @@ const renewToken = (req, res) => {
 app.get("/Dashboard", verifyuser, (req, res) => {
   return res.json({ valid: true, Message: "Welcome to Dashboard" });
 });
+
+app.get("/verifyuser", (req, res) => {
+  const accesstoken = req.cookies.accesstoken;
+  if (!accesstoken) {
+    return res.json({ valid: false, Message: "No Access Token" });
+  }
+
+  jwt.verify(accesstoken, process.env.JWT_ACCESS_TOKEN, (err, decoded) => {
+    if (err) {
+      return res.json({ valid: false, Message: "Invalid Token" });
+    } else {
+      StudentModel.findOne({ email: decoded.email }).then((user) => {
+        if (user) {
+          res.json({ valid: true, user: { name: user.name, email: user.email } });
+        } else {
+          res.json({ valid: false, Message: "User Not Found" });
+        }
+      });
+    }
+  });
+});
+
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);

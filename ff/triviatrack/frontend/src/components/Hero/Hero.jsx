@@ -33,7 +33,7 @@ const Hero = () => {
             initial='hidden'
             animate='visible'
             className="flex gap-8 justify-center md:justify-start !mt-8 items-center">
-                <button classname="primary-btn">Get Started</button>
+                <button className="primary-btn">Get Started</button>
             
             <button className="flex justify-end items-center gap-2 font-semibold">
                 <span className="w-10 h-10 bg-secondary/15 rounded-full flex justify-center items-center">

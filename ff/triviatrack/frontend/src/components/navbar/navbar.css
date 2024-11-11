@@ -1,0 +1,17 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px 50px;
+    transition: background-color 0.3s ease, padding 0.3s ease; /* Smooth transition for color and padding change */
+    z-index: 1000;
+  }
+  
+  .navbar-transparent {
+    background-color: transparent;
+  }
+  
+  .navbar-scrolled {
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background when scrolled */
+  }
+  
