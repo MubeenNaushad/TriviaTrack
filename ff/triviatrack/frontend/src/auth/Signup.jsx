@@ -32,7 +32,7 @@ const Signup = () => {
               className={styles['signup-input']} 
               required
             >
-              <option value="Student">Select</option>
+              <option value="hint">Select</option>
               <option value="Student">Student</option>
               <option value="Teacher">Teacher</option>
             </select>
