@@ -13,6 +13,7 @@ import Testimonial from "./components/Testimonial/Testimonial";
 import Footer from "./components/Footer/Footer";
 import SignUp from "./auth/Signup.jsx";
 import Login from "./auth/Login.jsx";
+import ContactForm from "./oldrand/ContactForm.jsx";
 
 const BannerData = {
   image: Img1,
@@ -56,7 +57,8 @@ const App = () => {
         />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        {/* You can add more routes here */}
+        <Route path="/contact" element={<ContactForm/>} />
+        
       </Routes>
     </Router>
   );
