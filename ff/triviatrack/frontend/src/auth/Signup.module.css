@@ -1,4 +1,16 @@
 /* Signup.module.css */
+/* Additional styling for the dropdown */
+
+.signup-input select {
+    appearance: none;
+    /* Remove default dropdown arrow */
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 1em;
+}
 * {
     padding: 0;
     box-sizing: border-box;
@@ -9,7 +21,6 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #9a9af2, #7a7ad4);
     overflow: hidden;
     color: #fff;
 }

@@ -5,8 +5,8 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import StudentModel from "./models/student.js";
 import dotenv from "dotenv";
-
 dotenv.config();
+
 
 const app = express();
 
@@ -107,6 +107,6 @@ app.get("/Dashboard", verifyuser, (req, res) => {
   return res.json({ valid: true, Message: "Welcome to Dashboard" });
 });
 
-app.listen(process.env.PORT, () => {
-  console.log("Server is running on port " + process.env.PORT);
+app.listen(process.dotenv, () => {
+  console.log("Server is running on port 3001");
 });
