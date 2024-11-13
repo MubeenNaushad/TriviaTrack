@@ -6,25 +6,25 @@ const NumberCounter = () => {
         <div className="container grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className='flex flex-col items-center justify-center'>
                 <p className='text-3xl font-semibold'>
-                    <CountUp start={0} end={890} duration={3} enableScrollSpy={true} scrollSpyOnce={true} />
+                    <CountUp start={0} end={890} duration={3} />
                 </p>
                 <p>Expert Tutors</p>
             </div>
             <div className='flex flex-col items-center justify-center'>
                 <p className='text-3xl font-semibold'>
-                    <CountUp end={20000} separator="," suffix="+" duration={3} enableScrollSpy={true} scrollSpyOnce={true} />
+                    <CountUp end={20000} separator="," suffix="+" duration={3}  />
                 </p>
                 <p>Games</p>
             </div>
             <div className='flex flex-col items-center justify-center'>
                 <p className='text-3xl font-semibold'>
-                    <CountUp end={290} duration={3} enableScrollSpy={true} scrollSpyOnce={true} />
+                    <CountUp end={290} duration={3} />
                 </p>
                 <p>Courses</p>
             </div>
             <div className='flex flex-col items-center justify-center'>
                 <p className='text-3xl font-semibold'>
-                    <CountUp end={78231} separator="," suffix="+" duration={3} enableScrollSpy={true} scrollSpyOnce={true} />
+                    <CountUp end={78231} separator="," suffix="+" duration={3} />
                 </p>
                 <p>Achievments</p>
             </div>

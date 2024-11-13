@@ -22,6 +22,10 @@ export const NavbarMenu = [
     {
         id: 5,
         title: "Contact",
+<<<<<<< HEAD
         link: "./contact",
+=======
+        link: "/contact",
+>>>>>>> 155c87d1dfe14bb5ebfbf3317303b93fb0850ee8
     }
 ];
