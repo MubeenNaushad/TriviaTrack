@@ -76,16 +76,16 @@ const navbar = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.5 }}
-<<<<<<< HEAD
+
         
       >
         <div className="container flex justify-between items-center py-6">
-=======
-        >
+
+        
         <div className={`fixed top-0 left-0 right-0 w-full z-50 px:4 lg:px-10 transition-colors duration-300 ${
         isScrolled ? 'bg-gray-900 shadow-md text-white' : 'bg-transparent text-gray-800'
        } flex justify-between items-center py-6`}>
->>>>>>> 155c87d1dfe14bb5ebfbf3317303b93fb0850ee8
+
           {/* Logo */}
           <div className={`text-2xl flex items-center gap-2 font-bold ${isScrolled ? 'text-white' : 'text-gray-800'}`}>
             <MdComputer className="text-3xl text-seconday" />
@@ -162,6 +162,7 @@ const navbar = () => {
           <div className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
             <MdMenu className="text-4xl" />
           </div>
+        </div>
         </div>
       </motion.div>
 

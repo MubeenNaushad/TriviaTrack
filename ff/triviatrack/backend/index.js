@@ -113,10 +113,10 @@ app.get("/Dashboard", verifyuser, (req, res) => {
   return res.json({ valid: true, Message: "Welcome to Dashboard" });
 });
 
-<<<<<<< HEAD
+
 app.listen(process.dotenv, () => {
   console.log("Server is running on port 3001");
-=======
+
 app.get("/verifyuser", (req, res) => {
   const accesstoken = req.cookies.accesstoken;
   if (!accesstoken) {
@@ -141,5 +141,5 @@ app.get("/verifyuser", (req, res) => {
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);
->>>>>>> 155c87d1dfe14bb5ebfbf3317303b93fb0850ee8
-});
+
+}); });
