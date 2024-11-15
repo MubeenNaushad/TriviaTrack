@@ -11,13 +11,13 @@ export const NavbarMenu = [
     },
     {
         id: 3,
-        title: "Resources",
+        title: "Courses",
         link: "#",
     },
     {
         id: 4,
-        title: "About us",
-        link: "#",
+        title: "Dashboard",
+        link: "/dashboard",
     }, 
     {
         id: 5,
