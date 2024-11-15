@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import SignUp from "./auth/Signup.jsx";
 import Login from "./auth/Login.jsx";
 import ContactForm from "./oldrand/ContactForm.jsx";
+import Dashboard from "./components/Dashboard/Dashboard.jsx";
 
 const BannerData = {
   image: Img1,
@@ -37,6 +38,7 @@ const App = () => {
   return (
     <Router>
       <Navbar />
+     
       <Routes>
         {/* Define the different routes in your application */}
         <Route
@@ -58,6 +60,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<ContactForm/>} />
+        <Route path="/dashboard" element={<Dashboard />} />
         
       </Routes>
     </Router>
