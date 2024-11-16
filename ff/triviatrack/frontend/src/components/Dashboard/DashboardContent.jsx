@@ -77,7 +77,7 @@ const DashboardContent = () => {
                 <tr>
                   <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-bold text-gray-600">Rank</th>
                   <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-bold text-gray-600">Name</th>
-                  <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-bold text-gray-600">Score</th>
+                  <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-bold text-gray-600">Email</th>
                 </tr>
               </thead>
               <tbody>
