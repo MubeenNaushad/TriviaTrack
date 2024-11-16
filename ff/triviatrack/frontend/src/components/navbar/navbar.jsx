@@ -110,7 +110,7 @@ const navbar = () => {
             </ul>
           </div>
 
-          {/* CTA Button  */}
+         
           <div className="hidden lg:block space-x-6">
             {!isLoggedIn ? (
             <>
@@ -150,6 +150,7 @@ const navbar = () => {
                     className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
                     onClick={handleLogout}
                   >
+                   
                     Logout
                   </button>
                 </div>
@@ -172,3 +173,4 @@ const navbar = () => {
 };
 
 export default navbar;
+

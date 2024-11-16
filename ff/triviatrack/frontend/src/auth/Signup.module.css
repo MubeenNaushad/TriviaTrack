@@ -131,15 +131,15 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 100px) {
     .signup-container {
-        padding: 10px;
+        padding: 100px;
     }
 
     .signup-form-container {
         width: 100%;
         max-width: 100%;
-        padding: 20px;
+        padding: 150px;
         border-radius: 15px;
     }
 

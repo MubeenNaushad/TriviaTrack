@@ -13,8 +13,14 @@ import Testimonial from "./components/Testimonial/Testimonial";
 import Footer from "./components/Footer/Footer";
 import SignUp from "./auth/Signup.jsx";
 import Login from "./auth/Login.jsx";
+import Roompage from "./room/indexx.jsx";
 import ContactForm from "./oldrand/ContactForm.jsx";
+import Livesession from "./components/navbar/Livesession.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
+
+
+
+
 
 const BannerData = {
   image: Img1,
@@ -47,8 +53,10 @@ const App = () => {
             <>
               <NavbarBanner />
               <Hero />
+              
               <NumberCounter />
               <WhyChoose />
+              
               <Banner {...BannerData} />
               <Banner {...BannerData2} reverse={true} />
               <SubjectCard />
@@ -60,7 +68,12 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<ContactForm/>} />
+        <Route path="/room/:roomid" element={<Roompage />} />
+        
         <Route path="/dashboard" element={<Dashboard />} />
+        
+        <Route path="/live" element={<Livesession />} />
+        
         
       </Routes>
     </Router>
