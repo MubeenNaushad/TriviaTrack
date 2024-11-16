@@ -7,7 +7,7 @@ export const NavbarMenu = [
     {
         id: 2,
         title: "For Students",
-        link: "/#",
+        link: "#",
     },
     {
         id: 3,
@@ -23,7 +23,7 @@ export const NavbarMenu = [
         id: 5,
         title: "Contact",
 
-        link: "./contact",
+        link: "/contact",
 
     }
 ];

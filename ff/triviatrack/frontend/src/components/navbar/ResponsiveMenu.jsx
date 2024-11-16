@@ -21,13 +21,13 @@ const ResponsiveMenu = ({ isOpen }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-gray-300 transition">
+                <Link to="/" className="hover:text-gray-300 transition">
                   About
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-gray-300 transition">
-                  Services
+                <Link to="/dashboard" className="hover:text-gray-300 transition">
+                  Dashboard
                 </Link>
               </li>
               <li>
