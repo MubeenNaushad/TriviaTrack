@@ -10,7 +10,7 @@ const Livesession = () => {
   }, [navigate, value]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 p-4">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 p-4 mt-10">
       <div className="flex flex-col items-center justify-center max-w-4xl bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-lg p-8 space-y-8">
         
         <h1 className="text-3xl font-bold text-white mt-4 text-center">
