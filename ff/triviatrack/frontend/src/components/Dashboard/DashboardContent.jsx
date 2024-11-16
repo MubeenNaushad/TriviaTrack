@@ -1,4 +1,3 @@
-import React from 'react';
 import { BsBook, BsFillTrophyFill, BsPeopleFill, BsFillBellFill } from 'react-icons/bs';
 import {
   BarChart,
@@ -10,6 +9,8 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
 const DashboardContent = () => {
   const data = [
@@ -18,6 +19,18 @@ const DashboardContent = () => {
     { name: 'Critical Thinking', avgGrade: 90 },
     { name: 'Webdev', avgGrade: 75 },
   ];
+
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/students")
+      .then((response) => {
+        setStudents(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching students:", error);
+      });
+  }, []);
 
   return (
     <div className="p-6 bg-gray-100">
@@ -68,14 +81,14 @@ const DashboardContent = () => {
                 </tr>
               </thead>
               <tbody>
-                {[...Array(20)].map((_, index) => (
-                  <tr key={index}>
-                    <td className="py-2 px-4 border-b">{index + 1}</td>
-                    <td className="py-2 px-4 border-b">Student {index + 1}</td>
-                    <td className="py-2 px-4 border-b">{Math.floor(Math.random() * 1000)}</td>
-                  </tr>
-                ))}
-              </tbody>
+        {students.map((student, index) => (
+          <tr key={student._id}>
+            <td className="py-2 px-4 border-b">{index + 1}</td>
+            <td className="py-2 px-4 border-b">{student.name}</td>
+            <td className="py-2 px-4 border-b">{student.email}</td>
+          </tr>
+        ))}
+      </tbody>
             </table>
           </div>
         </div>
