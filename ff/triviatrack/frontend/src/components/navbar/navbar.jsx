@@ -68,7 +68,8 @@ const navbar = () => {
         console.error("Error during logout:", err);
       });
   };
-  
+
+
 
   return (
     <>
@@ -130,19 +131,19 @@ const navbar = () => {
                 <div className="py-1">
                 <button 
                     className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
-                    onClick={handleLogout}
+                    onClick={() => navigate('/dashboard')}
                   >
                     My Profile
                   </button>
                 <button 
                     className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
-                    onClick={handleLogout}
+                    onClick={() => navigate('/dashboard')}
                   >
                     Dashboard
                   </button>
                   <button 
                     className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
-                    onClick={handleLogout}
+                    onClick={() => navigate('/dashboard')}
                   >
                     My Courses
                   </button>

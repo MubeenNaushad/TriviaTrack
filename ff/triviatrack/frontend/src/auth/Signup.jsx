@@ -18,7 +18,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 p-4">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 p-4 mt-10">
       <div className={styles['signup-container']}>
         <div className={styles['signup-form-container']}>
           <h2 className={styles['signup-title']}>Register</h2>
