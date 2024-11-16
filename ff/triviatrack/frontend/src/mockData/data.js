@@ -23,7 +23,14 @@ export const NavbarMenu = [
         id: 5,
         title: "Contact",
 
-        link: "./contact",
+        link: "/contact",
 
-    }
+    },
+     {
+        id: 6,
+        title: "Live Session",
+        link: "/live",
+
+    },
+    
 ];

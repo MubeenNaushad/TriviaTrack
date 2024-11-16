@@ -21,6 +21,11 @@ const ResponsiveMenu = ({ isOpen }) => {
                 </Link>
               </li>
               <li>
+                <Link to="/" className="hover:text-gray-300 transition">
+                  Live session
+                </Link>
+              </li>
+              <li>
                 <Link to="/about" className="hover:text-gray-300 transition">
                   About
                 </Link>
