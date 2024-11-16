@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import React, { useState } from "react";
 import styles from './Signup.module.css';
+import '@fortawesome/fontawesome-free';
 
 const Signup = () => {
   const [name, setName] = useState('');

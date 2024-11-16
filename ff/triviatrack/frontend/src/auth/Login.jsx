@@ -1,12 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './Login.module.css'; // Import as a CSS Module
+import styles from './Login.module.css';
 import axios from 'axios';
 import React, { useState } from "react";
+import '@fortawesome/fontawesome-free';
+
 
 const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [userType, setUserType] = useState("Student"); // Add state for user type
+  const [userType, setUserType] = useState("Student");
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;

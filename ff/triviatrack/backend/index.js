@@ -68,6 +68,16 @@ app.post("/logout", (req, res) => {
   res.json({ success: true });
 });
 
+app.get("/students", (req, res) => {
+  StudentModel.find({})
+    .then((students) => {
+      res.json(students);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 const verifyuser = (req, res, next) => {
   const accesstoken = req.cookies.accesstoken;
   if (!accesstoken) {
@@ -99,7 +109,7 @@ const renewToken = (req, res) => {
         const accesstoken = jwt.sign(
           { email: decoded.email },
           process.env.JWT_ACCESS_TOKEN,
-          { expiresIn: "1m" }
+          { expiresIn: "10m" }
         );
         res.cookie("accesstoken", accesstoken, { maxAge: 60000 });
         exist = true;
@@ -112,10 +122,6 @@ const renewToken = (req, res) => {
 app.get("/Dashboard", verifyuser, (req, res) => {
   return res.json({ valid: true, Message: "Welcome to Dashboard" });
 });
-
-
-app.listen(process.dotenv, () => {
-  console.log("Server is running on port 3001");
 
 app.get("/verifyuser", (req, res) => {
   const accesstoken = req.cookies.accesstoken;
@@ -142,4 +148,4 @@ app.get("/verifyuser", (req, res) => {
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);
 
-}); });
+});
