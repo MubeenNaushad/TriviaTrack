@@ -7,11 +7,12 @@ import Livesession from "../components/navbar/Livesession";
 const RoomPage=()=>{
     const{roomid}=useParams();
     const navigate=useNavigate();
+    
 
     const meeting =async(element)=>{
     const appID=814549105;
     const serverSecret="c4004320dfdb8161d035e491f59159b2";
-    const kitToken=ZegoUIKitPrebuilt.generateKitTokenForTest(appID,serverSecret,roomid,Date.now().toString(),Date.now().toString());
+    const kitToken=ZegoUIKitPrebuilt.generateKitTokenForTest(appID,serverSecret,roomid,Date.now().toString(),"TriviaTrack");
    
    const zc=ZegoUIKitPrebuilt.create(kitToken);
     zc.joinRoom({
@@ -27,7 +28,7 @@ const RoomPage=()=>{
       } ) 
 }
    return<div>
-         <div ref={meeting }/>
+         <div ref={meeting } style={{ width: '100vw', height: '100vh' }}/>
    </div>
 
 

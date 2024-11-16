@@ -20,7 +20,6 @@ const Signup = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 p-4">
-       
       <div className={styles['signup-container']}>
           
         <div className={styles['signup-form-container']}>
@@ -83,6 +82,7 @@ const Signup = () => {
         </div>
       </div>
     </div>
+   
   );
 };
 
