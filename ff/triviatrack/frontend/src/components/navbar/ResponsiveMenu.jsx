@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
+
 const ResponsiveMenu = ({ isOpen }) => {
   return (
     <AnimatePresence mode="wait">
@@ -22,17 +23,20 @@ const ResponsiveMenu = ({ isOpen }) => {
               </li>
               <li>
                 <Link to="/" className="hover:text-gray-300 transition">
+
                   Live session
                 </Link>
               </li>
               <li>
                 <Link to="/about" className="hover:text-gray-300 transition">
+
+
                   About
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-gray-300 transition">
-                  Services
+                <Link to="/dashboard" className="hover:text-gray-300 transition">
+                  Dashboard
                 </Link>
               </li>
               <li>

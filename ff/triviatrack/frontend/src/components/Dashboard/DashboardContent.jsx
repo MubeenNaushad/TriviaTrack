@@ -68,7 +68,7 @@ const DashboardContent = () => {
                 </tr>
               </thead>
               <tbody>
-                {[...Array(50)].map((_, index) => (
+                {[...Array(20)].map((_, index) => (
                   <tr key={index}>
                     <td className="py-2 px-4 border-b">{index + 1}</td>
                     <td className="py-2 px-4 border-b">Student {index + 1}</td>
