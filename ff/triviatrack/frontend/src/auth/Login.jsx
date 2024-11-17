@@ -14,7 +14,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:'+process.env.PORT+'/login', { email, password, userType })
+    axios.post('http://localhost:3001/login', { email, password, userType })
       .then(res => {
         if (res.data.Login) {
           navigate('/');
