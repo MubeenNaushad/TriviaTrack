@@ -19,7 +19,13 @@ app.use(
 );
 app.use(cookieParser());
 
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI).then(() => {
+  console.log("Connected to MongoDB");
+}).catch(err => {
+  console.log(err);
+});
+
+
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
   StudentModel.findOne({ email }).then((user) => {
@@ -42,9 +48,13 @@ app.post("/login", (req, res) => {
         });
         return res.json({ Login: true });
       } else {
-        res.json({ Login: false, Message: "No Record Found" });
+        res.json({ Login: false, Message: "Incorrect Password" });
       }
+    } else {
+      res.json({ Login: false, Message: "No Record Found" });
     }
+  }).catch(err => {
+    res.json({ error: err.message });
   });
 });
 
@@ -84,6 +94,9 @@ const verifyuser = (req, res, next) => {
     if (renewToken(req, res)) {
       next();
     } else {
+      return res.json({ valid: false, Message: "No Access" });
+    }
+  } else {
       jwt.verify(accesstoken, process.env.JWT_ACCESS_TOKEN, (err, decoded) => {
         if (err) {
           return res.json({ valid: false, Message: "Invalid Token" });
@@ -93,7 +106,6 @@ const verifyuser = (req, res, next) => {
         }
       });
     }
-  }
 };
 
 const renewToken = (req, res) => {
@@ -114,6 +126,8 @@ const renewToken = (req, res) => {
         res.cookie("accesstoken", accesstoken, { maxAge: 60000 });
         exist = true;
       }
+    }).catch(err => {
+      res.json({ error: err.message });
     });
   }
   return exist;
@@ -145,7 +159,33 @@ app.get("/verifyuser", (req, res) => {
 });
 
 
+app.delete("/students/delete/:id", (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json("No student with that id"); 
+  } else {
+    StudentModel.findByIdAndDelete(id)
+    .then(() => res.json("Student deleted successfully"))
+    .catch((err) => res.status(400).json({ error: err.message }));
+  }
+});
+
+
+app.patch("/students/update/:id", (req, res) => {
+  const { id } = req.params;
+  const { name, email, password } = red.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send("No student with that id");
+  } else {
+    const updatedStudent = { name, email, password, _id: id };
+    StudentModel.findByIdAndUpdate(id, { name, email, password }, { new: true })
+      .then((updatedStudent) => res.json(updatedStudent))
+      .catch((err) => res.json({ error: err.message }));
+  }
+});
+
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);
-
 });
