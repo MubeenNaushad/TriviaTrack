@@ -100,7 +100,7 @@ const navbar = () => {
                   <li key={item.id}>
                     <a
                       href={item.link}
-                      className={`${isScrolled ? 'text-white' : 'text-gray-600'}inline-block text-sm xl:text-base py-1 px-2 xl:px-3 hover:text-seconday transition-all duration-300 font-semibold`}
+                      className={`inline-block text-sm xl:text-base py-1 px-2 xl:px-3 hover:text-seconday transition-all duration-300 font-semibold`}
                     >
                       {item.title}
                     </a>
@@ -160,7 +160,7 @@ const navbar = () => {
           </div>
 
           {/* Mobile */}
-          <div className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
+          <div className="lg:hidden mr-20" onClick={() => setIsOpen(!isOpen)}>
             <MdMenu className="text-4xl" />
           </div>
         </div>
