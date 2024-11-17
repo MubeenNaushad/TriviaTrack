@@ -8,7 +8,7 @@ const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('Student'); // Default to "Student"
+  const [userType, setUserType] = useState('Student'); 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {

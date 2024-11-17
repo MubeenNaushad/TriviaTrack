@@ -4,7 +4,6 @@ import {
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer
@@ -102,7 +101,6 @@ const DashboardContent = () => {
               data={data}
               margin={{ top: 20, right: 30, left: 20, bottom: 0 }}
             >
-              <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />

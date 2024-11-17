@@ -27,7 +27,7 @@ const navbar = () => {
    
     window.addEventListener('scroll', handleScroll);
   
-    // Clean up the event listener on component unmount
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -92,7 +92,7 @@ const navbar = () => {
             <p>TriviaTrack</p>
           </div>
 
-          {/* Menu  */}
+         
           <div className="hidden lg:block">
             <ul className="flex items-center gap-6">
               {NavbarMenu.map((item) => {
@@ -124,7 +124,7 @@ const navbar = () => {
               <button className="flex items-center gap-2 font-semibold"  onClick={handleToggleDropdown}>
                 <MdPerson className="text-xl" />
                 {userName}
-                <svg class="hs-dropdown-open:rotate-180 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </button>
               <div className={`${isDropdownOpen ? "" : "hidden"} absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50`}>
                 <div className="py-1">
@@ -159,8 +159,8 @@ const navbar = () => {
             )}
           </div>
 
-          {/* Mobile */}
-          <div className="lg:hidden mr-20" onClick={() => setIsOpen(!isOpen)}>
+          
+          <div className="lg:hidden mr-32" onClick={() => setIsOpen(!isOpen)}>
             <MdMenu className="text-4xl" />
           </div>
         </div>

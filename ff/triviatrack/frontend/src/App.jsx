@@ -48,7 +48,7 @@ const App = () => {
       <Navbar />
      
       <Routes>
-        {/* Define the different routes in your application */}
+        
         <Route
           path="/"
           element={

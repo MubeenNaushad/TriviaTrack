@@ -26,6 +26,8 @@ const RoomPage=()=>{
     onLiveEnd:()=>{
         navigate("/")   
     },
+   
+    
     turnOnCameraWhenJoining: false,
        
       } ) 
