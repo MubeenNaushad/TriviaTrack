@@ -1,10 +1,11 @@
-import express from "express";
+import express, { response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import StudentModel from "./models/student.js";
 import dotenv from "dotenv";
+import bcrypt from "bcrypt";
 dotenv.config();
 
 
@@ -30,28 +31,32 @@ app.post("/login", (req, res) => {
   const { email, password } = req.body;
   StudentModel.findOne({ email }).then((user) => {
     if (user) {
-      if (password === user.password) {
-        const accesstoken = jwt.sign({ email }, process.env.JWT_ACCESS_TOKEN, {
-          expiresIn: "10m",
-        });
-        const refreshtoken = jwt.sign(
-          { email },
-          process.env.JWT_REFRESH_TOKEN,
-          { expiresIn: "50m" }
-        );
-        res.cookie("accesstoken", accesstoken, { maxAge: 600000 });
-        res.cookie("refreshtoken", refreshtoken, {
-          maxAge: 3000000,
-          httpOnly: true,
-          secure: true,
-          sameSite: "strict",
-        });
-        return res.json({ Login: true });
-      } else {
-        res.json({ Login: false, Message: "Incorrect Password" });
-      }
-    } else {
-      res.json({ Login: false, Message: "No Record Found" });
+      bcrypt.compare(password,user.password,(err,response)=>{
+        if(err){
+          res.json({Login:false,Message:"Invalid Password"})
+        }
+        if(response){
+          const accesstoken = jwt.sign({ email }, process.env.JWT_ACCESS_TOKEN, {
+            expiresIn: "10m",
+          });
+          const refreshtoken = jwt.sign(
+            { email },
+            process.env.JWT_REFRESH_TOKEN,
+            { expiresIn: "50m" }
+          );
+          res.cookie("accesstoken", accesstoken, { maxAge: 600000 });
+          res.cookie("refreshtoken", refreshtoken, {
+            maxAge: 3000000,
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+          });
+          return res.json({ Login: true });
+        }
+        else {
+          res.json({ Login: false, Message: "No Record Found" });
+        }
+      })    
     }
   }).catch(err => {
     res.json({ error: err.message });
@@ -60,14 +65,20 @@ app.post("/login", (req, res) => {
 
 app.post("/signup", (req, res) => {
   const { name, email, password } = req.body;
+ 
 
   StudentModel.findOne({ email }).then((user) => {
     if (user) {
       return res.json({ error: true, message: "Email already in use" });
     } else {
-      StudentModel.create({ name, email, password })
-        .then((user) => res.json(user))
-        .catch((err) => res.json(err));
+       bcrypt.hash(password, 10)
+  .then(hash =>{
+    StudentModel.create({ name, email, password:hash })
+    .then((user) => res.json(user))
+    .catch((err) => res.json(err));
+  });
+        
+        
     }
   });
 });

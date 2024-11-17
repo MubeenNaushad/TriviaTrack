@@ -25,7 +25,6 @@ const Login = () => {
       .catch(err => console.log(err));
   };
 
-  // Toggle user type between Student and Teacher
   const toggleUserType = () => {
     setUserType(prevType => (prevType === "Student" ? "Teacher" : "Student"));
   };
@@ -37,7 +36,7 @@ const Login = () => {
           
           <h2 className={styles['login-title']}>Welcome To TriviaTrack</h2>
 
-          {/* Toggle Button */}
+          
           <div className="flex justify-center mb-6">
             <button 
               onClick={toggleUserType}

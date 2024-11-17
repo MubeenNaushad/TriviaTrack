@@ -28,6 +28,7 @@ const Signup = () => {
         
           
           <form onSubmit={handleSubmit}>
+             <h2 className={styles['signup-title']}>Register</h2>
 
             <select 
               value={userType} 
@@ -77,7 +78,7 @@ const Signup = () => {
           <p>
             Already have an account? <Link to="/login" className={styles['signup-login-link']}>Login</Link>
           </p>
-            <h2 className={styles['signup-title']}>Register</h2>
+           
         
           
         </div>
