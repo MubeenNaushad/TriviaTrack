@@ -68,15 +68,15 @@
 .signup-input.select {
     appearance: none;
     padding: 15px;
-    padding-right: 40px;
+    padding-right: 30px;
     border: none;
     border-radius: 25px;
     background: rgba(255, 255, 255, 0.2);
     color: #000000;
     font-size: 1em;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 15px center;
+    background-position: right 1px center;
     background-size: 1em;
 }
 
@@ -105,6 +105,7 @@
     justify-content: center;
     gap: 15px;
     margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .signup-social-icons i {

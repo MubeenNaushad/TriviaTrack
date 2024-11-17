@@ -17,6 +17,8 @@ import Roompage from "./room/indexx.jsx";
 import ContactForm from "./oldrand/ContactForm.jsx";
 import Livesession from "./components/navbar/Livesession.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 

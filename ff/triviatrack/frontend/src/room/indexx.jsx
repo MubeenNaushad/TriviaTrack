@@ -1,7 +1,6 @@
 import React,{useState,useCallback} from "react";
 import {useNavigate,useParams} from "react-router-dom";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
-import Livesession from "../components/navbar/Livesession";
 
 
 const RoomPage=()=>{
@@ -23,7 +22,11 @@ const RoomPage=()=>{
     showScreenSharingButton: true,
     onLeaveRoom:()=>{
         navigate("/")
-    }
+    },
+    onLiveEnd:()=>{
+        navigate("/")   
+    },
+    turnOnCameraWhenJoining: false,
        
       } ) 
 }
