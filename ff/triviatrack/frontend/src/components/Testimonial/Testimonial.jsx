@@ -39,7 +39,7 @@ const Testimonial = () => {
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
-    // autoplay: true,
+
     autoplaySpeed: 2000,
     cssEase: "linear",
     pauseOnHover: true,
@@ -73,7 +73,7 @@ const Testimonial = () => {
   return (
     <div className="py-14 mb-10" >
       <div className="container">
-        {/* header section */}
+       
         <div className="space-y-4 p-6 text-center max-w-[600px] mx-auto mb-6">
           <h1 className="uppercase font-semibold text-orange-600">
             OUR TESTIMONIALS
@@ -82,14 +82,14 @@ const Testimonial = () => {
             What Our Users Say About Us
           </p>
         </div>
-        {/* Testimonial cards section */}
+      
         <div>
           <Slider {...setting}>
             {TestimonialsData.map((item) => {
               return (
                 <div key={item.id}>
                   <div className="flex flex-col gap-4 p-8 shadow-lg mx-4 rounded-xl bg-secondary/10">
-                    {/* upper section */}
+                 
                     <div className="flex justify-start items-center gap-5">
                       <img
                         src={item.img}
@@ -103,7 +103,7 @@ const Testimonial = () => {
                         <p>{item.name}</p>
                       </div>
                     </div>
-                    {/* bottom section */}
+              
                     <div className="py-6 space-y-4">
                       <p className="text-sm text-gray-500">{item.text}</p>
                       <p>⭐⭐⭐⭐⭐</p>

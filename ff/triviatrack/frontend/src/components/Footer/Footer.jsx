@@ -17,7 +17,7 @@ const Footer = () => {
       <div className="bg-primary/5">
         <div className="container">
           <div className="grid md:grid-cols-4 md:gap-4 py-5 border-t-2 border-gray-300/10 text-black">
-            {/* brand info section */}
+            
             <div className="py-8 px-4 space-y-4">
               <div className="text-2xl flex items-center gap-2 font-bold uppercase">
                 <MdComputer className="text-secondary text-4xl" />
@@ -43,7 +43,7 @@ const Footer = () => {
                 </a>
               </div>
             </div>
-            {/* Footer Links  */}
+            
             <div className="grid grid-cols-2 md:grid-cols-3 md:col-span-3 md:ml-14">
               <div className="py-8 px-4">
                 <h1 className="sm:text-xl text-xl font-bold sm:text-left text-justify mb-5">
@@ -51,7 +51,7 @@ const Footer = () => {
                 </h1>
                 <ul className="flex flex-col gap-3">
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <a href="/" className="hover:text-secondary duration-200">
                       Home
                     </a>
                   </li>
@@ -66,7 +66,7 @@ const Footer = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <a href="/login" className="hover:text-secondary duration-200">
                       Login
                     </a>
                   </li>
@@ -128,12 +128,12 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          {/* copyright section  */}
+          
           <div className="mt-8">
             <div className="text-center py-6 border-t-2 border-gray-800/10">
               <span className="text-sm text-black/60">
-                {" "}
-                Copyright @ TriviaTrack
+                
+                Copyright @ TriviaTrack2024
               </span>
             </div>
           </div>

@@ -131,7 +131,7 @@
     color: #d1d1ff;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 100px) {
     .signup-container {
         padding: 100px;
@@ -155,7 +155,7 @@
 
     .signup-input.select {
         padding-right: 35px;
-        /* Adjust padding for dropdown arrow on smaller screens */
+       
     }
 
     .signup-button {

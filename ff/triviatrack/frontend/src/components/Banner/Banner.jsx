@@ -7,7 +7,6 @@ const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
     <div className="bg-[#f9f9f9] pb-14">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 space-y-6 md:space-y-0">
-          {/* banner Image section */}
           <div
             className={`flex justify-start items-center ${
               reverse && "md:order-last md:justify-end"
@@ -22,7 +21,6 @@ const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
               className="w-[400px] h-full object-cover"
             />
           </div>
-          {/* Banner text section */}
           <div className="flex flex-col justify-center text-center md:text-left space-y-4 lg:max-w-[500px]">
             <motion.p
               variants={SlideUp(0.5)}

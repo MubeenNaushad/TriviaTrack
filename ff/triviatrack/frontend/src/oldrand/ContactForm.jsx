@@ -25,12 +25,12 @@ function ContactForm() {
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 p-4 mt-10">
       <div className="flex flex-col md:flex-row items-center justify-center max-w-4xl bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-lg p-8 space-y-8 md:space-y-0 md:space-x-8">
         
-        {/* Left Side Image */}
+  
         <div className="flex-shrink-0">
           <img src= "\src\assets\ContactUs.png" alt="Contact Support" className="w-full md:w-96 h-auto" />
         </div>
 
-        {/* Right Side Contact Form */}
+        
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
