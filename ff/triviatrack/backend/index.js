@@ -68,9 +68,7 @@ app.post("/signup", (req, res) => {
     StudentModel.create({ name, email, password:hash })
     .then((user) => res.json(user))
     .catch((err) => res.json(err));
-  });
-        
-        
+  }); 
     }
   });
 });

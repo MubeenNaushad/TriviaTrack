@@ -15,7 +15,7 @@ const navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    // Function to handle scroll
+    
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setIsScrolled(true);
@@ -24,7 +24,7 @@ const navbar = () => {
       }
     };
   
-    // Attach scroll event listener
+   
     window.addEventListener('scroll', handleScroll);
   
     // Clean up the event listener on component unmount
@@ -45,7 +45,7 @@ const navbar = () => {
       .then(response => {
         if (response.data.valid) {
           setIsLoggedIn(true);
-          setUserName(response.data.user.name); // Assuming the backend sends user data
+          setUserName(response.data.user.name); 
         } else {
           setIsLoggedIn(false);
         }
@@ -87,7 +87,6 @@ const navbar = () => {
         isScrolled ? 'bg-gray-900 shadow-md text-white' : 'bg-transparent text-gray-800'
        } flex justify-between items-center py-6`}>
 
-          {/* Logo */}
           <div className={`text-2xl flex items-center gap-2 font-bold ${isScrolled ? 'text-white' : 'text-gray-800'}`}>
             <MdComputer className="text-3xl text-seconday" />
             <p>TriviaTrack</p>

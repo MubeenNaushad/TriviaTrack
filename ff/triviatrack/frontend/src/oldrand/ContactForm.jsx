@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 
 
@@ -87,7 +88,7 @@ function ContactForm() {
               <>
                 <p>Need help? <span className="underline cursor-pointer">Contact Support</span></p>
                 <p className="mt-2">
-                  Don't have an account? <span className="underline cursor-pointer">Register</span>
+                  Don't have an account? <Link to="/signup"><span className="underline cursor-pointer"> Register</span></Link>
                 </p>
               </>
             )}
