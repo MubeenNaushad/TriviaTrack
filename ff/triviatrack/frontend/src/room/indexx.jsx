@@ -31,7 +31,7 @@ const RoomPage=()=>{
       } ) 
 }
    return<div>
-         <div ref={meeting } style={{ width: '100vw', height: '100vh' }}/>
+         <div className="mt-10" ref={meeting } style={{ width: '100vw', height: '100vh'}}/>
    </div>
 
 
