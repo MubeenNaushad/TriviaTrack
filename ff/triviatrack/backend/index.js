@@ -183,7 +183,7 @@ app.delete("/students/delete/:id", (req, res) => {
 
 app.patch("/students/update/:id", (req, res) => {
   const { id } = req.params;
-  const { name, email, password } = red.body;
+  const { name, email, password } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send("No student with that id");
