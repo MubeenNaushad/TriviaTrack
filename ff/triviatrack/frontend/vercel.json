@@ -5,6 +5,7 @@
       { "source": "/contact", "destination": "/" },
       { "source": "/dashboard", "destination": "/" },
       { "source": "/(.*)", "destination": "/index.html" }
-    ]
+    ],
+    "framework": null
   }
   
