@@ -22,7 +22,7 @@ const DashboardContent = () => {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/students")
+    axios.get(`${import.meta.env.VITE_APP_BASEURL}/students`)
       .then((response) => {
         console.log("Students fetched:", response.data);
         setStudents(response.data);

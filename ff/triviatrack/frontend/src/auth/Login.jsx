@@ -14,7 +14,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/login', { email, password, userType })
+    axios.post(`${import.meta.env.VITE_APP_BASEURL}/login`, { email, password, userType })
       .then(res => {
         if (res.data.Login) {
           navigate('/');

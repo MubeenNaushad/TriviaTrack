@@ -41,7 +41,7 @@ const navbar = () => {
   
 
   useEffect(() => {
-    axios.get("http://localhost:3001/verifyuser", { withCredentials: true })
+    axios.get(`${import.meta.env.VITE_APP_BASEURL}/verifyuser`, { withCredentials: true })
       .then(response => {
         if (response.data.valid) {
           setIsLoggedIn(true);
@@ -59,7 +59,7 @@ const navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    axios.post("http://localhost:3001/logout", {}, { withCredentials: true })
+    axios.post(`${import.meta.env.VITE_APP_BASEURL}/logout`, {}, { withCredentials: true })
       .then(() => {
         setIsLoggedIn(false);
         navigate('/');
