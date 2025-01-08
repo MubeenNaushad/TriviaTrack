@@ -1,23 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from "./components/navbar/navbar.jsx";
-import NavbarBanner from "./components/navbar/NavbarBanner.jsx";
-import Hero from "./components/Hero/Hero.jsx";
-import NumberCounter from "./components/NumberCounter/NumberCounter.jsx";
-import WhyChoose from "./components/WhyChoose/WhyChoose.jsx";
+import { BrowserRouter as Router, Route, Routes, createBrowserRouter } from "react-router-dom";
+import Navbar from "./components copy/navbar/navbar.jsx";
+import NavbarBanner from "./components copy/navbar/NavbarBanner.jsx";
+import Hero from "./components copy/Hero/Hero.jsx";
+import NumberCounter from "./components copy/NumberCounter/NumberCounter.jsx";
+import WhyChoose from "./components copy/WhyChoose/WhyChoose.jsx";
 import Img1 from "./assets/banner1.png";
 import Img2 from "./assets/banner2.png";
-import Banner from "./components/Banner/Banner";
-import SubjectCard from "./components/SubjectCard/SubjectCard";
-import Testimonial from "./components/Testimonial/Testimonial";
-import Footer from "./components/Footer/Footer";
+import Banner from "./components copy/Banner/Banner";
+import SubjectCard from "./components copy/SubjectCard/SubjectCard";
+import Testimonial from "./components copy/Testimonial/Testimonial";
+import Footer from "./components copy/Footer/Footer";
 import SignUp from "./auth/Signup.jsx";
 import Login from "./auth/Login.jsx";
 import Roompage from "./room/indexx.jsx";
 import ContactForm from "./oldrand/ContactForm.jsx";
-import Livesession from "./components/navbar/Livesession.jsx";
-import Dashboard from "./components/Dashboard/Dashboard.jsx";
+import Livesession from "./components copy/navbar/Livesession.jsx";
+import Dashboard from "./components copy/Dashboard/Dashboard.jsx";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import HeroSection from "./Pages/Student/HeroSection.jsx";
+import Courses from "./Pages/Student/Courses.jsx";
 
 const BannerData = {
   image: Img1,
@@ -37,7 +39,10 @@ const BannerData2 = {
   link: "#",
 };
 
+
+
 const App = () => {
+  
   return (
     <Router>
       <Navbar />
@@ -50,18 +55,31 @@ const App = () => {
             <>
               <NavbarBanner />
               <Hero />
-              
               <NumberCounter />
               <WhyChoose />
-              
               <Banner {...BannerData} />
               <Banner {...BannerData2} reverse={true} />
               <SubjectCard />
+              <HeroSection/>
               <Testimonial />
               <Footer />
             </>
+            
           }
+          
         />
+
+<Route
+          path="/courses"
+          element={
+            <>
+              <HeroSection/>
+              <Courses/>
+             
+            </> 
+          }       
+        />
+        
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<ContactForm/>} />
@@ -70,10 +88,14 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         
         <Route path="/live" element={<Livesession />} />
+        <Route path="/courses" element={<HeroSection />} />
+
         
         
       </Routes>
     </Router>
+
+
   );
 };
 

@@ -3,18 +3,20 @@ import mongoose from "mongoose";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
-import StudentModel from "./models/student.js";
+import StudentModel from "./models/user.model.js";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
+import { createcourse } from "./controllers/course.controller.js";
 
 dotenv.config();
 
 const app = express();
+const router=express.Router();
 
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "https://trivia-track.vercel.app",
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
     credentials: true,
   })
 );
@@ -194,6 +196,8 @@ app.patch("/students/update/:id", (req, res) => {
       .catch((err) => res.json({ error: err.message }));
   }
 });
+
+router.route("/course").post(verifyuser,createcourse)
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);
