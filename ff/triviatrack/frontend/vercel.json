@@ -1,0 +1,13 @@
+{
+  "rewrites": [
+    { "source": "/login", "destination": "/students/login" },
+    { "source": "/signup", "destination": "/students/signup" },
+    { "source": "/logout", "destination": "/students/logout" },
+    { "source": "/profile", "destination": "/students/profile" },
+    { "source": "/verifyuser", "destination": "/students/verifyuser" },
+    { "source": "/students", "destination": "/students/" },
+    { "source": "/students/update/:id", "destination": "/students/update/:id" },
+    { "source": "/students/delete/:id", "destination": "/students/delete/:id" },
+    { "source": "/courses", "destination": "/courses/" }
+  ]
+}
