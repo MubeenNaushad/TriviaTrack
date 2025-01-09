@@ -1,25 +1,32 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, createBrowserRouter } from "react-router-dom";
-import Navbar from "./components copy/navbar/navbar.jsx";
-import NavbarBanner from "./components copy/navbar/NavbarBanner.jsx";
-import Hero from "./components copy/Hero/Hero.jsx";
-import NumberCounter from "./components copy/NumberCounter/NumberCounter.jsx";
-import WhyChoose from "./components copy/WhyChoose/WhyChoose.jsx";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  createBrowserRouter,
+} from "react-router-dom";
+import Navbar from "./homecomponents/navbar/navbar.jsx";
+import NavbarBanner from "./homecomponents/navbar/NavbarBanner.jsx";
+import Hero from "./homecomponents/Hero/Hero.jsx";
+import NumberCounter from "./homecomponents/NumberCounter/NumberCounter.jsx";
+import WhyChoose from "./homecomponents/WhyChoose/WhyChoose.jsx";
 import Img1 from "./assets/banner1.png";
 import Img2 from "./assets/banner2.png";
-import Banner from "./components copy/Banner/Banner";
-import SubjectCard from "./components copy/SubjectCard/SubjectCard";
-import Testimonial from "./components copy/Testimonial/Testimonial";
-import Footer from "./components copy/Footer/Footer";
+import Banner from "./homecomponents/Banner/Banner.jsx";
+import SubjectCard from "./homecomponents/SubjectCard/SubjectCard.jsx";
+import Testimonial from "./homecomponents/Testimonial/Testimonial.jsx";
+import Footer from "./homecomponents/Footer/Footer.jsx";
 import SignUp from "./auth/Signup.jsx";
 import Login from "./auth/Login.jsx";
 import Roompage from "./room/indexx.jsx";
 import ContactForm from "./oldrand/ContactForm.jsx";
-import Livesession from "./components copy/navbar/Livesession.jsx";
-import Dashboard from "./components copy/Dashboard/Dashboard.jsx";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import Livesession from "./homecomponents/navbar/Livesession.jsx";
+import Dashboard from "./homecomponents/Dashboard/Dashboard.jsx";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import HeroSection from "./Pages/Student/HeroSection.jsx";
 import Courses from "./Pages/Student/Courses.jsx";
+import myLearning from "./Pages/Student/myLearning.jsx";
+import Profile from "./Pages/Student/Profile.jsx";
 
 const BannerData = {
   image: Img1,
@@ -39,16 +46,12 @@ const BannerData2 = {
   link: "#",
 };
 
-
-
 const App = () => {
-  
   return (
     <Router>
       <Navbar />
-     
+
       <Routes>
-        
         <Route
           path="/"
           element={
@@ -60,42 +63,37 @@ const App = () => {
               <Banner {...BannerData} />
               <Banner {...BannerData2} reverse={true} />
               <SubjectCard />
-              <HeroSection/>
+              <HeroSection />
               <Testimonial />
               <Footer />
             </>
-            
           }
-          
         />
 
-<Route
+        <Route
           path="/courses"
           element={
             <>
-              <HeroSection/>
-              <Courses/>
-             
-            </> 
-          }       
+              <HeroSection />
+              <Courses />
+            </>
+          }
         />
-        
+
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/contact" element={<ContactForm/>} />
+        <Route path="/contact" element={<ContactForm />} />
         <Route path="/room/:roomid" element={<Roompage />} />
-        
+
         <Route path="/dashboard" element={<Dashboard />} />
-        
+
+        <Route path="/my-learning" element={<myLearning />} />
+        <Route path="/profile" element={<Profile />} />
+
         <Route path="/live" element={<Livesession />} />
         <Route path="/courses" element={<HeroSection />} />
-
-        
-        
       </Routes>
     </Router>
-
-
   );
 };
 

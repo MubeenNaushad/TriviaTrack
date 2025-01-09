@@ -13,7 +13,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`${import.meta.env.VITE_APP_BASEURL}/signup`, { name, email, password, userType })
+    axios.post(`${import.meta.env.VITE_APP_BASEURL}/students/signup`, { name, email, password })
       .then(res => navigate('/login'))
       .catch(err => console.log(err));
   };
