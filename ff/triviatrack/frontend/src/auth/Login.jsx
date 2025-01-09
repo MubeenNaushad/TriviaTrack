@@ -83,7 +83,7 @@ const Login = () => {
           </div>
 
           <p>
-            Don't have an account? <Link to="/signup" className={styles['login-register-link']}>Register</Link>
+            Don't have an account? <Link to="/students/signup" className={styles['login-register-link']}>Register</Link>
           </p>
         </div>
       </div>

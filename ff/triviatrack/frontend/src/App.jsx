@@ -80,15 +80,15 @@ const App = () => {
           }
         />
 
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/students/signup" element={<SignUp />} />
+        <Route path="/students/login" element={<Login />} />
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/room/:roomid" element={<Roompage />} />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/students/dashboard" element={<Dashboard />} />
 
-        <Route path="/my-learning" element={<myLearning />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/students/my-learning" element={<myLearning />} />
+        <Route path="/students/profile" element={<Profile />} />
 
         <Route path="/live" element={<Livesession />} />
         <Route path="/courses" element={<HeroSection />} />

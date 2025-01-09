@@ -1,17 +1,18 @@
-import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import Course from "./Course";
 import { Input } from "@/components/ui/input";
+import React, { useState, useEffect } from "react";
+
 
 const Profile = () => {
   
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const enrolledIn = [];
+  const [error, setError] = useState();
+  const enrolledIn = [1,2];
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -98,13 +99,10 @@ const Profile = () => {
                     <Button>
                         {
                             isLoading ? (
-                                <>
-                                <Loader2 classNamemr-2 h-4 w-4 animate-spin></Loader2>
-                                </>
+                                <div className="border-4 border-blue-500 border-dotted rounded-full w-8 h-8 animate-spin"></div>
                             ) : "Save Changes"
                         }
                     </Button>
-                    <Button className="mr-2">Save</Button>
                     <Button variant="secondary">Cancel</Button>
                 </DialogFooter>
             </DialogContent>

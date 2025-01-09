@@ -88,7 +88,7 @@ function ContactForm() {
               <>
                 <p>Need help? <span className="underline cursor-pointer">Contact Support</span></p>
                 <p className="mt-2">
-                  Don't have an account? <Link to="/signup"><span className="underline cursor-pointer"> Register</span></Link>
+                  Don't have an account? <Link to="/students/signup"><span className="underline cursor-pointer"> Register</span></Link>
                 </p>
               </>
             )}

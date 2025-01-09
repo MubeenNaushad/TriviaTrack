@@ -116,13 +116,13 @@ const navbar = () => {
                 <>
                   <button
                     className="font-semibold"
-                    onClick={() => navigate("/login")}
+                    onClick={() => navigate("/students/login")}
                   >
                     Sign in
                   </button>
                   <button
                     className="text-white bg-seconday font-semibold rounded-full px-4 py-2"
-                    onClick={() => navigate("/signup")}
+                    onClick={() => navigate("/students/signup")}
                   >
                     Register
                   </button>
@@ -156,19 +156,19 @@ const navbar = () => {
                     <div className="py-1">
                       <button
                         className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => navigate("/profile")}
+                        onClick={() => navigate("/students/profile")}
                       >
                         My Profile
                       </button>
                       <button
                         className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => navigate("/dashboard")}
+                        onClick={() => navigate("/students/dashboard")}
                       >
                         Dashboard
                       </button>
                       <button
                         className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => navigate("/my-learning")}
+                        onClick={() => navigate("/students/my-learning")}
                       >
                         My Courses
                       </button>

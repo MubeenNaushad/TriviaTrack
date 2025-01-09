@@ -48,7 +48,7 @@ const ResponsiveMenu = ({ isOpen }) => {
                     Login
                   </button>
                 </Link>
-                <Link to="/signup">
+                <Link to="/students/signup">
                   <button className="px-6 py-2 bg-white text-primary font-semibold rounded-full hover:bg-gray-200 transition">
                     Sign Up
                   </button>
