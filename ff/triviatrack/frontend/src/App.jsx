@@ -25,8 +25,10 @@ import Dashboard from "./homecomponents/Dashboard/Dashboard.jsx";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import HeroSection from "./Pages/Student/HeroSection.jsx";
 import Courses from "./Pages/Student/Courses.jsx";
-import myLearning from "./Pages/Student/myLearning.jsx";
+import MyLearning from "./Pages/Student/myLearning.jsx";
 import Profile from "./Pages/Student/Profile.jsx";
+import CourseDetail from "./Pages/Student/courseDetail.jsx";
+import Filter from "./Pages/Student/Filter.jsx";
 
 const BannerData = {
   image: Img1,
@@ -73,12 +75,22 @@ const App = () => {
         <Route
           path="/courses"
           element={
-            <>
-              <HeroSection />
+            <div>
+               <HeroSection />
+            
+            <div className="flex min-h-screen">
+            <div className="w:[50%] bg-gray-100"> {/* Filter section */}
+              <Filter />
+            </div>
+            <div className="w-3/4 p-4"> {/* Main content section */}
+           
               <Courses />
-            </>
+            </div>
+          </div>
+          </div>
           }
         />
+        <Route path="/students/course-details" element={<CourseDetail />} />
 
         <Route path="/students/signup" element={<SignUp />} />
         <Route path="/students/login" element={<Login />} />
@@ -87,7 +99,7 @@ const App = () => {
 
         <Route path="/students/dashboard" element={<Dashboard />} />
 
-        <Route path="/students/my-learning" element={<myLearning />} />
+        <Route path="/students/my-learning" element={<MyLearning />} />
         <Route path="/students/profile" element={<Profile />} />
 
         <Route path="/live" element={<Livesession />} />

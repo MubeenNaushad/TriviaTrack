@@ -8,7 +8,7 @@ const HeroSection = () => {
           Find the Best courses for You
         </h1>
         <p className="text-gray-200 dark:text-gray-400 mb-8">
-          Discover,Learn and Upskill with Gamified Courses
+          Discover, Learn and Upskill with Gamified Courses
         </p>
         <form
           action=""

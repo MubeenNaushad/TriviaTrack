@@ -1,9 +1,9 @@
 import React from "react";
 import Course from "./Course.jsx"
 
-const myLearning = () => {
-  const isLoading = true;
-  const myLearningCourses = [];
+const MyLearning = () => {
+  const isLoading = false;
+  const myLearningCourses = [1,2];
 
   return (
     <div>
@@ -17,7 +17,7 @@ const myLearning = () => {
             <p>You are not enrolled in any course.</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {[1, 2].map((course, index) => (
+              {myLearningCourses.map((course, index) => (
                 <Course key={index} />
               ))}
             </div>
@@ -28,7 +28,7 @@ const myLearning = () => {
   );
 };
 
-export default myLearning;
+export default MyLearning;
 
 const MyLearningSkeleton = () => (
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
