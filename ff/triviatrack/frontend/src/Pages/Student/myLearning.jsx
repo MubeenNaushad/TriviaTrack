@@ -1,5 +1,5 @@
 import React from "react";
-import {Course} from "./Course.jsx";
+import Course from "./Course.jsx"
 
 const myLearning = () => {
   const isLoading = true;

@@ -24,9 +24,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 px-4 mt-10">
-      <div className="flex justify-center items-center w-full max-w-lg bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg shadow-black/10 text-white text-center animate-fade-in">
-        <form onSubmit={handleSubmit} className="w-full">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 mt-10">
+      <div className="flex justify-center items-center w-full max-w-sm bg-white/10 backdrop-blur-md rounded-2xl mb-20 p-8 shadow-lg shadow-black/10 text-white text-center animate-fade-in">
+        <form onSubmit={handleSubmit} className="">
           <h2 className="text-2xl font-bold mb-5">Register</h2>
 
           <select
@@ -74,14 +74,15 @@ const Signup = () => {
               <i className="fab fa-google mr-2"></i> Continue with Google
             </button>
           </div>
-        </form>
-
-        <p>
+          <div className="text-center pt-4">
           Already have an account?{" "}
           <Link to="/login" className="text-white font-bold underline transition-colors hover:text-blue-300">
             Login
           </Link>
-        </p>
+        </div>
+        </form>
+
+        
       </div>
     </div>
   );
