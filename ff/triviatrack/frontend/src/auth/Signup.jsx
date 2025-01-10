@@ -1,90 +1,92 @@
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import React, { useState } from "react";
-import styles from './Signup.module.css';
-import '@fortawesome/fontawesome-free';
+import styles from "./Signup.module.css";
+import "@fortawesome/fontawesome-free";
 
 const Signup = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('Student'); 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [userType, setUserType] = useState("Student");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`${import.meta.env.VITE_APP_BASEURL}/students/signup`, { name, email, password, userType })
-      .then(res => navigate('/login'))
-      .catch(err => console.log(err));
+    axios
+      .post(`${import.meta.env.VITE_APP_BASEURL}/students/signup`, {
+        name,
+        email,
+        password,
+        userType,
+      })
+      .then((res) => navigate("/login"))
+      .catch((err) => console.log(err));
   };
-
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 p-4 mt-10">
-      <div className={styles['signup-container']}>
-          
-        <div className={styles['signup-form-container']}>
-         
-        
-          
+      <div className={styles["signup-container"]}>
+        <div className={styles["signup-form-container"]}>
           <form onSubmit={handleSubmit}>
-             <h2 className={styles['signup-title']}>Register</h2>
+            <h2 className={styles["signup-title"]}>Register</h2>
 
-            <select 
-              value={userType} 
-              onChange={(e) => setUserType(e.target.value)} 
-              className={styles['signup-input']} 
+            <select
+              value={userType}
+              onChange={(e) => setUserType(e.target.value)}
+              className={styles["signup-input"]}
               required
             >
               <option value="hint">Select</option>
               <option value="Student">Student</option>
               <option value="Teacher">Teacher</option>
             </select>
-            
+
             <input
               type="text"
               placeholder="Enter Username..."
               required
               onChange={(e) => setName(e.target.value)}
-              className={styles['signup-input']}
+              className={styles["signup-input"]}
             />
             <input
               type="email"
               placeholder="Enter Email..."
               required
               onChange={(e) => setEmail(e.target.value)}
-              className={styles['signup-input']}
+              className={styles["signup-input"]}
             />
             <input
               type="password"
               placeholder="Enter Password..."
               required
               onChange={(e) => setPassword(e.target.value)}
-              className={styles['signup-input']}
+              className={styles["signup-input"]}
             />
 
-            
-            
-            <button type="submit" className={styles['signup-button']}>Register</button>
-            
-            <div className={styles['signup-social-icons']}>
-              <i className="fab fa-facebook"></i>
-              <i className="fab fa-instagram"></i>
-              <i className="fab fa-google"></i>
-              <i className="fab fa-apple"></i>
+            <button type="submit" className={styles["signup-button"]}>
+              Register
+            </button>
+
+            <div className="flex justify-center mt-4">
+              <button
+                className="flex items-center justify-center bg-inherit border border-white text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 mb-4"
+                type="button"
+              >
+                <i className="fab fa-google mr-2"></i> Continue with Google
+              </button>
             </div>
           </form>
-          
+
           <p>
-            Already have an account? <Link to="/login" className={styles['signup-login-link']}>Login</Link>
+            Already have an account?{" "}
+            <Link to="/login" className={styles["signup-login-link"]}>
+              Login
+            </Link>
           </p>
-           
-        
-          
         </div>
       </div>
     </div>
-   
   );
 };
 

@@ -103,9 +103,8 @@
 .signup-social-icons {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    gap: 20px;
+    margin-top: 24px;
 }
 
 .signup-social-icons i {

@@ -75,12 +75,14 @@ const Login = () => {
             <a href="#">Forgot Password?</a>
           </div>
 
-          <div className={styles['login-social-icons']}>
-            <i className="fab fa-facebook"></i>
-            <i className="fab fa-instagram"></i>
-            <i className="fab fa-google"></i>
-            <i className="fab fa-apple"></i>
-          </div>
+          <div className="flex justify-center mt-4">
+              <button
+                className="flex items-center justify-center bg-inherit border border-white text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 mb-4"
+                type="button"
+              >
+                <i className="fab fa-google mr-2"></i> Continue with Google
+              </button>
+            </div>
 
           <p>
             Don't have an account? <Link to="/students/signup" className={styles['login-register-link']}>Register</Link>
