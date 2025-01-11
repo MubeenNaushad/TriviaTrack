@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
 export const login = (req, res) => {
-  const { email, password,userType } = req.body;
+  const { email, password, userType } = req.body;
   StudentModel.findOne({ email })
     .then((user) => {
       if (user) {
