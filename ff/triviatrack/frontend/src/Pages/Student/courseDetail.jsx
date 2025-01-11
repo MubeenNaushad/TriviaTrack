@@ -4,9 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { BadgeInfo, Lock, PlayCircle } from "lucide-react";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const CourseDetail = () => {
+
+  const Navigate = useNavigate();
+
   const course = {
+    courseId: 10,
     courseTitle: "Sample Course Title",
     creator: { name: "John Doe" },
     createdAt: "2023-01-01",
@@ -25,12 +30,16 @@ const CourseDetail = () => {
         videoUrl: "https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"
       }
     ],
-    purchased: false,
+    purchased: true,
   };
 
   const handleContinueCourse = () => {
     console.log('Continue or buy the course');
   };
+
+  const handleOpenForum = () => {
+    Navigate('/select-category');
+  }
 
   return (
     <div className="space-y-5 mt-10">
@@ -94,7 +103,10 @@ const CourseDetail = () => {
             </CardContent>
             <CardFooter className="flex justify-center p-4">
               {course.purchased ? (
-                <Button onClick={handleContinueCourse} className="w-full">Continue Course</Button>
+                <>
+                <Button onClick={handleContinueCourse} className="w-full mr-4">Continue Course</Button>
+                <Button onClick={handleOpenForum} className="w-full">Open Forum</Button>
+                </>
               ) : (
                 <Button onClick={handleContinueCourse} className="w-full">Buy Course</Button>
               )}

@@ -43,6 +43,10 @@ const courseSchema=new mongoose.Schema({
         type:Boolean,
         default:false
     },
-},{timestamps:true})
+    categories: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category'
+    }],
+},{timestamps:true});
 
 export const Course=mongoose.model("Course",courseSchema);

@@ -18,7 +18,7 @@ const Sidebar = () => {
       </div>
       <ul className="space-y-5">
       <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
-          <Link to="/list-course" className="flex items-center">
+          <Link to="/dashboard" className="flex items-center">
             <BsFillPeopleFill className="inline-block mr-2" /> Dashboard
           </Link>
         </li>

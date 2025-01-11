@@ -26,3 +26,4 @@ export const createcourse = async(req,res)=>{
         })
     }
 }
+

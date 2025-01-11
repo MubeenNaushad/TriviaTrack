@@ -33,6 +33,9 @@ import AddCourse from "./Pages/Student/AddCourse.jsx";
 import CourseTable from "./Pages/Student/CourseTable.jsx";
 import { EditCourse } from "./Pages/Student/EditCourse.jsx";
 import { StudentData } from "./homecomponents/Dashboard/StudentData.jsx";
+import Categories from "./Forum/Categories.jsx";
+import Forum from "./Forum/Forum.jsx";
+import TopicDetails from "./Forum/TopicDetails.jsx";
 
 const BannerData = {
   image: Img1,
@@ -94,7 +97,11 @@ const App = () => {
           </div>
           }
         />
-        <Route path="/students/course-details" element={<CourseDetail />} />
+        <Route path="/course-details/courseid" element={<CourseDetail />} />
+
+        <Route path="/select-category" element={<Categories />} />
+        <Route path="/categories/:categoryId" element={<Forum />} />
+        <Route path="/categories/:categoryId/topics/:topicId/:topicTitle" element={<TopicDetails />} />
 
         <Route path="/students/signup" element={<SignUp />} />
         <Route path="/students/login" element={<Login />} />

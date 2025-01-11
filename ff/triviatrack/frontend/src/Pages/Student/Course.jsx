@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Course() {
   return (
@@ -14,9 +15,11 @@ function Course() {
         ></img>
       </div>
       <CardContent className="px-5 py-4 space-y-3">
+        <Link to="/course-details/courseid">
         <h1 className="hover:underline font-bold text-lg truncate cursor-pointer">
           ReactJs Complete Course
         </h1>
+        </Link>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Avatar className="h-8 w-8">
