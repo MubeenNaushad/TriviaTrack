@@ -28,11 +28,13 @@ const navbar = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  });
 
   const handleToggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -51,8 +53,6 @@ const navbar = () => {
         setIsLoggedIn(false);
       });
   });
-
-  const navigate = useNavigate();
 
   const handleLogout = () => {
     axios

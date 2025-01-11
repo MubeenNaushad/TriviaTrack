@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import StudentModel from "../models/user.model.js";
 
 export const verifyUserMiddleware = (req, res, next) => {
   const accesstoken = req.cookies.accesstoken;

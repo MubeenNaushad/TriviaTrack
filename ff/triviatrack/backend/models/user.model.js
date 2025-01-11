@@ -35,4 +35,6 @@ const userSchema = new mongoose.Schema({
 );
 
 const StudentModel = mongoose.model('User', userSchema);
+
+
 export default StudentModel;
