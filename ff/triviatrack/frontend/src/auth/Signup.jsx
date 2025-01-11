@@ -7,11 +7,12 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("Student");
+  const [userType, setUserType] = useState(""); // Default empty
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log({ name, email, password, userType }); // Debugging log
     axios
       .post(`${import.meta.env.VITE_APP_BASEURL}/students/signup`, {
         name,
@@ -19,23 +20,28 @@ const Signup = () => {
         password,
         userType,
       })
-      .then((res) => navigate("/login"))
+      .then((res) => navigate("/students/login"))
       .catch((err) => console.log(err));
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 mt-10">
       <div className="flex justify-center items-center w-full max-w-sm bg-white/10 backdrop-blur-md rounded-2xl mb-20 p-8 shadow-lg shadow-black/10 text-white text-center animate-fade-in">
-        <form onSubmit={handleSubmit} className="">
+        <form onSubmit={handleSubmit}>
           <h2 className="text-2xl font-bold mb-5">Register</h2>
 
           <select
             value={userType}
-            onChange={(e) => setUserType(e.target.value)}
+            onChange={(e) => {
+              setUserType(e.target.value);
+              console.log("Selected userType:", e.target.value); // Debugging log
+            }}
             className="w-full py-3 px-4 mb-2.5 rounded-full bg-white/20 text-black placeholder-gray-800 focus:bg-white/30 focus:outline-none focus:ring-4 focus:ring-blue-300"
             required
           >
-            <option value="hint" disabled>Select</option>
+            <option disabled value="">
+              Select
+            </option>
             <option value="Student">Student</option>
             <option value="Teacher">Teacher</option>
           </select>
@@ -62,27 +68,23 @@ const Signup = () => {
             className="w-full py-3 px-4 mb-4 rounded-full bg-white/20 text-black placeholder-gray-800 focus:bg-white/30 focus:outline-none focus:ring-4 focus:ring-blue-300"
           />
 
-          <button type="submit" className="w-full py-3 mb-4 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold text-lg transition-transform duration-300 hover:scale-105 shadow-md">
+          <button
+            type="submit"
+            className="w-full py-3 mb-4 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold text-lg transition-transform duration-300 hover:scale-105 shadow-md"
+          >
             Register
           </button>
 
-          <div className="flex justify-center mt-4">
-            <button
-              onClick={() => {}} // Placeholder for your actual Google sign-in handler
-              className="flex items-center justify-center bg-transparent border border-white text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-all hover:bg-white hover:text-blue-600"
-            >
-              <i className="fab fa-google mr-2"></i> Continue with Google
-            </button>
-          </div>
           <div className="text-center pt-4">
-          Already have an account?{" "}
-          <Link to="/login" className="text-white font-bold underline transition-colors hover:text-blue-300">
-            Login
-          </Link>
-        </div>
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="text-white font-bold underline transition-colors hover:text-blue-300"
+            >
+              Login
+            </Link>
+          </div>
         </form>
-
-        
       </div>
     </div>
   );

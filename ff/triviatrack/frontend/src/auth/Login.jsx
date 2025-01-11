@@ -6,7 +6,7 @@ import '@fortawesome/fontawesome-free';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState("Student");
+  const [userType, setUserType] = useState("");
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
@@ -23,10 +23,13 @@ const Login = () => {
         }
       })
       .catch(err => console.log(err));
+    console.log("Email:", email, "Password:", password, "UserType:", userType);
   };
 
   const toggleUserType = () => {
-    setUserType(prevType => (prevType === "Student" ? "Teacher" : "Student"));
+    const newType = userType === "Student" ? "Teacher" : "Student";
+    setUserType(newType);
+    console.log("Toggled UserType:", newType);
   };
 
   return (

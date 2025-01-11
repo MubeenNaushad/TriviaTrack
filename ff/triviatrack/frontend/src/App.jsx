@@ -29,6 +29,10 @@ import MyLearning from "./Pages/Student/myLearning.jsx";
 import Profile from "./Pages/Student/Profile.jsx";
 import CourseDetail from "./Pages/Student/courseDetail.jsx";
 import Filter from "./Pages/Student/Filter.jsx";
+import AddCourse from "./Pages/Student/AddCourse.jsx";
+import CourseTable from "./Pages/Student/CourseTable.jsx";
+import { EditCourse } from "./Pages/Student/EditCourse.jsx";
+import { StudentData } from "./homecomponents/Dashboard/StudentData.jsx";
 
 const BannerData = {
   image: Img1,
@@ -65,7 +69,7 @@ const App = () => {
               <Banner {...BannerData} />
               <Banner {...BannerData2} reverse={true} />
               <SubjectCard />
-              <HeroSection />
+              
               <Testimonial />
               <Footer />
             </>
@@ -97,13 +101,20 @@ const App = () => {
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/room/:roomid" element={<Roompage />} />
 
-        <Route path="/students/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/students/my-learning" element={<MyLearning />} />
         <Route path="/students/profile" element={<Profile />} />
 
         <Route path="/live" element={<Livesession />} />
         <Route path="/courses" element={<HeroSection />} />
+        <Route path="/Studentdata" element={<StudentData />} />
+        <Route path="/add-course" element={<AddCourse />} />
+        <Route path="/list-course" element={<CourseTable />} />
+        <Route path="/list-course/:lecture" element={<EditCourse />} />
+        
+
+       
       </Routes>
     </Router>
   );

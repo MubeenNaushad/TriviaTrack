@@ -1,7 +1,12 @@
-import React from 'react';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import DashboardContent from './DashboardContent';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import DashboardContent from "./DashboardContent";
+
+
+
+
 
 const Dashboard = () => {
   return (
@@ -9,7 +14,12 @@ const Dashboard = () => {
       <Sidebar />
       <div className="flex-1">
         <Header />
-        <DashboardContent />
+        <div className="p-4">
+          <Routes>
+            <Route path="/" element={<DashboardContent />} />
+            
+          </Routes>
+        </div>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
 export const login = (req, res) => {
-  const { email, password } = req.body;
+  const { email, password,userType } = req.body;
   StudentModel.findOne({ email })
     .then((user) => {
       if (user) {
@@ -12,6 +12,8 @@ export const login = (req, res) => {
           if (err) {
             res.json({ Login: false, Message: "Invalid Password" });
           }
+         
+         
           if (response) {
             const accesstoken = jwt.sign(
               { email },
@@ -45,7 +47,7 @@ export const login = (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const { name, email, password, userType = 'Student' } = req.body;
+  const { name, email, password, userType } = req.body;
 
   try {
     // Check if the user already exists
@@ -131,6 +133,7 @@ export const getUserProfile = async (req, res) => {
   }
 };
 
+
 export const verifyUser = (req, res) => {
   const accesstoken = req.cookies.accesstoken;
   if (!accesstoken) {
@@ -141,15 +144,27 @@ export const verifyUser = (req, res) => {
     if (err) {
       return res.json({ valid: false, Message: "Invalid Token" });
     } else {
+      // Find user by email and role
       StudentModel.findOne({ email: decoded.email }).then((user) => {
         if (user) {
+          // Check for userType mismatch
+          if (user.role !== decoded.userType) {
+            return res.json({
+              valid: false,
+              Message: `Access Denied: Expected role ${decoded.userType}, but user is ${user.role}`,
+            });
+          }
+
+          // If userType matches, allow access
           res.json({
             valid: true,
-            user: { name: user.name, email: user.email },
+            user: { name: user.name, email: user.email, role: user.role },
           });
         } else {
           res.json({ valid: false, Message: "User Not Found" });
         }
+      }).catch((err) => {
+        res.status(500).json({ valid: false, Message: "Internal Server Error" });
       });
     }
   });

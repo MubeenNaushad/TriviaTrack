@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route, Routes } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import {
   BsBook,
   BsClipboardCheck,
@@ -15,17 +17,24 @@ const Sidebar = () => {
         <BsBook className="inline-block mr-4" /> Teacher Dashboard
       </div>
       <ul className="space-y-5">
-        <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
-          <BsFillBarChartFill className="inline-block mr-2" /> Dashboard
+      <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+          <Link to="/list-course" className="flex items-center">
+            <BsFillPeopleFill className="inline-block mr-2" /> Dashboard
+          </Link>
         </li>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
-          <BsBook className="inline-block mr-2" /> Courses
+          <Link to="/list-course" className="flex items-center">
+            <BsFillPeopleFill className="inline-block mr-2" /> Course
+          </Link>
         </li>
+
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <BsClipboardCheck className="inline-block mr-2" /> Assignments
         </li>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
-          <BsFillPeopleFill className="inline-block mr-2" /> Students
+          <Link to="/Studentdata" className="flex items-center">
+            <BsFillPeopleFill className="inline-block mr-2" /> Student
+          </Link>
         </li>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <BsListTask className="inline-block mr-2" /> Progress Tracker
