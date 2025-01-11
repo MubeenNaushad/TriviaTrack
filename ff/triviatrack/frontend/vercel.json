@@ -1,13 +1,20 @@
 {
-  "rewrites": [
-    { "source": "/login", "destination": "/students/login" },
-    { "source": "/signup", "destination": "/students/signup" },
-    { "source": "/logout", "destination": "/students/logout" },
-    { "source": "/profile", "destination": "/students/profile" },
-    { "source": "/verifyuser", "destination": "/students/verifyuser" },
-    { "source": "/students", "destination": "/students/" },
-    { "source": "/students/update/:id", "destination": "/students/update/:id" },
-    { "source": "/students/delete/:id", "destination": "/students/delete/:id" },
-    { "source": "/courses", "destination": "/courses/" }
+  "routes": [
+    { "src": "/courses", "dest": "/", "status": 200 },
+    { "src": "/students/signup", "dest": "/", "status": 200 },
+    { "src": "/students/login", "dest": "/", "status": 200 },
+    { "src": "/contact", "dest": "/", "status": 200 },
+    { "src": "/room/:roomid", "dest": "/", "status": 200 },
+    { "src": "/dashboard", "dest": "/", "status": 200 },
+    { "src": "/students/my-learning", "dest": "/", "status": 200 },
+    { "src": "/students/profile", "dest": "/", "status": 200 },
+    { "src": "/live", "dest": "/", "status": 200 },
+    { "src": "/Studentdata", "dest": "/", "status": 200 },
+    { "src": "/add-course", "dest": "/", "status": 200 },
+    { "src": "/list-course", "dest": "/", "status": 200 },
+    { "src": "/list-course/:lecture", "dest": "/", "status": 200 },
+    { "src": "/select-category", "dest": "/", "status": 200 },
+    { "src": "/categories/:categoryId", "dest": "/", "status": 200 },
+    { "src": "/categories/:categoryId/topics/:topicId/:topicTitle", "dest": "/", "status": 200 }
   ]
 }
