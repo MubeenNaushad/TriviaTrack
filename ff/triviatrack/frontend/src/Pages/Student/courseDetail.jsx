@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Separator } from "@/components/ui/separator";
 import { BadgeInfo, Lock, PlayCircle } from "lucide-react";
 import { Navigate, useNavigate } from 'react-router-dom';
+import BuyCourse from '@/homecomponents/Buttons/BuyCourse.jsx';
 
 const CourseDetail = () => {
 
@@ -108,7 +109,7 @@ const CourseDetail = () => {
                 <Button onClick={handleOpenForum} className="w-full">Open Forum</Button>
                 </>
               ) : (
-                <Button onClick={handleContinueCourse} className="w-full">Buy Course</Button>
+                <BuyCourse/>
               )}
             </CardFooter>
           </Card>

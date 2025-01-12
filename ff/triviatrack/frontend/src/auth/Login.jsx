@@ -6,7 +6,7 @@ import '@fortawesome/fontawesome-free';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState("");
+  const [userType, setUserType] = useState("Student");
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
@@ -64,7 +64,6 @@ const Login = () => {
           <input
             type="password"
             placeholder="Enter Password..."
-            required
             onChange={(e) => setPassword(e.target.value)}
             className="w-full py-3 px-4 rounded-full bg-white/20 text-black placeholder-gray-800 focus:bg-white/30 focus:outline-none focus:ring-4 focus:ring-blue-300"
           />

@@ -2,6 +2,7 @@ import StudentModel from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import {uploadMedia, deleteMedia} from "../utils/cloudinary.js";
 
 export const login = (req, res) => {
   const { email, password, userType } = req.body;
@@ -19,17 +20,17 @@ export const login = (req, res) => {
               { email },
               process.env.JWT_ACCESS_TOKEN,
               {
-                expiresIn: "10m",
+                expiresIn: "50m",
               }
             );
             const refreshtoken = jwt.sign(
               { email },
               process.env.JWT_REFRESH_TOKEN,
-              { expiresIn: "50m" }
+              { expiresIn: "100m" }
             );
-            res.cookie("accesstoken", accesstoken, { maxAge: 600000 });
+            res.cookie("accesstoken", accesstoken, { maxAge: 6000000 });
             res.cookie("refreshtoken", refreshtoken, {
-              maxAge: 3000000,
+              maxAge: 30000000,
               httpOnly: true,
               secure: true,
               sameSite: "strict",
@@ -93,20 +94,6 @@ export const getStudents = (req, res) => {
     });
 };
 
-export const updateStudent = (req, res) => {
-  const { id } = req.params;
-  const { name, email, password } = req.body;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).send("No student with that id");
-  } else {
-    const updatedStudent = { name, email, password, _id: id };
-    StudentModel.findByIdAndUpdate(id, { name, email, password }, { new: true })
-      .then((updatedStudent) => res.json(updatedStudent))
-      .catch((err) => res.json({ error: err.message }));
-  }
-};
-
 export const deleteStudent = (req, res) => {
   const { id } = req.params;
 
@@ -121,12 +108,50 @@ export const deleteStudent = (req, res) => {
 
 export const getUserProfile = async (req, res) => {
   try {
-    const userId = req._id;
+    const userId = req.user._id;
     const user = await StudentModel.findById(userId).select("-password");
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
     return res.json ({ success:true, user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+
+export const updateProfile = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const name = req.body.name;
+    const profilePhoto = req.file;
+
+    const user = await StudentModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+    let photoUrl = user.photoUrl;
+
+    if (profilePhoto) {
+      if (user.photoUrl) {
+        const publicId = user.photoUrl.split("/").pop().split(".")[0];
+        await deleteMedia(publicId); // Ensure deletion is awaited if it's asynchronous
+      }
+      const cloudResponse = await uploadMedia(profilePhoto.path);
+      photoUrl = cloudResponse.secure_url; // Modify the outer photoUrl variable
+    } 
+
+    console.log("Received userId:", userId);
+console.log("Received name:", {name});
+console.log("Received photo file:", {photoUrl});
+
+    const updatedUser = await StudentModel.findByIdAndUpdate(userId, { name, photoUrl }, { new: true }).select("-password");
+    return res.status(200).json({
+      success: true,
+      user: updatedUser,
+      message: "Profile updated"
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ success: false, error: error.message });

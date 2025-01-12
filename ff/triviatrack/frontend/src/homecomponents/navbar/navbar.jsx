@@ -13,6 +13,8 @@ const navbar = () => {
   const [userName, setUserName] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [profilePhoto, setprofilePhoto] = useState("");
+  const [photoUrl, setPhotoUrl] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +47,7 @@ const navbar = () => {
         if (response.data.valid) {
           setIsLoggedIn(true);
           setUserName(response.data.user.name);
+          setprofilePhoto(response.data.user.photoUrl);
         } else {
           setIsLoggedIn(false);
         }
@@ -53,6 +56,14 @@ const navbar = () => {
         setIsLoggedIn(false);
       });
   });
+
+
+  useEffect(() => {
+    const storedPhotoUrl = localStorage.getItem('photoUrl');
+    if (storedPhotoUrl) {
+      setPhotoUrl(storedPhotoUrl);
+    }
+  }, []);
 
   const handleLogout = () => {
     axios
@@ -133,7 +144,19 @@ const navbar = () => {
                     className="flex items-center gap-2 font-semibold"
                     onClick={handleToggleDropdown}
                   >
-                    <MdPerson className="text-xl" />
+                    {profilePhoto.photoUrl ? (
+                      <img
+                        src={profilePhoto.photoUrl}
+                        alt="Profile"
+                        className="h-8 w-8 rounded-full"
+                      />
+                    ) : (
+                      <img
+                        src={photoUrl || "https://github.com/shadcn.png"}
+                        alt="Profile"
+                        className="h-8 w-8 rounded-full"
+                      />
+                    )}{" "}
                     {userName}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

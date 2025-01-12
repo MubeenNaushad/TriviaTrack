@@ -24,8 +24,8 @@ export const verifyUserMiddleware = (req, res, next) => {
           message: `Access denied: User role ${user.role} does not match required role ${decoded.userType}`
         });
       }
-
-      req.user = user; // Attach user to request object
+      
+      req.user = user;
       next(); // Proceed to next middleware or controller
     }).catch(err => {
       res.status(500).json({ valid: false, message: "Database access error" });

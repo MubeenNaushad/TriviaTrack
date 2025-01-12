@@ -1,12 +1,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-
-import React from "react";
 import { Link } from "react-router-dom";
+import React from "react";
 
 function Course() {
   return (
+    <Link to={`course-details/courseid`}>
     <Card className="overflow-hidden rounded-lg big-white shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
       <div className="relative">
         <img
@@ -39,6 +39,7 @@ function Course() {
         <div className="text-lg font-medium">1500 PKR</div>
       </CardContent>
     </Card>
+    </Link>
   );
 }
 
