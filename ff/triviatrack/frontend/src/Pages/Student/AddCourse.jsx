@@ -11,17 +11,28 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Sidebar from "@/homecomponents/Dashboard/Sidebar";
+import axios from "axios";
 
-import { Loader2 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const AddCourse = () => {
+  const navigate = useNavigate();
   const [courseTitle, setCourseTitle] = useState("");
   const [category, setCategory] = useState("");
 
-  const navigate = useNavigate();
+const handleSubmit=(e)=>{
+  e.preventDefault();
+  axios.post(`${import.meta.env.VITE_APP_BASEURL}/course/create`,{
+    courseTitle,
+    category,
+  }).then((res)=> navigate("/list-course"))
+  .catch((err) => console.log(err));
+}
+
+
+
+ 
 
   const getSelectedCategory = (value) => {
     setCategory(value);
@@ -90,7 +101,7 @@ const createCourseHandler=()=>{
           <Button variant="outline" onClick={() => navigate("/list-course")}>
             Back
           </Button>
-          <Button onClick={createCourseHandler}>Create</Button>
+          <Button onClick={handleSubmit}>Create</Button>
         </div>
       </div>
     </div>

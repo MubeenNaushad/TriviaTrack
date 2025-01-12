@@ -16,7 +16,7 @@ router.get("/verifyuser", verifyUserMiddleware, (req, res) => {
       user: {
         name: req.user.name,
         email: req.user.email,
-        role: req.user.role
+        userType: req.user.userType
       }
     });
   } else {
