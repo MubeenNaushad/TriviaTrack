@@ -1,20 +1,24 @@
-// src/components/Topics.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Modal from "./Modal";
 
-const Topics = ({ categoryId, onSelectTopic }) => {
-  const [topics, setTopics] = useState([
-    { id: 1, title: "Introduction to React", categoryId: "learning" },
-    { id: 2, title: "Advanced JavaScript", categoryId: "learning" },
-  ]);
+const Topics = () => {
+  const [topics, setTopics] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [newTopicTitle, setNewTopicTitle] = useState("");
+
+  useEffect(() => {
+    // This would ideally fetch from an API
+    setTopics([
+      { id: 1, title: 'Introduction to React' },
+      { id: 2, title: 'Advanced JavaScript' }
+    ]);
+  }, []);
 
   const handleAddTopic = () => {
     const newTopic = {
       id: topics.length + 1,
       title: newTopicTitle,
-      categoryId,
     };
     setTopics([...topics, newTopic]);
     setShowModal(false);
@@ -53,18 +57,15 @@ const Topics = ({ categoryId, onSelectTopic }) => {
         </form>
       </Modal>
       <ul>
-        {topics
-          .filter((topic) => topic.categoryId === categoryId)
-          .map((topic) => (
-            <li key={topic.id} className="mb-2">
-              <button
-                onClick={() => onSelectTopic(topic.id, topic.title)}
-                className="text-blue-500 hover:text-blue-700 font-medium text-lg py-2 px-4 rounded-lg shadow bg-white hover:bg-blue-100"
-              >
-                {topic.title}
-              </button>
-            </li>
-          ))}
+        {topics.map(topic => (
+          <li key={topic.id} className="mb-2">
+            <Link to={`/topics/${topic.id}`}
+              className="text-blue-500 hover:text-blue-700 font-medium text-lg py-2 px-4 rounded-lg shadow bg-white hover:bg-blue-100"
+            >
+              {topic.title}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
