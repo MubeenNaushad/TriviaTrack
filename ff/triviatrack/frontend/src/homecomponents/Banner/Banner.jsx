@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { SlideUp } from "../../utility/animation";
+import { Button } from "@/components/ui/button";
 
 const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
   return (
@@ -52,7 +53,7 @@ const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
               whileInView={"visible"}
               className="flex justify-center md:justify-start"
             >
-              <button className="primary-btn !mt-5">Get Started</button>
+              <Button className="primary-btn !mt-5">Get Started</Button>
             </motion.div>
           </div>
         </div>

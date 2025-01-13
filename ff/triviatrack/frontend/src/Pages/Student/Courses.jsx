@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Course from "./Course";
+import axios from "axios";
 
-const courses = [1, 2, 3, 4, 5, 6];
 
 const Courses = () => {
-  const isloading = false;
+
+  const [courses, setCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/course/getcourse`)
+      .then((response) => {
+        setCourses(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch courses", error);
+        setError(error);
+        setIsLoading(false);
+      });
+  }, []);
+
+  const total = courses.length;
+
   return (
     <div className="bg-gray-50">
       <div className="max-w-7xl mx-auto p-6">
@@ -13,11 +32,11 @@ const Courses = () => {
           Courses
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {isloading
+          {isLoading
             ? Array.from({ length: 8 }).map((_, index) => (
                 <CourseSkeleton key={index} />
               ))
-            : courses.map((course, index) => <Course key={index} />)}
+            : courses.map((course) => <Course key={total} course={course} />)}
         </div>
       </div>
     </div>

@@ -39,6 +39,20 @@ export const getcourse = async(req,res)=>{
     }
 }
 
+export const getspecificcourse = async(req,res)=>{
+    try{
+        const newcourse = await Course.findById(req.params.id).populate("creator");
+        return res.json(newcourse);
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            
+            message:"Failed to fetch courses"
+        })
+    }
+}
+
 export const getcoursebyid = async(req,res)=>{
     try{
         const course = await Course.findById(req.params.id);
