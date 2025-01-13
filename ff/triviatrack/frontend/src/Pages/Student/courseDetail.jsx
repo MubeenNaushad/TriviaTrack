@@ -43,7 +43,7 @@ const CourseDetail = () => {
   };
 
   const handleOpenForum = () => {
-    Navigate("/select-category");
+    Navigate("/forum");
   };
 
   return (
