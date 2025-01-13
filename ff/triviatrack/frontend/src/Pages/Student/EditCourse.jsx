@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import Sidebar from '@/homecomponents/Dashboard/Sidebar'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import CourseTab from './CourseTab';
 
 export const EditCourse = () => {
   return (
@@ -18,7 +19,8 @@ export const EditCourse = () => {
         <Button className="hover:text-blue-600" variant="outline">Go to lectures page</Button>
      
     </div>
- 
+   
+    <CourseTab/>
   </div>
   </div>
   )

@@ -39,30 +39,34 @@ export const getcourse = async(req,res)=>{
     }
 }
 
+export const getcoursebyid = async(req,res)=>{
+    try{
+        const course = await Course.findById(req.params.id);
+        return res.json(course);
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            message:"Failed to fetch course"
+        })
+    }
+}
 export const updatecourse = async(req,res)=>{
     try{
-        const {courseTitle, category}=req.body;
-        if(!courseTitle||!category){
-            return res.status(400).json({
-                message:"Course title and category are required."
-            })
-        }
-        const course =await Course.findByIdAndUpdate(req.params.id,{
-            courseTitle,
-            category
-        },{new:true});
+        const course =await Course.findByIdAndUpdate(req.params.id,req.body,{new:true});
         return res.json({
             course,
             message:"Course updated"
         })
-    }
-    catch(error){
+
+    }catch(error){
         console.log(error);
         return res.status(500).json({
             message:"Failed to update course"
         })
     }
 }
+
 
 export const deletecourse=async(req,res)=>{
     try{

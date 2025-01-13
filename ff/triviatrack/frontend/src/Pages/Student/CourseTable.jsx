@@ -17,6 +17,7 @@ import axios from "axios";
 
 
 export function CourseTable() {
+ 
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
 
@@ -77,7 +78,7 @@ export function CourseTable() {
                   <Button
                     className="mr-3"
                     variant="outline"
-                    onClick={() => navigate("/list-course/lecture")}
+                    onClick={() => navigate(`/list-course/${course._id}`)}
                   >
                     Edit
                   </Button>
