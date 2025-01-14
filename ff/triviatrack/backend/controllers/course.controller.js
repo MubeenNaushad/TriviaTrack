@@ -171,15 +171,16 @@ export const editLecture = async(req,res) => {
 
         if(lectureTitle){
             lecture.lectureTitle = lectureTitle; } 
-            if(videoInfo) lecture.videoUrl = videoInfo.videoUrl;
-            if(videoInfo.publicId) lecture.publicId = videoInfo.publicId;
+            if(videoInfo) {
+                lecture.videoUrl = videoInfo.videoUrl;
+                lecture.publicId = videoInfo.publicId;
+            }
             if(isPreviewFree) lecture.isPreviewFree = isPreviewFree;
 
             await lecture.save();
 
             const course = await Course.findById(id);
             if(course && course.lectures.includes(lecture._id)){
-                course.lectures.push(lecture._id);
                 await course.save();
             }
             return res.status(200).json({

@@ -14,7 +14,7 @@ router.get('/getonecourse/:id',getspecificcourse);
 
 router.post('/:courseId/lecture', createLecture);
 router.get('/:courseId/lecture', getCourseLecture);
-router.post('/:courseId/lecture/:lectureId', editLecture);
+router.patch('/:id/lecture/:lectureId', editLecture);
 router.delete('/lecture/:lectureId', removeLecture);
 router.get('/lecture/:lectureId', getLecturebyId);
 

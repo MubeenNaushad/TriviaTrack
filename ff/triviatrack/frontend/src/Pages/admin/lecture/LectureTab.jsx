@@ -42,7 +42,7 @@ const LectureTab = () => {
           }
         );
         if (res.data.success) {
-            console.log("id",courseId, lectureId);
+            console.log("id",id, lectureId);
           console.log(res);
           setUploadVideoInfo({
             videoUrl: res.data.data.url,
@@ -58,9 +58,14 @@ const LectureTab = () => {
     }
   };
 
+  const isFreeHandler = () => {
+    if(isFree == false) setIsFree(true);
+    if(isFree == true) setIsFree(false);
+  }
+
   const updateLecture = async () => {
     try {
-      await axios.post(
+      await axios.patch(
         `${
           import.meta.env.VITE_APP_BASEURL
         }/course/${id}/lecture/${lectureId}`,
@@ -104,7 +109,7 @@ const LectureTab = () => {
           />
         </div>
         <div className="flex items-center space-x-2 my-5">
-          <Switch id="airplane-mode" />
+          <Switch id="airplane-mode" onChange={isFreeHandler} />
           <Label htmlFor="airplane-mode">Is this lecture free?</Label>
         </div>
 
