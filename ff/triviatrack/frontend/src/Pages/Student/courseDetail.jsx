@@ -85,7 +85,7 @@ const CourseDetail = () => {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {course?.lectures?.map((lecture, idx) => (
-                    <div key={idx} className="flex items-center gap-3 text-sm">
+                    <div key={idx} className="flex items-center gap-3 text-sm" onClick={() => Navigate(`/course/${courseId}/lecture/${lecture._id}`)}>
                       <span>
                         <PlayCircle size={14} />{" "}
                       </span>

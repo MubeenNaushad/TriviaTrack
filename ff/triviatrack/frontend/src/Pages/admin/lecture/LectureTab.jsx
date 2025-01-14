@@ -23,7 +23,7 @@ const LectureTab = () => {
   const [btnDisable, setBtnDisable] = useState(true);
   const params = useParams();
 
-  const { id, lectureId } = params;
+  const { courseId, lectureId } = params;
 
   const fileChangeHandler = async (e) => {
     const file = e.target.files[0];
@@ -42,7 +42,7 @@ const LectureTab = () => {
           }
         );
         if (res.data.success) {
-            console.log("id",id, lectureId);
+            console.log("id",courseId, lectureId);
           console.log(res);
           setUploadVideoInfo({
             videoUrl: res.data.data.url,
@@ -68,8 +68,8 @@ const LectureTab = () => {
       await axios.patch(
         `${
           import.meta.env.VITE_APP_BASEURL
-        }/course/${id}/lecture/${lectureId}`,
-        { lectureTitle, videoInfo:uploadVideoInfo, isPreviewFree:isFree, id, lectureId }
+        }/course/${courseId}/lecture/${lectureId}`,
+        { lectureTitle, videoInfo:uploadVideoInfo, isPreviewFree:isFree, courseId, lectureId }
       );
       console.log("Lecture edited successfully");
     } catch (error) {
@@ -105,7 +105,7 @@ const LectureTab = () => {
             accept="video/*"
             onChange={fileChangeHandler}
             placeholder="Eg. Intro"
-            className="w-fit"
+            className="w-fit hover:cursor-pointer"
           />
         </div>
         <div className="flex items-center space-x-2 my-5">
@@ -116,7 +116,7 @@ const LectureTab = () => {
         {mediaProgress && (
           <div className="my-4">
             <Progress value={uploadProgress} />
-            <p>{uploadProgress}% uploaded</p>
+            <p>Uploading: {uploadProgress}%</p>
           </div>
         )}
         <div className="mt-4">

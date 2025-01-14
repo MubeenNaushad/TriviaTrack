@@ -14,8 +14,7 @@ const CreateLecture = () => {
     const params = useParams();
 
     const [currentLectures, setCurrentLectures] = useState([]);
-    const courseId = params.id;
-
+    const courseId = params.courseId;
 
     const handleSubmit = (e) => {
         e.preventDefault();

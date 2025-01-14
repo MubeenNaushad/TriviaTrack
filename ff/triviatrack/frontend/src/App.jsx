@@ -37,6 +37,7 @@ import Forum from "./Forum/Forum.jsx";
 import TopicDetails from "./Forum/TopicDetails.jsx";
 import CreateLecture from "./Pages/admin/lecture/CreateLecture.jsx";
 import EditLecture from "./Pages/admin/lecture/EditLecture.jsx";
+import SearchPage from "./Pages/Student/SearchPage.jsx";
 
 const BannerData = {
   image: Img1,
@@ -101,6 +102,7 @@ const App = () => {
         <Route path="/courses/course-details/:courseId" element={<CourseDetail />} />
         <Route path="/forum" element={<Forum />} />
         <Route path="/forum/topics/:topicId" element={<TopicDetails />} />
+        <Route path="/course/search" element={<SearchPage />} />
         <Route path="/students/signup" element={<SignUp />} />
         <Route path="/students/login" element={<Login />} />
         <Route path="/contact" element={<ContactForm />} />
@@ -113,8 +115,8 @@ const App = () => {
         <Route path="/add-course" element={<AddCourse />} />
         <Route path="/list-course" element={<CourseTable />} />
         <Route path="/list-course/:id" element={<EditCourse />} />
-        <Route path="/list-course/:id/lecture" element={<CreateLecture />} />
-        <Route path="/list-course/:id/lecture/:lectureId" element={<EditLecture />} />
+        <Route path="/list-course/:courseId/lecture" element={<CreateLecture />} />
+        <Route path="/list-course/:courseId/lecture/:lectureId" element={<EditLecture />} />
 
         
 

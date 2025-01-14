@@ -36,22 +36,23 @@ const Filter = ({ handleFilterChange }) => {
         ? prevCategories.filter((id) => id !== categoryId)
         : [...prevCategories, categoryId];
 
-        handleFilterChange(newCategories, sortByPrice);
-        return newCategories;
+      handleFilterChange(newCategories, sortByPrice);
+      return newCategories;
     });
   };
 
   const selectByPriceHandler = (selectedValue) => {
     setSortByPrice(selectedValue);
     handleFilterChange(selectedCategories, selectedValue);
-  }
+  };
+  
   return (
     <div className="w-full p-8">
       <div className="flex items-center justify-between gap-x-8">
         <h1 className="font-semibold text-lg md:text-xl">Filter Options</h1>
         <Select onValueChange={selectByPriceHandler}>
           <SelectTrigger>
-            <SelectValue placeholder="Sort by"/>
+            <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>

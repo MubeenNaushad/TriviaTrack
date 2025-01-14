@@ -8,13 +8,14 @@ import LectureTab from './LectureTab';
 const EditLecture = () => {
     const params = useParams();
 
-    const id = params.id;
+    const courseId = params.courseId;
+    
   return (
     <div className='flex pt-[2.4rem]'>
     <Sidebar/>
     <div className='p-8 items-center justify-between mb-5'>
         <div className='flex items-center gap-2'>
-            <Link to={`/list-course/${id}/lecture`}>
+            <Link to={`/list-course/${courseId}/lecture`}>
             <Button size='icon' variant='outline' className='rounded-full'>
                 <ArrowLeft size={16} />
             </Button>
