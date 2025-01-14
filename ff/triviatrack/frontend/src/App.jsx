@@ -96,16 +96,21 @@ const App = () => {
           </div>
           }
         />
-        <Route path="/course-details/:courseId" element={<CourseDetail />} />
+        <Route path="/courses/course-details/:courseId" element={<CourseDetail />} />
+
         <Route path="/forum" element={<Forum />} />
         <Route path="/forum/topics/:topicId" element={<TopicDetails />} />
+
         <Route path="/students/signup" element={<SignUp />} />
         <Route path="/students/login" element={<Login />} />
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/room/:roomid" element={<Roompage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="/students/dashboard" element={<Dashboard />} />
+
         <Route path="/students/my-learning" element={<MyLearning />} />
         <Route path="/students/profile" element={<Profile />} />
+
         <Route path="/live" element={<Livesession />} />
         <Route path="/courses" element={<HeroSection />} />
         <Route path="/Studentdata" element={<StudentData />} />

@@ -6,6 +6,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Course({course}) {
+  if (!course) {
+    return <div>No course data available.</div>;
+  }
   return (
     <div>
         <Link to={`course-details/${course._id}`} key={course._id}>
@@ -21,7 +24,7 @@ function Course({course}) {
               ></img>
             </div>
             <CardContent className="px-5 py-4 space-y-3">
-              <Link to="/course-details/courseid">
+              <Link to={`course-details/${course._id}`} key={course._id}>
                 <h1 className="hover:underline font-bold text-lg truncate cursor-pointer">
                   {course?.courseTitle
                     ? course?.courseTitle

@@ -21,7 +21,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const enrolledIn = [1, 2];
-  const Navigate = useNavigate();
+ 
   const [name, setName] = useState('');
   const [profilePhoto, setProfilePhoto] = useState();
 
@@ -163,7 +163,7 @@ const Profile = () => {
           {enrolledIn.length === 0 ? (
             <h1>You haven't enrolled in any course.</h1>
           ) : (
-            enrolledIn.map((course, index) => <Course key={index} />)
+            enrolledIn.map((course, index) => <Course/>)
           )}
         </div>
       </div>
