@@ -7,8 +7,8 @@ import axios from "axios";
 
 function Course({course}) {
   return (
-    <div>
-        <Link to={`course-details/${course._id}`} key={course._id}>
+    <div key={course._id}>
+        <Link to={`course-details/${course._id}`}>
           <Card className="overflow-hidden rounded-lg big-white shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
             <div className="relative">
               <img
@@ -21,8 +21,8 @@ function Course({course}) {
               ></img>
             </div>
             <CardContent className="px-5 py-4 space-y-3">
-              <Link to="/course-details/courseid">
-                <h1 className="hover:underline font-bold text-lg truncate cursor-pointer">
+            <Link to={`course-details/${course._id}`} key={course._id}>
+            <h1 className="hover:underline font-bold text-lg truncate cursor-pointer">
                   {course?.courseTitle
                     ? course?.courseTitle
                     : "ReactJs Complete Course"}

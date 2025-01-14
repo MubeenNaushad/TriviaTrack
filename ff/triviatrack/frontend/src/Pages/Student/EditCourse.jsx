@@ -3,6 +3,8 @@ import Sidebar from '@/homecomponents/Dashboard/Sidebar'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import CourseTab from './CourseTab';
+import { Link } from "react-router-dom";
+
 
 export const EditCourse = () => {
   return (
@@ -15,8 +17,10 @@ export const EditCourse = () => {
       <h1 className="font-bold text-xl">
         Add detail information regarding course
       </h1>
-   
+
+      <Link to="lecture">
         <Button className="hover:text-blue-600" variant="outline">Go to lectures page</Button>
+        </Link>
      
     </div>
    

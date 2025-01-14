@@ -88,9 +88,8 @@ const CourseDetail = () => {
                     <div key={idx} className="flex items-center gap-3 text-sm">
                       <span>
                         <PlayCircle size={14} />{" "}
-                        {/* Assuming all lectures are accessible */}
                       </span>
-                      <p>{lecture?.title}</p>
+                      <p>{lecture?.lectureTitle}</p>
                     </div>
                   ))}
                 </CardContent>
@@ -100,7 +99,7 @@ const CourseDetail = () => {
               <Card>
                 <CardContent className="p-4 flex flex-col">
                   <div className="w-full aspect-video mb-4">
-                    {course?.lectures[0]?.videoUrl ?(<ReactPlayer
+                    {course?.lectures[0]?.videoUrl ? (<ReactPlayer
                       width="100%"
                       height="100%"
                       url={course?.lectures[0]?.videoUrl} // Ensure there is a video URL

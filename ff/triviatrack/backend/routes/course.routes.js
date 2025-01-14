@@ -1,5 +1,5 @@
 import express from 'express';
-import { createcourse, getcourse, updatecourse, deletecourse, getspecificcourse,getcoursebyid } from '../controllers/course.controller.js';
+import { createcourse, getcourse, updatecourse, deletecourse, getspecificcourse,getcoursebyid, createLecture, getCourseLecture, editLecture, removeLecture, getLecturebyId } from '../controllers/course.controller.js';
 import { verifyUserMiddleware } from '../middleware/auth.middleware.js';
 
 const router = express.Router();
@@ -12,5 +12,10 @@ router.put('/update/:id',updatecourse);
 router.delete('/delete/:id',deletecourse);
 router.get('/getonecourse/:id',getspecificcourse);
 
+router.post('/:courseId/lecture', createLecture);
+router.get('/:courseId/lecture', getCourseLecture);
+router.post('/:courseId/lecture/:lectureId', editLecture);
+router.delete('/lecture/:lectureId', removeLecture);
+router.get('/lecture/:lectureId', getLecturebyId);
 
 export default router;

@@ -35,6 +35,8 @@ import { EditCourse } from "./Pages/Student/EditCourse.jsx";
 import { StudentData } from "./homecomponents/Dashboard/StudentData.jsx";
 import Forum from "./Forum/Forum.jsx";
 import TopicDetails from "./Forum/TopicDetails.jsx";
+import CreateLecture from "./Pages/admin/lecture/CreateLecture.jsx";
+import EditLecture from "./Pages/admin/lecture/EditLecture.jsx";
 
 const BannerData = {
   image: Img1,
@@ -96,22 +98,24 @@ const App = () => {
           </div>
           }
         />
-        <Route path="/course-details/:courseId" element={<CourseDetail />} />
+        <Route path="/courses/course-details/:courseId" element={<CourseDetail />} />
         <Route path="/forum" element={<Forum />} />
         <Route path="/forum/topics/:topicId" element={<TopicDetails />} />
         <Route path="/students/signup" element={<SignUp />} />
         <Route path="/students/login" element={<Login />} />
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/room/:roomid" element={<Roompage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/students/dashboard" element={<Dashboard />} />
         <Route path="/students/my-learning" element={<MyLearning />} />
         <Route path="/students/profile" element={<Profile />} />
         <Route path="/live" element={<Livesession />} />
-        <Route path="/courses" element={<HeroSection />} />
         <Route path="/Studentdata" element={<StudentData />} />
         <Route path="/add-course" element={<AddCourse />} />
         <Route path="/list-course" element={<CourseTable />} />
         <Route path="/list-course/:id" element={<EditCourse />} />
+        <Route path="/list-course/:id/lecture" element={<CreateLecture />} />
+        <Route path="/list-course/:id/lecture/:lectureId" element={<EditLecture />} />
+
         
 
        

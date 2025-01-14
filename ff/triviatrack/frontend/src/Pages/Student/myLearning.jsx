@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Course from "./Course.jsx"
+import axios from "axios";
 
 const MyLearning = () => {
-  const isLoading = false;
-  const myLearningCourses = [1,2];
+  const [isLoading, setIsLoading] = useState(true);
+  const [myLearningCourses, setMyLearningCourses] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/course/getcourse`)
+    .then((response) => {
+      setMyLearningCourses(response.data);
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.log("Failed to fetch courses", error);
+      setIsLoading(false);
+    })
+  }, []);
 
   return (
     <div>
@@ -18,7 +31,7 @@ const MyLearning = () => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {myLearningCourses.map((course, index) => (
-                <Course key={index} />
+                <Course key={index} course={course}/>
               ))}
             </div>
           )}

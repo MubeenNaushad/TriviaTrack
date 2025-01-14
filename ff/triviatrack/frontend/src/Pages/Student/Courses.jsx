@@ -15,6 +15,7 @@ const Courses = () => {
       .then((response) => {
         setCourses(response.data);
         setIsLoading(false);
+        console.log("Courses", response.data);
       })
       .catch((error) => {
         console.error("Failed to fetch courses", error);
@@ -36,7 +37,7 @@ const Courses = () => {
             ? Array.from({ length: 8 }).map((_, index) => (
                 <CourseSkeleton key={index} />
               ))
-            : courses.map((course) => <Course key={total} course={course} />)}
+            : courses.map((course) => <Course key={course._id} course={course} />)}
         </div>
       </div>
     </div>
