@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import studentRoutes from "./routes/student.routes.js";
 import courseRoutes from "./routes/course.routes.js";
+import mediaRoutes from "./routes/media.route.js"; 
 
 dotenv.config();
 
@@ -31,7 +32,8 @@ mongoose
     console.log(err);
   });
 
-app.use("/students", studentRoutes);
+app.use("/media", mediaRoutes);
+app.use("/students", studentRoutes); 
 app.use("/course", courseRoutes);
 
 app.listen(process.env.PORT, () => {

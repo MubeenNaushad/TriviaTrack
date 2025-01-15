@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Course from "./Course.jsx"
-import Courses from "./Courses.jsx";
+import axios from "axios";
 
 const MyLearning = () => {
-  const isLoading = false;
-  const myLearningCourses = [1];
+  const [isLoading, setIsLoading] = useState(true);
+  const [myLearningCourses, setMyLearningCourses] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/course/getcourse`)
+    .then((response) => {
+      setMyLearningCourses(response.data);
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.log("Failed to fetch courses", error);
+      setIsLoading(false);
+    })
+  }, []);
 
   return (
     <div>
@@ -19,7 +31,7 @@ const MyLearning = () => {
           ) : (
             <div className="flex flex-row flex-wrap gap-4">
               {myLearningCourses.map((course, index) => (
-                <Course key={index} />
+                <Course key={index} course={course}/>
               ))}
             </div>
           )}

@@ -37,11 +37,11 @@ const courseSchema=new mongoose.Schema({
     enrolledStudents:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'StudentModel'
-    }],
+    }], 
     lectures:[
         {
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'StudentModel'
+        type:mongoose.Schema.Types.ObjectId, 
+        ref:'Lecture'
         }
     ],
     creator:{

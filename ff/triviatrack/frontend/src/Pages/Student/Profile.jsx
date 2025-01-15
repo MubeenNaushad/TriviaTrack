@@ -24,6 +24,7 @@ const Profile = () => {
  
   const [name, setName] = useState('');
   const [profilePhoto, setProfilePhoto] = useState();
+  const [enrolledCourses, setenrolledCourses] = useState([]);
 
   useEffect(() => {
     axios
@@ -40,6 +41,18 @@ const Profile = () => {
       .catch(() => {
         setError("Error");
       });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/course/getcourse`)
+    .then((response) => {
+      setenrolledCourses(response.data);
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.log("Failed to fetch courses", error);
+      setIsLoading(false);
+    })
   }, []);
 
   const handleUpdateProfile = (e) => {
@@ -163,7 +176,7 @@ const Profile = () => {
           {enrolledIn.length === 0 ? (
             <h1>You haven't enrolled in any course.</h1>
           ) : (
-            enrolledIn.map((course, index) => <Course/>)
+            enrolledCourses.map((course, index) => <Course key={index} course={course} />)
           )}
         </div>
       </div>
