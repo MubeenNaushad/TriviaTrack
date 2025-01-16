@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import Course from "./Course";
+import Course from "../admin/course/Course";
 import { Input } from "@/components/ui/input";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
