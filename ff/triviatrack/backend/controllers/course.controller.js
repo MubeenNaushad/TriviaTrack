@@ -1,6 +1,6 @@
 import { Course } from "../models/course.model.js";
 import { Lecture } from "../models/lecture.model.js";
-import { deleteVideo } from "../utils/cloudinary.js";
+import { deleteVideo,uploadMedia } from "../utils/cloudinary.js";
 
 export const createcourse = async(req,res)=>{
     try{
@@ -68,17 +68,41 @@ export const getcoursebyid = async(req,res)=>{
     }
 }
 export const updatecourse = async(req,res)=>{
-    try{
-        const course =await Course.findByIdAndUpdate(req.params.id,req.body,{new:true});
-        return res.json({
+    try {
+        const courseId = req.params.id;
+        const {courseTitle, subTitle, description, category, courseLevel, coursePrice} = req.body;
+        const thumbnail = req.file;
+
+        let course = await Course.findById(courseId);
+        if(!course){
+            return res.status(404).json({
+                message:"Course not found!"
+            })
+        }
+        let courseThumbnail;
+        if(thumbnail){
+            if(course.courseThumbnail){
+                const publicId = course.courseThumbnail.split("/").pop().split(".")[0];
+                await deleteMedia(publicId); 
+            }
+         
+            courseThumbnail = await uploadMedia(thumbnail.path);
+        }
+
+ 
+        const updateData = {courseTitle, subTitle, description, category, courseLevel, coursePrice, courseThumbnail:courseThumbnail?.secure_url};
+
+        course = await Course.findByIdAndUpdate(courseId, updateData, {new:true});
+
+        return res.status(200).json({
             course,
-            message:"Course updated"
+            message:"Course updated successfully."
         })
 
-    }catch(error){
+    } catch (error) {
         console.log(error);
         return res.status(500).json({
-            message:"Failed to update course"
+            message:"Failed to create course"
         })
     }
 }
@@ -289,3 +313,30 @@ export const getLecturebyId = async(req,res)=>{
         })
     }
 }
+
+// export const togglePublishCourse = async(req,res)=>{
+//     try {
+//         const {courseId} = req.params;
+//         const {publish}=req.query;
+//         const course = await Course.findById(courseId);
+//         if(!course){
+//             return res.status(404).json({
+//                 message:"Course not found"
+//             });
+            
+        
+//         }
+//         course.isPublished = publish==="true"?true:false;
+//         await course.save();
+//         const statusMessage=course.isPublished?"published":"unpublished";
+//         return res.status(200).json({
+//             message:`Course is ${statusMessage}` 
+//         });
+//     } catch (error) {
+//             console.log(error);
+//             return res.status(500).json({
+//                 message:"Failed to Update Status"
+//             })
+        
+//     }
+// }

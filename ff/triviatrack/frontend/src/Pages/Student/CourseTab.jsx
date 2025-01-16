@@ -24,38 +24,41 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const CourseTab = () => {
-  const {id}=useParams();
-  
+  const { id } = useParams();
+
   const [input, setInput] = useState({
     courseTitle: "",
     subTitle: "",
     description: "",
     category: "",
     courseLevel: "",
-    coursePrice: "" ,
+    coursePrice: "",
     courseThumbnail: "",
   });
 
   useEffect(() => {
     const fetchdata = async () => {
-      try{const response=await axios.get(`${import.meta.env.VITE_APP_BASEURL}/course/getcourse/${id}`);
-      const courses=response.data;
-      console.log("Data Fetched Successfully",courses);
-      setInput({
-        courseTitle: courses.courseTitle,
-        subTitle: courses.subTitle,
-        description: courses.description,
-        category: courses.category,
-        courseLevel: courses.courseLevel,
-        coursePrice: courses.coursePrice,
-      
-      });
-    }catch(error){
-      console.error("Failed to fetch course",error); 
-    }
-  };
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_APP_BASEURL}/course/getcourse/${id}`
+        );
+        const courses = response.data;
+
+        console.log("Data Fetched Successfully", courses);
+        setInput({
+          courseTitle: courses.courseTitle,
+          subTitle: courses.subTitle,
+          description: courses.description,
+          category: courses.category,
+          courseLevel: courses.courseLevel,
+          coursePrice: courses.coursePrice,
+          courseThumbnail: courses.courseThumbnail,
+        });
+      } catch (error) {
+        console.error("Failed to fetch course", error);
+      }
+    };
     fetchdata();
-    
   }, [id]);
   const [previewThumbnail, setPreviewThumbnail] = useState("");
   const changeEventhandler = (e) => {
@@ -72,23 +75,43 @@ const CourseTab = () => {
   };
 
   const updatecourse = async (id) => {
+    const formData = new FormData();
+    formData.append("courseTitle", input.courseTitle);
+    formData.append("subTitle", input.subTitle);
+    formData.append("description", input.description);
+    formData.append("category", input.category);
+    formData.append("courseLevel", input.courseLevel);
+    formData.append("coursePrice", input.coursePrice);
+  
+    if (input.courseThumbnail instanceof File) {
+      formData.append("courseThumbnail", input.courseThumbnail);
+    }
+  
+    try {
+      await axios.put(`${import.meta.env.VITE_APP_BASEURL}/course/update/${id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log("Course Updated Successfully");
+      navigate("/list-course");
+    } catch (error) {
+      console.error("Failed to update course", error);
+    }
+  };
+
+  const publishStatusHandler = async (action) => {
     try {
       await axios.put(
-        `${import.meta.env.VITE_APP_BASEURL}/course/update/${id}`,{
-          courseTitle: input.courseTitle,
-          subTitle: input.subTitle,
-          description: input.description,
-          category: input.category,
-          courseLevel: input.courseLevel,
-          coursePrice: input.coursePrice,
-         
-      });
-      console.log("Course Updated Successfully");    
-      navigate("/list-course"); 
-  } catch(error){
-    console.error("Failed to update course",error);
-  }
-};
+        `${import.meta.env.VITE_APP_BASEURL}/course/${id}`,
+        {
+          
+          isPublished:action,
+        }
+      );
+    } catch (error) {
+      console.error("Failed to update Publish status", error);
+    }
+  };
+  
 
   const selectThumbnail = (e) => {
     const file = e.target.files?.[0];
@@ -99,7 +122,6 @@ const CourseTab = () => {
       fileReader.readAsDataURL(file);
     }
   };
-  const isPublished = true;
   const navigate = useNavigate();
   return (
     <Card>
@@ -111,8 +133,11 @@ const CourseTab = () => {
           </CardDescription>
         </div>
         <div className="flex gap-2 ">
-          <Button variant="outline">
-            {isPublished ? "Unpublish" : "publish"}
+          <Button
+            variant="outline"
+           
+          >
+            {input.isPublished ? "Publish" : "UnPublish"}
           </Button>
           <Button>Remove Course</Button>
         </div>
@@ -209,16 +234,18 @@ const CourseTab = () => {
               accept="image/*"
               className="w-fit"
             />
-            {
-              previewThumbnail && (
-                <img src={previewThumbnail} className="w-64 my-2" alt="Course Preview"/>
-              )
-            }
+            {previewThumbnail && (
+              <img
+                src={previewThumbnail}
+                className="w-64 my-2"
+                alt="Course Preview"
+              />
+            )}
           </div>
           <Button variant="outline" onClick={() => navigate("/list-course")}>
             Cancel
           </Button>
-          <Button className="ml-2" onClick={()=>updatecourse(id)} variant="">
+          <Button className="ml-2" onClick={() => updatecourse(id)} variant="">
             Save
           </Button>
         </div>
@@ -228,4 +255,3 @@ const CourseTab = () => {
 };
 
 export default CourseTab;
-
