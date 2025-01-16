@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "./index.js", 
+      "src": "./index.js",
       "use": "@vercel/node"
     },
     {
@@ -15,12 +15,12 @@
   ],
   "routes": [
     {
-      "src": "/(media|students|course)/(.*)",
-      "dest": "/$1/$2"
+      "src": "/api/(.*)",
+      "dest": "/server.js"
     },
     {
-      "src": "/favicon.ico",
-      "dest": "/favicon.ico"
+      "src": "/(media|students|course)/(.*)",
+      "dest": "/server.js"
     },
     {
       "src": "/(.*)",
@@ -30,6 +30,5 @@
   "env": {
     "MONGO_URI": "@mongo_uri",
     "FRONTEND_URL": "@frontend_url"
-  },
-  "regions": ["all"]
+  }
 }
