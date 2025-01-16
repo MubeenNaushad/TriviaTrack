@@ -73,7 +73,7 @@ export function CourseTable() {
                   </Badge>
                 </TableCell>
 
-                <TableCell className="font-medium">1500 PKR</TableCell>
+                <TableCell className="font-medium">${course.coursePrice}</TableCell>
                 <TableCell className="text-right">
                   <Button
                     className="mr-3"

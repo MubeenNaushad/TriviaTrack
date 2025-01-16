@@ -11,7 +11,7 @@ const Courses = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/course/getcourse`)
+      .get(`${import.meta.env.VITE_APP_BASEURL}/course/getcourse`)
       .then((response) => {
         setCourses(response.data);
         setIsLoading(false);

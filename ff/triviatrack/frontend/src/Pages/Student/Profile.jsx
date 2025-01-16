@@ -44,7 +44,7 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/course/getcourse`)
+    axios.get(`${import.meta.env.VITE_APP_BASEURL}/course/getcourse`)
     .then((response) => {
       setenrolledCourses(response.data);
       setIsLoading(false);

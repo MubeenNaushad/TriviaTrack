@@ -135,7 +135,7 @@ const LectureTab = () => {
           />
         </div>
         <div className="flex items-center space-x-2 my-5">
-          <Switch id="airplane-mode" onChange={isFreeHandler} />
+          <Switch id="airplane-mode" checked={isFree} onChecked={isFreeHandler} />
           <Label htmlFor="airplane-mode">Is this lecture free?</Label>
         </div>
 
