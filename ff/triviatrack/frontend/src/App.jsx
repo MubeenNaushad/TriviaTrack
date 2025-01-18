@@ -38,6 +38,8 @@ import TopicDetails from "./Forum/TopicDetails.jsx";
 import CreateLecture from "./Pages/admin/lecture/CreateLecture.jsx";
 import EditLecture from "./Pages/admin/lecture/EditLecture.jsx";
 import SearchPage from "./Pages/Student/SearchPage.jsx";
+import ForgotPassword from "./auth/ForgotPassword.jsx";
+import ResetPassword from "./auth/ResetPassword.jsx";
 
 const BannerData = {
   image: Img1,
@@ -110,6 +112,9 @@ const App = () => {
         <Route path="/students/dashboard" element={<Dashboard />} />
         <Route path="/students/my-learning" element={<MyLearning />} />
         <Route path="/students/profile" element={<Profile />} />
+        <Route path="/students/forgot-password" element={<ForgotPassword />} />
+        <Route path="/students/reset-password/:id/:token" element={<ResetPassword />} />
+
 
         <Route path="/live" element={<Livesession />} />
         <Route path="/Studentdata" element={<StudentData />} />
@@ -118,9 +123,6 @@ const App = () => {
         <Route path="/list-course/:id" element={<EditCourse />} />
         <Route path="/list-course/:courseId/lecture" element={<CreateLecture />} />
         <Route path="/list-course/:courseId/lecture/:lectureId" element={<EditLecture />} />
-
-        
-
        
       </Routes>
     </Router>

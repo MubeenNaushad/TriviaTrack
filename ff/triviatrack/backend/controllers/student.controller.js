@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import {uploadMedia, deleteMedia} from "../utils/cloudinary.js";
+import nodemailer from "nodemailer";
 
 export const login = (req, res) => {
   const { email, password, userType } = req.body;
@@ -14,6 +15,10 @@ export const login = (req, res) => {
             res.json({ Login: false, Message: "Invalid Password" });
           }
          
+          if (!user.isVerified) {
+            return res.json({ Login: false, isVerified: false, Message: "Account not verified. Please check your email." });
+          }
+          
          
           if (response) {
             const accesstoken = jwt.sign(
@@ -35,7 +40,7 @@ export const login = (req, res) => {
               secure: true,
               sameSite: "strict",
             });
-            return res.json({ Login: true });
+            return res.json({ Login: true, isVerified: true });
           } else {
             res.json({ Login: false, Message: "No Record Found" });
           }
@@ -59,24 +64,76 @@ export const signup = async (req, res) => {
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
+    const verificationToken = jwt.sign({ email }, process.env.JWTKey, { expiresIn: '1d' });
 
     // Create a new user
     const newUser = new StudentModel({
       name,
       email,
       password: hashedPassword,
-      userType
+      userType,
+      isVerified: false,
+      verificationToken
     });
 
     // Save the user to the database
     await newUser.save();
 
+    sendVerificationEmail(email, verificationToken)
+
     // Respond with the created user
-    return res.status(201).json(newUser);
+    return res.status(201).json(newUser, "Verification Pending");
   } catch (err) {
     return res.status(500).json({ error: true, message: err.message });
   }
 };
+
+const sendVerificationEmail = (email, token) => {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'youremail@gmail.com',
+      pass: 'yourpassword'
+    }
+  });
+
+  const mailOptions = {
+    from: 'youremail@gmail.com',
+    to: email,
+    subject: 'Verify Your Account',
+    text: `Please click on the following link to verify your account: ${process.env.FRONTEND_URL}/students/verify-account/${token}`
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+};
+
+export const verifyYourEmail = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await StudentModel.findOne({ email: decoded.email, verificationToken: token });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid token or already verified" });
+    }
+
+    user.isVerified = true;
+    user.verificationToken = "Verified";
+    await user.save();
+
+    res.redirect('/login'); // Or a success page
+    alert("Verification Successful.");
+  } catch (error) {
+    res.status(500).json({ message: "Failed to verify account" });
+  }
+};
+
 
 export const logout = (_, res) => {
   res.clearCookie("accesstoken");
@@ -157,3 +214,59 @@ console.log("Received photo file:", {photoUrl});
     return res.status(500).json({ success: false, error: error.message });
   }
 };
+
+
+export const ForgotPassword = async(req, res) => {
+  const {email} = req.body;
+  
+  StudentModel.findOne({email: email})
+  .then(user => {
+    if(!user) {
+      return res.send({Status: "User not existed."})
+    }
+    const token = jwt.sign({id: user._id}, process.env.JWT_ACCESS_TOKEN, {expiresIn: "1d"})
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'youremail@gmail.com',
+        pass: 'yourpassword'
+      }
+    });
+    
+    var mailOptions = {
+      from: `youremail@gmail.com`,
+      to: `${email}`,
+      subject: 'Reset Password Link',
+      text: `${process.env.FRONTEND_URL}/students/reset-password/${user._id}/${token}`
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        return res.send({Status: "Success"})
+      }
+    });
+
+  })
+}
+
+export const ResetPassword = async(req, res) => {
+  const {id, token} = req.params;
+  const {password} = req.body;
+
+  jwt.verify(token, `${process.env.JWT_ACCESS_TOKEN}`, (err, decoded) => {
+    if(err) {
+      return res.json({Status: "Error"})
+    } else {
+      bcrypt.hash(password, 10)
+      .then(hash => {
+        StudentModel.findByIdAndUpdate({_id: id}, {password: hash})
+        .then(u => res.send({Status: "Success"}))
+        .catch(err => res.send({Status: err}))
+      })
+      .catch(err => console.log(err))
+    }
+  })
+}

@@ -16,9 +16,12 @@ const Login = () => {
     axios.post(`${import.meta.env.VITE_APP_BASEURL}/students/login`, { email, password, userType })
       .then(res => {
         console.log("Res", res.data);
-        if (res.data.Login) {
+        if (res.data.Login && res.data.isVerified) {
           navigate('/');
+        } else if(res.data.Login && !res.data.isVerified) {
+          alert("Verify your email before logging in.");
         } else {
+          alert("Login failed");
           navigate('/');
         }
       })
@@ -72,7 +75,9 @@ const Login = () => {
           </button>
         </form>
 
-        <a href="#" className="text-sm underline hover:text-blue-300">Forgot Password?</a>
+        <Link to="/forgot-password"> 
+        <a className="text-sm underline hover:text-blue-300">Forgot Password?</a>
+        </Link>
 
         <div className="flex justify-center mt-4">
           <button
