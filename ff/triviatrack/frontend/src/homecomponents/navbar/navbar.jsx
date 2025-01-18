@@ -44,7 +44,7 @@ const navbar = () => {
         withCredentials: true,
       })
       .then((response) => {
-        if (response.data.valid) {
+        if (response.data.valid) { 
           setIsLoggedIn(true);
           setUserName(response.data.user.name);
           setprofilePhoto(response.data.user.photoUrl);

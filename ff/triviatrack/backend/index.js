@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import studentRoutes from "./routes/student.routes.js";
 import courseRoutes from "./routes/course.routes.js";
 import mediaRoutes from "./routes/media.route.js"; 
+import courseProgressRoute from "./routes/courseProgress.route.js";
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.use("/media", mediaRoutes);
 app.use("/students", studentRoutes); 
 app.use("/course", courseRoutes);
+app.use("/progress", courseProgressRoute);
 
 app.listen(process.env.PORT, () => {
     console.log("Server is running on port " + process.env.PORT);

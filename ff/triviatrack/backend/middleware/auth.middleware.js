@@ -25,6 +25,7 @@ export const verifyUserMiddleware = (req, res, next) => {
         });
       }
       
+      req.id = user._id;
       req.user = user;
       next(); // Proceed to next middleware or controller
     }).catch(err => {

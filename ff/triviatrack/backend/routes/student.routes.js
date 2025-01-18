@@ -19,7 +19,8 @@ router.get("/verifyuser", verifyUserMiddleware, (req, res) => {
         name: req.user.name,
         email: req.user.email,
         userType: req.user.userType,
-        photoUrl: req.user.photoUrl
+        photoUrl: req.user.photoUrl,
+        isVerified: req.user.isVerified
       }
     });
   } else {

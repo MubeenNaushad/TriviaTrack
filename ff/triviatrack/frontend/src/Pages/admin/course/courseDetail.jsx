@@ -39,7 +39,7 @@ const CourseDetail = () => {
   }, [courseId]);
 
   const handleContinueCourse = () => {
-    console.log("Continue or buy the course");
+    Navigate(`/progress/${courseId}`)
   };
 
   const handleOpenForum = () => {
@@ -114,7 +114,7 @@ const CourseDetail = () => {
                   </h1>
                 </CardContent>
                 <CardFooter className="flex justify-center p-4">
-                  {course?.purchased ? (
+                  {!course?.purchased ? (
                     <>
                       <Button
                         onClick={handleContinueCourse}

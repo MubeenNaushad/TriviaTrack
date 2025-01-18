@@ -16,7 +16,7 @@ export const login = (req, res) => {
           }
          
           if (!user.isVerified) {
-            return res.json({ Login: false, isVerified: false, Message: "Account not verified. Please check your email." });
+            return res.json({ Login: true, isVerified: false, Message: "Account not verified. Please check your email." });
           }
           
          
@@ -56,17 +56,14 @@ export const signup = async (req, res) => {
   const { name, email, password, userType } = req.body;
 
   try {
-    // Check if the user already exists
     const existingUser = await StudentModel.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: true, message: "Email already in use" });
     }
 
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
     const verificationToken = jwt.sign({ email }, process.env.JWTKey, { expiresIn: '1d' });
 
-    // Create a new user
     const newUser = new StudentModel({
       name,
       email,
@@ -76,12 +73,10 @@ export const signup = async (req, res) => {
       verificationToken
     });
 
-    // Save the user to the database
     await newUser.save();
 
     sendVerificationEmail(email, verificationToken)
 
-    // Respond with the created user
     return res.status(201).json(newUser, "Verification Pending");
   } catch (err) {
     return res.status(500).json({ error: true, message: err.message });

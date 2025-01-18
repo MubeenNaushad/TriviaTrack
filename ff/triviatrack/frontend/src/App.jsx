@@ -40,6 +40,7 @@ import EditLecture from "./Pages/admin/lecture/EditLecture.jsx";
 import SearchPage from "./Pages/Student/SearchPage.jsx";
 import ForgotPassword from "./auth/ForgotPassword.jsx";
 import ResetPassword from "./auth/ResetPassword.jsx";
+import CourseProgress from "./Pages/Student/CourseProgress.jsx";
 
 const BannerData = {
   image: Img1,
@@ -115,6 +116,7 @@ const App = () => {
         <Route path="/students/forgot-password" element={<ForgotPassword />} />
         <Route path="/students/reset-password/:id/:token" element={<ResetPassword />} />
 
+        <Route path="/progress/:courseId" element={<CourseProgress />} />
 
         <Route path="/live" element={<Livesession />} />
         <Route path="/Studentdata" element={<StudentData />} />

@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import React, { useState } from "react";
 import '@fortawesome/fontawesome-free';
+import {Toaster, toast} from "sonner";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -75,7 +76,7 @@ const Login = () => {
           </button>
         </form>
 
-        <Link to="/forgot-password"> 
+        <Link to="/students/forgot-password"> 
         <a className="text-sm underline hover:text-blue-300">Forgot Password?</a>
         </Link>
 

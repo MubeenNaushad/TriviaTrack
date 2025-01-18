@@ -12,7 +12,6 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, email, password, userType }); // Debugging log
     axios
       .post(`${import.meta.env.VITE_APP_BASEURL}/students/signup`, {
         name,
