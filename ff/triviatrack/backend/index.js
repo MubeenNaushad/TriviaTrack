@@ -15,27 +15,27 @@ app.use(express.json());
 
 console.log(process.env.FRONTEND_URL);
 
-app.use(
-  cors({
+// CORS configuration
+app.use(cors({
     origin: process.env.FRONTEND_URL,
     credentials: true,
-  })
-);
+}));
+
 app.use(cookieParser());
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("Connected to MongoDB" + process.env.MONGO_URI);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("Connected to MongoDB " + process.env.MONGO_URI);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
+// Routes
 app.use("/media", mediaRoutes);
 app.use("/students", studentRoutes); 
 app.use("/course", courseRoutes);
 
 app.listen(process.env.PORT, () => {
-  console.log("Server is running on port " + process.env.PORT);
+    console.log("Server is running on port " + process.env.PORT);
 });
