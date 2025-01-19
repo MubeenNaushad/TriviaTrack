@@ -116,7 +116,7 @@ const App = () => {
         <Route path="/students/forgot-password" element={<ForgotPassword />} />
         <Route path="/students/reset-password/:id/:token" element={<ResetPassword />} />
 
-        <Route path="/progress/:courseId" element={<CourseProgress />} />
+        <Route path="/progress/:courseId" element={<CourseProgress />} /> 
 
         <Route path="/live" element={<Livesession />} />
         <Route path="/Studentdata" element={<StudentData />} />

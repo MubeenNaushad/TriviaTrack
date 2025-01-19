@@ -8,7 +8,7 @@ export const getCourseProgress = async(req,res) => {
 
         let courseProgress = await CourseProgress.findOne({courseId, userId}).populate("courseId");
 
-        const courseDetails = await Course.findById(courseId);
+        const courseDetails = await Course.findById(courseId).populate("lectures");
 
         if(!courseDetails){
             return res.status(404).json({
@@ -47,6 +47,8 @@ export const updateLectureProgress = async (req, res) => {
         const {courseId, lectureId} = req.params;
         const userId = req.id;
 
+        console.log(`Updating progress for user ${userId} on course ${courseId} for lecture ${lectureId}`);
+
         let courseProgress = await CourseProgress.findOne({courseId, userId});
 
         if(!courseProgress){
@@ -62,25 +64,31 @@ export const updateLectureProgress = async (req, res) => {
 
         if(lectureIndex !== -1) {
             courseProgress.lectureProgress[lectureIndex].viewed = true;
+            console.log(`Lecture ${lectureId} marked as viewed.`);
+
         } else {
             courseProgress.lectureProgress.push({
                 lectureId, viewed:true,
             })
+            console.log(`Lecture ${lectureId} added to progress and marked as viewed.`);
         }
 
 
         const lectureProgressLength = courseProgress.lectureProgress.filter((lectureProg) => lectureProg.viewed).length;
 
         const course = await Course.findById(courseId);
+        console.log("Progress updated and saved to database.");
 
         if(course.lectures.length === lectureProgressLength) {
             courseProgress.completed = true;
+            
         }
 
         await courseProgress.save();
 
         return res.status(200).json({
-            message: "Lecture Progress Updated."
+            message: "Lecture Progress Updated.",
+            CheckProgress: courseProgress.lectureProgress.map(lp => ({ lectureId: lp.lectureId, viewed: lp.viewed }))
         })
 
     } catch (error) {
@@ -105,7 +113,10 @@ export const markAsCompleted = async (req, res) => {
 
         await courseProgress.save();
 
-        return res.status(200).json({message: "Course marked as completed"})
+        return res.status(200).json({
+            message: "Course marked as completed",
+            completedStatus: courseProgress.completed
+        })
 
     } catch (error) {
         console.log(error);
@@ -128,7 +139,10 @@ export const markAsInCompleted = async (req, res) => {
 
         await courseProgress.save();
 
-        return res.status(200).json({message: "Course marked as incompleted"})
+        return res.status(200).json({
+            message: "Course marked as incompleted",
+            completedStatus: courseProgress.completed
+        })
         
     } catch (error) {
         console.log(error);

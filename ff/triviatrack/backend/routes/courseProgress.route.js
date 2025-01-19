@@ -5,7 +5,7 @@ import {getCourseProgress, updateLectureProgress, markAsCompleted, markAsInCompl
 const router = express.Router();
 
 
-router.get("/:courseId", verifyUserMiddleware, getCourseProgress);
+router.get("/check/:courseId", verifyUserMiddleware, getCourseProgress);
 router.post("/:courseId/lecture/:lectureId/view", verifyUserMiddleware, updateLectureProgress);
 router.post("/:courseId/complete", verifyUserMiddleware, markAsCompleted);
 router.post("/:courseId/incomplete", verifyUserMiddleware, markAsInCompleted);
