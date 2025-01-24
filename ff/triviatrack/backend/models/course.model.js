@@ -1,61 +1,68 @@
 import mongoose from "mongoose";
 
 const categorySchema = new mongoose.Schema({
-    name: {
+  name: {
+    type: String,
+    required: true,
+  },
+});
+
+export const Category = mongoose.model("Category", categorySchema);
+
+const courseSchema = new mongoose.Schema(
+  {
+    courseTitle: {
       type: String,
-      required: true
-    }
-  });
-  
-export const Category = mongoose.model('Category', categorySchema);
-
-const courseSchema=new mongoose.Schema({
-    courseTitle:{
-        type:String,
-        required:true
+      required: true,
     },
-    subTitle:{
-        type:String,
+    subTitle: {
+      type: String,
     },
-    description:{
-        type:String,
+    description: {
+      type: String,
     },
-    category:{
-        type:String,
-        required:true
+    category: {
+      type: String,
+      required: true,
     },
-    courseLevel:{
-        type:String,
-        enum:["Beginner","Medium","Expert"]
+    courseLevel: {
+      type: String,
+      enum: ["Beginner", "Medium", "Expert"],
     },
-    coursePrice:{
-        type:Number,
-    }, 
-    courseThumbnail:{
-        type:String,
+    coursePrice: {
+      type: Number,
     },
-    enrolledStudents:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'StudentModel'
-    }], 
-    lectures:[
-        {
-        type:mongoose.Schema.Types.ObjectId, 
-        ref:'Lecture'
-        }
-    ],
-    creator:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'StudentModel'
+    courseThumbnail: {
+      type: String,
     },
-    isPublished:{
-        type:Boolean,
-        default:false
-    },
-    categories: [{
+    enrolledStudents: [
+      {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category'
-    }],
-},{timestamps:true});
+        ref: "User",
+      },
+    ],
+    lectures: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Lecture",
+      },
+    ],
+    creator: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    isPublished: {
+      type: Boolean,
+      default: false,
+    },
+    categories: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
-export const Course=mongoose.model("Course", courseSchema);
+export const Course = mongoose.model("Course", courseSchema);

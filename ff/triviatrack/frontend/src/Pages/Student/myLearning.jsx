@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Course from "../admin/course/Course.jsx"
+import Course from "../admin/course/Course.jsx";
 import axios from "axios";
 
 const MyLearning = () => {
@@ -7,15 +7,16 @@ const MyLearning = () => {
   const [myLearningCourses, setMyLearningCourses] = useState([]);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_APP_BASEURL}/course/getcourse`)
-    .then((response) => {
-      setMyLearningCourses(response.data);
-      setIsLoading(false);
-    })
-    .catch((error) => {
-      console.log("Failed to fetch courses", error);
-      setIsLoading(false);
-    })
+    axios
+      .get(`${import.meta.env.VITE_APP_BASEURL}/course/getcourse`)
+      .then((response) => {
+        setMyLearningCourses(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log("Failed to fetch courses", error);
+        setIsLoading(false);
+      });
   }, []);
 
   return (
@@ -31,7 +32,7 @@ const MyLearning = () => {
           ) : (
             <div className="flex flex-row flex-wrap gap-4">
               {myLearningCourses.map((course, index) => (
-                <Course key={index} course={course}/>
+                <Course key={index} course={course} />
               ))}
             </div>
           )}

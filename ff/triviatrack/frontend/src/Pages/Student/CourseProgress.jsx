@@ -88,8 +88,8 @@ const CourseProgress = () => {
         `${import.meta.env.VITE_APP_BASEURL}/progress/${courseId}/complete`
       );
       setCompleted(true);
-      setProgress(progress.map(prog => ({ ...prog, viewed: true })));
-      console.log("com",CompleteCourse.data);
+      setProgress(progress.map((prog) => ({ ...prog, viewed: true })));
+      console.log("com", CompleteCourse.data);
     } catch (error) {
       console.error("Failed to mark course as completed", error);
     }
@@ -101,8 +101,8 @@ const CourseProgress = () => {
         `${import.meta.env.VITE_APP_BASEURL}/progress/${courseId}/incomplete`
       );
       setCompleted(false);
-      setProgress(progress.map(prog => ({ ...prog, viewed: false })));
-      console.log("Incom",InCompleteCourse.data);
+      setProgress(progress.map((prog) => ({ ...prog, viewed: false })));
+      console.log("Incom", InCompleteCourse.data);
     } catch (error) {
       console.error("Failed to mark course as incomplete", error);
     }

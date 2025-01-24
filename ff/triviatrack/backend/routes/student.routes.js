@@ -1,5 +1,16 @@
 import express from "express";
-import { login, signup, logout, getStudents, deleteStudent, getUserProfile, updateProfile, ForgotPassword, ResetPassword, verifyYourEmail } from "../controllers/student.controller.js";
+import {
+  login,
+  signup,
+  logout,
+  getStudents,
+  deleteStudent,
+  getUserProfile,
+  updateProfile,
+  ForgotPassword,
+  ResetPassword,
+  verifyYourEmail,
+} from "../controllers/student.controller.js";
 import { verifyUserMiddleware } from "../middleware/auth.middleware.js";
 import StudentModel from "../models/user.model.js";
 import { uploadMedia, deleteMedia } from "../utils/cloudinary.js";
@@ -20,18 +31,18 @@ router.get("/verifyuser", verifyUserMiddleware, (req, res) => {
         email: req.user.email,
         userType: req.user.userType,
         photoUrl: req.user.photoUrl,
-        isVerified: req.user.isVerified
-      }
+        isVerified: req.user.isVerified,
+      },
     });
   } else {
     res.json({ valid: false });
   }
 });
-router.patch("/update/:id", upload.single('photoUrl'), updateProfile);
+router.patch("/update/:id", upload.single("photoUrl"), updateProfile);
 router.delete("/delete/:id", deleteStudent);
 router.get("/profile", verifyUserMiddleware, getUserProfile);
 router.post("/forgot-password", ForgotPassword);
 router.post("/reset-password/:id/:token", ResetPassword);
-router.get('/verify-account/:token', verifyYourEmail);
+router.get("/verify-account/:token", verifyYourEmail);
 
 export default router;

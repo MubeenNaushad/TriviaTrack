@@ -3,9 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Course from "./Course";
 import axios from "axios";
 
-
 const Courses = () => {
-
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -37,7 +35,9 @@ const Courses = () => {
             ? Array.from({ length: 8 }).map((_, index) => (
                 <CourseSkeleton key={index} />
               ))
-            : courses.map((course) => <Course key={course._id} course={course} />)}
+            : courses.map((course) => (
+                <Course key={course._id} course={course} />
+              ))}
         </div>
       </div>
     </div>

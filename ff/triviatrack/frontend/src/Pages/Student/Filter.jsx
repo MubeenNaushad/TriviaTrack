@@ -45,7 +45,7 @@ const Filter = ({ handleFilterChange }) => {
     setSortByPrice(selectedValue);
     handleFilterChange(selectedCategories, selectedValue);
   };
-  
+
   return (
     <div className="w-full p-8">
       <div className="flex items-center justify-between gap-x-8">

@@ -5,8 +5,9 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import studentRoutes from "./routes/student.routes.js";
 import courseRoutes from "./routes/course.routes.js";
-import mediaRoutes from "./routes/media.route.js"; 
+import mediaRoutes from "./routes/media.route.js";
 import courseProgressRoute from "./routes/courseProgress.route.js";
+import coursePurchaseRoute from "./routes/coursePurchase.route.js";
 
 dotenv.config();
 
@@ -17,27 +18,31 @@ app.use(express.json());
 console.log(process.env.FRONTEND_URL);
 
 // CORS configuration
-app.use(cors({
+app.use(
+  cors({
     origin: process.env.FRONTEND_URL,
     credentials: true,
-}));
+  })
+);
 
 app.use(cookieParser());
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log("Connected to MongoDB " + process.env.MONGO_URI);
-    })
-    .catch((err) => {
-        console.log(err); 
-    });
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("Connected to MongoDB " + process.env.MONGO_URI);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // Routes
 app.use("/media", mediaRoutes);
-app.use("/students", studentRoutes); 
+app.use("/students", studentRoutes);
 app.use("/course", courseRoutes);
 app.use("/progress", courseProgressRoute);
+app.use("/purchase", coursePurchaseRoute);
 
 app.listen(process.env.PORT, () => {
-    console.log("Server is running on port " + process.env.PORT);
+  console.log("Server is running on port " + process.env.PORT);
 });

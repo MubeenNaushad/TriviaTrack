@@ -21,90 +21,88 @@ const AddCourse = () => {
   const [courseTitle, setCourseTitle] = useState("");
   const [category, setCategory] = useState("");
 
-const handleSubmit=(e)=>{
-  e.preventDefault();
-  axios.post(`${import.meta.env.VITE_APP_BASEURL}/course/create`,{
-    courseTitle,
-    category,
-  }).then((res)=> navigate("/list-course"))
-  .catch((err) => console.log(err));
-}
-
-
-
- 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_APP_BASEURL}/course/create`, {
+        courseTitle,
+        category,
+      })
+      .then((res) => navigate("/list-course"))
+      .catch((err) => console.log(err));
+  };
 
   const getSelectedCategory = (value) => {
     setCategory(value);
   };
-const createCourseHandler=()=>{
+  const createCourseHandler = () => {
     console.log(courseTitle);
     console.log(category);
-}
+  };
 
   return (
     <div className="flex pt-[2.4rem]">
-        <Sidebar/>
-        
-    <div className="flex-1 mx-10 mt-10">
-      <div className="mb-4">
-        <h1 className="font-bold text-xl">
-          Lets add course, add some basic course details for your new course
-        </h1>
-        <p className="text-sm">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus,
-          laborum!
-        </p>
+      <Sidebar />
+
+      <div className="flex-1 mx-10 mt-10">
+        <div className="mb-4">
+          <h1 className="font-bold text-xl">
+            Lets add course, add some basic course details for your new course
+          </h1>
+          <p className="text-sm">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus,
+            laborum!
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <Label>Title</Label>
+            <Input
+              type="text"
+              value={courseTitle}
+              onChange={(e) => setCourseTitle(e.target.value)}
+              placeholder="Your Course Name"
+            />
+          </div>
+
+          <div>
+            <Label>Category</Label>
+            <Select onValueChange={getSelectedCategory}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Category</SelectLabel>
+                  <SelectItem value="Next JS">Next JS</SelectItem>
+                  <SelectItem value="Data Science">Data Science</SelectItem>
+                  <SelectItem value="Frontend Development">
+                    Frontend Development
+                  </SelectItem>
+                  <SelectItem value="Fullstack Development">
+                    Fullstack Development
+                  </SelectItem>
+                  <SelectItem value="MERN Stack Development">
+                    MERN Stack Development
+                  </SelectItem>
+                  <SelectItem value="Javascript">Javascript</SelectItem>
+                  <SelectItem value="Python">Python</SelectItem>
+                  <SelectItem value="Docker">Docker</SelectItem>
+                  <SelectItem value="MongoDB">MongoDB</SelectItem>
+                  <SelectItem value="HTML">HTML</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" onClick={() => navigate("/list-course")}>
+              Back
+            </Button>
+            <Button onClick={handleSubmit}>Create</Button>
+          </div>
+        </div>
       </div>
-      
-      <div className="space-y-4">
-        <div>
-          <Label>Title</Label>
-          <Input
-            type="text"
-            value={courseTitle}
-            onChange={(e) => setCourseTitle(e.target.value)}
-            placeholder="Your Course Name"
-          />
-        </div>
-       
-        <div>
-          <Label>Category</Label>
-          <Select onValueChange={getSelectedCategory}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select a category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Category</SelectLabel>
-                <SelectItem value="Next JS">Next JS</SelectItem>
-                <SelectItem value="Data Science">Data Science</SelectItem>
-                <SelectItem value="Frontend Development">
-                  Frontend Development
-                </SelectItem>
-                <SelectItem value="Fullstack Development">
-                  Fullstack Development
-                </SelectItem>
-                <SelectItem value="MERN Stack Development">
-                  MERN Stack Development
-                </SelectItem>
-                <SelectItem value="Javascript">Javascript</SelectItem>
-                <SelectItem value="Python">Python</SelectItem>
-                <SelectItem value="Docker">Docker</SelectItem>
-                <SelectItem value="MongoDB">MongoDB</SelectItem>
-                <SelectItem value="HTML">HTML</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" onClick={() => navigate("/list-course")}>
-            Back
-          </Button>
-          <Button onClick={handleSubmit}>Create</Button>
-        </div>
-      </div>
-    </div>
     </div>
   );
 };

@@ -82,15 +82,19 @@ const CourseTab = () => {
     formData.append("category", input.category);
     formData.append("courseLevel", input.courseLevel);
     formData.append("coursePrice", input.coursePrice);
-  
+
     if (input.courseThumbnail instanceof File) {
       formData.append("courseThumbnail", input.courseThumbnail);
     }
-  
+
     try {
-      await axios.put(`${import.meta.env.VITE_APP_BASEURL}/course/update/${id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.put(
+        `${import.meta.env.VITE_APP_BASEURL}/course/update/${id}`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       console.log("Course Updated Successfully");
       navigate("/list-course");
     } catch (error) {
@@ -100,18 +104,13 @@ const CourseTab = () => {
 
   const publishStatusHandler = async (action) => {
     try {
-      await axios.put(
-        `${import.meta.env.VITE_APP_BASEURL}/course/${id}`,
-        {
-          
-          isPublished:action,
-        }
-      );
+      await axios.put(`${import.meta.env.VITE_APP_BASEURL}/course/${id}`, {
+        isPublished: action,
+      });
     } catch (error) {
       console.error("Failed to update Publish status", error);
     }
   };
-  
 
   const selectThumbnail = (e) => {
     const file = e.target.files?.[0];
@@ -133,10 +132,7 @@ const CourseTab = () => {
           </CardDescription>
         </div>
         <div className="flex gap-2 ">
-          <Button
-            variant="outline"
-           
-          >
+          <Button variant="outline">
             {input.isPublished ? "Publish" : "UnPublish"}
           </Button>
           <Button>Remove Course</Button>

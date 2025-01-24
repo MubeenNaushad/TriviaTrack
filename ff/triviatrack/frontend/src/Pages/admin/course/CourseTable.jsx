@@ -15,9 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import axios from "axios";
 
-
 export function CourseTable() {
- 
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
 
@@ -38,12 +36,12 @@ export function CourseTable() {
   const deletecourse = async (id) => {
     try {
       await axios.delete(
-        `${import.meta.env.VITE_APP_BASEURL}/course/delete/${id}`);
-        setCourses(courses.filter((course) => course._id !== id));
-        console.log("course Deleted Successfully");
-      
-    } catch(error) {
-        console.error("Failed to delete course" ,error)
+        `${import.meta.env.VITE_APP_BASEURL}/course/delete/${id}`
+      );
+      setCourses(courses.filter((course) => course._id !== id));
+      console.log("course Deleted Successfully");
+    } catch (error) {
+      console.error("Failed to delete course", error);
     }
   };
 
@@ -69,11 +67,13 @@ export function CourseTable() {
                 <TableCell>{course.courseTitle}</TableCell>
                 <TableCell>
                   <Badge>
-                    {course.isPublished ?"Published":"Not Published"}
+                    {course.isPublished ? "Published" : "Not Published"}
                   </Badge>
                 </TableCell>
 
-                <TableCell className="font-medium">${course.coursePrice}</TableCell>
+                <TableCell className="font-medium">
+                  ${course.coursePrice}
+                </TableCell>
                 <TableCell className="text-right">
                   <Button
                     className="mr-3"

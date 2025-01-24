@@ -14,7 +14,6 @@ import axios from "axios";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate, useParams } from "react-router-dom";
 
-
 const LectureTab = () => {
   const [lectureTitle, setlectureTitle] = useState("");
   const [uploadVideoInfo, setUploadVideoInfo] = useState(null);
@@ -44,7 +43,7 @@ const LectureTab = () => {
           }
         );
         if (res.data.success) {
-            console.log("id",courseId, lectureId);
+          console.log("id", courseId, lectureId);
           console.log(res);
           setUploadVideoInfo({
             videoUrl: res.data.data.url,
@@ -61,9 +60,9 @@ const LectureTab = () => {
   };
 
   const isFreeHandler = () => {
-    if(isFree == false) setIsFree(true);
-    if(isFree == true) setIsFree(false);
-  }
+    if (isFree == false) setIsFree(true);
+    if (isFree == true) setIsFree(false);
+  };
 
   const updateLecture = async () => {
     try {
@@ -71,11 +70,16 @@ const LectureTab = () => {
         `${
           import.meta.env.VITE_APP_BASEURL
         }/course/${courseId}/lecture/${lectureId}`,
-        { lectureTitle, videoInfo:uploadVideoInfo, isPreviewFree: isFree, courseId, lectureId }
+        {
+          lectureTitle,
+          videoInfo: uploadVideoInfo,
+          isPreviewFree: isFree,
+          courseId,
+          lectureId,
+        }
       );
       console.log("Lecture edited successfully");
       navigate(`/list-course/${courseId}/lecture`);
-     
     } catch (error) {
       console.log(error);
     }
@@ -98,10 +102,8 @@ const LectureTab = () => {
       navigate(`/list-course/${courseId}/lecture`);
     } catch (error) {
       console.log("Error removing lecture:", error);
-     
     }
   };
-
 
   return (
     <Card className="mt-8 w-full">
@@ -114,13 +116,20 @@ const LectureTab = () => {
           </CardDescription>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="destructive" onClick={removeLecture}>Remove Lecture</Button>
+          <Button variant="destructive" onClick={removeLecture}>
+            Remove Lecture
+          </Button>
         </div>
       </CardHeader>
       <CardContent>
         <div>
           <Label>Title</Label>
-          <Input value={lectureTitle} onChange={(e) => setlectureTitle(e.target.value)} type="text" placeholder="Eg. Intro" />
+          <Input
+            value={lectureTitle}
+            onChange={(e) => setlectureTitle(e.target.value)}
+            type="text"
+            placeholder="Eg. Intro"
+          />
         </div>
         <div className="my-5">
           <Label>
@@ -135,7 +144,11 @@ const LectureTab = () => {
           />
         </div>
         <div className="flex items-center space-x-2 my-5">
-          <Switch id="airplane-mode" checked={isFree} onChecked={isFreeHandler} />
+          <Switch
+            id="airplane-mode"
+            checked={isFree}
+            onChecked={isFreeHandler}
+          />
           <Label htmlFor="airplane-mode">Is this lecture free?</Label>
         </div>
 
