@@ -49,25 +49,23 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
+    const getRankLogo = (points) => {
       if (points < 100) {
         setmaxPoints(100);
         setrankPic("https://cdn3d.iconscout.com/3d/premium/thumb/bronze-rank-3d-icon-download-in-png-blend-fbx-gltf-file-formats--medal-position-identification-badge-game-equipment-star-adventure-pack-sports-games-icons-8955734.png?f=webp");
+      } else if (points >= 100 && points < 200) {
+        setmaxPoints(200);
+        setrankPic("https://cdn3d.iconscout.com/3d/premium/thumb/silver-rank-3d-icon-download-in-png-blend-fbx-gltf-file-formats--position-medal-identification-badge-game-equipment-star-adventure-pack-sports-games-icons-8955733.png");
+      } else if (points >= 200 && points < 300) {
+        setmaxPoints(300);
+        setrankPic("https://cdn3d.iconscout.com/3d/premium/thumb/gold-rank-3d-icon-download-in-png-blend-fbx-gltf-file-formats--bronze-medal-position-identification-badge-adventure-game-pack-sports-games-icons-8955735.png?f=webp");
+      } else if (points >= 300) {
+        setmaxPoints(400);
+        setrankPic("https://cdn3d.iconscout.com/3d/premium/thumb/rank-diamond-3d-icon-download-in-png-blend-fbx-gltf-file-formats--bronze-medal-award-winner-pack-sign-symbols-icons-9325599.png?f=webp");
       }
-        if (points < 200 && points > 100) {
-          setmaxPoints(200);
-  
-          setrankPic("https://cdn3d.iconscout.com/3d/premium/thumb/silver-rank-3d-icon-download-in-png-blend-fbx-gltf-file-formats--position-medal-identification-badge-game-equipment-star-adventure-pack-sports-games-icons-8955733.png");
-        }
-          if (points < 300 && points > 200) { 
-            setmaxPoints(300);
-            setrankPic("https://cdn3d.iconscout.com/3d/premium/thumb/gold-rank-3d-icon-download-in-png-blend-fbx-gltf-file-formats--bronze-medal-position-identification-badge-adventure-game-pack-sports-games-icons-8955735.png?f=webp");
-          }
-          if (points > 400 && points > 400) {
-            setmaxPoints(400);
-            setrankPic("https://cdn3d.iconscout.com/3d/premium/thumb/rank-diamond-3d-icon-download-in-png-blend-fbx-gltf-file-formats--bronze-medal-award-winner-pack-sign-symbols-icons-9325599.png?f=webp");
-  
-          }
-  },[])
+    };
+    getRankLogo(profile.points);
+  }, [profile.points]);
 
   
   useEffect(() => {
@@ -220,7 +218,7 @@ const Profile = () => {
           <div className="items-center mr-2 mb-8">
           <img src={rankPic} alt="Rank Logo" className="w-24 h-25"/>
           <p>{profile.points}/{maxPoints} Points</p>
-          <Progress value={profile?.points}/>
+          <Progress value={profile?.points} max={maxPoints}/>
         </div>
         </div>
       </div>
