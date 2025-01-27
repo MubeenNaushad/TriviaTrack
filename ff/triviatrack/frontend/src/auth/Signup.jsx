@@ -24,7 +24,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 mt-10">
+    <div className="mt-16 flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 mt-10">
       <div className="flex justify-center items-center w-full max-w-sm bg-white/10 backdrop-blur-md rounded-2xl mb-20 p-8 shadow-lg shadow-black/10 text-white text-center animate-fade-in">
         <form onSubmit={handleSubmit}>
           <h2 className="text-2xl font-bold mb-5">Register</h2>

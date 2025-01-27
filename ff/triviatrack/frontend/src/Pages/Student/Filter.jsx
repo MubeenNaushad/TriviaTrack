@@ -30,27 +30,26 @@ const Filter = ({ handleFilterChange }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sortByPrice, setSortByPrice] = useState("");
 
-  const handleCategoryChange = (categoryId) => {
-    setSelectedCategories((prevCategories) => {
-      const newCategories = prevCategories.includes(categoryId)
-        ? prevCategories.filter((id) => id !== categoryId)
-        : [...prevCategories, categoryId];
+  const handleCategoryChange = (categoryId, isChecked) => {
+    const updatedCategories = isChecked
+      ? [...selectedCategories, categoryId]
+      : selectedCategories.filter((id) => id !== categoryId);
 
-      handleFilterChange(newCategories, sortByPrice);
-      return newCategories;
-    });
+    setSelectedCategories(updatedCategories);
+    handleFilterChange(updatedCategories, sortByPrice); // Pass updated state to parent
   };
 
-  const selectByPriceHandler = (selectedValue) => {
+  const handleSortChange = (selectedValue) => {
     setSortByPrice(selectedValue);
-    handleFilterChange(selectedCategories, selectedValue);
+    handleFilterChange(selectedCategories, selectedValue); // Pass updated state to parent
   };
 
   return (
     <div className="w-full p-8">
+      {/* Header */}
       <div className="flex items-center justify-between gap-x-8">
         <h1 className="font-semibold text-lg md:text-xl">Filter Options</h1>
-        <Select onValueChange={selectByPriceHandler}>
+        <Select onValueChange={handleSortChange}>
           <SelectTrigger>
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
@@ -63,16 +62,25 @@ const Filter = ({ handleFilterChange }) => {
           </SelectContent>
         </Select>
       </div>
+
       <Separator className="my-4" />
+
+      {/* Categories */}
       <div>
         <h1 className="font-semibold mb-2">CATEGORY</h1>
         {categories.map((category) => (
-          <div className="flex items-center space-x-2 my-2">
+          <div key={category.id} className="flex items-center space-x-2 my-2">
             <Checkbox
               id={category.id}
-              onCheckedChange={() => handleCategoryChange(category.id)}
+              checked={selectedCategories.includes(category.id)} // Maintain proper state binding
+              onCheckedChange={(isChecked) =>
+                handleCategoryChange(category.id, isChecked)
+              }
             />
-            <Label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            <Label
+              htmlFor={category.id} // Associate label with checkbox for accessibility
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
               {category.label}
             </Label>
           </div>

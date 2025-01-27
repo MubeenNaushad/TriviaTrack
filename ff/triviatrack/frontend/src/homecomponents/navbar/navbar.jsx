@@ -1,22 +1,39 @@
-import React from "react";
-import { NavbarMenu } from "../../mockData/data.js";
-import { MdComputer, MdMenu, MdPerson } from "react-icons/md";
-import { motion } from "framer-motion";
-import ResponsiveMenu from "./ResponsiveMenu.jsx";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+
 import axios from "axios";
 
-const navbar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+
+const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [profilePhoto, setprofilePhoto] = useState("");
-  const [photoUrl, setPhotoUrl] = useState('');
+  const [userType, setUserType] = useState(""); // Track userType (Student or Teacher)
+  const [userName, setUserName] = useState(""); // Track user's name
+  const [profilePhoto, setProfilePhoto] = useState(""); // Track user's profile photo
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Track dropdown visibility
+  const [isScrolled, setIsScrolled] = useState(false); // Track scroll state
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // Fetch user details
+    axios
+      .get(`${import.meta.env.VITE_APP_BASEURL}/students/verifyuser`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.data.valid) {
+          setIsLoggedIn(true);
+          setUserType(response.data.user.userType); // Store userType
+          setUserName(response.data.user.name); // Store user's name
+          setProfilePhoto(response.data.user.photoUrl || "https://via.placeholder.com/40"); // Default photo
+        } else {
+          setIsLoggedIn(false);
+        }
+      })
+      .catch(() => {
+        setIsLoggedIn(false);
+      });
+
+    // Handle scroll effect
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setIsScrolled(true);
@@ -26,197 +43,161 @@ const navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
-
-  const handleToggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_APP_BASEURL}/students/verifyuser`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        if (response.data.valid) { 
-          setIsLoggedIn(true);
-          setUserName(response.data.user.name);
-          setprofilePhoto(response.data.user.photoUrl);
-        } else {
-          setIsLoggedIn(false);
-        }
-      })
-      .catch(() => {
-        setIsLoggedIn(false);
-      });
-  });
-
-
-  useEffect(() => {
-    const storedPhotoUrl = localStorage.getItem('photoUrl');
-    if (storedPhotoUrl) {
-      setPhotoUrl(storedPhotoUrl);
-    }
   }, []);
 
   const handleLogout = () => {
     axios
-      .post(
-        `${import.meta.env.VITE_APP_BASEURL}/students/logout`,
-        {},
-        { withCredentials: true }
-      )
+      .post(`${import.meta.env.VITE_APP_BASEURL}/students/logout`, {}, { withCredentials: true })
       .then(() => {
         setIsLoggedIn(false);
-        navigate("/");
+        setUserType(""); // Clear userType
+        setUserName(""); // Clear userName
+        setProfilePhoto(""); // Clear profile photo
+        navigate("/students/login");
       })
       .catch((err) => {
         console.error("Error during logout:", err);
       });
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
-    <>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-      >
-        <div className="container flex justify-between items-center py-6">
-          <div
-            className={`fixed top-0 left-0 right-0 w-full z-50 px:4 lg:px-10 transition-colors duration-300 ${
-              isScrolled
-                ? "bg-gray-900 shadow-md text-white"
-                : "bg-transparent text-gray-800"
-            } flex justify-between items-center py-6`}
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? "bg-gray-900 shadow-md text-white" : "bg-transparent text-black"
+      }`}
+    >
+      <div className="container mx-auto px-4 lg:px-8 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <div
+          className="text-2xl font-bold flex items-center cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          TriviaTrack
+        </div>
+
+        {/* Navigation Links */}
+        <div className="hidden lg:flex space-x-6">
+          <button
+            onClick={() => navigate("/")}
+            className="hover:text-blue-400 transition-all font-medium"
           >
-            <div
-              className={`text-2xl flex items-center gap-2 font-bold ${
-                isScrolled ? "text-white" : "text-gray-800"
-              }`}
+            Home
+          </button>
+          <button
+            onClick={() => navigate("/courses")}
+            className="hover:text-blue-400 transition-all font-medium"
+          >
+            Courses
+          </button>
+          <button
+            onClick={() => navigate("/contact")}
+            className="hover:text-blue-400 transition-all font-medium"
+          >
+            Contact
+          </button>
+          <button
+            onClick={() => navigate("/live")}
+            className="hover:text-blue-400 transition-all font-medium"
+          >
+            Live Session
+          </button>
+          {isLoggedIn && userType === "Student" && (
+            <button
+              onClick={() => navigate("/students/dashboard")}
+              className="hover:text-blue-400 transition-all font-medium"
             >
-              <MdComputer className="text-3xl text-seconday" />
-              <p>TriviaTrack</p>
-            </div>
+              For Students
+            </button>
+          )}
+          {isLoggedIn && userType === "Teacher" && (
+            <button
+              onClick={() => navigate("/teacher/dashboard")}
+              className="hover:text-blue-400 transition-all font-medium"
+            >
+              Dashboard
+            </button>
+          )}
+        </div>
 
-            <div className="hidden lg:block">
-              <ul className="flex items-center gap-6">
-                {NavbarMenu.map((item) => {
-                  return (
-                    <li key={item.id}>
-                      <a
-                        href={item.link}
-                        className={`inline-block text-sm xl:text-base py-1 px-2 xl:px-3 hover:text-seconday transition-all duration-300 font-semibold`}
-                      >
-                        {item.title}
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-
-            <div className="hidden lg:block space-x-6">
-              {!isLoggedIn ? (
-                <>
+        {/* Right Side Buttons (Login/Register or Profile) */}
+        <div className="hidden lg:flex items-center space-x-4">
+          {isLoggedIn ? (
+            <div className="relative">
+              <button
+                className="flex items-center space-x-2 hover:text-blue-400 transition-all font-medium"
+                onClick={toggleDropdown}
+              >
+                <img
+                  src={profilePhoto}
+                  alt="Profile"
+                  className="w-8 h-8 rounded-full"
+                />
+                <span>{userName}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="ml-1"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg z-50">
                   <button
-                    className="font-semibold"
-                    onClick={() => navigate("/students/login")}
+                    className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                    onClick={() => navigate("/students/profile")}
                   >
-                    Sign in
+                    My Profile
                   </button>
                   <button
-                    className="text-white bg-seconday font-semibold rounded-full px-4 py-2"
-                    onClick={() => navigate("/students/signup")}
+                    className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                    onClick={() => navigate("/settings")}
                   >
-                    Register
+                    Settings
                   </button>
-                </>
-              ) : (
-                <div className="relative inline-block text-left">
                   <button
-                    className="flex items-center gap-2 font-semibold"
-                    onClick={handleToggleDropdown}
+                    className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                    onClick={handleLogout}
                   >
-                    {profilePhoto.photoUrl ? (
-                      <img
-                        src={profilePhoto.photoUrl}
-                        alt="Profile"
-                        className="h-8 w-8 rounded-full"
-                      />
-                    ) : (
-                      <img
-                        src={photoUrl || "https://github.com/shadcn.png"}
-                        alt="Profile"
-                        className="h-8 w-8 rounded-full"
-                      />
-                    )}{" "}
-                    {userName}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
+                    Logout
                   </button>
-                  <div
-                    className={`${
-                      isDropdownOpen ? "" : "hidden"
-                    } absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50`}
-                  >
-                    <div className="py-1">
-                      <button
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => navigate("/students/profile")}
-                      >
-                        My Profile
-                      </button>
-                      <button
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => navigate("/students/dashboard")}
-                      >
-                        Dashboard
-                      </button>
-                      <button
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => navigate("/students/my-learning")}
-                      >
-                        My Courses
-                      </button>
-                      <button
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={handleLogout}
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  </div>
                 </div>
               )}
             </div>
-
-            <div className="lg:hidden mr-32" onClick={() => setIsOpen(!isOpen)}>
-              <MdMenu className="text-4xl" />
-            </div>
-          </div>
+          ) : (
+            <>
+              <button
+                onClick={() => navigate("/students/login")}
+                className="hover:text-blue-400 transition-all font-medium"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => navigate("/students/signup")}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all"
+              >
+                Register
+              </button>
+            </>
+          )}
         </div>
-      </motion.div>
-
-      <ResponsiveMenu isOpen={isOpen} />
-    </>
+      </div>
+    </nav>
   );
 };
 
-export default navbar;
+export default Navbar;

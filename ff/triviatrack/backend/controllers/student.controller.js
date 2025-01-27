@@ -43,7 +43,7 @@ export const login = (req, res) => {
               secure: true,
               sameSite: "strict",
             });
-            return res.json({ Login: true, isVerified: true });
+            return res.json({ Login: true,userType: user.userType, isVerified: true });
           } else {
             res.json({ Login: false, Message: "No Record Found" });
           }

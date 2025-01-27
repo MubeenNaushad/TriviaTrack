@@ -41,6 +41,8 @@ import SearchPage from "./Pages/Student/SearchPage.jsx";
 import ForgotPassword from "./auth/ForgotPassword.jsx";
 import ResetPassword from "./auth/ResetPassword.jsx";
 import CourseProgress from "./Pages/Student/CourseProgress.jsx";
+import StudentDashboard from "./homecomponents/Student_Dashboard/StudentDashboard.jsx";
+import Quiz from "./Pages/Student/Quiz.jsx";
 
 const BannerData = {
   image: Img1,
@@ -77,7 +79,6 @@ const App = () => {
               <Banner {...BannerData} />
               <Banner {...BannerData2} reverse={true} />
               <SubjectCard />
-
               <Testimonial />
               <Footer />
             </>
@@ -116,7 +117,10 @@ const App = () => {
         <Route path="/students/login" element={<Login />} />
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/room/:roomid" element={<Roompage />} />
-        <Route path="/students/dashboard" element={<Dashboard />} />
+        <Route path="/students/dashboard" element={<StudentDashboard />} />
+        <Route path="/teacher/dashboard" element={<Dashboard />} />
+        <Route path="/quiz" element={<Quiz />} />
+
         <Route path="/students/my-learning" element={<MyLearning />} />
         <Route path="/students/profile" element={<Profile />} />
         <Route path="/students/forgot-password" element={<ForgotPassword />} />
