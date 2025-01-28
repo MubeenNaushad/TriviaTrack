@@ -3,13 +3,13 @@ import { BsFillBellFill, BsFillEnvelopeFill, BsPersonCircle, BsSearch } from 're
 
 const StudentHeader = () => {
   return (
-    <header className="mt-10 bg-white p-4 shadow-xl sticky top-0 z-40">
-      <div className="flex justify-between items-center container mx-auto">
-        <div className="flex items-center">
+    <header className="mt-10 bg-gray-800 text-white p-4 shadow-xl sticky top-0 z-40">
+      <div className="flex justify-between items-start container mx-auto">
+        <div className="flex items-center space-x-4">
           <BsSearch className="text-xl mr-2" />
           <input
             type="text"
-            placeholder="Search for courses or students..."
+            placeholder="Search for courses"
             className="border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>

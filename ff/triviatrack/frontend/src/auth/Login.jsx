@@ -66,7 +66,7 @@ const Login = () => {
             type="submit"
             className=" text-white w-full py-3 rounded-full bg-gray-700 font-bold text-lg hover:scale-105 transition-transform shadow-md"
           >
-            Login as {userType}
+            Login
           </button>
         </form>
 

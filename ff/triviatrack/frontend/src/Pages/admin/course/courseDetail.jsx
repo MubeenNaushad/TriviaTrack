@@ -56,7 +56,7 @@ const CourseDetail = () => {
   };
 
   return (
-    <div className="space-y-5 mt-10">
+    <div className="space-y-5 mt-16">
       {!isLoading && !course && <p>No courses found</p>}
       <div key={courseId}>
         <div className="bg-[#2D2F31] text-white">
