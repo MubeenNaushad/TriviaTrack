@@ -44,6 +44,38 @@ export const verifyUserMiddleware = (req, res, next) => {
   });
 };
 
+export const optionalVerifyUserMiddleware = (req, res, next) => {
+  const accessToken = req.cookies.accesstoken;
+  if (!accessToken) {
+    req.isVerified = false; // Mark as not verified
+    return next(); // Proceed without error
+  }
+
+  jwt.verify(accessToken, process.env.JWT_ACCESS_TOKEN, (err, decoded) => {
+    if (err) {
+      req.isVerified = false; // Still allow access, but as unverified
+      return next();
+    }
+
+    StudentModel.findOne({ email: decoded.email })
+      .then((user) => {
+        if (!user) {
+          req.isVerified = false; // User not found, proceed as unverified
+          return next();
+        }
+
+        req.isVerified = true;
+        req.user = user;
+        req.id = user._id;
+        next();
+      })
+      .catch((err) => {
+        req.isVerified = false;
+        next();
+      });
+  });
+};
+
 const renewToken = (req, res) => {
   const refreshtoken = req.cookies.refreshtoken;
   let exist = false;

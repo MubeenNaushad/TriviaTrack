@@ -60,7 +60,6 @@ export const createCheckoutSession = async (req, res) => {
     newPurchase.paymentId = session.id;
     await newPurchase.save();
 
-
     res.status(200).json({
       success: true,
       url: session.url,
@@ -125,10 +124,10 @@ export const stripeWebhook = async (req, res) => {
       const POINTS_PER_COURSE = 102;
 
       const updatedStudent = await StudentModel.findByIdAndUpdate(
-        purchase.userId, 
-        { 
+        purchase.userId,
+        {
           $addToSet: { enrolledcourses: purchase.courseId._id },
-          $inc: { points: POINTS_PER_COURSE}
+          $inc: { points: POINTS_PER_COURSE },
         },
         { new: true }
       );
@@ -163,9 +162,16 @@ export const getCourseDetailwithPurchase = async (req, res) => {
       return res.status(404).json({ message: "Course not found" });
     }
 
+    if (course.enrolledStudents.includes(userId)) {
+      return res.status(200).json({
+        course,
+        purchased: purchased ? true : false,
+      });
+    }
+
     return res.status(200).json({
       course,
-      purchased: purchased ? true : false,
+      purchased: false,
     });
   } catch (error) {
     console.log(error);

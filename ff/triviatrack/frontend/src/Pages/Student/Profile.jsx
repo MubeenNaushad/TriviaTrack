@@ -18,6 +18,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+
   const [profile, setProfile] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
@@ -29,6 +30,7 @@ const Profile = () => {
   const [maxPoints, setmaxPoints] = useState(100);
   const [rankPic, setrankPic] = useState("");
   const [points, setPoints] = useState(0);
+  const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
     axios
@@ -64,15 +66,17 @@ const Profile = () => {
         setrankPic("https://cdn3d.iconscout.com/3d/premium/thumb/rank-diamond-3d-icon-download-in-png-blend-fbx-gltf-file-formats--bronze-medal-award-winner-pack-sign-symbols-icons-9325599.png?f=webp");
       }
     };
+    setPercentage((profile.points / 100) * 10);
+    console.log(percentage, profile.points, maxPoints);
     getRankLogo(profile.points);
   }, [profile.points]);
 
   
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_APP_BASEURL}/course/getcourse`)
+      .get(`${import.meta.env.VITE_APP_BASEURL}/students/get-my-learning`)
       .then((response) => {
-        setenrolledCourses(response.data);
+        setenrolledCourses(response.data.enrolledCourses);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -104,8 +108,8 @@ const Profile = () => {
       .then((response) => {
         setIsLoading(false);
         if (response.data.success) {
+
           setProfile(response.data.user);
-          localStorage.setItem("photoUrl", response.data.user.photoUrl);
           console.log("Profile updated successfully");
         } else {
           setError("Failed to update profile");
@@ -126,6 +130,7 @@ const Profile = () => {
     setProfilePhoto(event.target.files[0]);
   };
 
+
   return (
     <div className="max-w-4xl mx-auto my-24 px-4">
       <h1 className="font-bold text-2xl text-center md:text-left">Profile</h1>
@@ -140,7 +145,7 @@ const Profile = () => {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         
-        <div className="">
+        <div className="ml-4">
           <div className="mb-2">
             <h1 className="font-semibold text-gray-900 dark:text-gray-100">
               Name:
@@ -218,7 +223,7 @@ const Profile = () => {
           <div className="items-center mr-2 mb-8">
           <img src={rankPic} alt="Rank Logo" className="w-24 h-25"/>
           <p>{profile.points}/{maxPoints} Points</p>
-          <Progress value={profile?.points} max={maxPoints}/>
+          <Progress value={percentage} />
         </div>
         </div>
       </div>

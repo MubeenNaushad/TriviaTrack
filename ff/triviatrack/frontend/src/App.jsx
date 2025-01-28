@@ -44,6 +44,7 @@ import CourseProgress from "./Pages/Student/CourseProgress.jsx";
 import StudentDashboard from "./homecomponents/Student_Dashboard/StudentDashboard.jsx";
 import Quiz from "./Pages/Student/Quiz.jsx";
 import { UserProvider } from "./context/UserContext.jsx";
+import VerifyAccount from "./auth/VerifyAccount.jsx";
 
 const BannerData = {
   image: Img1,
@@ -126,6 +127,8 @@ const App = () => {
         <Route path="/students/my-learning" element={<MyLearning />} />
         <Route path="/students/profile" element={<Profile />} />
         <Route path="/students/forgot-password" element={<ForgotPassword />} />
+        <Route path="/students/verify-account/:token" element={<VerifyAccount />}/>
+
         <Route
           path="/students/reset-password/:id/:token"
           element={<ResetPassword />}

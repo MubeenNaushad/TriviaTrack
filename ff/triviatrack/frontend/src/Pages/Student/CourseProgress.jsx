@@ -70,6 +70,22 @@ const CourseProgress = () => {
     }
   };
 
+  const completeLectureProgress = async (lectureId) => {
+    try {
+      const updatedProg = await axios.post(
+        `${
+          import.meta.env.VITE_APP_BASEURL
+        }/progress/${courseId}/lecture/${lectureId}/complete`
+      );
+      if (lectureId === currentLecture._id) {
+        setProgress(updatedProg.data.CheckProgress);
+      }
+      console.log("newww", updatedProg.data.CheckProgress);
+    } catch (error) {
+      console.error("Failed to update lecture progress", error);
+    }
+  };
+
   const getLectureNumber = () => {
     return (
       courseDetails.lectures.findIndex(
@@ -109,7 +125,7 @@ const CourseProgress = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 mt-10">
+    <div className="max-w-7xl mx-auto p-4 mt-24">
       <div className="flex justify-between mb-4">
         <h1 className="text-2xl font-bold ml-5">{courseDetails.courseTitle}</h1>
         <Button
@@ -132,7 +148,8 @@ const CourseProgress = () => {
             src={currentLecture.videoUrl}
             controls
             className="w-full h-auto md:rounded-lg"
-            onEnded={() => updateLectureProgress(currentLecture._id)}
+            onPlay={() => updateLectureProgress(currentLecture._id)}
+            onEnded={() => completeLectureProgress(currentLecture._id)}
           />
           <div className="mt-2">
             <h3 className="font-medium text-lg">

@@ -25,7 +25,7 @@ const Signup = () => {
       })
       .then((res) => {
         console.log("API Response:", res.data); // Debugging: Log the API response
-        if (res.data.Signup) {
+        if (res.data.user) {
           // Safeguard against undefined user
           const user = res.data.user || {};
           login({
@@ -33,6 +33,7 @@ const Signup = () => {
             userType: user.userType || "Unknown",
             profilePhoto: user.photoUrl || "https://via.placeholder.com/40", // Default profile photo
           });
+          alert("Verify your account before logging in.");
           navigate("/"); // Redirect to home after successful signup
         } else {
           alert("Signup failed");
@@ -52,7 +53,9 @@ const Signup = () => {
           <button
             onClick={() => setUserType("Student")}
             className={`px-4 py-2 border-2 border-black rounded-full ${
-              userType === "Student" ? "bg-gray-800 text-white font-bold" : "text-black"
+              userType === "Student"
+                ? "bg-gray-800 text-white font-bold"
+                : "text-black"
             }`}
           >
             Student
@@ -60,7 +63,9 @@ const Signup = () => {
           <button
             onClick={() => setUserType("Teacher")}
             className={`px-4 py-2 border-2 border-gray-800 rounded-full ${
-              userType === "Teacher" ? "bg-gray-800 text-white font-bold" : "text-black"
+              userType === "Teacher"
+                ? "bg-gray-800 text-white font-bold"
+                : "text-black"
             }`}
           >
             Teacher
@@ -99,7 +104,11 @@ const Signup = () => {
         <div className="flex justify-center mt-4">
           <button
             className="flex items-center justify-center bg-transparent border border-black text-black font-bold py-2 px-4 rounded hover:bg-white hover:text-gray-800 transition-all"
-            onClick={() => window.location.href = `${import.meta.env.VITE_APP_BASEURL}/auth/google`}
+            onClick={() =>
+              (window.location.href = `${
+                import.meta.env.VITE_APP_BASEURL
+              }/auth/google`)
+            }
           >
             <i className="fab fa-google mr-2"></i> Continue with Google
           </button>
@@ -107,7 +116,10 @@ const Signup = () => {
 
         <p className="">
           Already have an account?{" "}
-          <Link to="/students/login" className="font-bold underline hover:text-blue-300">
+          <Link
+            to="/students/login"
+            className="font-bold underline hover:text-blue-300"
+          >
             Login
           </Link>
         </p>

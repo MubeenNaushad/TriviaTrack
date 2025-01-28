@@ -5,12 +5,18 @@ import axios from "axios";
 const MyLearning = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [myLearningCourses, setMyLearningCourses] = useState([]);
+  const [progress, setProgress] = useState({});
+  const [totalLectures, setTotalLectures] = useState({});
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_APP_BASEURL}/course/getcourse`)
+      .get(`${import.meta.env.VITE_APP_BASEURL}/students/get-my-learning`)
       .then((response) => {
-        setMyLearningCourses(response.data);
+        console.log(response);
+        setMyLearningCourses(response.data.enrolledCourses);
+        response.data.enrolledCourses.forEach((course) => {
+          fetchProgress(course._id);
+        });
         setIsLoading(false);
       })
       .catch((error) => {
@@ -18,6 +24,27 @@ const MyLearning = () => {
         setIsLoading(false);
       });
   }, []);
+
+  const fetchProgress = (courseId) => {
+    axios
+      .get(`${import.meta.env.VITE_APP_BASEURL}/progress/check/${courseId}`)
+      .then((response) => {
+        const progressData = response.data.data.progress || [];
+        console.log("prog", progressData);
+        setProgress((prevProgress) => ({
+          ...prevProgress,
+          [courseId]: progressData.filter((p) => p.viewed).length, // Only count viewed lectures
+        }));
+        setTotalLectures((prevProgress) => ({
+          ...prevProgress,
+          [courseId]: progressData.length, // Only count viewed lectures
+        }));
+        console.log("prg", progress);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch progress for course", courseId, error);
+      });
+  };
 
   return (
     <div>
@@ -32,7 +59,13 @@ const MyLearning = () => {
           ) : (
             <div className="flex flex-row flex-wrap gap-4">
               {myLearningCourses.map((course, index) => (
-                <Course key={index} course={course} />
+                <div key={index}>
+                  <Course course={course} />
+                  <p>
+                    Your Progress: {progress[course._id]} out of{" "}
+                    {totalLectures[course._id]} lectures completed
+                  </p>
+                </div>
               ))}
             </div>
           )}

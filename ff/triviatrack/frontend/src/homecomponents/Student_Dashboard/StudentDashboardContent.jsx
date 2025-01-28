@@ -28,6 +28,20 @@ const DashboardContent = () => {
 
   const [students, setStudents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [thisUser, setThisUser] = useState({});
+  const [rank, setRank] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_APP_BASEURL}/students/profile`)
+      .then((response) => {
+        console.log("yh", response.data.user);
+        setThisUser(response.data.user);
+      })
+      .catch((error) => {
+        console.error("Error fetching user:", error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -35,11 +49,22 @@ const DashboardContent = () => {
       .then((response) => {
         console.log("Students fetched:", response.data);
         setStudents(response.data);
+        if (students.length > 0) {
+          checkRank();
+        }
       })
       .catch((error) => {
         console.error("Error fetching students:", error);
       });
   }, []);
+
+  const checkRank = () => {
+    const sortedStudents = students.sort((a, b) => b.points - a.points);
+    const ranking =
+      sortedStudents.findIndex((student) => student._id === thisUser._id) + 1;
+    console.log("rr", ranking);
+    setRank(ranking);
+  };
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -55,21 +80,21 @@ const DashboardContent = () => {
             <h3>Courses</h3>
             <BsBook />
           </div>
-          <h1 className="text-4xl mt-4">15</h1>
+          <h1 className="text-4xl mt-4">{thisUser?.enrolledcourses?.length}</h1>
         </div>
         <div className="bg-orange-500 text-white p-4 rounded-md shadow-md">
           <div className="flex items-center justify-between">
-            <h3>Achievements</h3>
+            <h3>Rank</h3>
             <BsFillTrophyFill />
           </div>
-          <h1 className="text-4xl mt-4">8</h1>
+          {students.length > 0 && <h1 className="text-4xl mt-4">{rank}</h1>}
         </div>
         <div className="bg-green-500 text-white p-4 rounded-md shadow-md">
           <div className="flex items-center justify-between">
-            <h3>Students</h3>
+            <h3>Points</h3>
             <BsPeopleFill />
           </div>
-          <h1 className="text-4xl mt-4">120</h1>
+          {<h1 className="text-4xl mt-4">{thisUser.points}</h1>}
         </div>
         <div className="bg-red-500 text-white p-4 rounded-md shadow-md">
           <div className="flex items-center justify-between">
@@ -89,57 +114,44 @@ const DashboardContent = () => {
               <thead>
                 <tr>
                   <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-bold text-gray-600">
-                    S.NO
+                    Rank
                   </th>
                   <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-bold text-gray-600">
                     Name
                   </th>
                   <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-bold text-gray-600">
-                    Email
+                    Points
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {students.map((student, index) => (
-                  <tr key={student._id}>
-                    <td className="py-2 px-4 border-b">{index + 1}</td>
-                    <td className="py-2 px-4 border-b">{student.name}</td>
-                    <td className="py-2 px-4 border-b">{student.email}</td>
-                  </tr>
-                ))}
+                {students
+                  .sort((a, b) => b.points - a.points)
+                  .map((student, index) => (
+                    <tr key={student._id}>
+                      <td className="py-2 px-4 border-b">{index + 1}</td>
+                      <td className="py-2 px-4 border-b">{student.name}</td>
+                      <td className="py-2 px-4 border-b">{student.points}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-md shadow-md h-64 mb-10">
-          <h3 className="text-xl font-bold mb-4">Average Grades by Courses</h3>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={data}
-              margin={{ top: 0, right: 30, left: 20, bottom: 0 }}
-            >
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="avgGrade" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
+        <div className="ml-16 mt-0 flex ">
+          <div className="bg-white p-4 rounded-md shadow-md">
+            <h3 className="text-xl font-bold mb-4">Calendar</h3>
+            <Calendar
+              onChange={handleDateChange}
+              value={selectedDate}
+              className=""
+            />
+          </div>
         </div>
       </div>
 
       {/* Calendar Integration */}
-      <div className="mt-6 flex ">
-        <div className="bg-white p-4 rounded-md shadow-md">
-          <h3 className="text-xl font-bold mb-4">Calendar</h3>
-          <Calendar
-            onChange={handleDateChange}
-            value={selectedDate}
-            className=""
-          />
-        </div>
-      </div>
     </div>
   );
 };

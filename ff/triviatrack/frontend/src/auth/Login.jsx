@@ -71,13 +71,19 @@ const Login = () => {
         </form>
 
         <Link to="/students/forgot-password">
-          <a className="text-sm underline hover:text-blue-300">Forgot Password?</a>
+          <a className="text-sm underline hover:text-blue-300">
+            Forgot Password?
+          </a>
         </Link>
 
         <div className="flex justify-center mt-4">
           <button
             className="flex items-center justify-center bg-transparent border border-black text-black font-bold py-2 px-4 rounded hover:bg-white hover:text-gray-800 transition-all"
-            onClick={() => window.location.href = `${import.meta.env.VITE_APP_BASEURL}/auth/google`}
+            onClick={() =>
+              (window.location.href = `${
+                import.meta.env.VITE_APP_BASEURL
+              }/auth/google`)
+            }
           >
             <i className="fab fa-google mr-2"></i> Continue with Google
           </button>
@@ -85,7 +91,10 @@ const Login = () => {
 
         <p className="">
           Don't have an account?{" "}
-          <Link to="/students/signup" className="font-bold underline hover:text-blue-300">
+          <Link
+            to="/students/signup"
+            className="font-bold underline hover:text-blue-300"
+          >
             Register
           </Link>
         </p>

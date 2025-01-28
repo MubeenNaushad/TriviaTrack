@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext"; // Import the UserContext
 import axios from "axios";
@@ -8,6 +8,8 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
+
+  const dropdownRef = useRef(null); // Create a ref for the dropdown
 
   useEffect(() => {
     // Fetch user details on mount
@@ -20,7 +22,9 @@ const Navbar = () => {
           login({
             name: response.data.user.name,
             userType: response.data.user.userType,
-            profilePhoto: response.data.user.photoUrl || "https://via.placeholder.com/40",
+            email: response.data.user.email,
+            profilePhoto:
+              response.data.user.photoUrl || "https://via.placeholder.com/40",
           });
         } else {
           logout();
@@ -38,13 +42,37 @@ const Navbar = () => {
 
   const handleLogout = () => {
     axios
-      .post(`${import.meta.env.VITE_APP_BASEURL}/students/logout`, {}, { withCredentials: true })
+      .post(
+        `${import.meta.env.VITE_APP_BASEURL}/students/logout`,
+        {},
+        { withCredentials: true }
+      )
       .then(() => {
         logout();
         navigate("/students/login");
       })
       .catch((err) => console.error("Error during logout:", err));
   };
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      // If the menu is open and the click is outside the menu, then close it
+      if (
+        isDropdownOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [isDropdownOpen]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -53,35 +81,58 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-gray-900 shadow-md text-white" : "bg-transparent text-black"
+        isScrolled
+          ? "bg-gray-900 shadow-md text-white"
+          : "bg-transparent text-black"
       }`}
     >
-      <div className="container mx-auto px-4 lg:px-8 py-4 flex items-center justify-between">
-        <div className="text-2xl font-bold flex items-center cursor-pointer" onClick={() => navigate("/")}>
+      <div className="container mx-auto px-4 lg:px-10 py-6 flex items-center justify-between">
+        <div
+          className="text-2xl font-bold flex items-center cursor-pointer"
+          onClick={() => navigate("/")}
+        >
           TriviaTrack
         </div>
 
         {/* Navigation Links */}
         <div className="hidden lg:flex space-x-6">
-          <button onClick={() => navigate("/")} className="hover:text-blue-400 transition-all font-medium">
+          <button
+            onClick={() => navigate("/")}
+            className="hover:text-blue-400 transition-all font-medium"
+          >
             Home
           </button>
-          <button onClick={() => navigate("/courses")} className="hover:text-blue-400 transition-all font-medium">
+          <button
+            onClick={() => navigate("/courses")}
+            className="hover:text-blue-400 transition-all font-medium"
+          >
             Courses
           </button>
-          <button onClick={() => navigate("/contact")} className="hover:text-blue-400 transition-all font-medium">
+          <button
+            onClick={() => navigate("/contact")}
+            className="hover:text-blue-400 transition-all font-medium"
+          >
             Contact
           </button>
-          <button onClick={() => navigate("/live")} className="hover:text-blue-400 transition-all font-medium">
+          <button
+            onClick={() => navigate("/live")}
+            className="hover:text-blue-400 transition-all font-medium"
+          >
             Live Session
           </button>
           {user?.userType === "Student" && (
-            <button onClick={() => navigate("/students/dashboard")} className="hover:text-blue-400 transition-all font-medium">
+            <button
+              onClick={() => navigate("/students/dashboard")}
+              className="hover:text-blue-400 transition-all font-medium"
+            >
               For Students
             </button>
           )}
           {user?.userType === "Teacher" && (
-            <button onClick={() => navigate("/teacher/dashboard")} className="hover:text-blue-400 transition-all font-medium">
+            <button
+              onClick={() => navigate("/teacher/dashboard")}
+              className="hover:text-blue-400 transition-all font-medium"
+            >
               Dashboard
             </button>
           )}
@@ -90,12 +141,16 @@ const Navbar = () => {
         {/* Right Side Buttons (Login/Register or Profile) */}
         <div className="hidden lg:flex items-center space-x-4">
           {user ? (
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <button
                 className="flex items-center space-x-2 hover:text-blue-400 transition-all font-medium"
                 onClick={toggleDropdown}
               >
-                <img src={user.profilePhoto} alt="Profile" className="w-8 h-8 rounded-full" />
+                <img
+                  src={user.profilePhoto}
+                  alt="Profile"
+                  className="w-8 h-8 rounded-full"
+                />
                 <span>{user.name}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -119,6 +174,28 @@ const Navbar = () => {
                   >
                     My Profile
                   </button>
+                  {user.userType === "Teacher" ? (
+                    <button
+                      className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                      onClick={() => navigate("/teacher/dashboard")}
+                    >
+                      Dashboard
+                    </button>
+                  ) : (
+                    <button
+                      className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                      onClick={() => navigate("/students/dashboard")}
+                    >
+                      Dashboard
+                    </button>
+                  )}
+                  <button
+                    className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                    onClick={() => navigate("/students/my-learning")}
+                  >
+                    My Learning
+                  </button>
+
                   <button
                     className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
                     onClick={() => navigate("/settings")}
@@ -136,7 +213,10 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <button onClick={() => navigate("/students/login")} className="hover:text-blue-400 transition-all font-medium">
+              <button
+                onClick={() => navigate("/students/login")}
+                className="hover:text-blue-400 transition-all font-medium"
+              >
                 Login
               </button>
               <button

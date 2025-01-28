@@ -10,6 +10,7 @@ import {
   ForgotPassword,
   ResetPassword,
   verifyYourEmail,
+  getMyLearning,
 } from "../controllers/student.controller.js";
 import { verifyUserMiddleware } from "../middleware/auth.middleware.js";
 import StudentModel from "../models/user.model.js";
@@ -44,27 +45,34 @@ router.delete("/delete/:id", deleteStudent);
 router.get("/profile", verifyUserMiddleware, getUserProfile);
 router.post("/forgot-password", ForgotPassword);
 router.post("/reset-password/:id/:token", ResetPassword);
-router.get("/verify-account/:token", verifyYourEmail);
+router.get("/verify-the-account/:token", verifyYourEmail);
+router.get("/get-my-learning", verifyUserMiddleware, getMyLearning);
 
-router.get('/google', passport.authenticate('google', {
-  scope: ['profile', 'email'],
-}));
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
 
-router.get('/google', passport.authenticate('google', {
-  scope: ['profile', 'email'],
-}));
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
 
 // Google OAuth Callback
 router.get(
-  '/google/callback',
-  passport.authenticate('google', {
-    failureRedirect: '/auth/failure',
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/auth/failure",
   }),
   (req, res) => {
     // Respond with JWT on successful authentication
     const { user, token } = req.user;
     res.json({
-      message: 'Authentication successful',
+      message: "Authentication successful",
       user,
       token,
     });
@@ -72,8 +80,8 @@ router.get(
 );
 
 // Failure Route
-router.get('/failure', (req, res) => {
-  res.status(401).json({ message: 'Authentication failed' });
+router.get("/failure", (req, res) => {
+  res.status(401).json({ message: "Authentication failed" });
 });
 
 export default router;

@@ -5,7 +5,7 @@ import {
   getCourseDetailwithPurchase,
   stripeWebhook,
 } from "../controllers/coursePurchase.controller.js";
-import { verifyUserMiddleware } from "../middleware/auth.middleware.js";
+import { verifyUserMiddleware, optionalVerifyUserMiddleware } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ router.post(
 
 router.get(
   "/course/:courseId/detail-with-status",
-  verifyUserMiddleware,
+  optionalVerifyUserMiddleware,
   getCourseDetailwithPurchase
 );
 

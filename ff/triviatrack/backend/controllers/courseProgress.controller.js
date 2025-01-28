@@ -20,10 +20,23 @@ export const getCourseProgress = async (req, res) => {
     }
 
     if (!courseProgress) {
+      const initialProgress = courseDetails.lectures.map((lecture) => ({
+        lectureId: lecture._id,
+        viewed: false,
+      }));
+
+      courseProgress = new CourseProgress({
+        userId,
+        courseId,
+        lectureProgress: initialProgress,
+        completed: false,
+      });
+      await courseProgress.save();
+
       return res.status(200).json({
         data: {
           courseDetails,
-          progress: [],
+          progress: initialProgress,
           completed: false,
         },
       });
@@ -42,6 +55,58 @@ export const getCourseProgress = async (req, res) => {
 };
 
 export const updateLectureProgress = async (req, res) => {
+  try {
+    const { courseId, lectureId } = req.params;
+    const userId = req.id;
+
+    console.log(
+      `Updating progress for user ${userId} on course ${courseId} for lecture ${lectureId}`
+    );
+
+    let courseProgress = await CourseProgress.findOne({ courseId, userId });
+
+    const lectureIndex = courseProgress.lectureProgress.findIndex(
+      (lecture) => lecture.lectureId === lectureId
+    );
+
+    if (lectureIndex !== -1) {
+      console.log(`Lecture ${lectureId} marked as viewed.`);
+    } else {
+      courseProgress.lectureProgress.push({
+        lectureId,
+        viewed: false,
+      });
+      console.log(
+        `Lecture ${lectureId} added to progress and marked as viewed.`
+      );
+    }
+
+    const lectureProgressLength = courseProgress.lectureProgress.filter(
+      (lectureProg) => lectureProg.viewed
+    ).length;
+
+    const course = await Course.findById(courseId);
+    console.log("Progress updated and saved to database.");
+
+    if (course.lectures.length === lectureProgressLength) {
+      courseProgress.completed = true;
+    }
+
+    await courseProgress.save();
+
+    return res.status(200).json({
+      message: "Lecture Progress Updated.",
+      CheckProgress: courseProgress.lectureProgress.map((lp) => ({
+        lectureId: lp.lectureId,
+        viewed: lp.viewed,
+      })),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const completeLectureProgress = async (req, res) => {
   try {
     const { courseId, lectureId } = req.params;
     const userId = req.id;

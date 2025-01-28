@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
-
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if(searchQuery.trim() !== '') {
-    navigate(`/course/search?query=${searchQuery}`)
-  }
-  setSearchQuery('');
-  }
+    if (searchQuery.trim() !== "") {
+      navigate(`/course/search?query=${searchQuery}`);
+    }
+    setSearchQuery("");
+  };
   return (
     <div className="mt-16 relative bg-gray-800 py-16 px-4 text-center">
       <div className="max-w-3xl mx-auto">
@@ -34,11 +33,17 @@ const HeroSection = () => {
             placeholder="Search For Gamified Courses"
             className="flex-grow border-none focus:outline-none px-6 py-3 text-gray-900 placeholder-gray-400 "
           ></input>
-          <button type="submit" className="border-none bg-blue-600 text-white px-6 py-3 rounded-r-full hover:bg-blue-700">
+          <button
+            type="submit"
+            className="border-none bg-blue-600 text-white px-6 py-3 rounded-r-full hover:bg-blue-700"
+          >
             Search
           </button>
         </form>
-        <button onClick={() => navigate(`/course/search?query`)} className="bg-white text-blue-600 rounded-full hover:bg-slate-200 py-3 px-5">
+        <button
+          onClick={() => navigate(`/course/search?query`)}
+          className="bg-white text-blue-600 rounded-full hover:bg-slate-200 py-3 px-5"
+        >
           Explore Courses
         </button>
       </div>
