@@ -8,12 +8,26 @@ import courseRoutes from "./routes/course.routes.js";
 import mediaRoutes from "./routes/media.route.js";
 import courseProgressRoute from "./routes/courseProgress.route.js";
 import coursePurchaseRoute from "./routes/coursePurchase.route.js";
+import passport from "passport";
+import session from "express-session";
+import GoogleStrategy from "passport-google-oauth20";
+import './Config/passport.js';
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+app.use(passport.initialize());
+
 
 console.log(process.env.FRONTEND_URL);
 

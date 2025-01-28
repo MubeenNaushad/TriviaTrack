@@ -22,7 +22,7 @@ function ContactForm() {
   };
 
   return (
-    <div className="mt-16 flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 p-4 mt-10">
+    <div className="mt-16 flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 p-4">
       <div className="flex flex-col md:flex-row items-center justify-center max-w-4xl bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-lg p-8 space-y-8 md:space-y-0 md:space-x-8">
         
   

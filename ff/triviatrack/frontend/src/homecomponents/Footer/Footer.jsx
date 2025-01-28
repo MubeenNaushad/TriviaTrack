@@ -5,7 +5,7 @@ import { MdComputer } from "react-icons/md";
 import FooterImg from "../../assets/footer.jpg";
 
 const FooterBg = {
-  backgroundImage: `url(${FooterImg})`,
+  backgroundColor: "#2d3748",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
   backgroundPosition: "bottom center",
@@ -16,7 +16,7 @@ const Footer = () => {
     <div style={FooterBg} className="rounded-t-3xl">
       <div className="bg-primary/5">
         <div className="container">
-          <div className="grid md:grid-cols-4 md:gap-4 py-5 border-t-2 border-gray-300/10 text-black">
+          <div className="grid md:grid-cols-4 md:gap-4 py-5 border-t-2 border-gray-300/10 text-white">
             
             <div className="py-8 px-4 space-y-4">
               <div className="text-2xl flex items-center gap-2 font-bold uppercase">
@@ -24,9 +24,7 @@ const Footer = () => {
                 <p className="">TriviaTrack</p>
               </div>
               <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque
-                accusamus nulla labore cumque id ipsum molestias architecto
-                voluptatum saepe ab.
+                To Learn More About Our Services And How We Can Help You, Please Contact Us.
               </p>
               <div className="flex items-center justify-start gap-5 !mt-6">
                 <a href="#" className="hover:text-secondary duration-200">
@@ -66,7 +64,7 @@ const Footer = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="/login" className="hover:text-secondary duration-200">
+                    <a href="/students/login" className="hover:text-secondary duration-200">
                       Login
                     </a>
                   </li>
@@ -131,7 +129,7 @@ const Footer = () => {
           
           <div className="mt-8">
             <div className="text-center py-6 border-t-2 border-gray-800/10">
-              <span className="text-sm text-black/60">
+              <span className="text-sm text-white/60">
                 
                 Copyright @ TriviaTrack2024
               </span>

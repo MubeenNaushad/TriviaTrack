@@ -1,66 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useUser } from "../../context/UserContext"; // Import the UserContext
 import axios from "axios";
 
-
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userType, setUserType] = useState(""); // Track userType (Student or Teacher)
-  const [userName, setUserName] = useState(""); // Track user's name
-  const [profilePhoto, setProfilePhoto] = useState(""); // Track user's profile photo
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Track dropdown visibility
-  const [isScrolled, setIsScrolled] = useState(false); // Track scroll state
+  const { user, login, logout } = useUser(); // Access global state and actions
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user details
+    // Fetch user details on mount
     axios
       .get(`${import.meta.env.VITE_APP_BASEURL}/students/verifyuser`, {
         withCredentials: true,
       })
       .then((response) => {
         if (response.data.valid) {
-          setIsLoggedIn(true);
-          setUserType(response.data.user.userType); // Store userType
-          setUserName(response.data.user.name); // Store user's name
-          setProfilePhoto(response.data.user.photoUrl || "https://via.placeholder.com/40"); // Default photo
+          login({
+            name: response.data.user.name,
+            userType: response.data.user.userType,
+            profilePhoto: response.data.user.photoUrl || "https://via.placeholder.com/40",
+          });
         } else {
-          setIsLoggedIn(false);
+          logout();
         }
       })
-      .catch(() => {
-        setIsLoggedIn(false);
-      });
+      .catch(() => logout());
 
     // Handle scroll effect
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [login, logout]);
 
   const handleLogout = () => {
     axios
       .post(`${import.meta.env.VITE_APP_BASEURL}/students/logout`, {}, { withCredentials: true })
       .then(() => {
-        setIsLoggedIn(false);
-        setUserType(""); // Clear userType
-        setUserName(""); // Clear userName
-        setProfilePhoto(""); // Clear profile photo
+        logout();
         navigate("/students/login");
       })
-      .catch((err) => {
-        console.error("Error during logout:", err);
-      });
+      .catch((err) => console.error("Error during logout:", err));
   };
 
   const toggleDropdown = () => {
@@ -74,53 +57,31 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <div
-          className="text-2xl font-bold flex items-center cursor-pointer"
-          onClick={() => navigate("/")}
-        >
+        <div className="text-2xl font-bold flex items-center cursor-pointer" onClick={() => navigate("/")}>
           TriviaTrack
         </div>
 
         {/* Navigation Links */}
         <div className="hidden lg:flex space-x-6">
-          <button
-            onClick={() => navigate("/")}
-            className="hover:text-blue-400 transition-all font-medium"
-          >
+          <button onClick={() => navigate("/")} className="hover:text-blue-400 transition-all font-medium">
             Home
           </button>
-          <button
-            onClick={() => navigate("/courses")}
-            className="hover:text-blue-400 transition-all font-medium"
-          >
+          <button onClick={() => navigate("/courses")} className="hover:text-blue-400 transition-all font-medium">
             Courses
           </button>
-          <button
-            onClick={() => navigate("/contact")}
-            className="hover:text-blue-400 transition-all font-medium"
-          >
+          <button onClick={() => navigate("/contact")} className="hover:text-blue-400 transition-all font-medium">
             Contact
           </button>
-          <button
-            onClick={() => navigate("/live")}
-            className="hover:text-blue-400 transition-all font-medium"
-          >
+          <button onClick={() => navigate("/live")} className="hover:text-blue-400 transition-all font-medium">
             Live Session
           </button>
-          {isLoggedIn && userType === "Student" && (
-            <button
-              onClick={() => navigate("/students/dashboard")}
-              className="hover:text-blue-400 transition-all font-medium"
-            >
+          {user?.userType === "Student" && (
+            <button onClick={() => navigate("/students/dashboard")} className="hover:text-blue-400 transition-all font-medium">
               For Students
             </button>
           )}
-          {isLoggedIn && userType === "Teacher" && (
-            <button
-              onClick={() => navigate("/teacher/dashboard")}
-              className="hover:text-blue-400 transition-all font-medium"
-            >
+          {user?.userType === "Teacher" && (
+            <button onClick={() => navigate("/teacher/dashboard")} className="hover:text-blue-400 transition-all font-medium">
               Dashboard
             </button>
           )}
@@ -128,18 +89,14 @@ const Navbar = () => {
 
         {/* Right Side Buttons (Login/Register or Profile) */}
         <div className="hidden lg:flex items-center space-x-4">
-          {isLoggedIn ? (
+          {user ? (
             <div className="relative">
               <button
                 className="flex items-center space-x-2 hover:text-blue-400 transition-all font-medium"
                 onClick={toggleDropdown}
               >
-                <img
-                  src={profilePhoto}
-                  alt="Profile"
-                  className="w-8 h-8 rounded-full"
-                />
-                <span>{userName}</span>
+                <img src={user.profilePhoto} alt="Profile" className="w-8 h-8 rounded-full" />
+                <span>{user.name}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -154,7 +111,6 @@ const Navbar = () => {
                   <path d="M6 9l6 6 6-6" />
                 </svg>
               </button>
-              {/* Dropdown Menu */}
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg z-50">
                   <button
@@ -180,10 +136,7 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <button
-                onClick={() => navigate("/students/login")}
-                className="hover:text-blue-400 transition-all font-medium"
-              >
+              <button onClick={() => navigate("/students/login")} className="hover:text-blue-400 transition-all font-medium">
                 Login
               </button>
               <button

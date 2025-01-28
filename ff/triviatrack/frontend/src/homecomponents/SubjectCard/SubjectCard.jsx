@@ -58,6 +58,7 @@ const subjectList = [
     icon: <FaBook />,
     color: "#464646",
     delay: 0.9,
+    link: "/course/search",
   },
 ];
 
@@ -80,7 +81,7 @@ const SubjectCard = () => {
             return (
               <motion.div
                 key={subject.id}
-                initial={{ opacity: 0, x: -200 }}
+                initial={{ opacity: 0, x: -50}}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{
                   type: "spring",

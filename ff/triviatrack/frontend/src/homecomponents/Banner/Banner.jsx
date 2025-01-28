@@ -53,7 +53,17 @@ const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
               whileInView={"visible"}
               className="flex justify-center md:justify-start"
             >
-              <Button className="primary-btn !mt-5">Get Started</Button>
+              <motion.button
+                className="primary-btn !mt-5 text-white"
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0px 4px 10px rgba(255, 87, 34, 0.4)",
+                }}
+                whileTap={{ scale: 1.05 }}
+                transition={{ type: "spring" }}
+              >
+                Get Started
+              </motion.button>
             </motion.div>
           </div>
         </div>

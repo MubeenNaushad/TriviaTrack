@@ -3,8 +3,10 @@ import HeroImg from "../../assets/hero.png";
 import { FaPlay } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { SlideRight } from "../../utility/animation";
+import { Link, useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate=useNavigate();
   return (
     <>
       <div className="container grid grid-cols-1 md:grid-cols-2 min-h-[650px] relative">
@@ -21,19 +23,28 @@ const Hero = () => {
             variants={SlideRight(0.6)}
             initial='hidden'
             animate='visible'
-            className="text-5xl font-semibold lg:text-6xl !leading-tight">Best Website for <span className="text-primary">Games</span></motion.h1>
+            className="text-5xl font-semibold lg:text-6xl !leading-tight">Best Platform For <span className="text-primary">Gamified Learning</span></motion.h1>
             <motion.p
             variants={SlideRight(0.8)}
             initial='hidden'
             animate='visible'
-            >lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</motion.p>
+            >We Aim To Improve your Knowledge Retention By Gamified Quizes And Learning Videos</motion.p>
             
             <motion.div 
             variants={SlideRight(1.0)}
             initial='hidden'
             animate='visible'
             className="flex gap-8 justify-center md:justify-start !mt-8 items-center">
-                <button className="secondary-foreground-btn hover:primary-btn">Get Started</button>
+              <motion.button
+              className="bg-gray-800 text-white px-6 py-2 rounded-3xl font-semibold"
+              whileHover={{scale:1.05,
+                color:"#fff",
+              }}
+              transition={{type:"spring",stiffness:300}}
+          
+                >
+                Get Started
+                </motion.button>
             
             <button className="flex justify-end items-center gap-2 font-semibold">
                 <span className="w-10 h-10 bg-secondary/15 rounded-full flex justify-center items-center">

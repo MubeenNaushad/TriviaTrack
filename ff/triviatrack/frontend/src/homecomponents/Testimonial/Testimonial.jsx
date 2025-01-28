@@ -4,32 +4,26 @@ import Slider from "react-slick";
 const TestimonialsData = [
   {
     id: 1,
-    name: "John Doe",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Arish Amin",
+    text: "This is a Great Application for learning and testing your knowledge. I am using this webiste and I am very satisfied with it.",
     img: "https://picsum.photos/101/101",
     delay: 0.2,
   },
   {
     id: 2,
-    name: "Steve Smith",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Mubeen Naushad",
+    text: "This website helped me a lot in my studies. I am very thankful to the developers of this website.Great Work",
     img: "https://picsum.photos/102/102",
     delay: 0.5,
   },
   {
     id: 3,
-    name: "Kristen",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Dr Adeel Ansari",
+    text: "Gave me a platform to teach my students in a fun way. I am very happy with the results. Will posting more content",
     img: "https://picsum.photos/104/104",
     delay: 0.8,
   },
-  {
-    id: 5,
-    name: "Ariana",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
-    img: "https://picsum.photos/103/103",
-    delay: 1.1,
-  },
+  
 ];
 
 const Testimonial = () => {
@@ -88,7 +82,7 @@ const Testimonial = () => {
             {TestimonialsData.map((item) => {
               return (
                 <div key={item.id}>
-                  <div className="flex flex-col gap-4 p-8 shadow-lg mx-4 rounded-xl bg-secondary/10">
+                  <div className="mb-12 flex flex-col gap-4 p-8 shadow-lg mx-4 rounded-xl bg-secondary/10">
                  
                     <div className="flex justify-start items-center gap-5">
                       <img
@@ -112,6 +106,7 @@ const Testimonial = () => {
                 </div>
               );
             })}
+     
           </Slider>
         </div>
       </div>

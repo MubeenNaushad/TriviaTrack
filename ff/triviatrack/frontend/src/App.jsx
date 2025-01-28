@@ -43,13 +43,14 @@ import ResetPassword from "./auth/ResetPassword.jsx";
 import CourseProgress from "./Pages/Student/CourseProgress.jsx";
 import StudentDashboard from "./homecomponents/Student_Dashboard/StudentDashboard.jsx";
 import Quiz from "./Pages/Student/Quiz.jsx";
+import { UserProvider } from "./context/UserContext.jsx";
 
 const BannerData = {
   image: Img1,
   tag: "CUSTOMIZE WITH YOUR SCHEDULE",
   title: "Personalized Games to help you.",
   subtitle:
-    "Our scheduling system allows you to select based on your free time. Lorem ipsum demo text for template. Keep track of your students class and tutoring schedules, and never miss your lectures. The best online class scheduling system with easy accessibility.Lorem ipsum is a placeholder text commonly used to demonstrate the visual form",
+    "At Trivia Track, we believe learning should be as fun, engaging, and effective as playing a game. That’s why we offer personalized, gamified experiences tailored to your unique learning style and progress.",
   link: "#",
 };
 
@@ -58,12 +59,13 @@ const BannerData2 = {
   tag: "CUSTOMIZE WITH YOUR SCHEDULE",
   title: "Games to help",
   subtitle:
-    "Our scheduling system allows you to select based on your free time. Lorem ipsum demo text for template. Keep track of your students class and tutoring schedules, and never miss your lectures. The best online class scheduling system with easy accessibility. Lorem ipsum is a placeholder text commonly used",
+    "Learning should be exciting, engaging, and effective. That’s why we bring you games designed to help you improve, challenge yourself, and master new skills effortlessly.",
   link: "#",
 };
 
 const App = () => {
   return (
+    <UserProvider>
     <Router>
       <Navbar />
 
@@ -146,6 +148,7 @@ const App = () => {
         />
       </Routes>
     </Router>
+    </UserProvider>
   );
 };
 

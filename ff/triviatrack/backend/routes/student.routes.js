@@ -15,6 +15,7 @@ import { verifyUserMiddleware } from "../middleware/auth.middleware.js";
 import StudentModel from "../models/user.model.js";
 import { uploadMedia, deleteMedia } from "../utils/cloudinary.js";
 import upload from "../utils/multer.js";
+import passport from "passport";
 
 const router = express.Router();
 
@@ -44,5 +45,35 @@ router.get("/profile", verifyUserMiddleware, getUserProfile);
 router.post("/forgot-password", ForgotPassword);
 router.post("/reset-password/:id/:token", ResetPassword);
 router.get("/verify-account/:token", verifyYourEmail);
+
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email'],
+}));
+
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email'],
+}));
+
+// Google OAuth Callback
+router.get(
+  '/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/auth/failure',
+  }),
+  (req, res) => {
+    // Respond with JWT on successful authentication
+    const { user, token } = req.user;
+    res.json({
+      message: 'Authentication successful',
+      user,
+      token,
+    });
+  }
+);
+
+// Failure Route
+router.get('/failure', (req, res) => {
+  res.status(401).json({ message: 'Authentication failed' });
+});
 
 export default router;

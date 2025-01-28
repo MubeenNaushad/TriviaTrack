@@ -9,8 +9,8 @@ const RoomPage=()=>{
     
 
     const meeting =async(element)=>{
-    const appID=814549105;
-    const serverSecret="c4004320dfdb8161d035e491f59159b2";
+    const appID=482998377;
+    const serverSecret="27be568853592ebc8b033ca21508ebd3";
     const kitToken=ZegoUIKitPrebuilt.generateKitTokenForTest(appID,serverSecret,roomid,Date.now().toString(),"TriviaTrack");
    
    const zc=ZegoUIKitPrebuilt.create(kitToken);
