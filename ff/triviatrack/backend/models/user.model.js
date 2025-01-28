@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    googleId: { type: String, required: true, unique: true },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true, 
+    },
     name: {
       type: String,
       required: true,
@@ -13,11 +17,12 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
-    password: {
-      type: String,
-      required: true,
-      minlength: 6,
+     password: {
+    type: String,
+    required: function() {
+      return !this.googleId; // Password is required only if googleId is not present
     },
+  },
     isVerified: {
       type: Boolean,
       default: false,

@@ -9,12 +9,9 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
-     
     },
     async (accessToken, refreshToken, profile, done) => {
-     
       try {
-        
         let user = await User.findOne({ googleId: profile.id });
 
         if (!user) {
@@ -26,7 +23,7 @@ passport.use(
         }
 
         // Generate JWT
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id }, process.env.JWTKey, { expiresIn: '1h' });
         return done(null, { user, token });
       } catch (error) {
         return done(error, null);
