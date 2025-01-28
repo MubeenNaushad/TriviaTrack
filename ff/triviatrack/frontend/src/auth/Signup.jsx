@@ -48,6 +48,24 @@ const Signup = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-300 px-4 mt-16">
       <div className="w-full max-w-sm p-8 mb-20 space-y-6 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg shadow-black/100 text-gray-800 text-center animate-fade-in">
         <h2 className="text-2xl font-bold">Signup</h2>
+        <div className="flex justify-center space-x-4">
+          <button
+            onClick={() => setUserType("Student")}
+            className={`px-4 py-2 border-2 border-black rounded-full ${
+              userType === "Student" ? "bg-gray-800 text-white font-bold" : "text-black"
+            }`}
+          >
+            Student
+          </button>
+          <button
+            onClick={() => setUserType("Teacher")}
+            className={`px-4 py-2 border-2 border-gray-800 rounded-full ${
+              userType === "Teacher" ? "bg-gray-800 text-white font-bold" : "text-black"
+            }`}
+          >
+            Teacher
+          </button>
+        </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"

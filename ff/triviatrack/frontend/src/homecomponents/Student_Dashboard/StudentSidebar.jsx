@@ -13,7 +13,7 @@ import { CiPen } from "react-icons/ci";
 
 const StudentSidebar = () => {
   return (
-    <aside className="w-68 bg-gray-800 text-white h-screen p-5 sticky top-0">
+    <aside className="mt-10 w-68 bg-gray-800 text-white h-screen p-5 sticky top-0">
       <div className="font-bold text-lg mb-4">
         <BsBook className="inline-block mr-4" /> Student Dashboard
       </div>
