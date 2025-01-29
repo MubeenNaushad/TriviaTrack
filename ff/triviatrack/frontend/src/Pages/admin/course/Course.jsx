@@ -56,11 +56,11 @@ function Course({ course }) {
                   "bg-blue-600 text-white px-2 py-1 text-xs rounded-full cursor-pointer"
                 }
               >
-                {course?.creator?.courseLevel ? course?.courseLevel : "Advance"}
+                {course?.courseLevel || ""}
               </Badge>
             </div>
             <div className="text-lg font-medium">
-              {course?.coursePrice ? course?.coursePrice : "1500 PKR"}
+              {course?.coursePrice || "1500 PKR"}
             </div>
           </CardContent>
         </Card>

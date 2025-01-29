@@ -115,7 +115,7 @@ const App = () => {
             element={<CourseDetail />}
           />
           <Route path="/forum" element={<Forum />} />
-          <Route path="/forum/topics/:topicId" element={<TopicDetails />} />
+          <Route path="/topics/:topicId" element={<TopicDetails />} />
           <Route path="/course/search" element={<SearchPage />} />
           <Route path="/students/signup" element={<SignUp />} />
           <Route path="/students/login" element={<Login />} />

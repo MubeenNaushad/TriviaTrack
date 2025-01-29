@@ -56,10 +56,10 @@ const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
             >
               <Link to="/students/signup">
               <motion.button
-                className="primary-btn !mt-5 text-white"
+                className="primary-btn mt-5 text-white"
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: "0px 4px 10px rgba(255, 87, 34, 0.4)",
+                  boxShadow: "0px 4px 10px rgba(255, 87, 34, 1)",
                 }}
                 whileTap={{ scale: 1.05 }}
                 transition={{ type: "spring" }}

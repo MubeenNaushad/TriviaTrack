@@ -4,15 +4,14 @@ import React, { createContext, useState, useContext } from "react";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // User state (null if logged out)
+  const [user, setUser] = useState(null); 
 
-  // Update user state when logging in
+  
   const login = (userData) => {
     console.log("updatedlogin")
     setUser(userData);
   };
 
-  // Clear user state when logging out
   const logout = () => {
     console.log("updatedlogout")
     setUser(null);
@@ -25,5 +24,5 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-// Hook for using the UserContext
+
 export const useUser = () => useContext(UserContext);

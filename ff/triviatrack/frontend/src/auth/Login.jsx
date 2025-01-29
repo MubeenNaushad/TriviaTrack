@@ -1,14 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import React, { useState } from "react";
-import { useUser } from "../context/UserContext"; // Ensure UserContext is set up
+import { useUser } from "../context/UserContext"; 
 import "@fortawesome/fontawesome-free";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("Student");
-  const { login } = useUser(); // Access the login function from UserContext
+  const { login } = useUser();
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
@@ -22,16 +22,16 @@ const Login = () => {
         userType,
       })
       .then((res) => {
-        console.log("API Response:", res.data); // Debugging: Log the API response
+        console.log("API Response:", res.data); 
         if (res.data.Login && res.data.isVerified) {
-          // Safeguard against undefined user
+          
           const user = res.data.user || {};
           login({
-            name: user.name || "Unknown", // Fallback to "Unknown" if name is missing
+            name: user.name || "Unknown",
             userType: user.userType || "Unknown",
-            profilePhoto: user.photoUrl || "https://via.placeholder.com/40", // Default profile photo
+            profilePhoto: user.photoUrl || "https://via.placeholder.com/40",
           });
-          navigate("/"); // Redirect to home after successful login
+          navigate("/"); 
         } else if (res.data.Login && !res.data.isVerified) {
           alert("Verify your email before logging in.");
         } else {
@@ -39,7 +39,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.error("API Error:", err); // Log any API errors
+        console.error("API Error:", err); 
         alert("An error occurred during login. Please try again.");
       });
   };
@@ -68,7 +68,11 @@ const Login = () => {
           >
             Login
           </button>
+          
+          
         </form>
+
+    
 
         <Link to="/students/forgot-password">
           <a className="text-sm underline hover:text-blue-300">

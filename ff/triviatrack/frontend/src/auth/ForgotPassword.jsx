@@ -17,6 +17,7 @@ const ForgotPassword = () => {
       })
       .then((res) => {
         console.log("Res", res.data);
+        alert("Reset link sent to your email.");
         navigate("/students/login");
       })
       .catch((err) => console.log(err));

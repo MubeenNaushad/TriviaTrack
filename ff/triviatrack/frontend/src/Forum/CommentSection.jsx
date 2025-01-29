@@ -1,4 +1,4 @@
-// src/components/CommentSection.jsx
+
 import React, { useState } from 'react';
 
 const CommentSection = ({ topicId }) => {
@@ -12,7 +12,7 @@ const CommentSection = ({ topicId }) => {
       date: new Date().toISOString().slice(0, 10),
     };
     setComments([...comments, newComment]);
-    event.target.elements.comment.value = '';  // Clear the input after submission
+    event.target.elements.comment.value = ''; 
   };
 
   return (

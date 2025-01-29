@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema(
      password: {
     type: String,
     required: function() {
-      return !this.googleId; // Password is required only if googleId is not present
+      return !this.googleId; 
     },
   },
     isVerified: {

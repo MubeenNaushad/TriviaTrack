@@ -14,9 +14,9 @@ const Livesession = () => {
   return (
     <>
       {user ? (
-        <div className="mt-20 flex items-center justify-center min-h-screen bg-seconday p-4">
-          <div className="flex flex-col items-center justify-center max-w-4xl bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-lg p-8 space-y-8">
-            <h1 className="text-3xl font-bold text-white mt-4 text-center">
+        <div className="mt-20 flex items-center justify-center min-h-screen bg-gray-300 p-4">
+          <div className="flex flex-col items-center justify-center max-w-4xl bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-2xl p-8 space-y-8">
+            <h1 className="text-3xl font-bold text-gray-800 mt-4 text-center">
               Join Session Name
             </h1>
 
@@ -37,7 +37,7 @@ const Livesession = () => {
                 placeholder="Enter Room Id"
               />
               <button
-                className="py-3 px-6 rounded-xl bg-seconday text-white font-semibold text-lg shadow-lg hover:bg-blue-700 focus:outline-none transition-all"
+                className="py-3 px-6 rounded-xl bg-gray-800 text-white font-semibold text-lg shadow-lg hover:bg-gray-900 focus:outline-none transition-all"
                 onClick={handleJoinRoom}
               >
                 Join
@@ -46,9 +46,12 @@ const Livesession = () => {
           </div>
         </div>
       ) : (
-        <h1 className="text-center font-bold text-2xl mt-32">
-          Cannot access without logging in.
+        <div className="mt-20 ">  
+          <h1 className="text-center font-bold text-2xl mt-32">
+          SignUp or Login to access this Feature.
         </h1>
+        </div>
+        
       )}
     </>
   );

@@ -144,7 +144,7 @@ export const deletecourse = async (req, res) => {
 export const searchCourse = async (req, res) => {
   try {
     const query = req.query.query || "";
-    const { categories = [], sortByPrice = "" } = req.query;
+    const { sortByPrice = "" } = req.query;
 
     const searchCriteria = {
       isPublished: false,

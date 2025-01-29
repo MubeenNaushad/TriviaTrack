@@ -50,28 +50,15 @@ router.get("/verify-the-account/:token", verifyYourEmail);
 router.get("/get-my-learning", verifyUserMiddleware, getMyLearning);
 router.get("/student-details/:studentId", getStudentProfile);
 
-router.get(
-  "/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
-);
 
-router.get(
-  "/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
-);
 
-// Google OAuth Callback
 router.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/auth/failure",
   }),
   (req, res) => {
-    // Respond with JWT on successful authentication
+
     const { user, token } = req.user;
     res.json({
       message: "Authentication successful",
@@ -81,7 +68,6 @@ router.get(
   }
 );
 
-// Failure Route
 router.get("/failure", (req, res) => {
   res.status(401).json({ message: "Authentication failed" });
 });

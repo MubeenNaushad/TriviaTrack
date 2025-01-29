@@ -43,23 +43,25 @@ const DashboardContent = () => {
       .get(`${import.meta.env.VITE_APP_BASEURL}/students`)
       .then((response) => {
         setStudents(response.data);
-        if (students.length > 0) {
-          checkRank();
-        }
+        
       })
       .catch((error) => {
         console.error("Error fetching students:", error);
       });
   }, []);
 
-
+  useEffect(() => {
+    if(students.length > 0) {
+      checkRank();
+      }
+  }, [students])
 
   const checkRank = () => {
     const sortedStudents = students.sort((a, b) => b.points - a.points);
     const ranking =
       sortedStudents.findIndex((student) => student._id === thisUser._id) + 1;
     console.log(ranking,"rankkkk");
-    setRank(ranking);
+    setRank(ranking);  
   };
 
   return (

@@ -16,6 +16,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+axios.defaults.withCredentials = true;
+
 const AddCourse = () => {
   const navigate = useNavigate();
   const [courseTitle, setCourseTitle] = useState("");
@@ -41,7 +43,7 @@ const AddCourse = () => {
   };
 
   return (
-    <div className="flex pt-[2.4rem]">
+    <div className="flex pt-[2.4rem] mb-10">
       <Sidebar />
 
       <div className="flex-1 mx-10 mt-10">

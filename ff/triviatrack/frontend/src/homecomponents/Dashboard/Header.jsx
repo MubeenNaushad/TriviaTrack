@@ -3,7 +3,7 @@ import { BsFillBellFill, BsFillEnvelopeFill, BsPersonCircle, BsSearch } from 're
 
 const Header = () => {
   return (
-    <header className="bg-white p-4 shadow-md sticky top-0 z-40">
+    <header className="bg-white p-4 shadow-md sticky top-0 z-40 mt-10">
       <div className="flex justify-between items-center container mx-auto">
         <div className="flex items-center">
           <BsSearch className="text-xl mr-2" />

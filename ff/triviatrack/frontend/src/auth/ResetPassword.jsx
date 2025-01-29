@@ -22,6 +22,7 @@ const ResetPassword = () => {
       )
       .then((res) => {
         console.log("Res", res.data);
+        alert("Password reset successfully");
         navigate("/students/login");
       })
       .catch((err) => console.log(err));

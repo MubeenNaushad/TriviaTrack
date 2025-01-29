@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import React, { useState } from "react";
-import { useUser } from "../context/UserContext"; // Ensure UserContext is set up
+import { useUser } from "../context/UserContext"; 
 import "@fortawesome/fontawesome-free";
 
 const Signup = () => {
@@ -9,7 +9,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [userType, setUserType] = useState("Student");
-  const { login } = useUser(); // Access the login function from UserContext
+  const { login } = useUser(); 
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
@@ -24,23 +24,23 @@ const Signup = () => {
         userType,
       })
       .then((res) => {
-        console.log("API Response:", res.data); // Debugging: Log the API response
+        console.log("API Response:", res.data); 
         if (res.data.user) {
-          // Safeguard against undefined user
+          
           const user = res.data.user || {};
           login({
-            name: user.name || "Unknown", // Fallback to "Unknown" if name is missing
+            name: user.name || "Unknown", 
             userType: user.userType || "Unknown",
-            profilePhoto: user.photoUrl || "https://via.placeholder.com/40", // Default profile photo
+            profilePhoto: user.photoUrl || "https://via.placeholder.com/40", 
           });
           alert("Verify your account before logging in.");
-          navigate("/"); // Redirect to home after successful signup
+          navigate("/"); 
         } else {
           alert("Signup failed");
         }
       })
       .catch((err) => {
-        console.error("API Error:", err); // Log any API errors
+        console.error("API Error:", err); 
         alert("An error occurred during signup. Please try again.");
       });
   };

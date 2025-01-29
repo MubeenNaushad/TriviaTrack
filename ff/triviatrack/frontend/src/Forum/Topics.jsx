@@ -8,7 +8,6 @@ const Topics = () => {
   const [newTopicTitle, setNewTopicTitle] = useState("");
 
   useEffect(() => {
-    // This would ideally fetch from an API
     setTopics([
       { id: 1, title: 'Introduction to React' },
       { id: 2, title: 'Advanced JavaScript' }
@@ -26,10 +25,10 @@ const Topics = () => {
   };
 
   return (
-    <div className="text-center mt-10">
+    <div className="text-center mt-10 mb-8">
       <button
         onClick={() => setShowModal(true)}
-        className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="mb-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Add New Topic
       </button>
@@ -45,7 +44,7 @@ const Topics = () => {
             value={newTopicTitle}
             onChange={(e) => setNewTopicTitle(e.target.value)}
             placeholder="Topic Title"
-            className="border border-gray-300 p-2 rounded w-full"
+            className="border border-gray-300 p-2 rounded w-full mb-6"
             required
           />
           <button
@@ -58,9 +57,9 @@ const Topics = () => {
       </Modal>
       <ul>
         {topics.map(topic => (
-          <li key={topic.id} className="mb-2">
+          <li key={topic.id} className="mb-8">
             <Link to={`/topics/${topic.id}`}
-              className="text-blue-500 hover:text-blue-700 font-medium text-lg py-2 px-4 rounded-lg shadow bg-white hover:bg-blue-100"
+              className="mt-8 text-white hover:text-white font-medium text-lg py-2 px-4 rounded-lg shadow bg-gray-800 hover:bg-gray-900"
             >
               {topic.title}
             </Link>

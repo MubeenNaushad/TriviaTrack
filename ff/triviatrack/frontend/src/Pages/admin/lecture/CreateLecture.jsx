@@ -49,8 +49,7 @@ const CreateLecture = () => {
             Lets add lectures, add lecture details for your new lecture
           </h1>
           <p className="text-sm">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus,
-            laborum!
+            Add a new lecture to your course, you can add multiple lectures too
           </p>
         </div>
 
