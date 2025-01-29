@@ -14,29 +14,29 @@ import { CiPen } from "react-icons/ci";
 
 const StudentSidebar = () => {
   return (
-    <aside className="mt-10 w-68 bg-gray-800 text-white h-screen p-5 sticky top-0">
-      <div className="font-bold text-lg mb-4">
+    <aside className="mt-10 w-68 sm:h-screen bg-gray-800 text-white p-5 sticky top-0 z-40">
+      <div className="font-bold text-2xl mb-12">
         <BsBook className="inline-block mr-4" /> Student Dashboard
       </div>
-      <ul className="space-y-5">
+      <ul className="space-y-9">
       <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
-          <Link to="" className="flex items-center">
+          <Link to="" className="flex items-center hover:scale-105 transition-all duration-300 text-lg">
             <BsFillPeopleFill className="inline-block mr-2" /> Dashboard
           </Link>
         </li>
 
-        <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+        <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
           <BsClipboardCheck className="inline-block mr-2" /> Assignments
         </li>
-        <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+        <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
           <Link to="/quiz" className="flex items-center">
             <CiPen className="inline-block mr-2" /> Quiz
           </Link>
         </li>
-        <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+        <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
           <BsListTask className="inline-block mr-2" /> Progress Tracker
         </li>
-        <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+        <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
           <BsFillGearFill className="inline-block mr-2" /> Settings
         </li>
       </ul>
