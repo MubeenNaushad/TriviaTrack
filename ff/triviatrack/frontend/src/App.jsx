@@ -48,6 +48,7 @@ import { UserProvider } from "./context/UserContext.jsx";
 import VerifyAccount from "./auth/VerifyAccount.jsx";
 import StudentProfile from "./homecomponents/Dashboard/StudentProfile.jsx";
 import Setting from "./Pages/Setting.jsx";
+import ProgressTracker from "./homecomponents/Student_Dashboard/ProgressTracker.jsx";
 
 const BannerData = {
   image: Img1,
@@ -124,6 +125,7 @@ const App = () => {
           <Route path="/teacher/dashboard" element={<Dashboard />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/settings" element={<Setting />} />
+          <Route path="/students/progresstrack" element={<ProgressTracker />} />
 
           <Route path="/students/my-learning" element={<MyLearning />} />
           <Route

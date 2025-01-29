@@ -35,8 +35,11 @@ const StudentSidebar = () => {
             <CiPen className="inline-block mr-2" /> Quiz
           </Link>
         </li>
+        
         <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
+        <Link to="/students/progresstrack">
           <BsListTask className="inline-block mr-2" /> Progress Tracker
+          </Link>
         </li>
         <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
           <BsFillGearFill className="inline-block mr-2" /> Settings
