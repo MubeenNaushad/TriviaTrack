@@ -106,9 +106,9 @@ const DashboardContent = () => {
         </div>
       </div>
 
-      {/* Main Content Grid - Leaderboard, Notice Board, Calendar, and Pie Chart */}
+      
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Leaderboard */}
+      
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h3 className="text-xl font-bold mb-4">🏆 LeaderBoard</h3>
           <div className="overflow-y-auto h-64">
