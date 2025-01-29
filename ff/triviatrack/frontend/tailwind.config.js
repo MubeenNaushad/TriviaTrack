@@ -13,6 +13,7 @@ export default {
   				foreground: 'hsl(var(--primary-foreground))'
   			},
   			seconday: '#0063ff',
+			tert: 'bg-gray-300',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

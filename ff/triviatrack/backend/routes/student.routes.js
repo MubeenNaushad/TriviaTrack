@@ -11,6 +11,7 @@ import {
   ResetPassword,
   verifyYourEmail,
   getMyLearning,
+  getStudentProfile,
 } from "../controllers/student.controller.js";
 import { verifyUserMiddleware } from "../middleware/auth.middleware.js";
 import StudentModel from "../models/user.model.js";
@@ -47,6 +48,7 @@ router.post("/forgot-password", ForgotPassword);
 router.post("/reset-password/:id/:token", ResetPassword);
 router.get("/verify-the-account/:token", verifyYourEmail);
 router.get("/get-my-learning", verifyUserMiddleware, getMyLearning);
+router.get("/student-details/:studentId", getStudentProfile);
 
 router.get(
   "/google",

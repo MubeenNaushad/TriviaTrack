@@ -16,7 +16,7 @@ const VerifyAccount = () => {
   }, []);
 
   return (
-    <div className='items-center mt-24'>
+    <div className='text-2xl text-center mt-24'>
       Verifying your email...
     </div>
   );

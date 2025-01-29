@@ -13,9 +13,11 @@ import Sidebar from "@/homecomponents/Dashboard/Sidebar";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+import { useUser } from "@/context/UserContext";
 import axios from "axios";
 
 export function CourseTable() {
+  const { user, login } = useUser();
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
 
@@ -26,6 +28,8 @@ export function CourseTable() {
           `${import.meta.env.VITE_APP_BASEURL}/course/getcourse`
         );
         setCourses(response.data);
+        console.log("tx", user, "log", login);
+        console.log("crd", response.data);
       } catch (error) {
         console.error("Failed to get courses:", error);
       }
@@ -46,7 +50,7 @@ export function CourseTable() {
   };
 
   return (
-    <div className="flex pt-[2.4rem]">
+    <div className="flex pt-[2.4rem] mt-10">
       <Sidebar />
       <div className="flex-1 p-10 ">
         <Button onClick={() => navigate(`/add-course`)}>
@@ -62,36 +66,69 @@ export function CourseTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {courses.map((course) => (
-              <TableRow key={course._id}>
-                <TableCell>{course.courseTitle}</TableCell>
-                <TableCell>
-                  <Badge>
-                    {course.isPublished ? "Published" : "Not Published"}
-                  </Badge>
-                </TableCell>
+            {user?.userType === "Admin"
+              ? courses.map((course) => (
+                  <TableRow key={course._id}>
+                    <TableCell>{course.courseTitle}</TableCell>
+                    <TableCell>
+                      <Badge>
+                        {course.isPublished ? "Published" : "Not Published"}
+                      </Badge>
+                    </TableCell>
 
-                <TableCell className="font-medium">
-                  ${course.coursePrice}
-                </TableCell>
-                <TableCell className="text-right">
-                  <Button
-                    className="mr-3"
-                    variant="outline"
-                    onClick={() => navigate(`/list-course/${course._id}`)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    className="mr-3"
-                    variant="destructive"
-                    onClick={() => deletecourse(course._id)}
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+                    <TableCell className="font-medium">
+                      ${course.coursePrice}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <Button
+                        className="mr-3"
+                        variant="outline"
+                        onClick={() => navigate(`/list-course/${course._id}`)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        className="mr-3"
+                        variant="destructive"
+                        onClick={() => deletecourse(course._id)}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              : courses
+                  .filter((course) => course?.creator?.email === user.email)
+                  .map((course) => (
+                    <TableRow key={course._id}>
+                      <TableCell>{course.courseTitle}</TableCell>
+                      <TableCell>
+                        <Badge>
+                          {course.isPublished ? "Published" : "Not Published"}
+                        </Badge>
+                      </TableCell>
+
+                      <TableCell className="font-medium">
+                        ${course.coursePrice}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button
+                          className="mr-3"
+                          variant="outline"
+                          onClick={() => navigate(`/list-course/${course._id}`)}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          className="mr-3"
+                          variant="destructive"
+                          onClick={() => deletecourse(course._id)}
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
           </TableBody>
         </Table>
       </div>

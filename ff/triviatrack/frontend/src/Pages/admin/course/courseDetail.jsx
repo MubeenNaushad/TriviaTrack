@@ -10,14 +10,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { BadgeInfo, PlayCircle } from "lucide-react";
+import { BadgeInfo, PlayCircle, User } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import BuyCourse from "@/homecomponents/Buttons/BuyCourse.jsx";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useUser } from "@/context/UserContext.jsx";
 
 const CourseDetail = () => {
   const Navigate = useNavigate();
+  const {user} = useUser();
 
   const { courseId } = useParams();
   const [course, setCourses] = useState();
@@ -38,6 +40,7 @@ const CourseDetail = () => {
         console.log(response);
         setCourses(response.data.course);
         setPurchased(response.data.purchased);
+        console.log(user.userType, "hh");
         setIsLoading(false);
       })
       .catch((error) => {
@@ -56,7 +59,7 @@ const CourseDetail = () => {
   };
 
   return (
-    <div className="space-y-5 mt-16">
+    <div className="space-y-5 mt-20">
       {!isLoading && !course && <p>No courses found</p>}
       <div key={courseId}>
         <div className="bg-[#2D2F31] text-white">
@@ -97,9 +100,7 @@ const CourseDetail = () => {
                   <div
                     key={idx}
                     className="flex items-center gap-3 text-sm"
-                    onClick={() =>
-                      Navigate(`/course/${courseId}/lecture/${lecture._id}`)
-                    }
+                    onMouseOver={console.log("hover")}
                   >
                     <span>
                       <PlayCircle size={14} />{" "}
@@ -133,7 +134,7 @@ const CourseDetail = () => {
                 </h1>
               </CardContent>
               <CardFooter className="flex justify-center p-4">
-                {purchased ? (
+                {(purchased) || (course?.creator?.email === user.email) ? (
                   <>
                     <Button
                       onClick={handleContinueCourse}

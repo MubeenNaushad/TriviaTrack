@@ -1,5 +1,5 @@
 import express from 'express';
-import { createcourse, getcourse, updatecourse, deletecourse, getspecificcourse,getcoursebyid, createLecture, getCourseLecture, editLecture, removeLecture, getLecturebyId, searchCourse} from '../controllers/course.controller.js';
+import { createcourse, getcourse, updatecourse, deletecourse,getcoursebyid, createLecture, getCourseLecture, editLecture, removeLecture, getLecturebyId, searchCourse, getStudentsByCourse} from '../controllers/course.controller.js';
 import { verifyUserMiddleware } from '../middleware/auth.middleware.js';
 import StudentModel from '../models/user.model.js';
 import upload from '../utils/multer.js'; 
@@ -12,7 +12,7 @@ router.get('/getcourse/:id',getcoursebyid);
 
 router.put('/update/:id',upload.single("courseThumbnail"),updatecourse);
 router.delete('/delete/:id',deletecourse);
-router.get('/getonecourse/:id',getspecificcourse);
+router.get('/:courseId/students',verifyUserMiddleware, getStudentsByCourse);
 router.get('/search', searchCourse);
 
 router.post('/:courseId/lecture', createLecture);

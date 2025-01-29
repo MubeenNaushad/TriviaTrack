@@ -24,9 +24,9 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-indigo-600 px-4 mt-10">
-      <div className="w-full max-w-sm p-8 mb-20 space-y-6 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg shadow-black/10 text-white text-center animate-fade-in">
-        <h2 className="text-2xl font-bold">Forgot Password</h2>
+    <div className="flex items-center justify-center min-h-screen bg-gray-300 px-4 mt-0">
+      <div className="w-full max-w-sm p-8 mb-20 space-y-6 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg shadow-black/50 text-white text-center animate-fade-in">
+        <h2 className="text-2xl font-bold text-black">Forgot Password</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -38,7 +38,7 @@ const ForgotPassword = () => {
           />
           <button
             type="submit"
-            className="w-full py-3 rounded-full bg-white font-bold text-lg hover:scale-105 transition-transform shadow-md"
+            className="w-full py-3 rounded-full bg-gray-700 font-bold text-lg hover:scale-105 transition-transform shadow-md"
           >
             Send Reset Link
           </button>

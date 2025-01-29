@@ -33,11 +33,13 @@ const Sidebar = () => {
         </li>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <Link to="/Studentdata" className="flex items-center">
-            <BsFillPeopleFill className="inline-block mr-2" /> Student
+            <BsFillPeopleFill className="inline-block mr-2" /> Students
           </Link>
         </li>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
-          <BsListTask className="inline-block mr-2" /> Progress Tracker
+          <Link to="/enrolledstudents">
+          <BsListTask className="inline-block mr-2" /> Your Students
+          </Link>
         </li>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <BsFillGearFill className="inline-block mr-2" /> Settings

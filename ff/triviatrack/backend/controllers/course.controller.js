@@ -1,6 +1,7 @@
 import { Course } from "../models/course.model.js";
 import { Lecture } from "../models/lecture.model.js";
 import { deleteVideo, uploadMedia } from "../utils/cloudinary.js";
+import StudentModel from "../models/user.model.js";
 
 export const createcourse = async (req, res) => {
   try {
@@ -28,7 +29,7 @@ export const createcourse = async (req, res) => {
 };
 export const getcourse = async (req, res) => {
   try {
-    const courses = await Course.find({}).populate("creator");
+    const courses = await Course.find({}).populate("creator").populate("enrolledStudents");
     return res.json(courses);
   } catch (error) {
     console.log(error);
@@ -38,17 +39,24 @@ export const getcourse = async (req, res) => {
   }
 };
 
-export const getspecificcourse = async (req, res) => {
+export const getStudentsByCourse = async (req, res) => {
+  const { courseId } = req.params;
+  const teacherId = req.user._id; // Assuming req.user is populated from the session or a middleware
+
   try {
-    const newcourse = await Course.findById(req.params.id)
-      .populate("creator")
-      .populate("lectures");
-    return res.json(newcourse);
+    const course = await Course.findById(courseId);
+    if (!course) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    if (course.creator.toString() !== teacherId.toString()) {
+      return res.status(403).json({ message: "Unauthorized access" });
+    }
+
+    const students = await StudentModel.find({ _id: { $in: course.enrolledStudents } });
+    res.status(200).json(students);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      message: "Failed to fetch courses",
-    });
+    res.status(500).json({ message: "Internal server error", error });
   }
 };
 

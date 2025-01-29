@@ -183,6 +183,24 @@ export const getUserProfile = async (req, res) => {
   }
 };
 
+
+export const getStudentProfile = async (req, res) => {
+  try {
+    const userId = req.params.studentId;
+
+    const user = await StudentModel.findById(userId).select("-password");
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+    return res.json({ success: true, user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 export const updateProfile = async (req, res) => {
   try {
     const userId = req.params.id;

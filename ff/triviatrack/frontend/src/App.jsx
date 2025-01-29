@@ -33,6 +33,7 @@ import AddCourse from "./Pages/admin/course/AddCourse.jsx";
 import CourseTable from "./Pages/admin/course/CourseTable.jsx";
 import { EditCourse } from "./Pages/admin/course/EditCourse.jsx";
 import { StudentData } from "./homecomponents/Dashboard/StudentData.jsx";
+import EnrolledStudents from "./homecomponents/Dashboard/EnrolledStudents.jsx";
 import Forum from "./Forum/Forum.jsx";
 import TopicDetails from "./Forum/TopicDetails.jsx";
 import CreateLecture from "./Pages/admin/lecture/CreateLecture.jsx";
@@ -45,6 +46,8 @@ import StudentDashboard from "./homecomponents/Student_Dashboard/StudentDashboar
 import Quiz from "./Pages/Student/Quiz.jsx";
 import { UserProvider } from "./context/UserContext.jsx";
 import VerifyAccount from "./auth/VerifyAccount.jsx";
+import StudentProfile from "./homecomponents/Dashboard/StudentProfile.jsx";
+import Setting from "./Pages/Setting.jsx";
 
 const BannerData = {
   image: Img1,
@@ -123,8 +126,10 @@ const App = () => {
         <Route path="/students/dashboard" element={<StudentDashboard />} />
         <Route path="/teacher/dashboard" element={<Dashboard />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/settings" element={<Setting />} />
 
         <Route path="/students/my-learning" element={<MyLearning />} />
+        <Route path="/students/student-details/:studentId" element={<StudentProfile />} />
         <Route path="/students/profile" element={<Profile />} />
         <Route path="/students/forgot-password" element={<ForgotPassword />} />
         <Route path="/students/verify-account/:token" element={<VerifyAccount />}/>
@@ -138,6 +143,7 @@ const App = () => {
 
         <Route path="/live" element={<Livesession />} />
         <Route path="/Studentdata" element={<StudentData />} />
+        <Route path="/enrolledstudents" element={<EnrolledStudents />} />
         <Route path="/add-course" element={<AddCourse />} />
         <Route path="/list-course" element={<CourseTable />} />
         <Route path="/list-course/:id" element={<EditCourse />} />
