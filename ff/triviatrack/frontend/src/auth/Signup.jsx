@@ -46,9 +46,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-300 px-4 mt-16">
-      <div className="w-full max-w-sm p-8 mb-20 space-y-6 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg shadow-black/100 text-gray-800 text-center animate-fade-in">
-        <h2 className="text-2xl font-bold">Signup</h2>
+    <div className="flex items-center justify-center min-h-screen bg-gray-300 px-4">
+      <div className="w-full max-w-sm p-8 space-y-6 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg shadow-black/100 text-gray-800 text-center animate-fade-in mt-28">
+        <h2 className="text-2xl font-bold">Create an account</h2>
         <div className="flex justify-center space-x-4">
           <button
             onClick={() => setUserType("Student")}

@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { SlideUp } from "../../utility/animation";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
   return (
@@ -53,6 +54,7 @@ const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
               whileInView={"visible"}
               className="flex justify-center md:justify-start"
             >
+              <Link to="/students/signup">
               <motion.button
                 className="primary-btn !mt-5 text-white"
                 whileHover={{
@@ -64,6 +66,7 @@ const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
               >
                 Get Started
               </motion.button>
+              </Link>
             </motion.div>
           </div>
         </div>

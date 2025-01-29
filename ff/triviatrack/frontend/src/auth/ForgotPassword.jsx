@@ -34,7 +34,7 @@ const ForgotPassword = () => {
             placeholder="Enter Email..."
             required
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full py-3 px-4 rounded-full bg-white/20 text-black placeholder-gray-800 focus:bg-white/30 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            className="w-full py-3 px-4 rounded-full bg-white/20 text-black placeholder-gray-800 focus:bg-white/30 focus:outline-none focus:ring-4 focus:ring-gray-700"
           />
           <button
             type="submit"

@@ -143,8 +143,8 @@ export const deletecourse = async (req, res) => {
 
 export const searchCourse = async (req, res) => {
   try {
-    const { query = "", categories = [], sortByPrice = "" } = req.query;
-    console.log(req.query);
+    const query = req.query.query || "";
+    const { categories = [], sortByPrice = "" } = req.query;
 
     const searchCriteria = {
       isPublished: false,
@@ -156,11 +156,6 @@ export const searchCourse = async (req, res) => {
         { subTitle: { $regex: query, $options: "i" } },
         { category: { $regex: query, $options: "i" } },
       ];
-    }
-
-    if (categories) {
-      const categoriesArray = categories.split(",");
-      searchCriteria.category = { $in: categoriesArray };
     }
 
     const sortOptions = {};

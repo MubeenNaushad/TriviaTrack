@@ -62,7 +62,7 @@ const MyLearning = () => {
                 <div key={index}>
                   <Course course={course} />
                   <p>
-                    Your Progress: {progress[course._id]} out of{" "}
+                    {progress[course._id]} out of{" "}
                     {totalLectures[course._id]} lectures completed
                   </p>
                 </div>

@@ -8,11 +8,13 @@ export const UserProvider = ({ children }) => {
 
   // Update user state when logging in
   const login = (userData) => {
+    console.log("updatedlogin")
     setUser(userData);
   };
 
   // Clear user state when logging out
   const logout = () => {
+    console.log("updatedlogout")
     setUser(null);
   };
 

@@ -25,12 +25,12 @@ const Courses = () => {
   const total = courses.length;
 
   return (
-    <div className="bg-gray-50 ">
+    <div className="bg-gray-50 w-full">
       <div className="max-w-7xl mx-auto p-6">
         <h2 className="font-bold text-3xl text-center mb-10 justify-center">
           Courses
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {isLoading
             ? Array.from({ length: 8 }).map((_, index) => (
                 <CourseSkeleton key={index} />

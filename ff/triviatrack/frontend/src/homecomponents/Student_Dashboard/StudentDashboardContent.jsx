@@ -23,6 +23,8 @@ const DashboardContent = () => {
     { name: "Pending", value: 30 },
   ]);
 
+  axios.defaults.withCredentials = true;
+
   // Fetch user profile
   useEffect(() => {
     axios
@@ -50,22 +52,13 @@ const DashboardContent = () => {
       });
   }, []);
 
-  // Fetch Courses from Backend
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_APP_BASEURL}/courses`)
-      .then((response) => {
-        setCourses(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching courses:", error);
-      });
-  }, []);
+
 
   const checkRank = () => {
     const sortedStudents = students.sort((a, b) => b.points - a.points);
     const ranking =
       sortedStudents.findIndex((student) => student._id === thisUser._id) + 1;
+    console.log(ranking,"rankkkk");
     setRank(ranking);
   };
 
@@ -78,7 +71,7 @@ const DashboardContent = () => {
             <h3 className="text-lg font-semibold">Courses</h3>
             <BsBook className="text-3xl" />
           </div>
-          <h1 className="text-5xl font-bold mt-4">{courses.length}</h1>
+          <h1 className="text-5xl font-bold mt-4">{thisUser?.enrolledcourses?.length}</h1>
         </div>
 
         <div className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white p-6 rounded-lg shadow-lg hover:shadow-3xl hover:scale-105 transition-all duration-500 cursor-pointer">
@@ -94,7 +87,7 @@ const DashboardContent = () => {
             <h3 className="text-lg font-semibold">Points</h3>
             <BsPeopleFill className="text-3xl" />
           </div>
-          <h1 className="text-5xl font-bold mt-4">{thisUser.length || 0}</h1>
+          <h1 className="text-5xl font-bold mt-4">{thisUser?.points || 0}</h1>
         </div>
 
         <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white p-6 rounded-lg shadow-lg hover:shadow-3xl hover:scale-105 transition-all duration-500 cursor-pointer">

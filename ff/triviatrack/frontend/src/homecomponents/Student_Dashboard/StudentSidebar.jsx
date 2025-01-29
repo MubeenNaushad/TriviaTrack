@@ -20,13 +20,15 @@ const StudentSidebar = () => {
       </div>
       <ul className="space-y-9">
       <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
-          <Link to="" className="flex items-center hover:scale-105 transition-all duration-300 text-lg">
+          <Link to="/students/dashboard" className="flex items-center hover:scale-105 transition-all duration-300 text-lg">
             <BsFillPeopleFill className="inline-block mr-2" /> Dashboard
           </Link>
         </li>
 
         <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
+        <Link to="">
           <BsClipboardCheck className="inline-block mr-2" /> Assignments
+          </Link>
         </li>
         <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
           <Link to="/quiz" className="flex items-center">

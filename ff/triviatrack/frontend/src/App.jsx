@@ -70,93 +70,99 @@ const BannerData2 = {
 const App = () => {
   return (
     <UserProvider>
-    <Router>
-      <Navbar />
+      <Router>
+        <Navbar />
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <NavbarBanner />
-              <Hero />
-              <NumberCounter />
-              <WhyChoose />
-              <Banner {...BannerData} />
-              <Banner {...BannerData2} reverse={true} />
-              <SubjectCard />
-              <Testimonial />
-              <Footer />
-            </>
-          }
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <NavbarBanner />
+                <Hero />
+                <NumberCounter />
+                <WhyChoose />
+                <Banner {...BannerData} />
+                <Banner {...BannerData2} reverse={true} />
+                <SubjectCard />
+                <Testimonial />
+                <Footer />
+              </>
+            }
+          />
 
-        <Route
-          path="/courses"
-          element={
-            <div>
-              <HeroSection />
+          <Route
+            path="/courses"
+            element={
+              <div>
+                <HeroSection />
 
-              <div className="flex min-h-screen">
-                <div className="w:[50%] bg-gray-100">
-                  {" "}
-                  {/* Filter section */}
-                  <Filter />
-                </div>
-                <div className="w-3/4 p-4">
-                  {" "}
-                  {/* Main content section */}
-                  <Courses />
+                <div className="flex min-h-screen">
+                  <div className="flex justify-center items-center h-full w-full">
+                    {" "}
+                    <div className="w-full">
+                      {" "}
+                      <Courses />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          }
-        />
-        <Route
-          path="/courses/course-details/:courseId"
-          element={<CourseDetail />}
-        />
-        <Route path="/forum" element={<Forum />} />
-        <Route path="/forum/topics/:topicId" element={<TopicDetails />} />
-        <Route path="/course/search" element={<SearchPage />} />
-        <Route path="/students/signup" element={<SignUp />} />
-        <Route path="/students/login" element={<Login />} />
-        <Route path="/contact" element={<ContactForm />} />
-        <Route path="/room/:roomid" element={<Roompage />} />
-        <Route path="/students/dashboard" element={<StudentDashboard />} />
-        <Route path="/teacher/dashboard" element={<Dashboard />} />
-        <Route path="/quiz" element={<Quiz />} />
-        <Route path="/settings" element={<Setting />} />
+            }
+          />
+          <Route
+            path="/courses/course-details/:courseId"
+            element={<CourseDetail />}
+          />
+          <Route path="/forum" element={<Forum />} />
+          <Route path="/forum/topics/:topicId" element={<TopicDetails />} />
+          <Route path="/course/search" element={<SearchPage />} />
+          <Route path="/students/signup" element={<SignUp />} />
+          <Route path="/students/login" element={<Login />} />
+          <Route path="/contact" element={<ContactForm />} />
+          <Route path="/room/:roomid" element={<Roompage />} />
+          <Route path="/students/dashboard" element={<StudentDashboard />} />
+          <Route path="/teacher/dashboard" element={<Dashboard />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/settings" element={<Setting />} />
 
-        <Route path="/students/my-learning" element={<MyLearning />} />
-        <Route path="/students/student-details/:studentId" element={<StudentProfile />} />
-        <Route path="/students/profile" element={<Profile />} />
-        <Route path="/students/forgot-password" element={<ForgotPassword />} />
-        <Route path="/students/verify-account/:token" element={<VerifyAccount />}/>
+          <Route path="/students/my-learning" element={<MyLearning />} />
+          <Route
+            path="/students/student-details/:studentId"
+            element={<StudentProfile />}
+          />
+          <Route path="/students/profile" element={<Profile />} />
+          <Route
+            path="/students/forgot-password"
+            element={<ForgotPassword />}
+          />
+          <Route
+            path="/students/verify-account/:token"
+            element={<VerifyAccount />}
+          />
 
-        <Route
-          path="/students/reset-password/:id/:token"
-          element={<ResetPassword />}
-        />
+          <Route
+            path="/students/reset-password/:id/:token"
+            element={<ResetPassword />}
+          />
 
-        <Route path="/progress/:courseId" element={<CourseProgress />} />
+          <Route path="/progress/:courseId" element={<CourseProgress />} />
 
-        <Route path="/live" element={<Livesession />} />
-        <Route path="/Studentdata" element={<StudentData />} />
-        <Route path="/enrolledstudents" element={<EnrolledStudents />} />
-        <Route path="/add-course" element={<AddCourse />} />
-        <Route path="/list-course" element={<CourseTable />} />
-        <Route path="/list-course/:id" element={<EditCourse />} />
-        <Route
-          path="/list-course/:courseId/lecture"
-          element={<CreateLecture />}
-        />
-        <Route
-          path="/list-course/:courseId/lecture/:lectureId"
-          element={<EditLecture />}
-        />
-      </Routes>
-    </Router>
+          <Route path="/live" element={<Livesession />} />
+          <Route path="/Studentdata" element={<StudentData />} />
+          <Route path="/enrolledstudents" element={<EnrolledStudents />} />
+          <Route path="/add-course" element={<AddCourse />} />
+          <Route path="/list-course" element={<CourseTable />} />
+          <Route path="/list-course/:id" element={<EditCourse />} />
+          <Route
+            path="/list-course/:courseId/lecture"
+            element={<CreateLecture />}
+          />
+          <Route
+            path="/list-course/:courseId/lecture/:lectureId"
+            element={<EditLecture />}
+          />
+        </Routes>
+      </Router>
     </UserProvider>
   );
 };

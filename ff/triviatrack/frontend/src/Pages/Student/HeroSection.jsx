@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -9,12 +9,13 @@ const HeroSection = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim() !== "") {
-      navigate(`/course/search?query=${searchQuery}`);
+      console.log("hererer", searchQuery);
+      navigate(`/course/search?query=${encodeURIComponent(searchQuery)}`);
     }
     setSearchQuery("");
   };
   return (
-    <div className="mt-16 relative bg-gray-800 py-16 px-4 text-center">
+    <div className="mt-20 relative bg-gray-800 py-16 px-4 text-center">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-white text-4xl font-bold mb-4">
           Find the Best courses for You

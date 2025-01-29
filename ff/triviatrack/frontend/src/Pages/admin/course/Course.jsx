@@ -13,19 +13,19 @@ function Course({ course }) {
     <div key={course._id}>
       <Link to={`course-details/${course._id}`}>
         <Card className="overflow-hidden rounded-lg big-white shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-          <div className="relative ">
+          <div className="relative justify-center items-center flex">
             <img
               src={
                 course?.courseThumbnail
                   ? course.courseThumbnail
                   : "https://fireship.io/courses/react/img/featured.png"
               }
-              className="w-full h-36 object-cover rounded-t-lg"
+              className="w-full h-52 object-cover rounded-t-lg"
             ></img>
           </div>
           <CardContent className="px-5 py-4 space-y-3">
             <Link to={`course-details/${course._id}`} key={course._id}>
-              <h1 className="hover:underline font-bold text-lg truncate cursor-pointer">
+              <h1 className="hover:underline font-bold text-xl truncate cursor-pointer">
                 {course?.courseTitle
                   ? course?.courseTitle
                   : "ReactJs Complete Course"}

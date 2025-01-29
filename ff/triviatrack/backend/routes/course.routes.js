@@ -13,7 +13,7 @@ router.get('/getcourse/:id',getcoursebyid);
 router.put('/update/:id',upload.single("courseThumbnail"),updatecourse);
 router.delete('/delete/:id',deletecourse);
 router.get('/:courseId/students',verifyUserMiddleware, getStudentsByCourse);
-router.get('/search', searchCourse);
+router.get('/search', searchCourse); 
 
 router.post('/:courseId/lecture', createLecture);
 router.get('/:courseId/lecture', getCourseLecture);
