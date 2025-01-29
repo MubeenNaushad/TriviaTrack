@@ -1,17 +1,18 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Course({ course }) {
+  const navigate = useNavigate();
   if (!course) {
     return <div>No course data available.</div>;
   }
   return (
     <div key={course._id}>
-      <Link to={`course-details/${course._id}`}>
+      <Link to={`/courses/course-details/${course._id}`}>
         <Card className="overflow-hidden rounded-lg big-white shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
           <div className="relative justify-center items-center flex">
             <img
@@ -24,7 +25,7 @@ function Course({ course }) {
             ></img>
           </div>
           <CardContent className="px-5 py-4 space-y-3">
-            <Link to={`course-details/${course._id}`} key={course._id}>
+            <Link to={`/courses/course-details/${course._id}`} key={course._id}>
               <h1 className="hover:underline font-bold text-xl truncate cursor-pointer">
                 {course?.courseTitle
                   ? course?.courseTitle

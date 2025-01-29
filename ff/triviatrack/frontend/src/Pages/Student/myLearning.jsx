@@ -61,10 +61,7 @@ const MyLearning = () => {
               {myLearningCourses.map((course, index) => (
                 <div key={index}>
                   <Course course={course} />
-                  <p>
-                    {progress[course._id]} out of{" "}
-                    {totalLectures[course._id]} lectures completed
-                  </p>
+                  
                 </div>
               ))}
             </div>

@@ -51,11 +51,11 @@ const ProgressTracker = () => {
             <p>No courses enrolled.</p>
           ) : (
             courses.map(course => (
-              <div key={course._id} className="mb-4 p-4 shadow rounded-lg">
-                <h2 className="font-bold text-lg">{course.courseTitle}</h2>
-                <p>{progress[course._id] || 0} out of {course.totalLectures || course.lectures.length} lectures completed</p>
-                <Progress value={(progress[course._id] || 0) / (totalLectures[course._id] || 1) * 100} />
-                <Link to={`/course-details/${course._id}`} className="text-blue-500 hover:underline">View Course</Link>
+              <div key={course._id} className="mb-4 p-4 shadow rounded-lg mt-4 gap-y-8">
+                <h2 className="font-bold text-lg mt-2">{course?.courseTitle}</h2>
+                <p className="mt-2">{progress[course._id] || 0} out of {course?.totalLectures || course?.lectures.length} lectures completed</p>
+                <Progress className="mt-2" value={(progress[course._id] || 0) / (totalLectures[course._id] || 1) * 100} />
+                <Link to={`/courses/course-details/${course._id}`} className="text-blue-500 hover:underline mt-2">View Course</Link>
               </div>
             ))
           )}
