@@ -13,6 +13,7 @@ import session from "express-session";
 import GoogleStrategy from "passport-google-oauth20";
 import "./Config/passport.js";
 import authRoutes from "./routes/auth.routes.js";
+import financialAidRoutes from "./routes/financialAid.routes.js";
 
 dotenv.config();
 
@@ -58,6 +59,7 @@ app.use("/course", courseRoutes);
 app.use("/progress", courseProgressRoute);
 app.use("/purchase", coursePurchaseRoute);
 app.use("/auth", authRoutes);
+app.use("/financial-aid", financialAidRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);

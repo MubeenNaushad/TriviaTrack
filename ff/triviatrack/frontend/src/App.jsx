@@ -53,6 +53,8 @@ import CategoryPage from "./Forum/Categories.jsx";
 import Leaderboard from "./homecomponents/Dashboard/Leaderboard.jsx";
 import FinancialAidForm from "./Pages/admin/course/FinancialAid.jsx";
 import Chatbot from "./homecomponents/Chatbot.jsx";
+import FinancialAidTable from "./homecomponents/Dashboard/financialAidTable.jsx";
+import FinancialAidView from "./homecomponents/Dashboard/financialAidView.jsx";
 
 const BannerData = {
   image: Img1,
@@ -126,6 +128,8 @@ const App = () => {
             path="/financial-aid/:courseId"
             element={<FinancialAidForm />}
           />
+          <Route path="/financial-aid-applications" element={<FinancialAidTable />} />
+          <Route path="/financial-aid-view/:appId" element={<FinancialAidView />} />
           <Route path="/posts/:postId" element={<PostPage />} />
           <Route path="/course/search" element={<SearchPage />} />
           <Route path="/students/signup" element={<SignUp />} />

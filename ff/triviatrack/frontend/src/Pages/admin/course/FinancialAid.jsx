@@ -21,9 +21,14 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function FinancialAidForm() {
+    const { courseId } = useParams();
+  
   const [formData, setFormData] = useState({
+    courseId: courseId,
     firstName: "",
     lastName: "",
     email: "",
@@ -33,7 +38,6 @@ export default function FinancialAidForm() {
     state: "",
     zipCode: "",
     dateOfBirth: "",
-    ssn: "",
     employmentStatus: "",
     annualIncome: "",
     householdSize: "",
@@ -87,13 +91,48 @@ export default function FinancialAidForm() {
       return;
     }
 
-    console.log("Form submitted:", formData);
+    console.log("Form should submit:", formData);
 
-    toast({
-      title: "Application Submitted",
-      description:
-        "Your financial aid application has been submitted successfully.",
-    });
+      axios
+        .post(
+          `${import.meta.env.VITE_APP_BASEURL}/financial-aid/sendaidapp`,
+          formData
+        )
+        .then((res) => {
+          console.log("Response:", res.data);
+          toast({
+            title: "Success",
+            description: "Application submitted successfully.",
+          });
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            address: "",
+            city: "",
+            state: "",
+            zipCode: "",
+            dateOfBirth: "",
+            ssn: "",
+            employmentStatus: "",
+            annualIncome: "",
+            householdSize: "",
+            currentStudent: "no",
+            schoolName: "",
+            programOfStudy: "",
+            aidReason: "",
+            agreeToTerms: false,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+          toast({
+            title: "Submission Error",
+            description: "There was an error submitting your application.",
+            variant: "destructive",
+          });
+        });
   };
 
   return (
@@ -166,19 +205,6 @@ export default function FinancialAidForm() {
                     type="date"
                     value={formData.dateOfBirth}
                     onChange={handleChange}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="ssn">
-                    Social Security Number (Last 4 digits)
-                  </Label>
-                  <Input
-                    id="ssn"
-                    name="ssn"
-                    maxLength={4}
-                    value={formData.ssn}
-                    onChange={handleChange}
-                    placeholder="XXXX"
                   />
                 </div>
               </div>
@@ -385,7 +411,9 @@ export default function FinancialAidForm() {
             <Button type="button" variant="outline">
               Save Draft
             </Button>
-            <Button type="submit">Submit Application</Button>
+            <Button type="submit" onClick={handleSubmit}>
+              Submit Application
+            </Button>
           </CardFooter>
         </form>
       </Card>

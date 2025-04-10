@@ -9,8 +9,12 @@ import {
   BsListTask,
   BsFillGearFill
 } from 'react-icons/bs';
+import {useUser} from "@/context/UserContext.jsx";
+
 
 const Sidebar = () => {
+  const { user } = useUser();
+
   return (
     <aside className="mt-8 w-100 bg-gray-800 text-white h-screen p-5 sticky top-0">
       <div className="font-bold text-lg mb-4">
@@ -41,6 +45,15 @@ const Sidebar = () => {
           <BsListTask className="inline-block mr-2" /> Your Students
           </Link>
         </li>
+        <>
+        {(user?.userType === "Student") &&
+        <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+          <Link to="/financial-aid-applications">
+          <BsListTask className="inline-block mr-2" /> Financial Aid Applications
+          </Link>
+        </li>
+      }
+        </>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <Link to="/leaderboard">
           <BsListTask className="inline-block mr-2" /> Leaderboard
