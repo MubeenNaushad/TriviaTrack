@@ -58,6 +58,10 @@ const CourseDetail = () => {
     Navigate("/forum");
   };
 
+  const handleAidOption = () => {
+    Navigate(`/financial-aid/${courseId}`);
+  }
+
   return (
     <div className="space-y-5 mt-20">
       {!isLoading && !course && <p>No courses found</p>}
@@ -134,7 +138,7 @@ const CourseDetail = () => {
                 </h1>
               </CardContent>
               <CardFooter className="flex justify-center p-4">
-                {(purchased) || (course?.creator?.email === user.email) ? (
+                {(purchased) || (course?.creator?.email === user?.email) ? (
                   <>
                     <Button
                       onClick={handleContinueCourse}
@@ -147,7 +151,10 @@ const CourseDetail = () => {
                     </Button>
                   </>
                 ) : (
-                  <BuyCourse courseId={courseId} />
+                  <div className="flex flex-col gap-3">
+                  <BuyCourse courseId={courseId} className="w-full"/>
+                  <Button variant="outline" className="outline-4" onClick={handleAidOption}> Get Financial Aid </Button>
+                  </div>
                 )}
               </CardFooter>
             </Card>

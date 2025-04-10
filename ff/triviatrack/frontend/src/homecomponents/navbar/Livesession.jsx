@@ -5,6 +5,7 @@ import { useUser } from "../../context/UserContext.jsx";
 const Livesession = () => {
   const { user } = useUser();
   const [value, setValue] = useState();
+  const [leftMeeting, setLeftMeeting] = useState(false); 
   const navigate = useNavigate();
 
   const handleJoinRoom = useCallback(() => {
@@ -46,12 +47,17 @@ const Livesession = () => {
           </div>
         </div>
       ) : (
-        <div className="mt-20 ">  
+        <div className="mt-20">
           <h1 className="text-center font-bold text-2xl mt-32">
-          SignUp or Login to access this Feature.
-        </h1>
+            SignUp or Login to access this Feature.
+          </h1>
         </div>
-        
+      )}
+
+      {leftMeeting && (
+        <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white p-3 rounded-md shadow-lg">
+          You left the meeting.
+        </div>
       )}
     </>
   );

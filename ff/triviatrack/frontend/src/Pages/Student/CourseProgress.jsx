@@ -67,7 +67,7 @@ const CourseProgress = () => {
       console.log("newww", updatedProg.data.CheckProgress);
     } catch (error) {
       console.error("Failed to update lecture progress", error);
-    }
+    } 
   };
 
   const completeLectureProgress = async (lectureId) => {
@@ -148,7 +148,7 @@ const CourseProgress = () => {
             src={currentLecture.videoUrl}
             controls
             className="w-full h-auto md:rounded-lg"
-            onPlay={() => updateLectureProgress(currentLecture._id)}
+//            onPlay={() => updateLectureProgress(currentLecture._id)}
             onEnded={() => completeLectureProgress(currentLecture._id)}
           />
           <div className="mt-2">

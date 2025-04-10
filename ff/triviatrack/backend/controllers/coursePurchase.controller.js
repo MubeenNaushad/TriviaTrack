@@ -78,7 +78,7 @@ export const stripeWebhook = async (req, res) => {
     const secret = process.env.WEBHOOK_ENDPOINT_SECRET;
 
     const header = stripe.webhooks.generateTestHeaderString({
-      payload: payloadString,
+      payload: payloadString, 
       secret,
     });
 
@@ -88,7 +88,6 @@ export const stripeWebhook = async (req, res) => {
     return res.status(400).send(`Webhook error: ${error.message}`);
   }
 
-  // Handle the checkout session completed event
   if (event.type === "checkout.session.completed") {
     console.log("check session complete is called");
 
@@ -108,7 +107,7 @@ export const stripeWebhook = async (req, res) => {
       }
       purchase.status = "completed";
 
-      // Make all lectures visible by setting `isPreviewFree` to true
+
       if (purchase.courseId && purchase.courseId.lectures.length > 0) {
         await Lecture.updateMany(
           { _id: { $in: purchase.courseId.lectures } },
@@ -118,7 +117,6 @@ export const stripeWebhook = async (req, res) => {
 
       await purchase.save();
 
-      // Update user's enrolledCourses
       console.log("purchse", purchase.userId);
       console.log("purasda", purchase.courseId._id);
       const POINTS_PER_COURSE = 102;
@@ -133,10 +131,9 @@ export const stripeWebhook = async (req, res) => {
       );
       console.log("Updated student:", updatedStudent);
 
-      // Update course to add user ID to enrolledStudents
       await Course.findByIdAndUpdate(
         purchase.courseId._id,
-        { $addToSet: { enrolledStudents: purchase.userId } }, // Add user ID to enrolledStudents
+        { $addToSet: { enrolledStudents: purchase.userId } },
         { new: true }
       );
     } catch (error) {

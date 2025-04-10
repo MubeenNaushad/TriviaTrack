@@ -11,6 +11,8 @@ import "react-calendar/dist/Calendar.css";
 import NoticeBoard from "./NoticeBoard";
 import PieChartComponent from "./PieChartComponent"; // Pie Chart Component
 
+
+
 const DashboardContent = () => {
   const [students, setStudents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());

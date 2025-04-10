@@ -9,13 +9,37 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [userType, setUserType] = useState("Student");
+  const [errors,setErrors]=useState({})
   const { login } = useUser(); 
   const navigate = useNavigate();
+
+const validateName = (name) => /^[^\d][\w\s]{3,30}$/.test(name);
+
+
+const validateEmail = (email) => /^[^\d][a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+
+const validatePassword = (password) => /^(?=.*[A-Z])(?=.*\d).{8,}$/.test(password);
 
   axios.defaults.withCredentials = true;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validationErrors={};
+    if(!validateName(name)){
+      validationErrors.name="Name must not start with a digit & have greater than 3 characters.";
+    }
+    if(!validateEmail(email)){
+      validationErrors.email="Email must not start with a digit";
+    }
+    if(!validatePassword(password)){
+      validationErrors.password="Password must have atleast 8 character containing one digit and one upper case"
+    }
+    if(Object.keys(validationErrors).length>0){
+      setErrors(validationErrors);
+      return;
+
+    }
+    setErrors({})
     axios
       .post(`${import.meta.env.VITE_APP_BASEURL}/students/signup`, {
         email,
@@ -79,6 +103,7 @@ const Signup = () => {
             onChange={(e) => setName(e.target.value)}
             className="w-full py-3 px-4 rounded-full bg-black/20 text-black placeholder-gray-800 focus:bg-white/30 focus:outline-none focus:ring-4 focus:ring-gray-800"
           />
+          {errors.name && <p className="text-red-300 text-sm text-left pl-3 mb-3">{errors.name}</p>}
           <input
             type="email"
             placeholder="Enter Email..."
@@ -86,6 +111,7 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full py-3 px-4 rounded-full bg-black/20 text-black placeholder-gray-800 focus:bg-white/30 focus:outline-none focus:ring-4 focus:ring-gray-800"
           />
+          {errors.email && <p className="text-red-300 text-sm text-left pl-3 mb-3">{errors.email}</p>}
           <input
             type="password"
             placeholder="Enter Password..."
@@ -93,6 +119,7 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full py-3 px-4 rounded-full bg-black/20 text-black placeholder-gray-800 focus:bg-white/30 focus:outline-none focus:ring-4 focus:ring-gray-800"
           />
+          {errors.password && <p className="text-red-300 text-sm text-left pl-3 mb-3">{errors.password}</p>}
           <button
             type="submit"
             className=" text-white w-full py-3 rounded-full bg-gray-700 font-bold text-lg hover:scale-105 transition-transform shadow-md"

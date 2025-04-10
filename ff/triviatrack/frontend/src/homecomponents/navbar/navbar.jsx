@@ -1,21 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../context/UserContext"; // Import the UserContext
+import { useUser } from "../../context/UserContext";
 import axios from "axios";
-import { motion, AnimatePresence } from "framer-motion";
-import ResponsiveMenu from "./ResponsiveMenu";
 
 const Navbar = () => {
-  const { user, login, logout } = useUser(); // Access global state and actions
+  const { user, login, logout } = useUser(); 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  
-  const dropdownRef = useRef(null); // Create a ref for the dropdown
+
+  const dropdownRef = useRef(null); 
 
   useEffect(() => {
-    // Fetch user details on mount
+    
     axios
       .get(`${import.meta.env.VITE_APP_BASEURL}/students/verifyuser`, {
         withCredentials: true,
@@ -35,7 +32,7 @@ const Navbar = () => {
       })
       .catch(() => logout());
 
-    // Handle scroll effect
+    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -57,10 +54,36 @@ const Navbar = () => {
       .catch((err) => console.error("Error during logout:", err));
   };
 
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      
+      if (
+        isDropdownOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [isDropdownOpen]);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-gray-900 shadow-md text-white" : "bg-transparent text-black"
+        isScrolled
+          ? "bg-gray-900 shadow-md text-white"
+          : "bg-transparent text-black"
       }`}
     >
       <div className="container mx-auto px-4 lg:px-10 py-6 flex items-center justify-between">
@@ -71,15 +94,6 @@ const Navbar = () => {
           TriviaTrack
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="lg:hidden text-gray-800 focus:outline-none"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          ☰
-        </button>
-
-        {/* Navigation Links */}
         <div className="hidden lg:flex space-x-6">
           <button
             onClick={() => navigate("/")}
@@ -113,7 +127,7 @@ const Navbar = () => {
               For Students
             </button>
           )}
-          {(user?.userType === "Teacher" || user?.userType === "Admin") && (
+          {(user?.userType === "Teacher" )|| (user?.userType === "Admin" ) && (
             <button
               onClick={() => navigate("/teacher/dashboard")}
               className="hover:text-blue-400 transition-all font-medium"
@@ -123,13 +137,12 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Right Side Buttons (Login/Register or Profile) */}
         <div className="hidden lg:flex items-center space-x-4">
           {user ? (
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <button
                 className="flex items-center space-x-2 hover:text-blue-400 transition-all font-medium"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                onClick={toggleDropdown}
               >
                 <img
                   src={user.profilePhoto}
@@ -137,17 +150,58 @@ const Navbar = () => {
                   className="w-8 h-8 rounded-full"
                 />
                 <span>{user.name}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="ml-1"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
               </button>
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-gray-800 text-gray-800 rounded-md shadow-lg z-50">
+                <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg z-50">
                   <button
                     className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
                     onClick={() => navigate("/students/profile")}
                   >
                     My Profile
                   </button>
+                  {(user.userType === "Teacher") || (user.userType === "Admin") ? (
+                    <button
+                      className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                      onClick={() => navigate("/teacher/dashboard")}
+                    >
+                      Dashboard
+                    </button>
+                  ) : (
+                    <button
+                      className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                      onClick={() => navigate("/students/dashboard")}
+                    >
+                      Dashboard
+                    </button>
+                  )}
+                  {user.userType === "Student" ? (<button
+                    className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                    onClick={() => navigate("/students/my-learning")}
+                  >
+                    My Learning
+                  </button>) : null }
+
                   <button
                     className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                    onClick={() => navigate("/settings")}
+                  >
+                    Settings
+                  </button>
+                  <button
+                    className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                     onClick={handleLogout}
                   >
                     Logout
@@ -173,9 +227,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      
-      {/* Responsive Menu */}
-      <ResponsiveMenu isOpen={isMenuOpen} />
     </nav>
   );
 };

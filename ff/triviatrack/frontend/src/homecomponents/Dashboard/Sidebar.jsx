@@ -42,7 +42,14 @@ const Sidebar = () => {
           </Link>
         </li>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+          <Link to="/leaderboard">
+          <BsListTask className="inline-block mr-2" /> Leaderboard
+          </Link>
+        </li>
+        <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+          <Link to="/settings">
           <BsFillGearFill className="inline-block mr-2" /> Settings
+          </Link>
         </li>
       </ul>
     </aside>

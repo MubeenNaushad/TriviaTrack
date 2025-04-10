@@ -55,7 +55,7 @@ export const login = (req, res) => {
     });
 };
 
-export const signup = async (req, res) => {
+export const signup = async (req, res) => { 
   const { name, email, password, userType } = req.body;
 
   try {
@@ -137,6 +137,41 @@ export const verifyYourEmail = async (req, res) => {
   } catch (error) {
     return res.status(500).json(error);
   }
+};
+
+export const sendNotification = async(req, res) => {
+
+  const {email} = req.user;
+  const {roomid} = req.params;
+
+  const count = count+1;
+
+  console.log("email is here", req.user);
+
+  const transporter = nodemailer.createTransport({ 
+    service: "gmail",
+    auth: {
+      user: "triviatrack09@gmail.com",
+      pass: "soft epwk mzui kcuw",
+    },
+  });
+
+  const mailOptions = {
+    from: "triviatrack09@gmail.com", 
+    to: email,
+    subject: "Meeting Notification",
+    text: `You have left the meeting: ${roomid}`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+
+  console.log(sendNotification)
 };
 
 export const logout = (_, res) => {

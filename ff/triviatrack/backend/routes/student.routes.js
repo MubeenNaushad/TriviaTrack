@@ -12,6 +12,7 @@ import {
   verifyYourEmail,
   getMyLearning,
   getStudentProfile,
+  sendNotification
 } from "../controllers/student.controller.js";
 import { verifyUserMiddleware } from "../middleware/auth.middleware.js";
 import StudentModel from "../models/user.model.js";
@@ -49,8 +50,7 @@ router.post("/reset-password/:id/:token", ResetPassword);
 router.get("/verify-the-account/:token", verifyYourEmail);
 router.get("/get-my-learning", verifyUserMiddleware, getMyLearning);
 router.get("/student-details/:studentId", getStudentProfile);
-
-
+router.post("/sendnotification/:roomid", verifyUserMiddleware, sendNotification);
 
 router.get(
   "/google/callback",

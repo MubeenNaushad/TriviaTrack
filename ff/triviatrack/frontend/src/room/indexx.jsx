@@ -1,13 +1,19 @@
-import React,{useState,useCallback} from "react";
+import React,{useState,useCallback, useEffect} from "react";
 import {useNavigate,useParams} from "react-router-dom";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
-
+import App from "@/App";
+import axios from "axios";
 
 const RoomPage=()=>{
     const{roomid}=useParams();
     const navigate=useNavigate();
-    
+    const [left, setLeft] = useState(false);
 
+    const sendEmail = () => {
+        const response = axios.post(`${import.meta.env.VITE_APP_BASEURL}/students/sendnotification/${roomid}`)
+}
+
+    
     const meeting =async(element)=>{
     const appID=482998377;
     const serverSecret="27be568853592ebc8b033ca21508ebd3";
@@ -22,18 +28,21 @@ const RoomPage=()=>{
     showScreenSharingButton: true,
     onLeaveRoom:()=>{
         navigate("/")
+        window.alert(`You have left the meeting, Thank you for attending: ${roomid}`)
+        sendEmail();
+
     },
     onLiveEnd:()=>{
+        alert("Meeting has ended.");
         navigate("/")   
     },
-   
-    
+
     turnOnCameraWhenJoining: false,
        
       } ) 
 }
    return<div>
-         <div className="mt-16" ref={meeting } style={{ width: '100vw', height: '100vh'}}/>
+         <div className="mt-16" ref={meeting} style={{ width: '100vw', height: '100vh'}}/>
    </div>
 
 

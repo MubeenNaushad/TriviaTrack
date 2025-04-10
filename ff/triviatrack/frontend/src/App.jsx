@@ -35,7 +35,7 @@ import { EditCourse } from "./Pages/admin/course/EditCourse.jsx";
 import { StudentData } from "./homecomponents/Dashboard/StudentData.jsx";
 import EnrolledStudents from "./homecomponents/Dashboard/EnrolledStudents.jsx";
 import Forum from "./Forum/Forum.jsx";
-import TopicDetails from "./Forum/TopicDetails.jsx";
+import PostPage from "./Forum/Posts.jsx";
 import CreateLecture from "./Pages/admin/lecture/CreateLecture.jsx";
 import EditLecture from "./Pages/admin/lecture/EditLecture.jsx";
 import SearchPage from "./Pages/Student/SearchPage.jsx";
@@ -49,6 +49,10 @@ import VerifyAccount from "./auth/VerifyAccount.jsx";
 import StudentProfile from "./homecomponents/Dashboard/StudentProfile.jsx";
 import Setting from "./Pages/Setting.jsx";
 import ProgressTracker from "./homecomponents/Student_Dashboard/ProgressTracker.jsx";
+import CategoryPage from "./Forum/Categories.jsx";
+import Leaderboard from "./homecomponents/Dashboard/Leaderboard.jsx";
+import FinancialAidForm from "./Pages/admin/course/FinancialAid.jsx";
+import Chatbot from "./homecomponents/Chatbot.jsx";
 
 const BannerData = {
   image: Img1,
@@ -88,6 +92,7 @@ const App = () => {
                 <SubjectCard />
                 <Testimonial />
                 <Footer />
+                <Chatbot />
               </>
             }
           />
@@ -115,7 +120,10 @@ const App = () => {
             element={<CourseDetail />}
           />
           <Route path="/forum" element={<Forum />} />
-          <Route path="/topics/:topicId" element={<TopicDetails />} />
+          <Route path="/categories/:category" element={<CategoryPage />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/financial-aid/:courseId" element={<FinancialAidForm />} />
+          <Route path="/posts/:postId" element={<PostPage />} />
           <Route path="/course/search" element={<SearchPage />} />
           <Route path="/students/signup" element={<SignUp />} />
           <Route path="/students/login" element={<Login />} />

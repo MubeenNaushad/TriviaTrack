@@ -24,7 +24,7 @@ const SearchResult = ({ course }) => {
           <Badge className="w-fit mt-2 md:mt-0">{course.courseLevel}</Badge>
         </div>
       </Link>
-      <div className="mt-4 md:mt-0 md:text-right w-full md:w-auto">
+      <div className="mt-4 md:mt-0 md:text-right w-full md:w-auto ml-48">
         <h1 className="font-bold text-lg md:text-xl">
           {course.coursePrice} PKR
         </h1>

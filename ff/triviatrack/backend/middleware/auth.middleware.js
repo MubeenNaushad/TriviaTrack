@@ -47,20 +47,20 @@ export const verifyUserMiddleware = (req, res, next) => {
 export const optionalVerifyUserMiddleware = (req, res, next) => {
   const accessToken = req.cookies.accesstoken;
   if (!accessToken) {
-    req.isVerified = false; // Mark as not verified
-    return next(); // Proceed without error
+    req.isVerified = false; 
+    return next(); 
   }
 
   jwt.verify(accessToken, process.env.JWT_ACCESS_TOKEN, (err, decoded) => {
     if (err) {
-      req.isVerified = false; // Still allow access, but as unverified
+      req.isVerified = false;
       return next();
     }
 
     StudentModel.findOne({ email: decoded.email })
       .then((user) => {
         if (!user) {
-          req.isVerified = false; // User not found, proceed as unverified
+          req.isVerified = false; 
           return next();
         }
 
