@@ -6,9 +6,8 @@ const router = express.Router();
 router.get(
   "/google",
   passport.authenticate("google", {
-    scope: ["profile", "email"], 
+    scope: ["profile", "email"],
   })
 );
 
- 
 export default router;

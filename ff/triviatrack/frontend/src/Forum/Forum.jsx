@@ -1,18 +1,18 @@
-import { 
-  FiChevronLeft,        // For any needed back or navigation icons (if used)
-  FiMessageSquare,      // Replaces custom MessageSquareIcon
-  FiUsers,              // Replaces custom UsersIcon
-  FiSearch,             // Replaces custom SearchIcon in sidebar
-  FiGlobe,              // Replaces custom GlobeIcon for Languages category
-  FiBookOpen            // Replaces custom BookIcon
-} from 'react-icons/fi';
-import { 
-  FaThumbsUp,           // Replaces custom ThumbsUpIcon
-  FaCode,               // Replaces custom CodeIcon in categories/trending topics
-  FaGraduationCap       // Replaces custom GraduationCapIcon
-} from 'react-icons/fa';
-import { GiGamepad } from 'react-icons/gi'; // Replaces custom GamepadIcon
-import { MdPalette } from 'react-icons/md';  // Replaces custom PaletteIcon
+import {
+  FiChevronLeft, // For any needed back or navigation icons (if used)
+  FiMessageSquare, // Replaces custom MessageSquareIcon
+  FiUsers, // Replaces custom UsersIcon
+  FiSearch, // Replaces custom SearchIcon in sidebar
+  FiGlobe, // Replaces custom GlobeIcon for Languages category
+  FiBookOpen, // Replaces custom BookIcon
+} from "react-icons/fi";
+import {
+  FaThumbsUp, // Replaces custom ThumbsUpIcon
+  FaCode, // Replaces custom CodeIcon in categories/trending topics
+  FaGraduationCap, // Replaces custom GraduationCapIcon
+} from "react-icons/fa";
+import { GiGamepad } from "react-icons/gi"; // Replaces custom GamepadIcon
+import { MdPalette } from "react-icons/md"; // Replaces custom PaletteIcon
 
 export default function HomePage() {
   return (
@@ -26,27 +26,35 @@ export default function HomePage() {
                 {/* Replaced ThumbsUpIcon with FaThumbsUp */}
                 <FaThumbsUp className="mb-2 h-10 w-10 text-green-500" />
                 <div className="text-2xl font-bold">334,006</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">Thanks given</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  Thanks given
+                </div>
               </div>
 
               <div className="flex flex-col items-center justify-center rounded-lg bg-blue-100 p-6 dark:bg-blue-900/20">
                 {/* Replaced MessageSquareIcon with FiMessageSquare */}
                 <FiMessageSquare className="mb-2 h-10 w-10 text-blue-500" />
                 <div className="text-2xl font-bold">2,143,258</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">Total posts</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  Total posts
+                </div>
               </div>
 
               <div className="flex flex-col items-center justify-center rounded-lg bg-purple-100 p-6 dark:bg-purple-900/20">
                 {/* Replaced UsersIcon with FiUsers */}
                 <FiUsers className="mb-2 h-10 w-10 text-purple-500" />
                 <div className="text-2xl font-bold">25</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">Online users</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  Online users
+                </div>
               </div>
             </div>
 
             {/* Page Title */}
             <div className="mb-8">
-              <h1 className="text-3xl font-bold tracking-tight">Learning Forum</h1>
+              <h1 className="text-3xl font-bold tracking-tight">
+                Learning Forum
+              </h1>
               <p className="mt-1 text-gray-500 dark:text-gray-400">
                 Join discussions on various learning topics
               </p>
@@ -55,15 +63,23 @@ export default function HomePage() {
             {/* Categories Section */}
             <div className="grid gap-4 sm:grid-cols-2">
               {categories.map((category) => (
-                <a key={category.id} href={`/categories/${category.slug}`} className="block h-full">
+                <a
+                  key={category.id}
+                  href={`/categories/${category.slug}`}
+                  className="block h-full"
+                >
                   <div className="h-full rounded-lg border border-gray-200 bg-white p-6 transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
                     <div className="mb-4 flex items-center gap-3">
-                      <div className={`flex h-10 w-10 items-center justify-center rounded-full ${category.bgColor}`}>
+                      <div
+                        className={`flex h-10 w-10 items-center justify-center rounded-full ${category.bgColor}`}
+                      >
                         {category.icon}
                       </div>
                       <h3 className="text-xl font-semibold">{category.name}</h3>
                     </div>
-                    <p className="mb-4 text-gray-500 dark:text-gray-400">{category.description}</p>
+                    <p className="mb-4 text-gray-500 dark:text-gray-400">
+                      {category.description}
+                    </p>
                     <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
                       <div>{category.postCount} posts</div>
                       <div>{category.userCount} participants</div>
@@ -74,7 +90,9 @@ export default function HomePage() {
             </div>
 
             {/* Recent Discussions Section */}
-            <h2 className="mb-4 mt-12 text-2xl font-bold">Recent Discussions</h2>
+            <h2 className="mb-4 mt-12 text-2xl font-bold">
+              Recent Discussions
+            </h2>
             <div className="space-y-4">
               {posts.map((post) => (
                 <a key={post.id} href={`/posts/${post.id}`} className="block">
@@ -87,14 +105,23 @@ export default function HomePage() {
                         </span>
                       )}
                     </div>
-                    <p className="mb-4 text-gray-500 dark:text-gray-400">{post.excerpt}</p>
+                    <p className="mb-4 text-gray-500 dark:text-gray-400">
+                      {post.excerpt}
+                    </p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="h-6 w-6 overflow-hidden rounded-full bg-blue-100">
-                          <img src={post.author.avatar || "/placeholder.svg"} alt={post.author.name} />
+                          <img
+                            src={post.author.avatar || "/placeholder.svg"}
+                            alt={post.author.name}
+                          />
                         </div>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">{post.author.name}</span>
-                        <span className="text-xs text-gray-400 dark:text-gray-500">{post.createdAt}</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          {post.author.name}
+                        </span>
+                        <span className="text-xs text-gray-400 dark:text-gray-500">
+                          {post.createdAt}
+                        </span>
                       </div>
                       <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
                         <div className="flex items-center gap-1">
@@ -137,12 +164,16 @@ export default function HomePage() {
                 {trendingTopics.map((topic) => (
                   <a key={topic.id} href={topic.url} className="block">
                     <div className="flex items-start gap-3 rounded-md p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700">
-                      <div className={`flex h-8 w-8 items-center justify-center rounded-full ${topic.bgColor}`}>
+                      <div
+                        className={`flex h-8 w-8 items-center justify-center rounded-full ${topic.bgColor}`}
+                      >
                         {topic.icon}
                       </div>
                       <div>
                         <h4 className="font-medium">{topic.title}</h4>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{topic.postCount} posts this week</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {topic.postCount} posts this week
+                        </p>
                       </div>
                     </div>
                   </a>
@@ -157,11 +188,16 @@ export default function HomePage() {
                 {activeUsers.map((user) => (
                   <div key={user.id} className="flex items-center gap-3">
                     <div className="h-10 w-10 overflow-hidden rounded-full bg-blue-100">
-                      <img src={user.avatar || "/placeholder.svg"} alt={user.name} />
+                      <img
+                        src={user.avatar || "/placeholder.svg"}
+                        alt={user.name}
+                      />
                     </div>
                     <div>
                       <h4 className="font-medium">{user.name}</h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">{user.postCount} posts</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        {user.postCount} posts
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -172,16 +208,28 @@ export default function HomePage() {
             <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
               <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
               <div className="space-y-2">
-                <a href="#" className="block rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">
+                <a
+                  href="#"
+                  className="block rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
                   Forum Guidelines
                 </a>
-                <a href="#" className="block rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">
+                <a
+                  href="#"
+                  className="block rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
                   FAQ
                 </a>
-                <a href="#" className="block rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">
+                <a
+                  href="#"
+                  className="block rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
                   Support
                 </a>
-                <a href="#" className="block rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">
+                <a
+                  href="#"
+                  className="block rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
                   Report an Issue
                 </a>
               </div>
@@ -193,14 +241,13 @@ export default function HomePage() {
   );
 }
 
-// Updated categories array using react-icons for icons in each category
 const categories = [
   {
     id: "cat-1",
     name: "Programming",
     slug: "programming",
-    description: "Discuss coding challenges, programming languages, and software development",
-    // Replaced CodeIcon with FaCode
+    description:
+      "Discuss coding challenges, programming languages, and software development",
     icon: <FaCode className="h-5 w-5 text-blue-500" />,
     color: "text-blue-500",
     bgColor: "bg-blue-100 dark:bg-blue-950",
@@ -212,7 +259,6 @@ const categories = [
     name: "Mathematics",
     slug: "mathematics",
     description: "Explore mathematical concepts, problems, and solutions",
-    // Replaced BookIcon with FiBookOpen
     icon: <FiBookOpen className="h-5 w-5 text-green-500" />,
     color: "text-green-500",
     bgColor: "bg-green-100 dark:bg-green-950",
@@ -224,7 +270,6 @@ const categories = [
     name: "Science",
     slug: "science",
     description: "Discuss scientific theories, experiments, and discoveries",
-    // Replaced GraduationCapIcon with FaGraduationCap
     icon: <FaGraduationCap className="h-5 w-5 text-purple-500" />,
     color: "text-purple-500",
     bgColor: "bg-purple-100 dark:bg-purple-950",
@@ -236,7 +281,6 @@ const categories = [
     name: "Gaming",
     slug: "gaming",
     description: "Share gaming experiences, strategies, and discussions",
-    // Replaced GamepadIcon with GiGamepad
     icon: <GiGamepad className="h-5 w-5 text-red-500" />,
     color: "text-red-500",
     bgColor: "bg-red-100 dark:bg-red-950",
@@ -248,7 +292,6 @@ const categories = [
     name: "Art & Design",
     slug: "art-design",
     description: "Showcase creative works and discuss design principles",
-    // Replaced PaletteIcon with MdPalette
     icon: <MdPalette className="h-5 w-5 text-orange-500" />,
     color: "text-orange-500",
     bgColor: "bg-orange-100 dark:bg-orange-950",
@@ -260,7 +303,6 @@ const categories = [
     name: "Languages",
     slug: "languages",
     description: "Learn and practice different languages from around the world",
-    // Replaced GlobeIcon with FiGlobe
     icon: <FiGlobe className="h-5 w-5 text-teal-500" />,
     color: "text-teal-500",
     bgColor: "bg-teal-100 dark:bg-teal-950",
@@ -321,7 +363,8 @@ const posts = [
   {
     id: "post-3",
     title: "The theory of relativity explained simply",
-    excerpt: "Breaking down Einstein's famous theory into understandable concepts",
+    excerpt:
+      "Breaking down Einstein's famous theory into understandable concepts",
     author: users[2],
     category: categories[2],
     createdAt: "1 week ago",
@@ -343,13 +386,11 @@ const posts = [
   },
 ];
 
-// Trending topics array with updated icons
 const trendingTopics = [
   {
     id: "topic-1",
     title: "React Hooks",
     url: "/categories/programming",
-    // Replaced CodeIcon with FaCode
     icon: <FaCode className="h-4 w-4 text-blue-500" />,
     bgColor: "bg-blue-100 dark:bg-blue-950",
     postCount: 42,
@@ -358,7 +399,6 @@ const trendingTopics = [
     id: "topic-2",
     title: "Calculus Problems",
     url: "/categories/mathematics",
-    // Replaced BookIcon with FiBookOpen
     icon: <FiBookOpen className="h-4 w-4 text-green-500" />,
     bgColor: "bg-green-100 dark:bg-green-950",
     postCount: 28,
@@ -367,7 +407,6 @@ const trendingTopics = [
     id: "topic-3",
     title: "Quantum Physics",
     url: "/categories/science",
-    // Replaced GraduationCapIcon with FaGraduationCap
     icon: <FaGraduationCap className="h-4 w-4 text-purple-500" />,
     bgColor: "bg-purple-100 dark:bg-purple-950",
     postCount: 35,
@@ -376,14 +415,12 @@ const trendingTopics = [
     id: "topic-4",
     title: "Game Optimization",
     url: "/categories/gaming",
-    // Replaced GamepadIcon with GiGamepad
     icon: <GiGamepad className="h-4 w-4 text-red-500" />,
     bgColor: "bg-red-100 dark:bg-red-950",
     postCount: 19,
   },
 ];
 
-// Active users array remains unchanged
 const activeUsers = [
   {
     id: "active-1",

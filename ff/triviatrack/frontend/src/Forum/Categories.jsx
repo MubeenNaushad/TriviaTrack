@@ -1,16 +1,20 @@
 import { useParams } from "react-router-dom";
-// Import react-icons as needed
-import { FiChevronLeft, FiMessageSquare, FiSearch, FiBookOpen } from "react-icons/fi";
+import {
+  FiChevronLeft,
+  FiMessageSquare,
+  FiSearch,
+  FiBookOpen,
+} from "react-icons/fi";
 import { FaThumbsUp, FaCode, FaGraduationCap } from "react-icons/fa";
 import { GiGamepad } from "react-icons/gi";
 
 export default function CategoryPage() {
   const params = useParams();
   const slug = params?.slug;
-  // Find the category by slug or fallback to the first category
   const category = categories.find((cat) => cat.slug === slug) || categories[0];
-  // Filter posts that belong to the selected category
-  const categoryPosts = posts.filter((post) => post.category.id === category.id);
+  const categoryPosts = posts.filter(
+    (post) => post.category.id === category.id
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -19,7 +23,6 @@ export default function CategoryPage() {
           href="/forum"
           className="mb-6 inline-flex items-center gap-1 rounded-md px-2 py-1 text-sm text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
         >
-          {/* Using react-icons FiChevronLeft instead of custom ChevronLeftIcon */}
           <FiChevronLeft className="h-4 w-4" />
           Back to Forum
         </a>
@@ -27,12 +30,18 @@ export default function CategoryPage() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <div className="mb-8 flex items-start gap-4">
-              <div className={`flex h-12 w-12 items-center justify-center rounded-lg ${category.bgColor}`}>
+              <div
+                className={`flex h-12 w-12 items-center justify-center rounded-lg ${category.bgColor}`}
+              >
                 {category.icon}
               </div>
               <div>
-                <h1 className="text-3xl font-bold tracking-tight">{category.name}</h1>
-                <p className="mt-1 text-gray-500 dark:text-gray-400">{category.description}</p>
+                <h1 className="text-3xl font-bold tracking-tight">
+                  {category.name}
+                </h1>
+                <p className="mt-1 text-gray-500 dark:text-gray-400">
+                  {category.description}
+                </p>
               </div>
             </div>
 
@@ -49,7 +58,9 @@ export default function CategoryPage() {
                           </span>
                         )}
                       </div>
-                      <p className="mb-4 text-gray-500 dark:text-gray-400">{post.excerpt}</p>
+                      <p className="mb-4 text-gray-500 dark:text-gray-400">
+                        {post.excerpt}
+                      </p>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <div className="h-6 w-6 overflow-hidden rounded-full bg-blue-100">
@@ -111,15 +122,21 @@ export default function CategoryPage() {
               <h3 className="mb-4 text-lg font-semibold">Category Stats</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Total Posts</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Total Posts
+                  </span>
                   <span className="font-medium">{category.postCount}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Participants</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Participants
+                  </span>
                   <span className="font-medium">{category.userCount}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Last Activity</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Last Activity
+                  </span>
                   <span className="font-medium">2 hours ago</span>
                 </div>
               </div>
@@ -132,12 +149,16 @@ export default function CategoryPage() {
                 {users.slice(0, 3).map((user) => (
                   <div key={user.id} className="flex items-center gap-3">
                     <div className="h-10 w-10 overflow-hidden rounded-full bg-blue-100">
-                      <img src={user.avatar || "/placeholder.svg"} alt={user.name} />
+                      <img
+                        src={user.avatar || "/placeholder.svg"}
+                        alt={user.name}
+                      />
                     </div>
                     <div>
                       <h4 className="font-medium">{user.name}</h4>
                       <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {Math.floor(Math.random() * 50) + 10} posts in this category
+                        {Math.floor(Math.random() * 50) + 10} posts in this
+                        category
                       </p>
                     </div>
                   </div>
@@ -158,7 +179,9 @@ export default function CategoryPage() {
                       href={`/categories/${cat.slug}`}
                       className="flex items-center gap-2 rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
-                      <div className={`flex h-6 w-6 items-center justify-center rounded-full ${cat.bgColor}`}>
+                      <div
+                        className={`flex h-6 w-6 items-center justify-center rounded-full ${cat.bgColor}`}
+                      >
                         {cat.icon}
                       </div>
                       <span>{cat.name}</span>
@@ -280,7 +303,8 @@ const posts = [
   {
     id: "post-3",
     title: "The theory of relativity explained simply",
-    excerpt: "Breaking down Einstein's famous theory into understandable concepts",
+    excerpt:
+      "Breaking down Einstein's famous theory into understandable concepts",
     author: users[2],
     category: categories[2],
     createdAt: "1 week ago",

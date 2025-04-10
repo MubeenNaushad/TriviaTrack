@@ -11,12 +11,12 @@ import coursePurchaseRoute from "./routes/coursePurchase.route.js";
 import passport from "passport";
 import session from "express-session";
 import GoogleStrategy from "passport-google-oauth20";
-import './Config/passport.js';
+import "./Config/passport.js";
 import authRoutes from "./routes/auth.routes.js";
 
 dotenv.config();
 
-const app = express(); 
+const app = express();
 
 app.use(express.json());
 app.use(
@@ -29,7 +29,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 console.log(process.env.FRONTEND_URL);
 

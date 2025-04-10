@@ -19,7 +19,7 @@ import { useUser } from "@/context/UserContext.jsx";
 
 const CourseDetail = () => {
   const Navigate = useNavigate();
-  const {user} = useUser();
+  const { user } = useUser();
 
   const { courseId } = useParams();
   const [course, setCourses] = useState();
@@ -60,7 +60,7 @@ const CourseDetail = () => {
 
   const handleAidOption = () => {
     Navigate(`/financial-aid/${courseId}`);
-  }
+  };
 
   return (
     <div className="space-y-5 mt-20">
@@ -138,7 +138,7 @@ const CourseDetail = () => {
                 </h1>
               </CardContent>
               <CardFooter className="flex justify-center p-4">
-                {(purchased) || (course?.creator?.email === user?.email) ? (
+                {purchased || course?.creator?.email === user?.email ? (
                   <>
                     <Button
                       onClick={handleContinueCourse}
@@ -152,8 +152,15 @@ const CourseDetail = () => {
                   </>
                 ) : (
                   <div className="flex flex-col gap-3">
-                  <BuyCourse courseId={courseId} className="w-full"/>
-                  <Button variant="outline" className="outline-4" onClick={handleAidOption}> Get Financial Aid </Button>
+                    <BuyCourse courseId={courseId} className="w-full" />
+                    <Button
+                      variant="outline"
+                      className="outline-4"
+                      onClick={handleAidOption}
+                    >
+                      {" "}
+                      Get Financial Aid{" "}
+                    </Button>
                   </div>
                 )}
               </CardFooter>

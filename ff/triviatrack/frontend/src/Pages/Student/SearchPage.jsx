@@ -14,8 +14,9 @@ const SearchPage = () => {
 
   useEffect(() => {
     const fetchCourses = async () => {
-
-      let url = `${import.meta.env.VITE_APP_BASEURL}/course/search?query=${encodeURIComponent(query)}`;
+      let url = `${
+        import.meta.env.VITE_APP_BASEURL
+      }/course/search?query=${encodeURIComponent(query)}`;
       console.log("uu", url);
 
       if (sortByPrice !== "") {
@@ -24,7 +25,7 @@ const SearchPage = () => {
 
       try {
         const response = await axios.get(url);
-        console.log(response,"rr");
+        console.log(response, "rr");
         setCourses(response.data.courses);
         setIsLoading(false);
         console.log("tt", response.data.courses);

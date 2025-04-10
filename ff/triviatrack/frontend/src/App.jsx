@@ -122,7 +122,10 @@ const App = () => {
           <Route path="/forum" element={<Forum />} />
           <Route path="/categories/:category" element={<CategoryPage />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/financial-aid/:courseId" element={<FinancialAidForm />} />
+          <Route
+            path="/financial-aid/:courseId"
+            element={<FinancialAidForm />}
+          />
           <Route path="/posts/:postId" element={<PostPage />} />
           <Route path="/course/search" element={<SearchPage />} />
           <Route path="/students/signup" element={<SignUp />} />

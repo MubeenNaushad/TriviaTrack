@@ -1,27 +1,19 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-// Import required icons from react-icons
-// From react-icons/fi (Feather icons)
-import { 
-  FiChevronLeft,      // Replaces custom ChevronLeftIcon
-  FiMessageSquare,    // Replaces custom MessageSquareIcon
-  FiBookmark,         // Replaces custom BookmarkIcon
-  FiShare,            // Replaces custom ShareIcon
-  FiFlag,             // Replaces custom FlagIcon
-  FiCornerUpLeft,     // Replaces custom ReplyIcon
-  FiBookOpen          // Used for the Book icon in the Mathematics category
-} from 'react-icons/fi';
+import {
+  FiChevronLeft,
+  FiMessageSquare,
+  FiBookmark,
+  FiShare,
+  FiFlag,
+  FiCornerUpLeft,
+  FiBookOpen,
+} from "react-icons/fi";
 
-// From react-icons/fa (Font Awesome icons)
-import { 
-  FaThumbsUp,         // Replaces custom ThumbsUpIcon in buttons and comments
-  FaCode,             // Replaces custom CodeIcon
-  FaGraduationCap     // Replaces custom GraduationCapIcon
-} from 'react-icons/fa';
+import { FaThumbsUp, FaCode, FaGraduationCap } from "react-icons/fa";
 
-// From react-icons/gi (Game Icons)
-import { GiGamepad } from 'react-icons/gi'; // Replaces custom GamepadIcon
+import { GiGamepad } from "react-icons/gi";
 
 export default function PostPage() {
   const params = useParams();
@@ -42,7 +34,8 @@ export default function PostPage() {
     },
     {
       id: "comment-2",
-      content: "Great post! I would add that understanding the fundamentals is also crucial for beginners.",
+      content:
+        "Great post! I would add that understanding the fundamentals is also crucial for beginners.",
       author: users[2],
       createdAt: "2 days ago",
       likes: 8,
@@ -94,7 +87,10 @@ export default function PostPage() {
         <div className="mb-6 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
           <div className="flex items-start gap-4 border-b border-gray-200 p-6 dark:border-gray-700">
             <div className="h-10 w-10 overflow-hidden rounded-full bg-blue-100">
-              <img src={post.author.avatar || "/placeholder.svg"} alt={post.author.name} />
+              <img
+                src={post.author.avatar || "/placeholder.svg"}
+                alt={post.author.name}
+              />
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2">
@@ -117,11 +113,14 @@ export default function PostPage() {
             <div className="prose max-w-none dark:prose-invert">
               <p>{post.excerpt}</p>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt,
-                nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies
-                tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Sed vitae magna eu magna
-                efficitur consequat in vel enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                posuere cubilia curae; Donec at mauris nec dolor consequat faucibus.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl,
+                eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget
+                ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl
+                nisl eget nisl. Sed vitae magna eu magna efficitur consequat in
+                vel enim. Vestibulum ante ipsum primis in faucibus orci luctus
+                et ultrices posuere cubilia curae; Donec at mauris nec dolor
+                consequat faucibus.
               </p>
             </div>
           </div>
@@ -171,7 +170,9 @@ export default function PostPage() {
         <div className="space-y-4">
           <div className="overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
             <div className="border-b border-gray-200 p-4 dark:border-gray-700">
-              <h2 className="text-lg font-semibold">Comments ({comments.length})</h2>
+              <h2 className="text-lg font-semibold">
+                Comments ({comments.length})
+              </h2>
             </div>
             <div className="p-4">
               <form onSubmit={handleSubmitComment}>
@@ -203,12 +204,19 @@ export default function PostPage() {
                 >
                   <div className="flex items-start gap-4 p-4">
                     <div className="h-8 w-8 overflow-hidden rounded-full bg-blue-100">
-                      <img src={comment.author.avatar || "/placeholder.svg"} alt={comment.author.name} />
+                      <img
+                        src={comment.author.avatar || "/placeholder.svg"}
+                        alt={comment.author.name}
+                      />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold">{comment.author.name}</span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">{comment.createdAt}</span>
+                        <span className="font-semibold">
+                          {comment.author.name}
+                        </span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                          {comment.createdAt}
+                        </span>
                       </div>
                       <p className="mt-1 text-sm">{comment.content}</p>
                       <div className="mt-2 flex gap-2">
@@ -230,7 +238,9 @@ export default function PostPage() {
             </div>
           ) : (
             <div className="flex h-20 items-center justify-center rounded-lg border border-dashed border-gray-300 dark:border-gray-700">
-              <p className="text-center text-gray-500 dark:text-gray-400">No comments yet. Be the first to comment!</p>
+              <p className="text-center text-gray-500 dark:text-gray-400">
+                No comments yet. Be the first to comment!
+              </p>
             </div>
           )}
         </div>
@@ -245,7 +255,8 @@ const categories = [
     id: "cat-1",
     name: "Programming",
     slug: "programming",
-    description: "Discuss coding challenges, programming languages, and software development",
+    description:
+      "Discuss coding challenges, programming languages, and software development",
     // Using react-icons FaCode instead of custom CodeIcon
     icon: <FaCode className="h-5 w-5 text-blue-500" />,
     color: "text-blue-500",
@@ -335,7 +346,8 @@ const posts = [
   {
     id: "post-3",
     title: "The theory of relativity explained simply",
-    excerpt: "Breaking down Einstein's famous theory into understandable concepts",
+    excerpt:
+      "Breaking down Einstein's famous theory into understandable concepts",
     author: users[2],
     category: categories[2],
     createdAt: "1 week ago",

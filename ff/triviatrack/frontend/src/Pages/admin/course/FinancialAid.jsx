@@ -1,13 +1,26 @@
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { Checkbox } from "@/components/ui/checkbox"
-import { toast } from "@/hooks/use-toast"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "@/hooks/use-toast";
 
 export default function FinancialAidForm() {
   const [formData, setFormData] = useState({
@@ -29,40 +42,40 @@ export default function FinancialAidForm() {
     programOfStudy: "",
     aidReason: "",
     agreeToTerms: false,
-  })
+  });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
+    const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
-    }))
-  }
+    }));
+  };
 
   const handleSelectChange = (name, value) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleRadioChange = (value) => {
     setFormData((prev) => ({
       ...prev,
       currentStudent: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!formData.firstName || !formData.lastName || !formData.email) {
       toast({
         title: "Error",
         description: "Please fill out all required fields",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
     if (!formData.agreeToTerms) {
@@ -70,29 +83,31 @@ export default function FinancialAidForm() {
         title: "Error",
         description: "You must agree to the terms and conditions",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
-
-    console.log("Form submitted:", formData)
+    console.log("Form submitted:", formData);
 
     toast({
       title: "Application Submitted",
-      description: "Your financial aid application has been submitted successfully.",
-    })
-  }
+      description:
+        "Your financial aid application has been submitted successfully.",
+    });
+  };
 
   return (
     <div className="container mx-auto py-10 px-4 pt-32">
       <Card className="max-w-4xl mx-auto">
         <CardHeader className="bg-slate-50 border-b">
           <CardTitle className="text-2xl">Financial Aid Application</CardTitle>
-          <CardDescription>Please complete all fields accurately to apply for financial assistance.</CardDescription>
+          <CardDescription>
+            Please complete all fields accurately to apply for financial
+            assistance.
+          </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-6 pt-6">
-
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Personal Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -100,23 +115,48 @@ export default function FinancialAidForm() {
                   <Label htmlFor="firstName">
                     First Name <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required />
+                  <Input
+                    id="firstName"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="lastName">
                     Last Name <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required />
+                  <Input
+                    id="lastName"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">
                     Email <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} />
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="dateOfBirth">Date of Birth</Label>
@@ -129,7 +169,9 @@ export default function FinancialAidForm() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="ssn">Social Security Number (Last 4 digits)</Label>
+                  <Label htmlFor="ssn">
+                    Social Security Number (Last 4 digits)
+                  </Label>
                   <Input
                     id="ssn"
                     name="ssn"
@@ -143,17 +185,32 @@ export default function FinancialAidForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="address">Address</Label>
-                <Input id="address" name="address" value={formData.address} onChange={handleChange} />
+                <Input
+                  id="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="city">City</Label>
-                  <Input id="city" name="city" value={formData.city} onChange={handleChange} />
+                  <Input
+                    id="city"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="state">State</Label>
-                  <Select value={formData.state} onValueChange={(value) => handleSelectChange("state", value)}>
+                  <Select
+                    value={formData.state}
+                    onValueChange={(value) =>
+                      handleSelectChange("state", value)
+                    }
+                  >
                     <SelectTrigger id="state">
                       <SelectValue placeholder="Select state" />
                     </SelectTrigger>
@@ -171,11 +228,15 @@ export default function FinancialAidForm() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="zipCode">Zip Code</Label>
-                  <Input id="zipCode" name="zipCode" value={formData.zipCode} onChange={handleChange} />
+                  <Input
+                    id="zipCode"
+                    name="zipCode"
+                    value={formData.zipCode}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
             </div>
-
 
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-lg font-medium">Financial Information</h3>
@@ -184,7 +245,9 @@ export default function FinancialAidForm() {
                   <Label htmlFor="employmentStatus">Employment Status</Label>
                   <Select
                     value={formData.employmentStatus}
-                    onValueChange={(value) => handleSelectChange("employmentStatus", value)}
+                    onValueChange={(value) =>
+                      handleSelectChange("employmentStatus", value)
+                    }
                   >
                     <SelectTrigger id="employmentStatus">
                       <SelectValue placeholder="Select status" />
@@ -193,7 +256,9 @@ export default function FinancialAidForm() {
                       <SelectItem value="fullTime">Full-time</SelectItem>
                       <SelectItem value="partTime">Part-time</SelectItem>
                       <SelectItem value="unemployed">Unemployed</SelectItem>
-                      <SelectItem value="selfEmployed">Self-employed</SelectItem>
+                      <SelectItem value="selfEmployed">
+                        Self-employed
+                      </SelectItem>
                       <SelectItem value="retired">Retired</SelectItem>
                       <SelectItem value="student">Student</SelectItem>
                     </SelectContent>
@@ -214,7 +279,9 @@ export default function FinancialAidForm() {
                   <Label htmlFor="householdSize">Household Size</Label>
                   <Select
                     value={formData.householdSize}
-                    onValueChange={(value) => handleSelectChange("householdSize", value)}
+                    onValueChange={(value) =>
+                      handleSelectChange("householdSize", value)
+                    }
                   >
                     <SelectTrigger id="householdSize">
                       <SelectValue placeholder="Select size" />
@@ -231,7 +298,6 @@ export default function FinancialAidForm() {
                 </div>
               </div>
             </div>
-
 
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-lg font-medium">Education Information</h3>
@@ -258,7 +324,12 @@ export default function FinancialAidForm() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="schoolName">School Name</Label>
-                      <Input id="schoolName" name="schoolName" value={formData.schoolName} onChange={handleChange} />
+                      <Input
+                        id="schoolName"
+                        name="schoolName"
+                        value={formData.schoolName}
+                        onChange={handleChange}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="programOfStudy">Program of Study</Label>
@@ -279,12 +350,18 @@ export default function FinancialAidForm() {
               <h3 className="text-lg font-medium">Aid Request</h3>
               <div className="space-y-2">
                 <Label htmlFor="aidReason">
-                  Please explain why you are requesting financial aid and how it will help you
+                  Please explain why you are requesting financial aid and how it
+                  will help you
                 </Label>
-                <Textarea id="aidReason" name="aidReason" value={formData.aidReason} onChange={handleChange} rows={4} />
+                <Textarea
+                  id="aidReason"
+                  name="aidReason"
+                  value={formData.aidReason}
+                  onChange={handleChange}
+                  rows={4}
+                />
               </div>
             </div>
-
 
             <div className="pt-4 border-t">
               <div className="flex items-start space-x-2">
@@ -292,11 +369,14 @@ export default function FinancialAidForm() {
                   id="agreeToTerms"
                   name="agreeToTerms"
                   checked={formData.agreeToTerms}
-                  onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, agreeToTerms: checked }))}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({ ...prev, agreeToTerms: checked }))
+                  }
                 />
                 <Label htmlFor="agreeToTerms" className="text-sm">
-                  I certify that all information provided is true and accurate. I understand that providing false
-                  information may result in denial of aid and possible legal action.
+                  I certify that all information provided is true and accurate.
+                  I understand that providing false information may result in
+                  denial of aid and possible legal action.
                 </Label>
               </div>
             </div>
@@ -310,5 +390,5 @@ export default function FinancialAidForm() {
         </form>
       </Card>
     </div>
-  )
+  );
 }
