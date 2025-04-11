@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import {Progress} from "@/components/ui/progress";
+import { Progress } from "@/components/ui/progress";
+import StudentSidebar from "./StudentSidebar";
 
 const ProgressTracker = () => {
   const [courses, setCourses] = useState([]);
@@ -41,12 +42,13 @@ const ProgressTracker = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10 mt-20">
-      <h1 className="text-xl font-semibold mb-4">Course Progress</h1>
+    <div className="mt-8 flex pt-[2.4rem]">
+      <StudentSidebar />
+      <h1 className="text-xl font-semibold mb-4 mt-6 p-8">Course Progress</h1>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div>
+        <div className="mt-20 p-8 w-[60%]">
           {courses.length === 0 ? (
             <p>No courses enrolled.</p>
           ) : (
