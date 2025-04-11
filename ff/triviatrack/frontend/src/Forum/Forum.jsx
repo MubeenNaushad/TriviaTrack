@@ -1,20 +1,52 @@
 import {
-  FiChevronLeft, // For any needed back or navigation icons (if used)
-  FiMessageSquare, // Replaces custom MessageSquareIcon
-  FiUsers, // Replaces custom UsersIcon
-  FiSearch, // Replaces custom SearchIcon in sidebar
-  FiGlobe, // Replaces custom GlobeIcon for Languages category
-  FiBookOpen, // Replaces custom BookIcon
+  FiChevronLeft, 
+  FiMessageSquare, 
+  FiUsers, 
+  FiSearch, 
+  FiGlobe, 
+  FiBookOpen, 
 } from "react-icons/fi";
 import {
-  FaThumbsUp, // Replaces custom ThumbsUpIcon
-  FaCode, // Replaces custom CodeIcon in categories/trending topics
-  FaGraduationCap, // Replaces custom GraduationCapIcon
+  FaThumbsUp, 
+  FaCode, 
+  FaGraduationCap, 
 } from "react-icons/fa";
-import { GiGamepad } from "react-icons/gi"; // Replaces custom GamepadIcon
-import { MdPalette } from "react-icons/md"; // Replaces custom PaletteIcon
+import { GiGamepad } from "react-icons/gi";
+import { MdPalette } from "react-icons/md"; 
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 
 export default function HomePage() {
+
+  const [posts, setPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+
+    const getCategories = async() => {
+      try{
+        const categories = await axios.get(`${import.meta.env.VITE_APP_BASEURL}/forum/all-categories`);
+        setCategories(categories.data);
+      } catch (error) {
+        console.log("Error fetching categories: ", error);
+      }
+    }
+
+    const getAllPosts = async () => {
+      try {
+        const posts = await axios.get(`${import.meta.env.VITE_APP_BASEURL}/forum/all-posts`);
+        setPosts(posts.data);
+      } catch (error) {
+        console.log("Error fetching posts:", error)
+      }
+    }
+
+    getCategories();
+    getAllPosts();
+
+  }, [])
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-6 pt-32">
@@ -241,75 +273,6 @@ export default function HomePage() {
   );
 }
 
-const categories = [
-  {
-    id: "cat-1",
-    name: "Programming",
-    slug: "programming",
-    description:
-      "Discuss coding challenges, programming languages, and software development",
-    icon: <FaCode className="h-5 w-5 text-blue-500" />,
-    color: "text-blue-500",
-    bgColor: "bg-blue-100 dark:bg-blue-950",
-    postCount: 128,
-    userCount: 456,
-  },
-  {
-    id: "cat-2",
-    name: "Mathematics",
-    slug: "mathematics",
-    description: "Explore mathematical concepts, problems, and solutions",
-    icon: <FiBookOpen className="h-5 w-5 text-green-500" />,
-    color: "text-green-500",
-    bgColor: "bg-green-100 dark:bg-green-950",
-    postCount: 87,
-    userCount: 324,
-  },
-  {
-    id: "cat-3",
-    name: "Science",
-    slug: "science",
-    description: "Discuss scientific theories, experiments, and discoveries",
-    icon: <FaGraduationCap className="h-5 w-5 text-purple-500" />,
-    color: "text-purple-500",
-    bgColor: "bg-purple-100 dark:bg-purple-950",
-    postCount: 95,
-    userCount: 287,
-  },
-  {
-    id: "cat-4",
-    name: "Gaming",
-    slug: "gaming",
-    description: "Share gaming experiences, strategies, and discussions",
-    icon: <GiGamepad className="h-5 w-5 text-red-500" />,
-    color: "text-red-500",
-    bgColor: "bg-red-100 dark:bg-red-950",
-    postCount: 156,
-    userCount: 512,
-  },
-  {
-    id: "cat-5",
-    name: "Art & Design",
-    slug: "art-design",
-    description: "Showcase creative works and discuss design principles",
-    icon: <MdPalette className="h-5 w-5 text-orange-500" />,
-    color: "text-orange-500",
-    bgColor: "bg-orange-100 dark:bg-orange-950",
-    postCount: 64,
-    userCount: 198,
-  },
-  {
-    id: "cat-6",
-    name: "Languages",
-    slug: "languages",
-    description: "Learn and practice different languages from around the world",
-    icon: <FiGlobe className="h-5 w-5 text-teal-500" />,
-    color: "text-teal-500",
-    bgColor: "bg-teal-100 dark:bg-teal-950",
-    postCount: 73,
-    userCount: 245,
-  },
-];
 
 const users = [
   {
@@ -336,55 +299,27 @@ const users = [
   },
 ];
 
-const posts = [
+const activeUsers = [
   {
-    id: "post-1",
-    title: "Getting started with React: A beginner's guide",
-    excerpt: "Learn the basics of React and how to build your first component",
-    author: users[0],
-    category: categories[0],
-    createdAt: "2 days ago",
-    views: 1245,
-    replies: 32,
-    likes: 87,
-    isPinned: true,
+    id: "active-1",
+    name: "Alex Johnson",
+    avatar: "/placeholder.svg?height=40&width=40",
+    postCount: 128,
   },
   {
-    id: "post-2",
-    title: "Understanding calculus: The basics of derivatives",
-    excerpt: "A simple explanation of derivatives and their applications",
-    author: users[1],
-    category: categories[1],
-    createdAt: "5 days ago",
-    views: 876,
-    replies: 18,
-    likes: 45,
+    id: "active-2",
+    name: "Sam Wilson",
+    avatar: "/placeholder.svg?height=40&width=40",
+    postCount: 85,
   },
   {
-    id: "post-3",
-    title: "The theory of relativity explained simply",
-    excerpt:
-      "Breaking down Einstein's famous theory into understandable concepts",
-    author: users[2],
-    category: categories[2],
-    createdAt: "1 week ago",
-    views: 1532,
-    replies: 27,
-    likes: 103,
-    isEdited: true,
-  },
-  {
-    id: "post-4",
-    title: "Optimizing game performance: Tips and tricks",
-    excerpt: "Learn how to improve your game's performance and user experience",
-    author: users[3],
-    category: categories[3],
-    createdAt: "3 days ago",
-    views: 945,
-    replies: 21,
-    likes: 67,
+    id: "active-3",
+    name: "Taylor Smith",
+    avatar: "/placeholder.svg?height=40&width=40",
+    postCount: 237,
   },
 ];
+
 
 const trendingTopics = [
   {
@@ -418,26 +353,5 @@ const trendingTopics = [
     icon: <GiGamepad className="h-4 w-4 text-red-500" />,
     bgColor: "bg-red-100 dark:bg-red-950",
     postCount: 19,
-  },
-];
-
-const activeUsers = [
-  {
-    id: "active-1",
-    name: "Alex Johnson",
-    avatar: "/placeholder.svg?height=40&width=40",
-    postCount: 128,
-  },
-  {
-    id: "active-2",
-    name: "Sam Wilson",
-    avatar: "/placeholder.svg?height=40&width=40",
-    postCount: 85,
-  },
-  {
-    id: "active-3",
-    name: "Taylor Smith",
-    avatar: "/placeholder.svg?height=40&width=40",
-    postCount: 237,
   },
 ];

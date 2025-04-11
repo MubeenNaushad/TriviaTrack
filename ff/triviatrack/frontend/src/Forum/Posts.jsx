@@ -111,7 +111,7 @@ export default function PostPage() {
           <div className="p-6">
             <h1 className="mb-4 text-2xl font-bold">{post.title}</h1>
             <div className="prose max-w-none dark:prose-invert">
-              <p>{post.excerpt}</p>
+              <p>{post.description}</p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
                 auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl,
@@ -323,7 +323,7 @@ const posts = [
   {
     id: "post-1",
     title: "Getting started with React: A beginner's guide",
-    excerpt: "Learn the basics of React and how to build your first component",
+    description: "Learn the basics of React and how to build your first component",
     author: users[0],
     category: categories[0],
     createdAt: "2 days ago",
@@ -335,7 +335,7 @@ const posts = [
   {
     id: "post-2",
     title: "Understanding calculus: The basics of derivatives",
-    excerpt: "A simple explanation of derivatives and their applications",
+    description: "A simple explanation of derivatives and their applications",
     author: users[1],
     category: categories[1],
     createdAt: "5 days ago",
@@ -346,7 +346,7 @@ const posts = [
   {
     id: "post-3",
     title: "The theory of relativity explained simply",
-    excerpt:
+    description:
       "Breaking down Einstein's famous theory into understandable concepts",
     author: users[2],
     category: categories[2],
@@ -359,7 +359,7 @@ const posts = [
   {
     id: "post-4",
     title: "Optimizing game performance: Tips and tricks",
-    excerpt: "Learn how to improve your game's performance and user experience",
+    description: "Learn how to improve your game's performance and user experience",
     author: users[3],
     category: categories[3],
     createdAt: "3 days ago",
