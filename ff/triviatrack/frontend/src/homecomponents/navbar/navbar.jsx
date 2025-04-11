@@ -2,17 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const { user, login, logout } = useUser(); 
+  const { user, login, logout } = useUser();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
 
-  const dropdownRef = useRef(null); 
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
-    
+
     axios
       .get(`${import.meta.env.VITE_APP_BASEURL}/students/verifyuser`, {
         withCredentials: true,
@@ -28,11 +29,12 @@ const Navbar = () => {
           });
         } else {
           logout();
+
         }
       })
       .catch(() => logout());
 
-    
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -50,13 +52,14 @@ const Navbar = () => {
       .then(() => {
         logout();
         navigate("/students/login");
+        toast.success("Logged Out Successfully")
       })
       .catch((err) => console.error("Error during logout:", err));
   };
 
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
-      
+
       if (
         isDropdownOpen &&
         dropdownRef.current &&
@@ -69,7 +72,7 @@ const Navbar = () => {
     document.addEventListener("mousedown", checkIfClickedOutside);
 
     return () => {
-      
+
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [isDropdownOpen]);
@@ -80,11 +83,10 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-gray-900 shadow-md text-white"
-          : "bg-transparent text-black"
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
+        ? "bg-gray-900 shadow-md text-white"
+        : "bg-transparent text-black"
+        }`}
     >
       <div className="container mx-auto px-4 lg:px-10 py-6 flex items-center justify-between">
         <div
@@ -127,7 +129,7 @@ const Navbar = () => {
               For Students
             </button>
           )}
-          {(user?.userType === "Teacher" )|| (user?.userType === "Admin" ) && (
+          {(user?.userType === "Teacher") || (user?.userType === "Admin") && (
             <button
               onClick={() => navigate("/teacher/dashboard")}
               className="hover:text-blue-400 transition-all font-medium"
@@ -192,7 +194,7 @@ const Navbar = () => {
                     onClick={() => navigate("/students/my-learning")}
                   >
                     My Learning
-                  </button>) : null }
+                  </button>) : null}
 
                   <button
                     className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"

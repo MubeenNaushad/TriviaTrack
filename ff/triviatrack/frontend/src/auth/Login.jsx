@@ -5,6 +5,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useUser } from "../context/UserContext"
 import { FaGoogle, FaEnvelope, FaLock } from "react-icons/fa"
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -36,6 +37,8 @@ const Login = () => {
             profilePhoto: user.photoUrl || "https://via.placeholder.com/40",
           })
           navigate("/")
+          toast.success("Login Successful")
+
         } else if (res.data.Login && !res.data.isVerified) {
           setError("Please verify your email before logging in.")
         } else {

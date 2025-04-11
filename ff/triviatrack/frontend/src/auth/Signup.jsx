@@ -62,8 +62,9 @@ const Signup = () => {
           })
           alert("Verify your account before logging in.")
           navigate("/")
+          toast.success("Sign Up Successfull")
         } else {
-          alert("Signup failed")
+          toast.error("Sign Up Failed")
         }
       })
       .catch((err) => {
