@@ -55,6 +55,8 @@ import FinancialAidForm from "./Pages/admin/course/FinancialAid.jsx";
 import Chatbot from "./homecomponents/Chatbot.jsx";
 import FinancialAidTable from "./homecomponents/Dashboard/financialAidTable.jsx";
 import FinancialAidView from "./homecomponents/Dashboard/financialAidView.jsx";
+import QuizBuilder from "./homecomponents/Quiz/quiz-builder.jsx";
+
 
 const BannerData = {
   image: Img1,
@@ -138,6 +140,9 @@ const App = () => {
           <Route path="/room/:roomid" element={<Roompage />} />
           <Route path="/students/dashboard" element={<StudentDashboard />} />
           <Route path="/teacher/dashboard" element={<Dashboard />} />
+
+          <Route path="/generate-quiz" element={<QuizBuilder />} />
+
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/settings" element={<Setting />} />
           <Route path="/students/progresstrack" element={<ProgressTracker />} />

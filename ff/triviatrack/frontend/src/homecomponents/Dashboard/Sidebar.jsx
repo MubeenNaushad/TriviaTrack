@@ -9,7 +9,7 @@ import {
   BsListTask,
   BsFillGearFill
 } from 'react-icons/bs';
-import {useUser} from "@/context/UserContext.jsx";
+import { useUser } from "@/context/UserContext.jsx";
 
 
 const Sidebar = () => {
@@ -21,7 +21,7 @@ const Sidebar = () => {
         <BsBook className="inline-block mr-4" /> Teacher Dashboard
       </div>
       <ul className="space-y-5">
-      <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+        <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <Link to="/teacher/dashboard" className="flex items-center">
             <BsFillPeopleFill className="inline-block mr-2" /> Dashboard
           </Link>
@@ -42,26 +42,35 @@ const Sidebar = () => {
         </li>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <Link to="/enrolledstudents">
-          <BsListTask className="inline-block mr-2" /> Your Students
+            <BsListTask className="inline-block mr-2" /> Your Students
           </Link>
         </li>
         <>
-        {(user?.userType === "Student") &&
-        <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
-          <Link to="/financial-aid-applications">
-          <BsListTask className="inline-block mr-2" /> Financial Aid Applications
-          </Link>
-        </li>
-      }
+          {(user?.userType === "Student") &&
+            <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+              <Link to="/financial-aid-applications">
+                <BsListTask className="inline-block mr-2" /> Financial Aid Applications
+              </Link>
+            </li>
+          }
+        </>
+        <>
+          {(user?.userType === "Teacher") &&
+            <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+              <Link to="/generate-quiz">
+                <BsListTask className="inline-block mr-2" /> Generate Quiz
+              </Link>
+            </li>
+          }
         </>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <Link to="/leaderboard">
-          <BsListTask className="inline-block mr-2" /> Leaderboard
+            <BsListTask className="inline-block mr-2" /> Leaderboard
           </Link>
         </li>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <Link to="/settings">
-          <BsFillGearFill className="inline-block mr-2" /> Settings
+            <BsFillGearFill className="inline-block mr-2" /> Settings
           </Link>
         </li>
       </ul>
