@@ -57,7 +57,7 @@ import FinancialAidTable from "./homecomponents/Dashboard/financialAidTable.jsx"
 import FinancialAidView from "./homecomponents/Dashboard/financialAidView.jsx";
 import QuizBuilder from "./homecomponents/Quiz/quiz-builder.jsx";
 import courseAidTable from "./homecomponents/Dashboard/courseAidTable.jsx";
-
+import RecommendationSystem from "./homecomponents/Student_Dashboard/RecommendationSystem.jsx"
 const BannerData = {
   image: Img1,
   tag: "CUSTOMIZE WITH YOUR SCHEDULE",
@@ -149,6 +149,7 @@ const App = () => {
           <Route path="/students/progresstrack" element={<ProgressTracker />} />
 
           <Route path="/students/my-learning" element={<MyLearning />} />
+          <Route path="/recommendation-system" element={<RecommendationSystem />} />
           <Route
             path="/students/student-details/:studentId"
             element={<StudentProfile />}
