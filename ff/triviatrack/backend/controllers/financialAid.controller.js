@@ -1,5 +1,7 @@
 import {FinancialAid} from "../models/financialAid.model.js";
 import {Course} from "../models/course.model.js"
+import StudentModel from "../models/user.model.js";
+
 
 export const createFinancialAidApplication = async (req, res) => {
   try {
@@ -43,7 +45,7 @@ export const getCourseAidApps = async (req, res) => {
     const courseIds = TeacherCourses.map(course => course._id);
 
     const applications = await FinancialAid.find({ courseId: { $in: courseIds } }).sort({ submittedAt: -1 }).populate('courseId', 'courseTitle');
-    
+
     return res.status(200).json(applications);
   } catch (error) {
     console.error("Error fetching applications:", error);
@@ -82,6 +84,21 @@ export const updateFinancialAidApplication = async (req, res) => {
   
         if (!newApplication) {
             return res.status(404).json({ message: "Application not found." });
+        }
+
+        if(aidStatus === "approved") {
+          await StudentModel.findByIdAndUpdate(newApplication.studentId, {
+            $addToSet: { enrolledcourses: newApplication.courseId },
+
+          }, {
+            new: true
+          });
+
+          await Course.findByIdAndUpdate(newApplication.courseId, {
+            $addToSet: { enrolledStudents: newApplication.studentId },
+          }, {
+            new: true
+          });
         }
 
       return res.status(201).json({

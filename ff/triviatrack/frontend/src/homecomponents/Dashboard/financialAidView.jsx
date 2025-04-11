@@ -106,7 +106,7 @@ const FinancialAidView = () => {
           </div>
           <div>
             <strong>Course Title: </strong>
-            {application.courseId.courseTitle}
+            {application?.courseId?.courseTitle}
           </div>
           <div>
             <strong>Email: </strong>
@@ -180,10 +180,10 @@ const FinancialAidView = () => {
           </div>
         </CardContent> 
         <div className="text-center">
-          <Button className="mr-4" disabled={application.aidStatus === "approved" || "denied"} onClick={() => approveApp(application._id, "approved")}>
+          <Button className="mr-4" disabled={application.aidStatus !== "pending"} onClick={() => approveApp(application._id, "approved")}>
             Approve
           </Button>
-          <Button variant="destructive" className="mb-8" disabled={application.aidStatus === "approved" || "denied"} onClick={() => denyApp(application._id, "denied")}>
+          <Button variant="destructive" className="mb-8" disabled={application.aidStatus !== "pending"} onClick={() => denyApp(application._id, "denied")}>
             Deny
           </Button>
         </div>

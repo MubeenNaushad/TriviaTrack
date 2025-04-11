@@ -56,7 +56,7 @@ const FinancialAidTable = () => {
                 <TableHead>Email</TableHead>
                 <TableHead>Course Name</TableHead>
                 <TableHead>Employment Status</TableHead>
-                <TableHead>Annual Income</TableHead>
+                <TableHead>Aid Status</TableHead>
                 {/* <TableHead>Aid Reason</TableHead> */}
                 <TableHead>Submitted</TableHead>
                 <TableHead className="text-right">Action</TableHead>
@@ -71,7 +71,7 @@ const FinancialAidTable = () => {
                   <TableCell>{app.email}</TableCell>
                   <TableCell>{app?.courseId?.courseTitle}</TableCell>
                   <TableCell>{app.employmentStatus}</TableCell>
-                  <TableCell className="font-medium">${app.annualIncome}</TableCell>
+                  <TableCell className="font-medium">{app.aidStatus}</TableCell>
                   {/* <TableCell>{app.aidReason}</TableCell> */}
                   <TableCell>
                     {new Date(app.submittedAt).toLocaleString()}
