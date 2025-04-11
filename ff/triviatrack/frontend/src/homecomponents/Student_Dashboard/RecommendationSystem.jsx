@@ -6,7 +6,7 @@ import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import * as ProgressPrimitive from "@radix-ui/react-progress";
 import { ChevronDown, Home, BookOpen, Settings, MessageSquare, ArrowRight } from "lucide-react";
-import Sidebar from "../Dashboard/Sidebar";
+import StudentSidebar from "./StudentSidebar";
 
 // Utility function for class names
 const cn = (...classes) => classes.filter(Boolean).join(" ");
@@ -250,7 +250,7 @@ export default function LearningPlatform() {
     return (
 
         <div className="flex pt-[1.4rem] mt-6">
-            <Sidebar />
+            <StudentSidebar />
 
 
             {/* Main Content Area */}

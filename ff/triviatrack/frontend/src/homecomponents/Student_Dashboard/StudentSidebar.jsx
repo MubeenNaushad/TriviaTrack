@@ -10,6 +10,7 @@ import {
   BsFillGearFill
 } from 'react-icons/bs';
 import { CiPen } from "react-icons/ci";
+import { FaRobot } from 'react-icons/fa';
 
 
 const StudentSidebar = () => {
@@ -50,7 +51,7 @@ const StudentSidebar = () => {
         <li className=
           "flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
           <Link to="/recommendation-system">
-            <BsFillGearFill className="inline-block mr-2" /> Settings
+            <FaRobot className="inline-block mr-2" /> Recommendations
           </Link>
         </li>
       </ul>
