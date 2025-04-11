@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const FinancialAidSchema = new mongoose.Schema({
   studentId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
+  courseTitle: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },

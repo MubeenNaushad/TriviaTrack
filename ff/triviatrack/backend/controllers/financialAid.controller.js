@@ -1,5 +1,5 @@
 import {FinancialAid} from "../models/financialAid.model.js";
-
+import {Course} from "../models/course.model.js"
 
 export const createFinancialAidApplication = async (req, res) => {
   try {
@@ -26,7 +26,24 @@ export const createFinancialAidApplication = async (req, res) => {
 
 export const getAllFinancialAidApplications = async (req, res) => {
   try {
-    const applications = await FinancialAid.find().sort({ submittedAt: -1 });
+    const applications = await FinancialAid.find().sort({ submittedAt: -1 }).populate('courseId', 'courseTitle');
+    return res.status(200).json(applications);
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const getCourseAidApps = async (req, res) => {
+  try {
+    const teacherId = req.id;
+
+    const TeacherCourses = await Course.find({ creator: teacherId }).select('_id');
+
+    const courseIds = TeacherCourses.map(course => course._id);
+
+    const applications = await FinancialAid.find({ courseId: { $in: courseIds } }).sort({ submittedAt: -1 }).populate('courseId', 'courseTitle');
+    
     return res.status(200).json(applications);
   } catch (error) {
     console.error("Error fetching applications:", error);
@@ -37,13 +54,14 @@ export const getAllFinancialAidApplications = async (req, res) => {
 export const getSpecificAid = async (req, res) => {
     try {
         const {appId} = req.params;
-      const application = await FinancialAid.findById(appId);
+      const application = await FinancialAid.findById(appId).populate('courseId', 'courseTitle');
       return res.status(200).json(application);
     } catch (error) {
       console.error("Error fetching applications:", error);
       return res.status(500).json({ message: "Internal server error" });
     }
   };
+
 
 export const updateFinancialAidApplication = async (req, res) => {
     try {

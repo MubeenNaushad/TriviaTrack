@@ -28,6 +28,7 @@ const FinancialAidView = () => {
           }
         );
         setApplication(response.data);
+        console.log("datt", response.data);
       } catch (err) {
         console.error("Error fetching application details:", err);
         setError("Error fetching application details.");
@@ -40,6 +41,24 @@ const FinancialAidView = () => {
   }, [appId]);
 
   const approveApp = async (appId, newStatus) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_APP_BASEURL}/financial-aid/update-aid/${appId}`,
+        {
+          aidStatus: newStatus,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      setApplication(response.data);
+    } catch (err) {
+      console.error("Error updating application details:", err);
+      setError("Error updating application details.");
+    }
+  };
+
+  const denyApp = async (appId, newStatus) => {
     try {
       const response = await axios.put(
         `${import.meta.env.VITE_APP_BASEURL}/financial-aid/update-aid/${appId}`,
@@ -84,6 +103,10 @@ const FinancialAidView = () => {
           <div>
             <strong>Name: </strong>
             {application.firstName} {application.lastName}
+          </div>
+          <div>
+            <strong>Course Title: </strong>
+            {application.courseId.courseTitle}
           </div>
           <div>
             <strong>Email: </strong>
@@ -149,18 +172,18 @@ const FinancialAidView = () => {
           </div>
           <div>
             <strong>Status: </strong>
-            {application.status}
+            {application.aidStatus}
           </div>
           <div>
             <strong>Submitted: </strong>
             {new Date(application.submittedAt).toLocaleString()}
           </div>
-        </CardContent>
+        </CardContent> 
         <div className="text-center">
-          <Button className="mr-4" onClick={() => approveApp(application._id, "approved")}>
+          <Button className="mr-4" disabled={application.aidStatus === "approved" || "denied"} onClick={() => approveApp(application._id, "approved")}>
             Approve
           </Button>
-          <Button variant="destructive" className="mb-8">
+          <Button variant="destructive" className="mb-8" disabled={application.aidStatus === "approved" || "denied"} onClick={() => denyApp(application._id, "denied")}>
             Deny
           </Button>
         </div>

@@ -16,7 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { useUser } from "@/context/UserContext";
 import axios from "axios";
 
-const FinancialAidTable = () => {
+const courseAidTable = () => {
   const [applications, setApplications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -25,8 +25,7 @@ const FinancialAidTable = () => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const backendURL = import.meta.env.VITE_APP_BASEURL || "http://localhost:5000";
-        const response = await axios.get(`${backendURL}/financial-aid/get-all-aids`, {
+        const response = await axios.get(`${import.meta.env.VITE_APP_BASEURL}/financial-aid/get-course-aid-apps`, {
           withCredentials: true,
         });
         setApplications(response.data);
@@ -96,4 +95,4 @@ const FinancialAidTable = () => {
   );
 };
 
-export default FinancialAidTable;
+export default courseAidTable;

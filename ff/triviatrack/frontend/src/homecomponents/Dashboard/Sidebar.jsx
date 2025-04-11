@@ -46,10 +46,19 @@ const Sidebar = () => {
           </Link>
         </li>
         <>
-          {(user?.userType === "Student") &&
+          {(user?.userType === "Admin") &&
             <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
               <Link to="/financial-aid-applications">
                 <BsListTask className="inline-block mr-2" /> Financial Aid Applications
+              </Link>
+            </li>
+          }
+        </>
+        <>
+          {(user?.userType === "Teacher") &&
+            <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
+              <Link to="/course-financial-aid-applications">
+                <BsListTask className="inline-block mr-2" /> Course Financial Aid Applications
               </Link>
             </li>
           }

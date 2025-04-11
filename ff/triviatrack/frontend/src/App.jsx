@@ -56,7 +56,7 @@ import Chatbot from "./homecomponents/Chatbot.jsx";
 import FinancialAidTable from "./homecomponents/Dashboard/financialAidTable.jsx";
 import FinancialAidView from "./homecomponents/Dashboard/financialAidView.jsx";
 import QuizBuilder from "./homecomponents/Quiz/quiz-builder.jsx";
-
+import courseAidTable from "./homecomponents/Dashboard/courseAidTable.jsx";
 
 const BannerData = {
   image: Img1,
@@ -130,6 +130,7 @@ const App = () => {
             path="/financial-aid/:courseId"
             element={<FinancialAidForm />}
           />
+          <Route path="/course-financial-aid-applications" element={<courseAidTable />} />
           <Route path="/financial-aid-applications" element={<FinancialAidTable />} />
           <Route path="/financial-aid-view/:appId" element={<FinancialAidView />} />
           <Route path="/posts/:postId" element={<PostPage />} />

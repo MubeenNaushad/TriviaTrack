@@ -2,6 +2,7 @@ import express from "express";
 import {
   createFinancialAidApplication,
   getAllFinancialAidApplications,
+  getCourseAidApps,
   getSpecificAid,
   updateFinancialAidApplication,
 } from "../controllers/financialAid.controller.js";
@@ -17,6 +18,8 @@ router.put(
 );
 
 router.get("/get-all-aids", getAllFinancialAidApplications);
+
+router.get("/get-course-aid-apps", verifyUserMiddleware, getCourseAidApps);
 
 router.get("/get-specific-aid/:appId", getSpecificAid);
 
