@@ -22,7 +22,11 @@ const FinancialAidSchema = new mongoose.Schema({
   aidReason: { type: String },
   agreeToTerms: { type: Boolean, required: true },
   submittedAt: { type: Date, default: Date.now },
-  aidStatus: {type: String, enum: ["pending", "approved", "denied"], default: "pending"},
+  aidStatus: {
+    type: String,
+    enum: ["pending", "approved", "denied"],
+    default: "pending",
+  },
 });
 
 export const FinancialAid = mongoose.model("FinancialAid", FinancialAidSchema);

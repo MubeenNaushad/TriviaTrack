@@ -1,20 +1,16 @@
 import { useParams } from "react-router-dom";
 import {
-  FiChevronLeft, 
-  FiMessageSquare, 
-  FiUsers, 
-  FiSearch, 
-  FiGlobe, 
-  FiBookOpen, 
+  FiChevronLeft,
+  FiMessageSquare,
+  FiUsers,
+  FiSearch,
+  FiGlobe,
+  FiBookOpen,
   FiX,
 } from "react-icons/fi";
-import {
-  FaThumbsUp, 
-  FaCode, 
-  FaGraduationCap, 
-} from "react-icons/fa";
+import { FaThumbsUp, FaCode, FaGraduationCap } from "react-icons/fa";
 import { GiGamepad } from "react-icons/gi";
-import { MdPalette } from "react-icons/md"; 
+import { MdPalette } from "react-icons/md";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "../components/ui/button";
@@ -27,34 +23,34 @@ export default function CategoryPage() {
   const [category, setCategory] = useState([]);
   const [categoryPosts, setcategoryPosts] = useState([]);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [postTitle, setPostTitle] = useState("")
-  const [postContent, setPostContent] = useState("")
-  const [postDescription, setPostDescription] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [postTitle, setPostTitle] = useState("");
+  const [postContent, setPostContent] = useState("");
+  const [postDescription, setPostDescription] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-
-    const icons  = {
-      FaCode: <FaCode className="h-5 w-5 text-blue-500" />,
-      FiBookOpen: <FiBookOpen className="h-5 w-5 text-green-500" />,
-      FaGraduationCap: <FaGraduationCap className="h-5 w-5 text-purple-500" />,
-      GiGamepad: <GiGamepad className="h-5 w-5 text-red-500" />,
-      MdPalette: <MdPalette className="h-5 w-5 text-orange-500" />,
-      FiGlobe: <FiGlobe className="h-5 w-5 text-teal-500" />,
-    };
+  const icons = {
+    FaCode: <FaCode className="h-5 w-5 text-blue-500" />,
+    FiBookOpen: <FiBookOpen className="h-5 w-5 text-green-500" />,
+    FaGraduationCap: <FaGraduationCap className="h-5 w-5 text-purple-500" />,
+    GiGamepad: <GiGamepad className="h-5 w-5 text-red-500" />,
+    MdPalette: <MdPalette className="h-5 w-5 text-orange-500" />,
+    FiGlobe: <FiGlobe className="h-5 w-5 text-teal-500" />,
+  };
 
   useEffect(() => {
     const getCategoryPosts = async () => {
       try {
         console.log("gg");
-        const response = await axios.get(`${import.meta.env.VITE_APP_BASEURL}/forum/categories/${slug}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_APP_BASEURL}/forum/categories/${slug}`
+        );
         setcategoryPosts(response.data.CategoryPosts);
         setCategory(response.data.category);
         console.log("catposts", response.data);
       } catch (error) {
         console.error("Error fetching category posts:", error);
-
       }
-    }
+    };
 
     getCategoryPosts();
   }, [slug]);
@@ -62,17 +58,20 @@ export default function CategoryPage() {
   const handleCreatePost = async (e) => {
     e.preventDefault();
 
-    if(!postTitle.trim() || !postDescription.trim() || !postContent.trim()) {
+    if (!postTitle.trim() || !postDescription.trim() || !postContent.trim()) {
       toast.error("Please fill in all fields");
       return;
     }
     try {
-      const response = await axios.post(`${import.meta.env.VITE_APP_BASEURL}/forum/create-post`, {
-        title: postTitle,
-        description: postDescription,
-        content: postContent,
-        category: category._id,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_APP_BASEURL}/forum/create-post`,
+        {
+          title: postTitle,
+          description: postDescription,
+          content: postContent,
+          category: category._id,
+        }
+      );
       console.log("Post created successfully:", response.data);
       setIsCreateModalOpen(false);
       setPostTitle("");
@@ -80,13 +79,15 @@ export default function CategoryPage() {
       setPostDescription("");
       // getCategoryPosts();
 
-      const newres = await axios.get(`${import.meta.env.VITE_APP_BASEURL}/forum/categories/${slug}`)
-      setcategoryPosts(newres.data.CategoryPosts)
+      const newres = await axios.get(
+        `${import.meta.env.VITE_APP_BASEURL}/forum/categories/${slug}`
+      );
+      setcategoryPosts(newres.data.CategoryPosts);
       setIsSubmitting(false);
     } catch (error) {
       console.error("Error creating post:", error);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -111,24 +112,28 @@ export default function CategoryPage() {
                 <h1 className="text-3xl font-bold tracking-tight">
                   {category.name}
                 </h1>
-                
+
                 <p className="mt-1 text-gray-500 dark:text-gray-400">
                   {category.description}
                 </p>
               </div>
               <Button
-                    onClick={() => setIsCreateModalOpen(true)}
-                    className="flex ml-auto items-right gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md "
-                  >
-                    <FiPlus className="h-4 w-4" />
-                    Create Post
-                  </Button>
+                onClick={() => setIsCreateModalOpen(true)}
+                className="flex ml-auto items-right gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md "
+              >
+                <FiPlus className="h-4 w-4" />
+                Create Post
+              </Button>
             </div>
 
             <div className="space-y-4">
               {categoryPosts.length > 0 ? (
                 categoryPosts.map((post) => (
-                  <a key={post._id} href={`/forum/posts/${post._id}`} className="block">
+                  <a
+                    key={post._id}
+                    href={`/forum/posts/${post._id}`}
+                    className="block"
+                  >
                     <div className="rounded-lg border border-gray-200 bg-white p-4 transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
                       <div className="mb-2 flex items-start justify-between">
                         <h3 className="text-lg font-semibold">{post.title}</h3>
@@ -301,7 +306,10 @@ export default function CategoryPage() {
               </div>
 
               <div>
-                <label htmlFor="post-description" className="block mb-1 font-medium">
+                <label
+                  htmlFor="post-description"
+                  className="block mb-1 font-medium"
+                >
                   Description
                 </label>
                 <textarea
@@ -316,7 +324,10 @@ export default function CategoryPage() {
               </div>
 
               <div>
-                <label htmlFor="post-content" className="block mb-1 font-medium">
+                <label
+                  htmlFor="post-content"
+                  className="block mb-1 font-medium"
+                >
                   Content
                 </label>
                 <textarea
@@ -434,4 +445,3 @@ const users = [
     avatar: "/placeholder.svg?height=40&width=40",
   },
 ];
-

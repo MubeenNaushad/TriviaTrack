@@ -17,7 +17,7 @@ import { GiGamepad } from "react-icons/gi";
 import axios from "axios";
 
 export default function PostPage() {
-  const {postId} = useParams();
+  const { postId } = useParams();
 
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -28,12 +28,13 @@ export default function PostPage() {
   const [category, setCategory] = useState("");
   const [newComment, setNewComment] = useState("");
 
-
   useEffect(() => {
     const getPost = async () => {
-      try{
+      try {
         console.log("g", postId);
-        const response = await axios.get(`${import.meta.env.VITE_APP_BASEURL}/forum/posts/${postId}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_APP_BASEURL}/forum/posts/${postId}`
+        );
         const data = response.data;
         console.log("data", data);
         setPost(data.post);
@@ -43,7 +44,7 @@ export default function PostPage() {
       } catch (error) {
         console.error("Error fetching posts: ", error);
       }
-    }
+    };
 
     getPost();
   }, []);
@@ -61,11 +62,15 @@ export default function PostPage() {
     e.preventDefault();
     if (!newComment.trim()) return;
 
-    const comment = await axios.post(`${import.meta.env.VITE_APP_BASEURL}/forum/posts/${postId}/add-comment`, {
-      content: newComment,
-    }, {
-      withCredentials: true,
-    });
+    const comment = await axios.post(
+      `${import.meta.env.VITE_APP_BASEURL}/forum/posts/${postId}/add-comment`,
+      {
+        content: newComment,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
     const addedComment = comment.data;
     setComments([addedComment, ...comments]);
@@ -114,11 +119,12 @@ export default function PostPage() {
           <div className="p-6">
             <h1 className="mb-4 text-2xl font-bold">{post.title}</h1>
             <div className="prose max-w-none dark:prose-invert">
-              <p className="italic font-bold">Description: {post.description}</p>
+              <p className="italic font-bold">
+                Description: {post.description}
+              </p>
               <p className="mt-4">Content: {post.content}</p>
             </div>
           </div>
-          
 
           <div className="flex justify-between border-t border-gray-200 p-4 dark:border-gray-700">
             <div className="flex gap-2">
@@ -243,4 +249,3 @@ export default function PostPage() {
     </div>
   );
 }
-

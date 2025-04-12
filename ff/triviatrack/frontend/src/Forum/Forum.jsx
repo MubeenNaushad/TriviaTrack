@@ -1,28 +1,22 @@
 import {
-  FiChevronLeft, 
-  FiMessageSquare, 
-  FiUsers, 
-  FiSearch, 
-  FiGlobe, 
-  FiBookOpen, 
+  FiChevronLeft,
+  FiMessageSquare,
+  FiUsers,
+  FiSearch,
+  FiGlobe,
+  FiBookOpen,
 } from "react-icons/fi";
-import {
-  FaThumbsUp, 
-  FaCode, 
-  FaGraduationCap, 
-} from "react-icons/fa";
+import { FaThumbsUp, FaCode, FaGraduationCap } from "react-icons/fa";
 import { GiGamepad } from "react-icons/gi";
-import { MdPalette } from "react-icons/md"; 
+import { MdPalette } from "react-icons/md";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 export default function HomePage() {
-
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  const icons  = {
+  const icons = {
     FaCode: <FaCode className="h-5 w-5 text-blue-500" />,
     FiBookOpen: <FiBookOpen className="h-5 w-5 text-green-500" />,
     FaGraduationCap: <FaGraduationCap className="h-5 w-5 text-purple-500" />,
@@ -32,29 +26,31 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-
-    const getCategories = async() => {
-      try{
-        const categories = await axios.get(`${import.meta.env.VITE_APP_BASEURL}/forum/all-categories`);
+    const getCategories = async () => {
+      try {
+        const categories = await axios.get(
+          `${import.meta.env.VITE_APP_BASEURL}/forum/all-categories`
+        );
         setCategories(categories.data);
       } catch (error) {
         console.log("Error fetching categories: ", error);
       }
-    }
+    };
 
     const getAllPosts = async () => {
       try {
-        const posts = await axios.get(`${import.meta.env.VITE_APP_BASEURL}/forum/all-posts`);
+        const posts = await axios.get(
+          `${import.meta.env.VITE_APP_BASEURL}/forum/all-posts`
+        );
         setPosts(posts.data);
       } catch (error) {
-        console.log("Error fetching posts:", error)
+        console.log("Error fetching posts:", error);
       }
-    }
+    };
 
     getCategories();
     getAllPosts();
-
-  }, [])
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -154,7 +150,7 @@ export default function HomePage() {
                         <div className="h-6 w-6 overflow-hidden rounded-full bg-blue-100">
                           <img
                             src={post.author?.photoUrl || "/placeholder.svg"}
-                            alt={post.author?.name || "ff" }
+                            alt={post.author?.name || "ff"}
                           />
                         </div>
                         <span className="text-sm text-gray-500 dark:text-gray-400">
@@ -282,9 +278,6 @@ export default function HomePage() {
   );
 }
 
-
-
-
 const activeUsers = [
   {
     id: "active-1",
@@ -305,7 +298,6 @@ const activeUsers = [
     postCount: 237,
   },
 ];
-
 
 const trendingTopics = [
   {

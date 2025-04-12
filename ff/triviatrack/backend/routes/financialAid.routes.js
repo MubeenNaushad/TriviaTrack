@@ -12,10 +12,7 @@ const router = express.Router();
 
 router.post("/sendaidapp", verifyUserMiddleware, createFinancialAidApplication);
 
-router.put(
-  "/update-aid/:appId",
-  updateFinancialAidApplication
-);
+router.put("/update-aid/:appId", updateFinancialAidApplication);
 
 router.get("/get-all-aids", getAllFinancialAidApplications);
 
