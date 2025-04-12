@@ -1,20 +1,92 @@
 import { useParams } from "react-router-dom";
 import {
-  FiChevronLeft,
-  FiMessageSquare,
-  FiSearch,
-  FiBookOpen,
+  FiChevronLeft, 
+  FiMessageSquare, 
+  FiUsers, 
+  FiSearch, 
+  FiGlobe, 
+  FiBookOpen, 
+  FiX,
 } from "react-icons/fi";
-import { FaThumbsUp, FaCode, FaGraduationCap } from "react-icons/fa";
+import {
+  FaThumbsUp, 
+  FaCode, 
+  FaGraduationCap, 
+} from "react-icons/fa";
 import { GiGamepad } from "react-icons/gi";
+import { MdPalette } from "react-icons/md"; 
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Button } from "../components/ui/button";
+import { FiPlus } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 export default function CategoryPage() {
   const params = useParams();
   const slug = params?.slug;
-  const category = categories.find((cat) => cat.slug === slug) || categories[0];
-  const categoryPosts = posts.filter(
-    (post) => post.category.id === category.id
-  );
+  const [category, setCategory] = useState([]);
+  const [categoryPosts, setcategoryPosts] = useState([]);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [postTitle, setPostTitle] = useState("")
+  const [postContent, setPostContent] = useState("")
+  const [postDescription, setPostDescription] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+
+    const icons  = {
+      FaCode: <FaCode className="h-5 w-5 text-blue-500" />,
+      FiBookOpen: <FiBookOpen className="h-5 w-5 text-green-500" />,
+      FaGraduationCap: <FaGraduationCap className="h-5 w-5 text-purple-500" />,
+      GiGamepad: <GiGamepad className="h-5 w-5 text-red-500" />,
+      MdPalette: <MdPalette className="h-5 w-5 text-orange-500" />,
+      FiGlobe: <FiGlobe className="h-5 w-5 text-teal-500" />,
+    };
+
+  useEffect(() => {
+    const getCategoryPosts = async () => {
+      try {
+        console.log("gg");
+        const response = await axios.get(`${import.meta.env.VITE_APP_BASEURL}/forum/categories/${slug}`);
+        setcategoryPosts(response.data.CategoryPosts);
+        setCategory(response.data.category);
+        console.log("catposts", response.data);
+      } catch (error) {
+        console.error("Error fetching category posts:", error);
+
+      }
+    }
+
+    getCategoryPosts();
+  }, [slug]);
+
+  const handleCreatePost = async (e) => {
+    e.preventDefault();
+
+    if(!postTitle.trim() || !postDescription.trim() || !postContent.trim()) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_APP_BASEURL}/forum/create-post`, {
+        title: postTitle,
+        description: postDescription,
+        content: postContent,
+        category: category._id,
+      });
+      console.log("Post created successfully:", response.data);
+      setIsCreateModalOpen(false);
+      setPostTitle("");
+      setPostContent("");
+      setPostDescription("");
+      // getCategoryPosts();
+
+      const newres = await axios.get(`${import.meta.env.VITE_APP_BASEURL}/forum/categories/${slug}`)
+      setcategoryPosts(newres.data.CategoryPosts)
+      setIsSubmitting(false);
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -33,22 +105,30 @@ export default function CategoryPage() {
               <div
                 className={`flex h-12 w-12 items-center justify-center rounded-lg ${category.bgColor}`}
               >
-                {category.icon}
+                {icons[category.icon]}
               </div>
               <div>
                 <h1 className="text-3xl font-bold tracking-tight">
                   {category.name}
                 </h1>
+                
                 <p className="mt-1 text-gray-500 dark:text-gray-400">
                   {category.description}
                 </p>
               </div>
+              <Button
+                    onClick={() => setIsCreateModalOpen(true)}
+                    className="flex ml-auto items-right gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md "
+                  >
+                    <FiPlus className="h-4 w-4" />
+                    Create Post
+                  </Button>
             </div>
 
             <div className="space-y-4">
               {categoryPosts.length > 0 ? (
                 categoryPosts.map((post) => (
-                  <a key={post.id} href={`/posts/${post.id}`} className="block">
+                  <a key={post._id} href={`/forum/posts/${post._id}`} className="block">
                     <div className="rounded-lg border border-gray-200 bg-white p-4 transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
                       <div className="mb-2 flex items-start justify-between">
                         <h3 className="text-lg font-semibold">{post.title}</h3>
@@ -59,18 +139,18 @@ export default function CategoryPage() {
                         )}
                       </div>
                       <p className="mb-4 text-gray-500 dark:text-gray-400">
-                        {post.excerpt}
+                        {post.description}
                       </p>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <div className="h-6 w-6 overflow-hidden rounded-full bg-blue-100">
                             <img
-                              src={post.author.avatar || "/placeholder.svg"}
-                              alt={post.author.name}
+                              src={post.author?.photoUrl || "/placeholder.svg"}
+                              alt={post.author?.name || "Unknwon"}
                             />
                           </div>
                           <span className="text-sm text-gray-500 dark:text-gray-400">
-                            {post.author.name}
+                            {post.author?.name || "Unknown"}
                           </span>
                           <span className="text-xs text-gray-400 dark:text-gray-500">
                             {post.createdAt}
@@ -192,6 +272,85 @@ export default function CategoryPage() {
           </div>
         </div>
       </div>
+      {isCreateModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+          <div className="w-full max-w-2xl rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-xl font-bold">Create New Post</h2>
+              <button
+                onClick={() => setIsCreateModalOpen(false)}
+                className="rounded-full p-1 hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <FiX className="h-5 w-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleCreatePost} className="space-y-4">
+              <div>
+                <label htmlFor="post-title" className="block mb-1 font-medium">
+                  Title
+                </label>
+                <input
+                  id="post-title"
+                  value={postTitle}
+                  onChange={(e) => setPostTitle(e.target.value)}
+                  placeholder="Enter post title"
+                  required
+                  className="w-full rounded-md border border-gray-200 p-2 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="post-description" className="block mb-1 font-medium">
+                  Description
+                </label>
+                <textarea
+                  id="post-description"
+                  value={postDescription}
+                  onChange={(e) => setPostDescription(e.target.value)}
+                  placeholder="Write your post description here..."
+                  required
+                  rows={3}
+                  className="w-full rounded-md border border-gray-200 p-2 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="post-content" className="block mb-1 font-medium">
+                  Content
+                </label>
+                <textarea
+                  id="post-content"
+                  value={postContent}
+                  onChange={(e) => setPostContent(e.target.value)}
+                  placeholder="Write your post content here..."
+                  required
+                  rows={8}
+                  className="w-full rounded-md border border-gray-200 p-2 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                />
+              </div>
+
+              <div className="flex justify-end gap-2 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setIsCreateModalOpen(false)}
+                  disabled={isSubmitting}
+                  className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                >
+                  {isSubmitting ? "Creating..." : "Create Post"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -276,52 +435,3 @@ const users = [
   },
 ];
 
-const posts = [
-  {
-    id: "post-1",
-    title: "Getting started with React: A beginner's guide",
-    excerpt: "Learn the basics of React and how to build your first component",
-    author: users[0],
-    category: categories[0],
-    createdAt: "2 days ago",
-    views: 1245,
-    replies: 32,
-    likes: 87,
-    isPinned: true,
-  },
-  {
-    id: "post-2",
-    title: "Understanding calculus: The basics of derivatives",
-    excerpt: "A simple explanation of derivatives and their applications",
-    author: users[1],
-    category: categories[1],
-    createdAt: "5 days ago",
-    views: 876,
-    replies: 18,
-    likes: 45,
-  },
-  {
-    id: "post-3",
-    title: "The theory of relativity explained simply",
-    excerpt:
-      "Breaking down Einstein's famous theory into understandable concepts",
-    author: users[2],
-    category: categories[2],
-    createdAt: "1 week ago",
-    views: 1532,
-    replies: 27,
-    likes: 103,
-    isEdited: true,
-  },
-  {
-    id: "post-4",
-    title: "Optimizing game performance: Tips and tricks",
-    excerpt: "Learn how to improve your game's performance and user experience",
-    author: users[3],
-    category: categories[3],
-    createdAt: "3 days ago",
-    views: 945,
-    replies: 21,
-    likes: 67,
-  },
-];

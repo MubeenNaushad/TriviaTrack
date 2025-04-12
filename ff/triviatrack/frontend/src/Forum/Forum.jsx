@@ -22,6 +22,15 @@ export default function HomePage() {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const icons  = {
+    FaCode: <FaCode className="h-5 w-5 text-blue-500" />,
+    FiBookOpen: <FiBookOpen className="h-5 w-5 text-green-500" />,
+    FaGraduationCap: <FaGraduationCap className="h-5 w-5 text-purple-500" />,
+    GiGamepad: <GiGamepad className="h-5 w-5 text-red-500" />,
+    MdPalette: <MdPalette className="h-5 w-5 text-orange-500" />,
+    FiGlobe: <FiGlobe className="h-5 w-5 text-teal-500" />,
+  };
+
   useEffect(() => {
 
     const getCategories = async() => {
@@ -97,7 +106,7 @@ export default function HomePage() {
               {categories.map((category) => (
                 <a
                   key={category.id}
-                  href={`/categories/${category.slug}`}
+                  href={`/forum/categories/${category.slug}`}
                   className="block h-full"
                 >
                   <div className="h-full rounded-lg border border-gray-200 bg-white p-6 transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
@@ -105,7 +114,7 @@ export default function HomePage() {
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-full ${category.bgColor}`}
                       >
-                        {category.icon}
+                        {icons[category.icon]}
                       </div>
                       <h3 className="text-xl font-semibold">{category.name}</h3>
                     </div>
@@ -127,7 +136,7 @@ export default function HomePage() {
             </h2>
             <div className="space-y-4">
               {posts.map((post) => (
-                <a key={post.id} href={`/posts/${post.id}`} className="block">
+                <a key={post.id} href={`/posts/${post._id}`} className="block">
                   <div className="rounded-lg border border-gray-200 bg-white p-4 transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
                     <div className="mb-2 flex items-start justify-between">
                       <h3 className="text-lg font-semibold">{post.title}</h3>
@@ -138,18 +147,18 @@ export default function HomePage() {
                       )}
                     </div>
                     <p className="mb-4 text-gray-500 dark:text-gray-400">
-                      {post.excerpt}
+                      {post.description}
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="h-6 w-6 overflow-hidden rounded-full bg-blue-100">
                           <img
-                            src={post.author.avatar || "/placeholder.svg"}
-                            alt={post.author.name}
+                            src={post.author?.photoUrl || "/placeholder.svg"}
+                            alt={post.author?.name || "ff" }
                           />
                         </div>
                         <span className="text-sm text-gray-500 dark:text-gray-400">
-                          {post.author.name}
+                          {post.author?.name || "Unknown"}
                         </span>
                         <span className="text-xs text-gray-400 dark:text-gray-500">
                           {post.createdAt}
@@ -274,30 +283,7 @@ export default function HomePage() {
 }
 
 
-const users = [
-  {
-    id: "user-1",
-    name: "Alex Johnson",
-    avatar: "/placeholder.svg?height=40&width=40",
-    badge: "Moderator",
-  },
-  {
-    id: "user-2",
-    name: "Sam Wilson",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "user-3",
-    name: "Taylor Smith",
-    avatar: "/placeholder.svg?height=40&width=40",
-    badge: "Top Contributor",
-  },
-  {
-    id: "user-4",
-    name: "Jordan Lee",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-];
+
 
 const activeUsers = [
   {

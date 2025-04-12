@@ -128,7 +128,7 @@ const App = () => {
             element={<CourseDetail />}
           />
           <Route path="/forum" element={<Forum />} />
-          <Route path="/categories/:category" element={<CategoryPage />} />
+          <Route path="/forum/categories/:slug" element={<CategoryPage />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route
             path="/financial-aid/:courseId"
@@ -138,7 +138,7 @@ const App = () => {
           <Route path="/course-financial-aid-applications" element={<courseAidTable />} />
           <Route path="/financial-aid-applications" element={<FinancialAidTable />} />
           <Route path="/financial-aid-view/:appId" element={<FinancialAidView />} />
-          <Route path="/posts/:postId" element={<PostPage />} />
+          <Route path="/forum/posts/:postId" element={<PostPage />} />
           <Route path="/course/search" element={<SearchPage />} />
           <Route path="/students/signup" element={<SignUp />} />
           <Route path="/students/login" element={<Login />} />

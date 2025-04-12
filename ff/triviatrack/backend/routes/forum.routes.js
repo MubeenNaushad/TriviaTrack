@@ -1,5 +1,6 @@
 import express from "express";
-import { getAllCategories, getAllPosts, getPostsByCategory } from "../controllers/forum.controller.js";
+import { AddCommentToPost, createPost, getAllCategories, getAllPosts, getPostbyId, getPostsByCategory } from "../controllers/forum.controller.js";
+import { verifyUserMiddleware } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
@@ -7,6 +8,12 @@ router.get("/all-posts", getAllPosts);
 
 router.get("/all-categories", getAllCategories);
 
-router.get("/posts-by-category/:slug", getPostsByCategory);
+router.get("/categories/:slug", getPostsByCategory);
+
+router.post("/create-post", verifyUserMiddleware ,createPost);
+
+router.get("/posts/:postId", getPostbyId);
+
+router.post("/posts/:postId/add-comment", verifyUserMiddleware, AddCommentToPost);
 
 export default router;
