@@ -82,12 +82,10 @@ export const updateFinancialAidApplication = async (req, res) => {
     const allowedStatuses = ["pending", "approved", "denied"];
 
     if (!allowedStatuses.includes(aidStatus)) {
-      return res
-        .status(400)
-        .json({
-          message:
-            "Invalid status value. Allowed values are 'pending', 'approved', or 'denied'.",
-        });
+      return res.status(400).json({
+        message:
+          "Invalid status value. Allowed values are 'pending', 'approved', or 'denied'.",
+      });
     }
 
     const newApplication = await FinancialAid.findByIdAndUpdate(

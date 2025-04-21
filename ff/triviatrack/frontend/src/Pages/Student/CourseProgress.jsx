@@ -3,14 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { CheckCircle, CheckCircle2, CirclePlay } from "lucide-react";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { MdQuiz } from "react-icons/md";
 
 const CourseProgress = () => {
   axios.defaults.withCredentials = true;
 
   const params = useParams();
   const { courseId } = params;
+  const navigate = useNavigate();
 
   const [courseDetails, setCourseDetails] = useState({
     categories: [],
@@ -67,7 +69,7 @@ const CourseProgress = () => {
       console.log("newww", updatedProg.data.CheckProgress);
     } catch (error) {
       console.error("Failed to update lecture progress", error);
-    } 
+    }
   };
 
   const completeLectureProgress = async (lectureId) => {
@@ -148,7 +150,7 @@ const CourseProgress = () => {
             src={currentLecture.videoUrl}
             controls
             className="w-full h-auto md:rounded-lg"
-//            onPlay={() => updateLectureProgress(currentLecture._id)}
+            //            onPlay={() => updateLectureProgress(currentLecture._id)}
             onEnded={() => completeLectureProgress(currentLecture._id)}
           />
           <div className="mt-2">
@@ -196,6 +198,27 @@ const CourseProgress = () => {
                 </CardContent>
               </Card>
             ))}
+
+            <Card
+              className="mb-3 hover:cursor-pointer transition transform"
+              onClick={() => navigate(`/quiz/${courseId}`)}
+            >
+              <CardContent className="flex items-center justify-between p-4">
+                <div className="flex items-center">
+                  <MdQuiz size={24} className="text-gray-500 mr-2" />
+                  <div>
+                    <CardTitle className="text-lg font-medium">Quiz</CardTitle>
+                  </div>
+                </div>
+
+                <Badge
+                  variant={"outline"}
+                  className="bg-green-200 text-green-600"
+                >
+                  Passed
+                </Badge>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

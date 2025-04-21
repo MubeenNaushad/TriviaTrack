@@ -41,7 +41,6 @@ export function EnrolledStudents() {
     <div className="flex pt-[2.4rem] mt-10">
       <Sidebar />
       <div className="flex-1 p-10 ">
-        
         <Table className="mt-6">
           <TableHeader>
             <TableRow>
@@ -51,17 +50,25 @@ export function EnrolledStudents() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {courses.filter(course => course?.creator?.email === user?.email).map(course => (
-              course.enrolledStudents.map(student => (
-                <TableRow key={student._id}>
-                  <TableCell>{student.name}</TableCell>
-                  <TableCell>{course.courseTitle}</TableCell>
-                  <TableCell>
-                    <Button onClick={() => navigate(`/students/student-details/${student._id}`)}>View Profile</Button>
-                  </TableCell>
-                </TableRow>
-              ))
-            ))}
+            {courses
+              .filter((course) => course?.creator?.email === user?.email)
+              .map((course) =>
+                course.enrolledStudents.map((student) => (
+                  <TableRow key={student._id}>
+                    <TableCell>{student.name}</TableCell>
+                    <TableCell>{course.courseTitle}</TableCell>
+                    <TableCell>
+                      <Button
+                        onClick={() =>
+                          navigate(`/students/student-details/${student._id}`)
+                        }
+                      >
+                        View Profile
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
           </TableBody>
         </Table>
       </div>

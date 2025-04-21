@@ -1,16 +1,15 @@
-import React from 'react';
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import {
   BsBook,
   BsClipboardCheck,
   BsFillBarChartFill,
   BsFillPeopleFill,
   BsListTask,
-  BsFillGearFill
-} from 'react-icons/bs';
+  BsFillGearFill,
+} from "react-icons/bs";
 import { useUser } from "@/context/UserContext.jsx";
-
 
 const Sidebar = () => {
   const { user } = useUser();
@@ -46,31 +45,33 @@ const Sidebar = () => {
           </Link>
         </li>
         <>
-          {(user?.userType === "Admin") &&
+          {user?.userType === "Admin" && (
             <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
               <Link to="/financial-aid-applications">
-                <BsListTask className="inline-block mr-2" /> Financial Aid Applications
+                <BsListTask className="inline-block mr-2" /> Financial Aid
+                Applications
               </Link>
             </li>
-          }
+          )}
         </>
         <>
-          {(user?.userType === "Teacher") &&
+          {user?.userType === "Teacher" && (
             <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
               <Link to="/course-financial-aid-applications">
-                <BsListTask className="inline-block mr-2" /> Course Financial Aid Applications
+                <BsListTask className="inline-block mr-2" /> Course Financial
+                Aid Applications
               </Link>
             </li>
-          }
+          )}
         </>
         <>
-          {(user?.userType === "Teacher") &&
+          {user?.userType === "Teacher" && (
             <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
               <Link to="/generate-quiz">
                 <BsListTask className="inline-block mr-2" /> Generate Quiz
               </Link>
             </li>
-          }
+          )}
         </>
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <Link to="/leaderboard">

@@ -5,6 +5,7 @@ import {
   getQuizById,
   updateQuiz,
   deleteQuiz,
+  getQuizBycourseId,
 } from "../controllers/quiz.controller.js";
 import { verifyUserMiddleware } from "../middleware/auth.middleware.js";
 
@@ -15,6 +16,8 @@ router.post("/", verifyUserMiddleware, createQuiz);
 router.get("/", getQuizzes);
 
 router.get("/:id", getQuizById);
+
+router.get("/from-course/:courseId", getQuizBycourseId);
 
 router.put("/:id", verifyUserMiddleware, updateQuiz);
 

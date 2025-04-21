@@ -178,12 +178,21 @@ const FinancialAidView = () => {
             <strong>Submitted: </strong>
             {new Date(application.submittedAt).toLocaleString()}
           </div>
-        </CardContent> 
+        </CardContent>
         <div className="text-center">
-          <Button className="mr-4" disabled={application.aidStatus !== "pending"} onClick={() => approveApp(application._id, "approved")}>
+          <Button
+            className="mr-4"
+            disabled={application.aidStatus !== "pending"}
+            onClick={() => approveApp(application._id, "approved")}
+          >
             Approve
           </Button>
-          <Button variant="destructive" className="mb-8" disabled={application.aidStatus !== "pending"} onClick={() => denyApp(application._id, "denied")}>
+          <Button
+            variant="destructive"
+            className="mb-8"
+            disabled={application.aidStatus !== "pending"}
+            onClick={() => denyApp(application._id, "denied")}
+          >
             Deny
           </Button>
         </div>

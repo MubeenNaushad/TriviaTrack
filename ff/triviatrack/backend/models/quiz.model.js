@@ -18,6 +18,7 @@ const QuestionSchema = new mongoose.Schema({
 const QuizSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
+    courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
     description: { type: String },
     questions: [QuestionSchema],
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

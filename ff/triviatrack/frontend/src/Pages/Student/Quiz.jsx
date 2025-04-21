@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const questions = [
+const defaultQuestions = [
   {
     questionText: "What is the capital of France?",
     answerOptions: [
@@ -32,6 +35,7 @@ const questions = [
 ];
 
 export const Quiz = () => {
+  const { courseId } = useParams();
   const navigate = useNavigate();
   const [playerName, setPlayerName] = useState("");
   const [hasStarted, setHasStarted] = useState(false);
@@ -41,11 +45,53 @@ export const Quiz = () => {
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
 
+  const [questions, setQuestions] = useState(defaultQuestions);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const startQuiz = () => {
     if (playerName.trim() !== "") {
       setHasStarted(true);
     }
   };
+
+  useEffect(() => {
+    if (!courseId) {
+      // no courseId → stick with defaultQuestions
+      return;
+    }
+
+    const fetchQuizByCourse = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const resp = await axios.get(
+          `${
+            import.meta.env.VITE_APP_BASEURL
+          }/api/quizzes/from-course/${courseId}`
+        );
+        const apiQs = resp.data.questions;
+        if (Array.isArray(apiQs) && apiQs.length > 0) {
+          const uiQs = apiQs.map((q) => ({
+            questionText: q.text,
+            answerOptions: q.options.map((opt) => ({
+              answerText: opt.text,
+              isCorrect: opt.isCorrect,
+            })),
+          }));
+          setQuestions(uiQs);
+        } else {
+        }
+      } catch (err) {
+        console.error("Failed to fetch quiz for course", courseId, err);
+        setError("Couldn’t load quiz for that course, using default quiz.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQuizByCourse();
+  }, [courseId]);
 
   const nextQuestion = () => {
     setAnswered(false);
@@ -70,7 +116,6 @@ export const Quiz = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="w-full max-w-4xl bg-white p-6 rounded shadow-lg flex flex-col md:flex-row items-center md:items-start">
-        
         <div className="w-full md:w-1/3 flex justify-center md:justify-start">
           <img
             src="\src\assets\Quiz.png"
@@ -88,7 +133,9 @@ export const Quiz = () => {
           {!hasStarted ? (
             // Enter Name Screen
             <div className="text-center">
-              <h2 className="text-xl font-semibold">Enter Your Name to Start</h2>
+              <h2 className="text-xl font-semibold">
+                Enter Your Name to Start
+              </h2>
               <input
                 type="text"
                 className="w-full p-3 border rounded mt-4 text-center"
@@ -111,7 +158,9 @@ export const Quiz = () => {
           ) : showScore ? (
             // Score Screen
             <div className="text-center">
-              <h2 className="text-2xl font-semibold">Thank You, {playerName}!</h2>
+              <h2 className="text-2xl font-semibold">
+                Thank You, {playerName}!
+              </h2>
               <p className="text-lg mt-2">
                 You scored <span className="font-bold">{score}</span> out of{" "}
                 {questions.length}

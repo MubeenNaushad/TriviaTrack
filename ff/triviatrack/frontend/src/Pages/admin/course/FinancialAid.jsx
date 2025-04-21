@@ -25,8 +25,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function FinancialAidForm() {
-    const { courseId } = useParams();
-  
+  const { courseId } = useParams();
+
   const [formData, setFormData] = useState({
     courseId: courseId,
     firstName: "",
@@ -93,46 +93,46 @@ export default function FinancialAidForm() {
 
     console.log("Form should submit:", formData);
 
-      axios
-        .post(
-          `${import.meta.env.VITE_APP_BASEURL}/financial-aid/sendaidapp`,
-          formData
-        )
-        .then((res) => {
-          console.log("Response:", res.data);
-          toast({
-            title: "Success",
-            description: "Application submitted successfully.",
-          });
-          setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            address: "",
-            city: "",
-            state: "",
-            zipCode: "",
-            dateOfBirth: "",
-            ssn: "",
-            employmentStatus: "",
-            annualIncome: "",
-            householdSize: "",
-            currentStudent: "no",
-            schoolName: "",
-            programOfStudy: "",
-            aidReason: "",
-            agreeToTerms: false,
-          });
-        })
-        .catch((err) => {
-          console.log("Error:", err);
-          toast({
-            title: "Submission Error",
-            description: "There was an error submitting your application.",
-            variant: "destructive",
-          });
+    axios
+      .post(
+        `${import.meta.env.VITE_APP_BASEURL}/financial-aid/sendaidapp`,
+        formData
+      )
+      .then((res) => {
+        console.log("Response:", res.data);
+        toast({
+          title: "Success",
+          description: "Application submitted successfully.",
         });
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          address: "",
+          city: "",
+          state: "",
+          zipCode: "",
+          dateOfBirth: "",
+          ssn: "",
+          employmentStatus: "",
+          annualIncome: "",
+          householdSize: "",
+          currentStudent: "no",
+          schoolName: "",
+          programOfStudy: "",
+          aidReason: "",
+          agreeToTerms: false,
+        });
+      })
+      .catch((err) => {
+        console.log("Error:", err);
+        toast({
+          title: "Submission Error",
+          description: "There was an error submitting your application.",
+          variant: "destructive",
+        });
+      });
   };
 
   return (

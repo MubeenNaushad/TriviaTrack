@@ -25,10 +25,14 @@ const FinancialAidTable = () => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const backendURL = import.meta.env.VITE_APP_BASEURL || "http://localhost:5000";
-        const response = await axios.get(`${backendURL}/financial-aid/get-all-aids`, {
-          withCredentials: true,
-        });
+        const backendURL =
+          import.meta.env.VITE_APP_BASEURL || "http://localhost:5000";
+        const response = await axios.get(
+          `${backendURL}/financial-aid/get-all-aids`,
+          {
+            withCredentials: true,
+          }
+        );
         setApplications(response.data);
       } catch (error) {
         console.error("Failed to fetch financial aid applications:", error);
@@ -39,7 +43,6 @@ const FinancialAidTable = () => {
 
     fetchApplications();
   }, []);
-  
 
   return (
     <div className="flex pt-[2.4rem] mt-10">
@@ -72,7 +75,6 @@ const FinancialAidTable = () => {
                   <TableCell>{app?.courseId?.courseTitle}</TableCell>
                   <TableCell>{app.employmentStatus}</TableCell>
                   <TableCell className="font-medium">{app.aidStatus}</TableCell>
-                  {/* <TableCell>{app.aidReason}</TableCell> */}
                   <TableCell>
                     {new Date(app.submittedAt).toLocaleString()}
                   </TableCell>
@@ -84,7 +86,6 @@ const FinancialAidTable = () => {
                     >
                       View
                     </Button>
-                    
                   </TableCell>
                 </TableRow>
               ))}

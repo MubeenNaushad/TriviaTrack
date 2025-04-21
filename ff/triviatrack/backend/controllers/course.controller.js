@@ -29,7 +29,9 @@ export const createcourse = async (req, res) => {
 };
 export const getcourse = async (req, res) => {
   try {
-    const courses = await Course.find({}).populate("creator").populate("enrolledStudents");
+    const courses = await Course.find({})
+      .populate("creator")
+      .populate("enrolledStudents");
     return res.json(courses);
   } catch (error) {
     console.log(error);
@@ -53,7 +55,9 @@ export const getStudentsByCourse = async (req, res) => {
       return res.status(403).json({ message: "Unauthorized access" });
     }
 
-    const students = await StudentModel.find({ _id: { $in: course.enrolledStudents } });
+    const students = await StudentModel.find({
+      _id: { $in: course.enrolledStudents },
+    });
     res.status(200).json(students);
   } catch (error) {
     res.status(500).json({ message: "Internal server error", error });
@@ -156,6 +160,10 @@ export const searchCourse = async (req, res) => {
         { subTitle: { $regex: query, $options: "i" } },
         { category: { $regex: query, $options: "i" } },
       ];
+    }
+
+    if (categories.length > 0 && categories[0] !== "") {
+      searchCriteria.category = { $in: categories };
     }
 
     const sortOptions = {};

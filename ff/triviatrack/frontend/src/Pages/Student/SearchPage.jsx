@@ -17,13 +17,14 @@ const SearchPage = () => {
     const fetchCourses = async () => {
       setIsLoading(true);
 
-      let url = `${import.meta.env.VITE_APP_BASEURL}/course/search?query=${encodeURIComponent(query)}`;
+      let url = `${
+        import.meta.env.VITE_APP_BASEURL
+      }/course/search?query=${encodeURIComponent(query)}`;
 
       if (sortByPrice !== "") {
         url += `&sortByPrice=${encodeURIComponent(sortByPrice)}`;
       }
 
-      // ✅ Use categories[]=... format
       if (selectedCategories.length > 0) {
         selectedCategories.forEach((cat) => {
           url += `&categories[]=${encodeURIComponent(cat)}`;
@@ -56,9 +57,7 @@ const SearchPage = () => {
   return (
     <div className="max-w-8xl mx-auto p-6 md:p-8 md:px-56 mt-5">
       <div className="my-6">
-        <h1 className="font-bold text-xl md:text-2xl">
-          Results for "{query}"
-        </h1>
+        <h1 className="font-bold text-xl md:text-2xl">Results for "{query}"</h1>
         <p>
           Showing results for{" "}
           <span className="font-bold text-blue-800 italic">{query}</span>

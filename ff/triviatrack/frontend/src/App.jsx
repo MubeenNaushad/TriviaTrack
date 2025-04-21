@@ -128,10 +128,7 @@ function AppRoutes() {
         <Route path="/forum" element={<Forum />} />
         <Route path="/forum/categories/:slug" element={<CategoryPage />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route
-          path="/financial-aid/:courseId"
-          element={<FinancialAidForm />}
-        />
+        <Route path="/financial-aid/:courseId" element={<FinancialAidForm />} />
         <Route path="/game" element={<Game />} />
         <Route
           path="/course-financial-aid-applications"
@@ -153,8 +150,13 @@ function AppRoutes() {
         <Route path="/room/:roomid" element={<Roompage />} />
         <Route path="/students/dashboard" element={<StudentDashboard />} />
         <Route path="/teacher/dashboard" element={<Dashboard />} />
-        <Route path="/generate-quiz" element={<QuizBuilder />} />
-        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/generate-quiz/new" element={<QuizBuilder />} />
+
+        <Route path="/generate-quiz/:id" element={<QuizBuilder />} />
+
+        <Route path="/quiz/test" element={<Filter />} />
+        <Route path="/quiz/:courseId" element={<Quiz />} />
+
         <Route path="/settings" element={<Setting />} />
         <Route path="/students/progresstrack" element={<ProgressTracker />} />
         <Route path="/students/my-learning" element={<MyLearning />} />
@@ -167,10 +169,7 @@ function AppRoutes() {
           element={<StudentProfile />}
         />
         <Route path="/students/profile" element={<Profile />} />
-        <Route
-          path="/students/forgot-password"
-          element={<ForgotPassword />}
-        />
+        <Route path="/students/forgot-password" element={<ForgotPassword />} />
         <Route
           path="/students/verify-account/:token"
           element={<VerifyAccount />}

@@ -61,7 +61,6 @@ const MyLearning = () => {
               {myLearningCourses.map((course, index) => (
                 <div key={index}>
                   <Course course={course} />
-                  
                 </div>
               ))}
             </div>
