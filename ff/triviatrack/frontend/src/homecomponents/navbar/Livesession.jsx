@@ -5,19 +5,24 @@ import { useUser } from "../../context/UserContext.jsx";
 const Livesession = () => {
   const { user } = useUser();
   const [value, setValue] = useState();
-  const [leftMeeting, setLeftMeeting] = useState(false); 
+  const [leftMeeting, setLeftMeeting] = useState("");
   const navigate = useNavigate();
 
   const handleJoinRoom = useCallback(() => {
+    if (value.trim().length === 0) {
+      alert("Please enter a room ID.");
+      return;
+    }
+
     navigate(`/room/${value}`);
   }, [navigate, value]);
 
   return (
     <>
       {user ? (
-        <div className="mt-20 flex items-center justify-center min-h-screen bg-gray-300 p-4">
+        <div className="mt-20 flex items-center justify-center min-h-screen bg-gray-100 p-4">
           <div className="flex flex-col items-center justify-center max-w-4xl bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-2xl p-8 space-y-8">
-            <h1 className="text-3xl font-bold text-gray-800 mt-4 text-center">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mt-4 text-center">
               Join Session Name
             </h1>
 
@@ -38,7 +43,11 @@ const Livesession = () => {
                 placeholder="Enter Room Id"
               />
               <button
-                className="py-3 px-6 rounded-xl bg-gray-800 text-white font-semibold text-lg shadow-lg hover:bg-gray-900 focus:outline-none transition-all"
+                disabled={!value?.trim()}
+                className={`w-full py-3 px-8 rounded-full font-semibold text-lg shadow-md transition-all ${value?.trim()
+                    ? "bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    : "bg-gray-400 text-gray-100 cursor-not-allowed"
+                  }`}
                 onClick={handleJoinRoom}
               >
                 Join

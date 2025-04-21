@@ -14,9 +14,8 @@ const SearchPage = () => {
 
   useEffect(() => {
     const fetchCourses = async () => {
-      let url = `${
-        import.meta.env.VITE_APP_BASEURL
-      }/course/search?query=${encodeURIComponent(query)}`;
+      let url = `${import.meta.env.VITE_APP_BASEURL
+        }/course/search?query=${encodeURIComponent(query)}`;
       console.log("uu", url);
 
       if (sortByPrice !== "") {
@@ -47,7 +46,7 @@ const SearchPage = () => {
   const isEmpty = !isLoading && courses?.length === 0;
 
   return (
-    <div className="max-w-7xl mx-auto p-4 md:p-8 mt-5">
+    <div className="max-w-8xl mx-auto p-6 md:p-8 md:px-56 mt-5">
       <div className="my-6">
         <h1 className="font-bold text-xl md:text-2xl">
           Results for "{query}"{" "}
@@ -57,7 +56,7 @@ const SearchPage = () => {
           <span className="font-bold text-blue-800 italic">{query}</span>
         </p>
       </div>
-      <div className="flex flex-col md:flex-row gap-10 md:w-1/3">
+      <div className="flex flex-col md:flex-row gap-10 md:w-1/4">
         <Filter handleFilterChange={handleFilterChange} />
         <div className="flex-1 ml-12">
           {isLoading ? (
