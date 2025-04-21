@@ -10,7 +10,7 @@ import { verifyUserMiddleware } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-router.post("/", createQuiz);
+router.post("/", verifyUserMiddleware, createQuiz);
 
 router.get("/", getQuizzes);
 

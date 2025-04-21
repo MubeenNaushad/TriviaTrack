@@ -12,6 +12,7 @@ import QuizPreview from "./quiz-preview";
 import Sidebars from "../Dashboard/Sidebar.jsx";
 import { delay, motion } from "framer-motion";
 import { Progress } from "@/components/ui/progress"
+import { toast } from "react-toastify";
 
 
 
@@ -40,8 +41,11 @@ export default function QuizBuilder() {
                 setQuestions(questions || []);
             } catch (err) {
                 setError("Failed to load quiz data.");
+                toast.error("Failed to load quiz data.");
+                console.error(err);
             } finally {
                 setLoading(false);
+
             }
         };
         fetchQuiz();
@@ -94,11 +98,15 @@ export default function QuizBuilder() {
 
                 await axios.put(`${API_BASE_URL}/api/quizzes/${id}`, quizData);
                 <Progress value={33} />
+                toast.success("Quiz updated successfully!");
+
 
             } else {
 
                 await axios.post(`${API_BASE_URL}/api/quizzes`, quizData);
                 <Progress value={33} />
+                toast.success("Quiz created successfully!");
+
 
             }
         } catch (err) {
@@ -112,8 +120,7 @@ export default function QuizBuilder() {
     };
 
     if (loading) return <Progress value={33} />
-        ;
-    if (error) return <p className="text-red-500">{error}</p>;
+
 
     return (
         <div className="flex pt-[1.4rem] mt-6">
