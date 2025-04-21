@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  createBrowserRouter,
+  useLocation,
 } from "react-router-dom";
 import Navbar from "./homecomponents/navbar/navbar.jsx";
 import NavbarBanner from "./homecomponents/navbar/NavbarBanner.jsx";
@@ -53,13 +53,13 @@ import CategoryPage from "./Forum/Categories.jsx";
 import Leaderboard from "./homecomponents/Dashboard/Leaderboard.jsx";
 import FinancialAidForm from "./Pages/admin/course/FinancialAid.jsx";
 import Chatbot from "./homecomponents/Chatbot.jsx";
-
+import Game from "./homecomponents/Student_Dashboard/SpaceGame.jsx";
 import FinancialAidTable from "./homecomponents/Dashboard/financialAidTable.jsx";
 import FinancialAidView from "./homecomponents/Dashboard/financialAidView.jsx";
 import QuizBuilder from "./homecomponents/Quiz/quiz-builder.jsx";
 import courseAidTable from "./homecomponents/Dashboard/courseAidTable.jsx";
 import RecommendationSystem from "./homecomponents/Student_Dashboard/RecommendationSystem.jsx";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const BannerData = {
   image: Img1,
@@ -79,132 +79,132 @@ const BannerData2 = {
   link: "#",
 };
 
-const App = () => {
+function AppRoutes() {
+  const location = useLocation();
+  // Hide navbar only on /game route
+  const hideNavbar = location.pathname === "/game";
+
   return (
-    <UserProvider>
-      <Router>
-        <Navbar />
-        <ToastContainer />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <NavbarBanner />
-                <Hero />
-                <NumberCounter />
-                <WhyChoose />
-                <Banner {...BannerData} />
-                <Banner {...BannerData2} reverse={true} />
-                <SubjectCard />
-                <Testimonial />
-                <Footer />
-                <Chatbot />
-              </>
-            }
-          />
-
-          <Route
-            path="/courses"
-            element={
-              <div>
-                <HeroSection />
-
-                <div className="flex min-h-screen">
-                  <div className="flex justify-center items-center h-full w-full">
-                    {" "}
-                    <div className="w-full">
-                      {" "}
-                      <Courses />
-                    </div>
+    <>
+      {!hideNavbar && <Navbar />}
+      <ToastContainer />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <NavbarBanner />
+              <Hero />
+              <NumberCounter />
+              <WhyChoose />
+              <Banner {...BannerData} />
+              <Banner {...BannerData2} reverse={true} />
+              <SubjectCard />
+              <Testimonial />
+              <Footer />
+              <Chatbot />
+            </>
+          }
+        />
+        <Route
+          path="/courses"
+          element={
+            <div>
+              <HeroSection />
+              <div className="flex min-h-screen">
+                <div className="flex justify-center items-center h-full w-full">
+                  <div className="w-full">
+                    <Courses />
                   </div>
                 </div>
               </div>
-            }
-          />
-          <Route
-            path="/courses/course-details/:courseId"
-            element={<CourseDetail />}
-          />
-          <Route path="/forum" element={<Forum />} />
-          <Route path="/forum/categories/:slug" element={<CategoryPage />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route
-            path="/financial-aid/:courseId"
-            element={<FinancialAidForm />}
-          />
-
-          <Route
-            path="/course-financial-aid-applications"
-            element={<courseAidTable />}
-          />
-          <Route
-            path="/financial-aid-applications"
-            element={<FinancialAidTable />}
-          />
-          <Route
-            path="/financial-aid-view/:appId"
-            element={<FinancialAidView />}
-          />
-          <Route path="/forum/posts/:postId" element={<PostPage />} />
-          <Route path="/course/search" element={<SearchPage />} />
-          <Route path="/students/signup" element={<SignUp />} />
-          <Route path="/students/login" element={<Login />} />
-          <Route path="/contact" element={<ContactForm />} />
-          <Route path="/room/:roomid" element={<Roompage />} />
-          <Route path="/students/dashboard" element={<StudentDashboard />} />
-          <Route path="/teacher/dashboard" element={<Dashboard />} />
-
-          <Route path="/generate-quiz" element={<QuizBuilder />} />
-
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/settings" element={<Setting />} />
-          <Route path="/students/progresstrack" element={<ProgressTracker />} />
-
-          <Route path="/students/my-learning" element={<MyLearning />} />
-          <Route
-            path="/recommendation-system"
-            element={<RecommendationSystem />}
-          />
-          <Route
-            path="/students/student-details/:studentId"
-            element={<StudentProfile />}
-          />
-          <Route path="/students/profile" element={<Profile />} />
-          <Route
-            path="/students/forgot-password"
-            element={<ForgotPassword />}
-          />
-          <Route
-            path="/students/verify-account/:token"
-            element={<VerifyAccount />}
-          />
-
-          <Route
-            path="/students/reset-password/:id/:token"
-            element={<ResetPassword />}
-          />
-
-          <Route path="/progress/:courseId" element={<CourseProgress />} />
-
-          <Route path="/live" element={<Livesession />} />
-          <Route path="/Studentdata" element={<StudentData />} />
-          <Route path="/enrolledstudents" element={<EnrolledStudents />} />
-          <Route path="/add-course" element={<AddCourse />} />
-          <Route path="/list-course" element={<CourseTable />} />
-          <Route path="/list-course/:id" element={<EditCourse />} />
-          <Route
-            path="/list-course/:courseId/lecture"
-            element={<CreateLecture />}
-          />
-          <Route
-            path="/list-course/:courseId/lecture/:lectureId"
-            element={<EditLecture />}
-          />
-        </Routes>
-      </Router>
-    </UserProvider>
+            </div>
+          }
+        />
+        <Route
+          path="/courses/course-details/:courseId"
+          element={<CourseDetail />}
+        />
+        <Route path="/forum" element={<Forum />} />
+        <Route path="/forum/categories/:slug" element={<CategoryPage />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route
+          path="/financial-aid/:courseId"
+          element={<FinancialAidForm />}
+        />
+        <Route path="/game" element={<Game />} />
+        <Route
+          path="/course-financial-aid-applications"
+          element={<courseAidTable />}
+        />
+        <Route
+          path="/financial-aid-applications"
+          element={<FinancialAidTable />}
+        />
+        <Route
+          path="/financial-aid-view/:appId"
+          element={<FinancialAidView />}
+        />
+        <Route path="/forum/posts/:postId" element={<PostPage />} />
+        <Route path="/course/search" element={<SearchPage />} />
+        <Route path="/students/signup" element={<SignUp />} />
+        <Route path="/students/login" element={<Login />} />
+        <Route path="/contact" element={<ContactForm />} />
+        <Route path="/room/:roomid" element={<Roompage />} />
+        <Route path="/students/dashboard" element={<StudentDashboard />} />
+        <Route path="/teacher/dashboard" element={<Dashboard />} />
+        <Route path="/generate-quiz" element={<QuizBuilder />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/settings" element={<Setting />} />
+        <Route path="/students/progresstrack" element={<ProgressTracker />} />
+        <Route path="/students/my-learning" element={<MyLearning />} />
+        <Route
+          path="/recommendation-system"
+          element={<RecommendationSystem />}
+        />
+        <Route
+          path="/students/student-details/:studentId"
+          element={<StudentProfile />}
+        />
+        <Route path="/students/profile" element={<Profile />} />
+        <Route
+          path="/students/forgot-password"
+          element={<ForgotPassword />}
+        />
+        <Route
+          path="/students/verify-account/:token"
+          element={<VerifyAccount />}
+        />
+        <Route
+          path="/students/reset-password/:id/:token"
+          element={<ResetPassword />}
+        />
+        <Route path="/progress/:courseId" element={<CourseProgress />} />
+        <Route path="/live" element={<Livesession />} />
+        <Route path="/Studentdata" element={<StudentData />} />
+        <Route path="/enrolledstudents" element={<EnrolledStudents />} />
+        <Route path="/add-course" element={<AddCourse />} />
+        <Route path="/list-course" element={<CourseTable />} />
+        <Route path="/list-course/:id" element={<EditCourse />} />
+        <Route
+          path="/list-course/:courseId/lecture"
+          element={<CreateLecture />}
+        />
+        <Route
+          path="/list-course/:courseId/lecture/:lectureId"
+          element={<EditLecture />}
+        />
+      </Routes>
+    </>
   );
-};
+}
+
+const App = () => (
+  <UserProvider>
+    <Router>
+      <AppRoutes />
+    </Router>
+  </UserProvider>
+);
 
 export default App;

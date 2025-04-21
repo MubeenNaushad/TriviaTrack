@@ -11,6 +11,7 @@ import {
 } from 'react-icons/bs';
 import { CiPen } from "react-icons/ci";
 import { FaRobot } from 'react-icons/fa';
+import Spacegame from "./SpaceGame.jsx";
 
 
 const StudentSidebar = () => {
@@ -46,6 +47,13 @@ const StudentSidebar = () => {
           "flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
           <Link to="/settings">
             <BsFillGearFill className="inline-block mr-2" /> Settings
+          </Link>
+        </li>
+
+        <li className=
+          "flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
+          <Link to="/game">
+            <BsFillGearFill className="inline-block mr-2" /> Game
           </Link>
         </li>
         <li className=
