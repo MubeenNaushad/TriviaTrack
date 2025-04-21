@@ -2,35 +2,35 @@ import { Trophy, Medal, User } from "lucide-react"
 
 export default function Leaderboard() {
   const topPlayers = [
-    { id: 1, name: "Alex Johnson", rank: 1, score: 9850, quizzes: 42 },
-    { id: 2, name: "Jamie Smith", rank: 2, score: 8720, quizzes: 38 },
-    { id: 3, name: "Taylor Brown", rank: 3, score: 8450, quizzes: 35 },
+    { id: 1, name: "Arish Amin", rank: 1, score: 9850, quizzes: 42 },
+    { id: 2, name: "Mubeen Naushad", rank: 2, score: 8720, quizzes: 38 },
+    { id: 3, name: "Dr.Adeel Ansari", rank: 3, score: 8450, quizzes: 35 },
   ]
 
   const globalRankings = [
-    { id: 1, name: "Alex Johnson", quizzes: 42, points: 9850 },
-    { id: 2, name: "Jamie Smith", quizzes: 38, points: 8720 },
-    { id: 3, name: "Taylor Brown", quizzes: 35, points: 8450 },
-    { id: 4, name: "Jordan Wilson", quizzes: 31, points: 7980 },
-    { id: 5, name: "Casey Miller", quizzes: 29, points: 7650 },
-    { id: 6, name: "Riley Davis", quizzes: 27, points: 7320 },
-    { id: 7, name: "Morgan Lee", quizzes: 25, points: 6890 },
-    { id: 8, name: "Quinn Taylor", quizzes: 23, points: 6540 },
-    { id: 9, name: "Avery Martin", quizzes: 21, points: 6210 },
-    { id: 10, name: "Reese Clark", quizzes: 19, points: 5980 },
+    { id: 1, name: "Arish Amin", quizzes: 42, points: 9850 },
+    { id: 2, name: "Mubeen Naushad", quizzes: 38, points: 8720 },
+    { id: 3, name: "Dr.Adeel Ansari", quizzes: 35, points: 8450 },
+    { id: 4, name: "Ali", quizzes: 31, points: 7980 },
+    { id: 5, name: "Shawn", quizzes: 29, points: 7650 },
+    { id: 6, name: "Soban", quizzes: 27, points: 7320 },
+    { id: 7, name: "Umer", quizzes: 25, points: 6890 },
+    { id: 8, name: "Mahad", quizzes: 23, points: 6540 },
+    { id: 9, name: "Waqas", quizzes: 21, points: 6210 },
+    { id: 10, name: "Imran", quizzes: 19, points: 5980 },
   ]
 
   const categoryChampions = [
-    { category: "Science", name: "Alex Johnson", points: 2450 },
-    { category: "Technology", name: "Jamie Smith", points: 2180 },
-    { category: "History", name: "Taylor Brown", points: 1950 },
-    { category: "Geography", name: "Jordan Wilson", points: 1820 },
+    { category: "Science", name: "Arish Amin", points: 2450 },
+    { category: "Technology", name: "Mubeen Naushad", points: 2180 },
+    { category: "History", name: "Dr.Adeel Ansari", points: 1950 },
+    { category: "Geography", name: "Imran Ali", points: 1820 },
   ]
 
   const borderColors = ["#FFD700", "#C0C0C0", "#CD7F32"]
 
   return (
-    <div className="min-h-screen bg-[#d9e1ef] text-black">
+    <div className="min-h-screen bg-gray-100 text-black">
 
       <main className="max-w-6xl mx-auto px-4 py-8 pt-32">
         <div className="text-center mb-12">
@@ -40,7 +40,7 @@ export default function Leaderboard() {
 
         <div className="grid grid-cols-3 gap-4 mb-12">
           <div className="flex items-end h-[350px]">
-            <div className="p-6 rounded-lg border-2 w-full h-[300px]" style={{ borderColor: borderColors[1] }}>
+            <div className="p-6 rounded-lg border-4 w-full h-[300px]" style={{ borderColor: borderColors[1] }}>
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
                   <Medal className="h-5 w-5 text-gray-300" />
@@ -65,7 +65,7 @@ export default function Leaderboard() {
           </div>
 
           <div className="flex items-end h-[350px]">
-            <div className="p-6 rounded-lg border-2 w-full h-[350px]" style={{ borderColor: borderColors[0] }}>
+            <div className="p-6 rounded-lg border-4 w-full h-[350px]" style={{ borderColor: borderColors[0] }}>
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
                   <Trophy className="h-5 w-5 text-yellow-400" />
@@ -90,7 +90,7 @@ export default function Leaderboard() {
           </div>
 
           <div className="flex items-end h-[350px]">
-            <div className="p-6 rounded-lg border-2 w-full h-[250px]" style={{ borderColor: borderColors[2] }}>
+            <div className="p-6 rounded-lg border-4 w-full h-[250px]" style={{ borderColor: borderColors[2] }}>
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
                   <Medal className="h-5 w-5 text-orange-400" />
@@ -146,16 +146,16 @@ export default function Leaderboard() {
 
           <div className="space-y-8">
 
-            <div className="bg-[#cfdbef] rounded-lg p-6">
-              <h2 className="text-2xl font-bold mb-6">Category Champions</h2>
+            <div className="bg-gray-600 rounded-lg p-6">
+              <h2 className="text-2xl font-bold mb-6 text-white">Category Champions</h2>
 
               <div className="space-y-4">
                 {categoryChampions.map((champion, index) => (
-                  <div key={index} className="bg-[#b9ccec] p-4 rounded-md">
-                    <p className="text-gray-400 text-sm">{champion.category}</p>
+                  <div key={index} className="bg-gray-800 p-4 rounded-md">
+                    <p className="text-white text-sm">{champion.category}</p>
                     <div className="flex justify-between items-center mt-1">
-                      <p className="font-medium">{champion.name}</p>
-                      <p className="font-bold">{champion.points.toLocaleString()}</p>
+                      <p className="font-medium text-white">{champion.name}</p>
+                      <p className="font-bold text-white">{champion.points.toLocaleString()}</p>
                     </div>
                   </div>
                 ))}

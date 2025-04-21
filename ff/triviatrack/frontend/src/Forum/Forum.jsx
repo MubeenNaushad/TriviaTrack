@@ -281,19 +281,19 @@ export default function HomePage() {
 const activeUsers = [
   {
     id: "active-1",
-    name: "Alex Johnson",
+    name: "Arish Amin",
     avatar: "/placeholder.svg?height=40&width=40",
     postCount: 128,
   },
   {
     id: "active-2",
-    name: "Sam Wilson",
+    name: "Mubeen Naushad",
     avatar: "/placeholder.svg?height=40&width=40",
     postCount: 85,
   },
   {
     id: "active-3",
-    name: "Taylor Smith",
+    name: "Dr.Adeel Ansari",
     avatar: "/placeholder.svg?height=40&width=40",
     postCount: 237,
   },

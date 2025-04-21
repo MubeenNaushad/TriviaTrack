@@ -424,18 +424,18 @@ const categories = [
 const users = [
   {
     id: "user-1",
-    name: "Alex Johnson",
+    name: "Arish Amin",
     avatar: "/placeholder.svg?height=40&width=40",
     badge: "Moderator",
   },
   {
     id: "user-2",
-    name: "Sam Wilson",
+    name: "Mubeen Naushad",
     avatar: "/placeholder.svg?height=40&width=40",
   },
   {
     id: "user-3",
-    name: "Taylor Smith",
+    name: "Dr.Adeel Ansari",
     avatar: "/placeholder.svg?height=40&width=40",
     badge: "Top Contributor",
   },
