@@ -6,7 +6,7 @@ const SearchResult = ({ course }) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-300 py-4 gap-8">
       <Link
-        to={`/course-details/${course._id}`}
+        to={`/courses/course-details/${course._id}`}
         className="flex flex-col md:flex-row gap-8 w-full md:w-auto"
       >
         <img

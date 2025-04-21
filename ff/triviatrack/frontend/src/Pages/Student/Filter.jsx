@@ -46,12 +46,9 @@ const Filter = ({ handleFilterChange }) => {
 
   return (
     <div className="w-full p-4 sm:p-6 md:p-8">
-      {/* Header */}
-    
-        
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-y-4 sm:gap-x-8 ">
         <h1 className="font-semibold text-lg md:text-xl">Filter Options</h1>
-        
+
         <Select onValueChange={handleSortChange}>
           <SelectTrigger className="w-full sm:w-48 hover:scale-105 transition-all duration-300">
             <SelectValue placeholder="Sort by" />
@@ -66,15 +63,16 @@ const Filter = ({ handleFilterChange }) => {
         </Select>
       </div>
 
-    
       <Separator className="my-4" />
 
-      {/* Categories */}
       <div>
         <h1 className="font-semibold mb-2">CATEGORY</h1>
         <div className="grid grid-cols-1 gap-2">
           {categories.map((category) => (
-            <div key={category.id} className="flex items-center space-x-2 my-1 hover:scale-105 transition-all duration-175">
+            <div
+              key={category.id}
+              className="flex items-center space-x-2 my-1 hover:scale-105 transition-all duration-175"
+            >
               <Checkbox
                 id={category.id}
                 checked={selectedCategories.includes(category.id)}

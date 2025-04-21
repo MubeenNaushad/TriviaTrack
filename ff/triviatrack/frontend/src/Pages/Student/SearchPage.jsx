@@ -8,40 +8,48 @@ const SearchPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
   const [sortByPrice, setSortByPrice] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchCourses = async () => {
-      let url = `${import.meta.env.VITE_APP_BASEURL
-        }/course/search?query=${encodeURIComponent(query)}`;
-      console.log("uu", url);
+      setIsLoading(true);
+
+      let url = `${import.meta.env.VITE_APP_BASEURL}/course/search?query=${encodeURIComponent(query)}`;
 
       if (sortByPrice !== "") {
         url += `&sortByPrice=${encodeURIComponent(sortByPrice)}`;
       }
 
+      // ✅ Use categories[]=... format
+      if (selectedCategories.length > 0) {
+        selectedCategories.forEach((cat) => {
+          url += `&categories[]=${encodeURIComponent(cat)}`;
+        });
+      }
+
+      console.log("Final URL:", url); // Debug
+
       try {
         const response = await axios.get(url);
-        console.log(response, "rr");
         setCourses(response.data.courses);
-        setIsLoading(false);
-        console.log("tt", response.data.courses);
+        setError("");
       } catch (err) {
         setError("Failed to fetch courses");
+      } finally {
         setIsLoading(false);
       }
     };
 
     fetchCourses();
-  }, [query, sortByPrice]);
+  }, [query, sortByPrice, selectedCategories]);
 
-  const handleFilterChange = (price) => {
+  const handleFilterChange = (categories, price) => {
+    setSelectedCategories(categories);
     setSortByPrice(price);
   };
-
-  console.log("cc", courses);
 
   const isEmpty = !isLoading && courses?.length === 0;
 
@@ -49,16 +57,20 @@ const SearchPage = () => {
     <div className="max-w-8xl mx-auto p-6 md:p-8 md:px-56 mt-5">
       <div className="my-6">
         <h1 className="font-bold text-xl md:text-2xl">
-          Results for "{query}"{" "}
+          Results for "{query}"
         </h1>
         <p>
           Showing results for{" "}
           <span className="font-bold text-blue-800 italic">{query}</span>
         </p>
       </div>
-      <div className="flex flex-col md:flex-row gap-10 md:w-1/4">
-        <Filter handleFilterChange={handleFilterChange} />
-        <div className="flex-1 ml-12">
+
+      <div className="flex flex-col md:flex-row gap-10">
+        <div className="md:w-1/4">
+          <Filter handleFilterChange={handleFilterChange} />
+        </div>
+
+        <div className="flex-1">
           {isLoading ? (
             Array.from({ length: 3 }).map((_, idx) => (
               <CourseSkeleton key={idx} />
@@ -70,6 +82,7 @@ const SearchPage = () => {
               <SearchResult key={course._id} course={course} />
             ))
           )}
+          {error && <p className="text-red-500 mt-4">{error}</p>}
         </div>
       </div>
     </div>
@@ -79,9 +92,14 @@ const SearchPage = () => {
 export default SearchPage;
 
 const CourseSkeleton = () => {
-  return <p>Loading</p>;
+  return (
+    <div className="p-4 border border-gray-300 rounded mb-4 animate-pulse">
+      <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
+      <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+    </div>
+  );
 };
 
 const CourseNotFound = () => {
-  return <p>Course Not Found.</p>;
+  return <p className="text-gray-600">No courses found.</p>;
 };
