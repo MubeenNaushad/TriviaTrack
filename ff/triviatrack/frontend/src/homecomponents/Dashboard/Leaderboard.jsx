@@ -117,27 +117,27 @@ export default function Leaderboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-          <div className="lg:col-span-2 bg-[#cfdbef] rounded-lg p-6">
-            <h2 className="text-2xl font-bold mb-6">Global Rankings</h2>
+          <div className="lg:col-span-2 bg-gray-600 rounded-lg p-6">
+            <h2 className="text-2xl font-bold mb-6 text-white">Global Rankings</h2>
 
             <div className="space-y-4">
               {globalRankings.map((player) => (
-                <div key={player.id} className="flex items-center justify-between bg-[#b9ccec] p-4 rounded-md">
+                <div key={player.id} className="flex items-center justify-between bg-gray-700 p-4 rounded-md">
                   <div className="flex items-center gap-4">
                     <div className="w-8 h-8 flex items-center justify-center">
-                      <span className="text-gray-400">#{player.id}</span>
+                      <span className=" text-white">#{player.id}</span>
                     </div>
                     <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center">
                       <User className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="font-medium">{player.name}</p>
-                      <p className="text-gray-400 text-xs">{player.quizzes} quizzes</p>
+                      <p className="font-medium text-white">{player.name}</p>
+                      <p className=" text-xs text-white">{player.quizzes} quizzes</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold">{player.points.toLocaleString()}</p>
-                    <p className="text-gray-400 text-xs">points</p>
+                    <p className="font-bold text-white">{player.points.toLocaleString()}</p>
+                    <p className=" text-xs text-white">points</p>
                   </div>
                 </div>
               ))}
@@ -163,23 +163,18 @@ export default function Leaderboard() {
             </div>
 
 
-            <div className="bg-[#b9ccec] rounded-lg p-6">
-              <h2 className="text-2xl font-bold mb-6">Your Ranking</h2>
-              <div className="text-center py-6">
-                <p className="text-gray-400 mb-4">Sign in to see your ranking</p>
-                <button className="px-6 py-2 bg-blue-600 rounded-md hover:bg-blue-700">Login</button>
-              </div>
-            </div>
+
+
           </div>
         </div>
-      </main>
+      </main >
 
-      <footer className="border-t border-gray-400 py-6 mt-16 text-center text-gray-400">
+      <footer className="border-t border-gray-800 py-6 mt-16 text-center bg-gray-800 text-white">
         <div className="flex justify-center items-center gap-2 mb-2">
           <Trophy className="h-5 w-5 text-blue-500" />
           <span className="font-bold">TriviaTrack</span>
         </div>
       </footer>
-    </div>
+    </div >
   )
 }
