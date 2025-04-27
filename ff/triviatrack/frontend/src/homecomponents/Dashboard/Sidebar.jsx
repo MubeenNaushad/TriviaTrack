@@ -32,9 +32,6 @@ const Sidebar = () => {
         </li>
 
         <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
-          <BsClipboardCheck className="inline-block mr-2" /> Assignments
-        </li>
-        <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
           <Link to="/Studentdata" className="flex items-center">
             <BsFillPeopleFill className="inline-block mr-2" /> Students
           </Link>
