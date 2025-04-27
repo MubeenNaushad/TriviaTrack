@@ -121,11 +121,11 @@ export const updateFinancialAidApplication = async (req, res) => {
     }
 
     return res.status(201).json({
-      message: "Application submitted successfully.",
+      message: "Application judged successfully.",
       data: newApplication,
     });
   } catch (error) {
-    console.error("Error saving application:", error);
+    console.error("Error updating application:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
