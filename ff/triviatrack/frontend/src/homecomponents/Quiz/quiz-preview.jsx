@@ -96,13 +96,12 @@ export default function QuizPreview({ title, description, questions }) {
                     {question.options.map((option) => (
                       <li
                         key={option.id}
-                        className={`p-3 rounded-md border ${
-                          option.id === correctOption.id
+                        className={`p-3 rounded-md border ${option.id === correctOption.id
                             ? "bg-green-100 border-green-500"
                             : option.id === selectedOptionId
-                            ? "bg-red-100 border-red-500"
-                            : "border-gray-200"
-                        }`}
+                              ? "bg-red-100 border-red-500"
+                              : "border-gray-200"
+                          }`}
                       >
                         {option.text}
                         {option.id === correctOption.id && " ✅"}

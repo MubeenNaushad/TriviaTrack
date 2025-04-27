@@ -69,7 +69,7 @@ export default function PhaserSpaceshipQuiz() {
                 });
             });
 
-            // Score text
+
             scoreText = this.add.text(20, 20, 'Score: 0', {
                 font: '24px Courier', fill: '#0ff', stroke: '#000', strokeThickness: 4
             }).setShadow(2, 2, '#000', 2, true, true);
@@ -77,7 +77,7 @@ export default function PhaserSpaceshipQuiz() {
             this.physics.add.overlap(ship, bubbles, hitBubble, null, this);
             cursors = this.input.keyboard.createCursorKeys();
 
-            // Create question panel via HTML string
+
             const html = `
         <div class="question-panel">
           <p id="qtext">Question?</p>
@@ -101,7 +101,7 @@ export default function PhaserSpaceshipQuiz() {
                 panel.setVisible(false);
                 asking = false;
                 questionIndex++;
-                // Check if all bubbles are gone
+
                 if (bubbles.countActive(true) === 0) {
                     endGame();
                 }
@@ -180,7 +180,7 @@ export default function PhaserSpaceshipQuiz() {
                     overflow: 'hidden',
                 }}
             />
-            {/* Home button overlay */}
+
             <button
                 onClick={() => navigate("/")}
                 style={{
@@ -202,7 +202,7 @@ export default function PhaserSpaceshipQuiz() {
             >
                 Home
             </button>
-            {/* Show final score overlay when game ends */}
+
             {finalScore !== null && (
                 <div
                     style={{
