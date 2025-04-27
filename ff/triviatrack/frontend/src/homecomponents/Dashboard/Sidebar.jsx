@@ -67,7 +67,7 @@ const Sidebar = () => {
         <>
           {user?.userType === "Teacher" && (
             <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">
-              <Link to="/generate-quiz">
+              <Link to="/generate-quiz/new">
                 <BsListTask className="inline-block mr-2" /> Generate Quiz
               </Link>
             </li>

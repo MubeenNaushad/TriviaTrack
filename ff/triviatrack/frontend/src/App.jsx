@@ -57,7 +57,7 @@ import Game from "./homecomponents/Student_Dashboard/SpaceGame.jsx";
 import FinancialAidTable from "./homecomponents/Dashboard/financialAidTable.jsx";
 import FinancialAidView from "./homecomponents/Dashboard/financialAidView.jsx";
 import QuizBuilder from "./homecomponents/Quiz/quiz-builder.jsx";
-import courseAidTable from "./homecomponents/Dashboard/courseAidTable.jsx";
+import CourseAidTable from "./homecomponents/Dashboard/courseAidTable.jsx";
 import RecommendationSystem from "./homecomponents/Student_Dashboard/RecommendationSystem.jsx";
 import { ToastContainer } from "react-toastify";
 
@@ -132,7 +132,7 @@ function AppRoutes() {
         <Route path="/game" element={<Game />} />
         <Route
           path="/course-financial-aid-applications"
-          element={<courseAidTable />}
+          element={<CourseAidTable />}
         />
         <Route
           path="/financial-aid-applications"

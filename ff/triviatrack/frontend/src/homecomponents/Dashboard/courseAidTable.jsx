@@ -16,7 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { useUser } from "@/context/UserContext";
 import axios from "axios";
 
-const courseAidTable = () => {
+const CourseAidTable = () => {
   const [applications, setApplications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -100,4 +100,4 @@ const courseAidTable = () => {
   );
 };
 
-export default courseAidTable;
+export default CourseAidTable;

@@ -73,7 +73,7 @@ export default function FinancialAidForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.firstName || !formData.lastName || !formData.email) {
+    if (!formData.firstName || !formData.lastName || !formData.email ||   formData.aidReason.trim().length < 300) {
       toast({
         title: "Error",
         description: "Please fill out all required fields",
@@ -241,14 +241,10 @@ export default function FinancialAidForm() {
                       <SelectValue placeholder="Select state" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="AL">Alabama</SelectItem>
-                      <SelectItem value="AK">Alaska</SelectItem>
-                      <SelectItem value="AZ">Arizona</SelectItem>
-                      {/* Add more states as needed */}
-                      <SelectItem value="CA">California</SelectItem>
-                      <SelectItem value="CO">Colorado</SelectItem>
-                      <SelectItem value="NY">New York</SelectItem>
-                      <SelectItem value="TX">Texas</SelectItem>
+                      <SelectItem value="AL">Sindh</SelectItem>
+                      <SelectItem value="AK">Balochistan</SelectItem>
+                      <SelectItem value="AZ">KPK</SelectItem>
+                      <SelectItem value="CA">Punjab</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -291,7 +287,7 @@ export default function FinancialAidForm() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="annualIncome">Annual Income ($)</Label>
+                  <Label htmlFor="annualIncome">Annual Income (PKR)</Label>
                   <Input
                     id="annualIncome"
                     name="annualIncome"
@@ -385,6 +381,8 @@ export default function FinancialAidForm() {
                   value={formData.aidReason}
                   onChange={handleChange}
                   rows={4}
+                  minLength={300}
+                  required
                 />
               </div>
             </div>
@@ -398,6 +396,7 @@ export default function FinancialAidForm() {
                   onCheckedChange={(checked) =>
                     setFormData((prev) => ({ ...prev, agreeToTerms: checked }))
                   }
+                  required
                 />
                 <Label htmlFor="agreeToTerms" className="text-sm">
                   I certify that all information provided is true and accurate.
