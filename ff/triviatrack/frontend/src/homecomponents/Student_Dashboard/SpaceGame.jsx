@@ -27,7 +27,7 @@ export default function PhaserSpaceshipQuiz() {
             const cx = this.cameras.main.centerX;
             const cy = this.cameras.main.centerY;
 
-            // Starfield
+
             this.cameras.main.setBackgroundColor('#000022');
             for (let i = 0; i < 200; i++) {
                 const x = Phaser.Math.Between(0, this.scale.width);
@@ -42,7 +42,7 @@ export default function PhaserSpaceshipQuiz() {
                 });
             }
 
-            // Generate textures off-scene
+
             const g = this.make.graphics({ add: false });
             g.fillStyle(0x00ffff); g.fillTriangle(0, 32, 16, 0, 32, 32);
             g.generateTexture('ship', 32, 32);
@@ -50,7 +50,7 @@ export default function PhaserSpaceshipQuiz() {
             g.fillStyle(0xaa00ff); g.fillCircle(16, 16, 16);
             g.generateTexture('bubble', 32, 32);
 
-            // Add ship and bubbles
+
             ship = this.physics.add.sprite(cx, cy, 'ship').setCollideWorldBounds(true);
             bubbles = this.physics.add.group();
             for (let i = 0; i < 7; i++) {

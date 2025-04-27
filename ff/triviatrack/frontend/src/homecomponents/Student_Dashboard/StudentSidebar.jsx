@@ -33,7 +33,7 @@ const StudentSidebar = () => {
           </Link>
         </li>
         <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
-          <Link to="/quiz" className="flex items-center">
+          <Link to="/quiz/new" className="flex items-center">
             <CiPen className="inline-block mr-2" /> Quiz
           </Link>
         </li>

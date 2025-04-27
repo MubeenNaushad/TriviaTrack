@@ -27,7 +27,7 @@ const DashboardContent = () => {
 
   axios.defaults.withCredentials = true;
 
-  // Fetch user profile
+
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_APP_BASEURL}/students/profile`)
@@ -39,13 +39,12 @@ const DashboardContent = () => {
       });
   }, []);
 
-  // Fetch students & determine rank
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_APP_BASEURL}/students`)
       .then((response) => {
         setStudents(response.data);
-        
+
       })
       .catch((error) => {
         console.error("Error fetching students:", error);
@@ -53,22 +52,22 @@ const DashboardContent = () => {
   }, []);
 
   useEffect(() => {
-    if(students.length > 0) {
+    if (students.length > 0) {
       checkRank();
-      }
+    }
   }, [students])
 
   const checkRank = () => {
     const sortedStudents = students.sort((a, b) => b.points - a.points);
     const ranking =
       sortedStudents.findIndex((student) => student._id === thisUser._id) + 1;
-    console.log(ranking,"rankkkk");
-    setRank(ranking);  
+    console.log(ranking, "rankkkk");
+    setRank(ranking);
   };
 
   return (
     <div className="p-6 bg-gray-100">
-      {/* Stats Cards */}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
         <div className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-6 rounded-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 cursor-pointer">
           <div className="flex items-center justify-between">
@@ -103,9 +102,9 @@ const DashboardContent = () => {
         </div>
       </div>
 
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
+
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h3 className="text-xl font-bold mb-4">🏆 LeaderBoard</h3>
           <div className="overflow-y-auto h-64">
@@ -138,13 +137,13 @@ const DashboardContent = () => {
           </div>
         </div>
 
-        {/* Notice Board */}
+
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h3 className="text-xl font-bold mb-4">📌 Notice Board</h3>
           <NoticeBoard />
         </div>
 
-        {/* Pie Chart */}
+
         <PieChartComponent progressData={courseProgress} />
       </div>
     </div>

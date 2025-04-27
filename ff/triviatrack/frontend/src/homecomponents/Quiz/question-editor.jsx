@@ -18,6 +18,7 @@ import {
   CheckCircle,
   Circle,
 } from "lucide-react";
+import { useParams } from "react-router-dom";
 
 export default function QuestionEditor({
   question,
@@ -34,6 +35,7 @@ export default function QuestionEditor({
 
   const handleTypeChange = (value) => {
     let updatedOptions = [...question.options];
+
 
     if (value === "true-false") {
       updatedOptions = [
@@ -175,11 +177,10 @@ export default function QuestionEditor({
                 <Button
                   variant="ghost"
                   size="sm"
-                  className={`h-8 w-8 p-0 ${
-                    option.isCorrect
-                      ? "text-green-600"
-                      : "text-gray-400 hover:text-gray-600"
-                  }`}
+                  className={`h-8 w-8 p-0 ${option.isCorrect
+                    ? "text-green-600"
+                    : "text-gray-400 hover:text-gray-600"
+                    }`}
                   onClick={() => updateOption(option.id, "isCorrect", true)}
                 >
                   {option.isCorrect ? (

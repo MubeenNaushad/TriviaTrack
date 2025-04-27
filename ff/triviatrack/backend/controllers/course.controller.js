@@ -146,6 +146,7 @@ export const deletecourse = async (req, res) => {
 };
 
 export const searchCourse = async (req, res) => {
+  const categories = req.query.categories || req.query["categories[]"] || [];
   try {
     const query = req.query.query || "";
     const { sortByPrice = "" } = req.query;

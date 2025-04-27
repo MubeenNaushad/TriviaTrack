@@ -81,7 +81,7 @@ const BannerData2 = {
 
 function AppRoutes() {
   const location = useLocation();
-  // Hide navbar only on /game route
+
   const hideNavbar = location.pathname === "/game";
 
   return (

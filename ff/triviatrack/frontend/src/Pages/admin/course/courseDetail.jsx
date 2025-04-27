@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { BadgeInfo, PlayCircle, User } from "lucide-react";
+import { BadgeInfo, PlayCircle } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import BuyCourse from "@/homecomponents/Buttons/BuyCourse.jsx";
 import axios from "axios";
@@ -32,15 +32,13 @@ const CourseDetail = () => {
   useEffect(() => {
     axios
       .get(
-        `${
-          import.meta.env.VITE_APP_BASEURL
+        `${import.meta.env.VITE_APP_BASEURL
         }/purchase/course/${courseId}/detail-with-status`
       )
       .then((response) => {
         console.log(response);
         setCourses(response.data.course);
         setPurchased(response.data.purchased);
-        console.log(user.userType, "hh");
         setIsLoading(false);
       })
       .catch((error) => {
@@ -104,10 +102,9 @@ const CourseDetail = () => {
                   <div
                     key={idx}
                     className="flex items-center gap-3 text-sm"
-                    onMouseOver={console.log("hover")}
                   >
                     <span>
-                      <PlayCircle size={14} />{" "}
+                      <PlayCircle size={14} />
                     </span>
                     <p>{lecture?.lectureTitle}</p>
                   </div>
@@ -123,45 +120,49 @@ const CourseDetail = () => {
                     <ReactPlayer
                       width="100%"
                       height="100%"
-                      url={course?.lectures[0]?.videoUrl} // Ensure there is a video URL
+                      url={course?.lectures[0]?.videoUrl}
                       controls={true}
                     />
                   ) : (
                     <p>No video</p>
                   )}
                 </div>
-                <h1>{course?.lectures[0]?.title}</h1>{" "}
-                {/* Display the title of the first lecture */}
+                <h1>{course?.lectures[0]?.title}</h1>
                 <Separator className="my-2" />
                 <h1 className="text-lg md:text-xl font-semibold">
                   Course Price: {course?.coursePrice}
                 </h1>
               </CardContent>
               <CardFooter className="flex justify-center p-4">
-                {purchased || course?.creator?.email === user?.email ? (
-                  <>
-                    <Button
-                      onClick={handleContinueCourse}
-                      className="w-full mr-4"
-                    >
-                      Continue Course
-                    </Button>
-                    <Button onClick={handleOpenForum} className="w-full">
-                      Open Forum
-                    </Button>
-                  </>
+                {user ? (
+                  purchased || course?.creator?.email === user?.email ? (
+                    <>
+                      <Button
+                        onClick={handleContinueCourse}
+                        className="w-full mr-4"
+                      >
+                        Continue Course
+                      </Button>
+                      <Button onClick={handleOpenForum} className="w-full">
+                        Open Forum
+                      </Button>
+                    </>
+                  ) : (
+                    <div className="flex flex-col gap-3 w-full">
+                      <BuyCourse courseId={courseId} className="w-full" />
+                      <Button
+                        variant="outline"
+                        className="outline-4 w-full"
+                        onClick={handleAidOption}
+                      >
+                        Get Financial Aid
+                      </Button>
+                    </div>
+                  )
                 ) : (
-                  <div className="flex flex-col gap-3">
-                    <BuyCourse courseId={courseId} className="w-full" />
-                    <Button
-                      variant="outline"
-                      className="outline-4"
-                      onClick={handleAidOption}
-                    >
-                      {" "}
-                      Get Financial Aid{" "}
-                    </Button>
-                  </div>
+                  <p className="text-center text-sm text-gray-500">
+                    Please log in to access course options.
+                  </p>
                 )}
               </CardFooter>
             </Card>

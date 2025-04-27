@@ -57,7 +57,7 @@ export const Quiz = () => {
 
   useEffect(() => {
     if (!courseId) {
-      // no courseId → stick with defaultQuestions
+
       return;
     }
 
@@ -66,8 +66,7 @@ export const Quiz = () => {
       setError("");
       try {
         const resp = await axios.get(
-          `${
-            import.meta.env.VITE_APP_BASEURL
+          `${import.meta.env.VITE_APP_BASEURL
           }/api/quizzes/from-course/${courseId}`
         );
         const apiQs = resp.data.questions;
@@ -145,11 +144,10 @@ export const Quiz = () => {
               />
               <button
                 onClick={startQuiz}
-                className={`block w-full bg-gray-800 text-white py-3 mt-4 rounded ${
-                  playerName.trim()
+                className={`block w-full bg-gray-800 text-white py-3 mt-4 rounded ${playerName.trim()
                     ? "hover:bg-gray-900"
                     : "opacity-50 cursor-not-allowed"
-                }`}
+                  }`}
                 disabled={!playerName.trim()}
               >
                 Start Quiz
@@ -191,15 +189,14 @@ export const Quiz = () => {
                 <button
                   key={index}
                   onClick={() => handleAnswer(index, option.isCorrect)}
-                  className={`block w-full p-3 mt-3 rounded border text-lg transition ${
-                    answered
+                  className={`block w-full p-3 mt-3 rounded border text-lg transition ${answered
                       ? option.isCorrect
                         ? "bg-green-400"
                         : selectedAnswer === index
-                        ? "bg-red-400"
-                        : ""
+                          ? "bg-red-400"
+                          : ""
                       : "bg-gray-200 hover:bg-gray-300"
-                  }`}
+                    }`}
                 >
                   {option.answerText}
                 </button>
@@ -208,9 +205,8 @@ export const Quiz = () => {
               <button
                 disabled={!answered}
                 onClick={nextQuestion}
-                className={`block w-full text-white text-lg py-3 mt-6 rounded ${
-                  answered ? "bg-green-500 hover:bg-green-600" : "bg-green-300"
-                }`}
+                className={`block w-full text-white text-lg py-3 mt-6 rounded ${answered ? "bg-green-500 hover:bg-green-600" : "bg-green-300"
+                  }`}
               >
                 {currentQuestion < questions.length - 1
                   ? "Next Question"
