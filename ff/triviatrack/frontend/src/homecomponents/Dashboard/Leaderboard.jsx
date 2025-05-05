@@ -1,16 +1,19 @@
 import { Trophy, Medal, User } from "lucide-react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+
 
 export default function Leaderboard() {
   const topPlayers = [
-    { id: 1, name: "Arish Amin", rank: 1, score: 9850, quizzes: 42 },
+    { id: 1, name: "Dr. Adeel Ansari", rank: 1, score: 9850, quizzes: 42 },
     { id: 2, name: "Mubeen Naushad", rank: 2, score: 8720, quizzes: 38 },
-    { id: 3, name: "Dr.Adeel Ansari", rank: 3, score: 8450, quizzes: 35 },
+    { id: 3, name: "Arish Amin", rank: 3, score: 8450, quizzes: 35 },
   ];
 
-  const globalRankings = [
-    { id: 1, name: "Arish Amin", quizzes: 42, points: 9850 },
+/*  const globalRankings = [
+    { id: 1, name: "Dr. Adeel Ansari", quizzes: 42, points: 9850 },
     { id: 2, name: "Mubeen Naushad", quizzes: 38, points: 8720 },
-    { id: 3, name: "Dr.Adeel Ansari", quizzes: 35, points: 8450 },
+    { id: 3, name: "Arish Amin", quizzes: 35, points: 8450 },
     { id: 4, name: "Ali", quizzes: 31, points: 7980 },
     { id: 5, name: "Shawn", quizzes: 29, points: 7650 },
     { id: 6, name: "Soban", quizzes: 27, points: 7320 },
@@ -18,7 +21,7 @@ export default function Leaderboard() {
     { id: 8, name: "Mahad", quizzes: 23, points: 6540 },
     { id: 9, name: "Waqas", quizzes: 21, points: 6210 },
     { id: 10, name: "Imran", quizzes: 19, points: 5980 },
-  ];
+  ]; */
 
   const categoryChampions = [
     { category: "Science", name: "Arish Amin", points: 2450 },
@@ -28,6 +31,22 @@ export default function Leaderboard() {
   ];
 
   const borderColors = ["#FFD700", "#C0C0C0", "#CD7F32"];
+
+    const [globalRankings, setglobalRankings] = useState([]);
+  
+    useEffect(() => {
+      axios
+        .get(`${import.meta.env.VITE_APP_BASEURL}/students`)
+        .then((response) => {
+          console.log("Students fetched:", response.data);
+          setglobalRankings(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching students:", error);
+        });
+    }, []);
+
+
 
   return (
     <div className="min-h-screen bg-gray-100 text-black">
@@ -145,14 +164,14 @@ export default function Leaderboard() {
             </h2>
 
             <div className="space-y-4">
-              {globalRankings.map((player) => (
+              {globalRankings.sort((a, b) => b.points - a.points).map((player, index) => (
                 <div
                   key={player.id}
                   className="flex items-center justify-between bg-gray-700 p-4 rounded-md"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-8 h-8 flex items-center justify-center">
-                      <span className=" text-white">#{player.id}</span>
+                      <span className=" text-white">#{index+1}</span>
                     </div>
                     <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center">
                       <User className="h-4 w-4" />
@@ -172,6 +191,7 @@ export default function Leaderboard() {
                   </div>
                 </div>
               ))}
+              
             </div>
           </div>
 
@@ -193,6 +213,7 @@ export default function Leaderboard() {
                     </div>
                   </div>
                 ))}
+                
               </div>
             </div>
           </div>

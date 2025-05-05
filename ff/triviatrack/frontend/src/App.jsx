@@ -60,6 +60,7 @@ import QuizBuilder from "./homecomponents/Quiz/quiz-builder.jsx";
 import CourseAidTable from "./homecomponents/Dashboard/courseAidTable.jsx";
 import RecommendationSystem from "./homecomponents/Student_Dashboard/RecommendationSystem.jsx";
 import { ToastContainer } from "react-toastify";
+import ForumSearchPage from "./Forum/ForumSearchPage.jsx";
 
 const BannerData = {
   image: Img1,
@@ -143,6 +144,7 @@ function AppRoutes() {
           element={<FinancialAidView />}
         />
         <Route path="/forum/posts/:postId" element={<PostPage />} />
+        <Route path="/forum/search" element={<ForumSearchPage />} />
         <Route path="/course/search" element={<SearchPage />} />
         <Route path="/students/signup" element={<SignUp />} />
         <Route path="/students/login" element={<Login />} />

@@ -11,10 +11,14 @@ import { GiGamepad } from "react-icons/gi";
 import { MdPalette } from "react-icons/md";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const navigate = useNavigate();
 
   const icons = {
     FaCode: <FaCode className="h-5 w-5 text-blue-500" />,
@@ -97,7 +101,6 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Categories Section */}
             <div className="grid gap-4 sm:grid-cols-2">
               {categories.map((category) => (
                 <a
@@ -126,13 +129,12 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* Recent Discussions Section */}
             <h2 className="mb-4 mt-12 text-2xl font-bold">
               Recent Discussions
             </h2>
             <div className="space-y-4">
               {posts.map((post) => (
-                <a key={post.id} href={`/posts/${post._id}`} className="block">
+                <a key={post.id} href={`/forum/posts/${post._id}`} className="block">
                   <div className="rounded-lg border border-gray-200 bg-white p-4 transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
                     <div className="mb-2 flex items-start justify-between">
                       <h3 className="text-lg font-semibold">{post.title}</h3>
@@ -188,8 +190,18 @@ export default function HomePage() {
                 <FiSearch className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                 <input
                   type="search"
-                  placeholder="Search forums..."
-                  className="w-full rounded-md border border-gray-200 bg-gray-100 py-2 pl-10 pr-4 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-100"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      // When user presses Enter, go to /forum/search?query=...
+                      navigate(
+                        `/forum/search?query=${encodeURIComponent(searchTerm)}`
+                      );
+                    }
+                  }} 
+                  placeholder="Search forums…"
+                  className="w-full pl-10 py-2 rounded border"
                 />
               </div>
             </div>
@@ -303,7 +315,7 @@ const trendingTopics = [
   {
     id: "topic-1",
     title: "React Hooks",
-    url: "/categories/programming",
+    url: "/forum/categories/programming",
     icon: <FaCode className="h-4 w-4 text-blue-500" />,
     bgColor: "bg-blue-100 dark:bg-blue-950",
     postCount: 42,
@@ -311,7 +323,7 @@ const trendingTopics = [
   {
     id: "topic-2",
     title: "Calculus Problems",
-    url: "/categories/mathematics",
+    url: "/forum/categories/mathematics",
     icon: <FiBookOpen className="h-4 w-4 text-green-500" />,
     bgColor: "bg-green-100 dark:bg-green-950",
     postCount: 28,
@@ -319,7 +331,7 @@ const trendingTopics = [
   {
     id: "topic-3",
     title: "Quantum Physics",
-    url: "/categories/science",
+    url: "/forum/categories/science",
     icon: <FaGraduationCap className="h-4 w-4 text-purple-500" />,
     bgColor: "bg-purple-100 dark:bg-purple-950",
     postCount: 35,
@@ -327,7 +339,7 @@ const trendingTopics = [
   {
     id: "topic-4",
     title: "Game Optimization",
-    url: "/categories/gaming",
+    url: "/forum/categories/gaming",
     icon: <GiGamepad className="h-4 w-4 text-red-500" />,
     bgColor: "bg-red-100 dark:bg-red-950",
     postCount: 19,

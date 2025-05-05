@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -21,6 +19,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Pencil, Award, BookOpen, User } from "lucide-react";
 import Course from "../admin/course/Course";
+import { useNavigate } from "react-router-dom";
+
 
 const Profile = () => {
   const [profile, setProfile] = useState("");
@@ -33,6 +33,8 @@ const Profile = () => {
   const [rankPic, setRankPic] = useState("");
   const [points, setPoints] = useState(0);
   const [percentage, setPercentage] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProfile();
@@ -331,7 +333,6 @@ const Profile = () => {
               </CardContent>
             </Card>
 
-            {/* Learning Statistics Card */}
             <Card className="lg:col-span-3">
               <CardHeader>
                 <CardTitle>Learning Statistics</CardTitle>
@@ -382,7 +383,7 @@ const Profile = () => {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>My Enrolled Courses</CardTitle>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={() => navigate("/students/my-learning")}>
                   View All
                 </Button>
               </CardHeader>

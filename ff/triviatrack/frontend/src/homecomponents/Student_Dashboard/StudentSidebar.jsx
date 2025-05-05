@@ -37,6 +37,11 @@ const StudentSidebar = () => {
             <CiPen className="inline-block mr-2" /> Quiz
           </Link>
         </li>
+        <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
+          <Link to="/leaderboard" className="flex items-center">
+            <CiPen className="inline-block mr-2" /> Leaderboard
+          </Link>
+        </li>
 
         <li className="flex items-center p-2 hover:scale-105 transition-all duration-300 text-lg cursor-pointer">
           <Link to="/students/progresstrack">

@@ -1,13 +1,9 @@
-"use client";
-
 import React, { useState } from "react";
 import { ChevronDown, MessageSquare, ArrowRight } from "lucide-react";
 import StudentSidebar from "./StudentSidebar";
 
-// Utility for class names
 const cn = (...classes) => classes.filter(Boolean).join(" ");
 
-// Simple UI Components
 const Button = ({ children, onClick, className = "" }) => (
     <button onClick={onClick} className={cn("bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700", className)}>
         {children}
@@ -95,9 +91,7 @@ export default function LearningPlatform() {
         <div className="flex pt-6 mt-6">
             <StudentSidebar />
 
-            {/* Main Content */}
             <div className="flex-1 flex flex-col">
-                {/* Chat Section */}
                 <div className="p-6 border-b">
                     <div className="flex items-center gap-2 mb-4">
                         <MessageSquare size={20} />
@@ -123,7 +117,6 @@ export default function LearningPlatform() {
                     </div>
                 </div>
 
-                {/* Recommendations */}
                 <div className="flex-1 p-6 overflow-y-auto">
                     <div className="flex items-center justify-between mb-6">
                         <h2 className="text-xl font-bold">Recommendations</h2>
@@ -169,7 +162,6 @@ export default function LearningPlatform() {
                 </div>
             </div>
 
-            {/* Sidebar */}
             <div className="w-96 border-l p-6 space-y-6">
                 <div className="flex items-center gap-3 border-b pb-4">
                     <Avatar src="/placeholder.svg" alt="User" />

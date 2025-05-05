@@ -261,7 +261,7 @@ export default function CategoryPage() {
                   .map((cat) => (
                     <a
                       key={cat.id}
-                      href={`/categories/${cat.slug}`}
+                      href={`/forum/categories/${cat.slug}`}
                       className="flex items-center gap-2 rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
                       <div

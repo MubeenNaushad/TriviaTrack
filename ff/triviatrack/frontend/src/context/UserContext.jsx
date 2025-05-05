@@ -8,12 +8,12 @@ export const UserProvider = ({ children }) => {
 
   
   const login = (userData) => {
-    console.log("updatedlogin")
+//    console.log("updatedlogin")
     setUser(userData);
   };
 
   const logout = () => {
-    console.log("updatedlogout")
+//    console.log("updatedlogout")
     setUser(null);
   };
 

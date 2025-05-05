@@ -145,11 +145,11 @@ const LectureTab = () => {
         </div>
         <div className="flex items-center space-x-2 my-5">
           <Switch
-            id="airplane-mode"
+            id="isFree"
             checked={isFree}
-            onChecked={isFreeHandler}
+            onCheckedChange={(value) => setIsFree(value)}
           />
-          <Label htmlFor="airplane-mode">Is this lecture free?</Label>
+          <Label htmlFor="isFree">Is this lecture free?</Label>
         </div>
 
         {mediaProgress && (
