@@ -1,6 +1,8 @@
 import multer from "multer";
+import os from "os";
 
+const dest = process.env.VERCEL
+  ? os.tmpdir()  
+  : "uploads";   
 
-const upload = multer({dest:"uploads/"})
-
-export default upload;
+export default multer({ dest });
