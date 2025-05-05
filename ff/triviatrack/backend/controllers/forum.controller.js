@@ -134,3 +134,38 @@ export const AddLikeToPost = async (req, res) => {
     return res.status(500).json({ message: "Error adding like to post" });
   }
 };
+
+
+export const searchPosts = async (req, res) => {
+  try {
+    const q = req.query.query?.trim() || "";
+
+    // 1) Build a case-insensitive regex filter on title, description, or content
+    const filter = {};
+    if (q) {
+      filter.$or = [
+        { title:       { $regex: q, $options: "i" } },
+        { description: { $regex: q, $options: "i" } },
+        { content:     { $regex: q, $options: "i" } },
+      ];
+    }
+
+    // 2) Fetch matching posts, populate author and category fields
+    const posts = await ForumPost.find(filter)
+      .populate({
+        path: "author",
+        select: "name photoUrl",    // only bring back these two
+      })
+      .populate({
+        path: "category",
+        select: "name slug",        // pull category name & slug
+        model: "ForumCategory"      // ensure it uses the right model
+      })
+      .sort({ createdAt: -1 });     // newest first
+
+    return res.status(200).json(posts);
+  } catch (err) {
+    console.error("Error in searchPosts:", err);
+    return res.status(500).json({ error: "Failed to search posts" });
+  }
+};

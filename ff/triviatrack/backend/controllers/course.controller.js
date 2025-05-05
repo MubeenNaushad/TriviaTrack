@@ -6,7 +6,7 @@ import StudentModel from "../models/user.model.js";
 export const createcourse = async (req, res) => {
   try {
     const { courseTitle, category } = req.body;
-    if (!courseTitle || !category) {
+    if (!courseTitle || !category) { 
       return res.status(400).json({
         message: "Course title and category are required.",
       });

@@ -6,6 +6,7 @@ import {
   getAllPosts,
   getPostbyId,
   getPostsByCategory,
+  searchPosts,
 } from "../controllers/forum.controller.js";
 import { verifyUserMiddleware } from "../middleware/auth.middleware.js";
 
@@ -20,6 +21,8 @@ router.get("/categories/:slug", getPostsByCategory);
 router.post("/create-post", verifyUserMiddleware, createPost);
 
 router.get("/posts/:postId", getPostbyId);
+
+router.get("/search-posts",  searchPosts);
 
 router.post(
   "/posts/:postId/add-comment",

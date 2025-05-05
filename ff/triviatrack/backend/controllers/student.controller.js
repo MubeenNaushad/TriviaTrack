@@ -94,7 +94,7 @@ const sendVerificationEmail = (email, token) => {
       user: "triviatrack09@gmail.com",
       pass: "soft epwk mzui kcuw",
     },
-  });
+  }); 
 
   const mailOptions = {
     from: "triviatrack09@gmail.com",
