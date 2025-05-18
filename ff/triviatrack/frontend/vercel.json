@@ -1,15 +1,54 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "vite.config.js",
-        "use": "@vercel/static-build",
-        "config": { "distDir": "dist" }
+  "version": 2,
+  "builds": [
+    {
+      "src": "vite.config.js",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
       }
-    ],
-    "routes": [
-      { "handle": "filesystem" },
-      { "src": "/.*", "dest": "/index.html" }
-    ]
-  }
-  
+    }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+
+    {
+      "src": "/students/(.*)",
+      "dest": "https://trivia-track-stsa.vercel.app/students/$1"
+    },
+    {
+      "src": "/course/(.*)",
+      "dest": "https://trivia-track-stsa.vercel.app/course/$1"
+    },
+    {
+      "src": "/forum/(.*)",
+      "dest": "https://trivia-track-stsa.vercel.app/forum/$1"
+    },
+    {
+      "src": "/progress/(.*)",
+      "dest": "https://trivia-track-stsa.vercel.app/progress/$1"
+    },
+    {
+      "src": "/purchase/(.*)",
+      "dest": "https://trivia-track-stsa.vercel.app/purchase/$1"
+    },
+    {
+      "src": "/auth/(.*)",
+      "dest": "https://trivia-track-stsa.vercel.app/auth/$1"
+    },
+    {
+      "src": "/financial-aid/(.*)",
+      "dest": "https://trivia-track-stsa.vercel.app/financial-aid/$1"
+    },
+    {
+      "src": "/media/(.*)",
+      "dest": "https://trivia-track-stsa.vercel.app/media/$1"
+    },
+    {
+      "src": "/api/quizzes/(.*)",
+      "dest": "https://trivia-track-stsa.vercel.app/api/quizzes/$1"
+    },
+
+    { "src": "/.*", "dest": "/index.html" }
+  ]
+}
