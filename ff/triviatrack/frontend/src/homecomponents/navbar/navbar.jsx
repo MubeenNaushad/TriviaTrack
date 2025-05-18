@@ -12,6 +12,8 @@ const Navbar = () => {
 
   const dropdownRef = useRef(null);
 
+  axios.defaults.withCredentials = true; 
+
   useEffect(() => {
 
     axios

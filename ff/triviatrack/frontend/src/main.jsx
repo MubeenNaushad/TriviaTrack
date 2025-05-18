@@ -5,6 +5,8 @@ import App from './App.jsx'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+axios.defaults.withCredentials = true;
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
