@@ -9,7 +9,7 @@ import {
 } from "../controllers/courseProgress.controller.js";
 
 const router = express.Router();
-
+ 
 router.get("/check/:courseId", verifyUserMiddleware, getCourseProgress);
 router.post(
   "/:courseId/lecture/:lectureId/view",

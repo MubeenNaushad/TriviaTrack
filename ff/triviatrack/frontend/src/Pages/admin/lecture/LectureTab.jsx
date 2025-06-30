@@ -111,8 +111,7 @@ const LectureTab = () => {
         <div>
           <CardTitle>Edit Lecture</CardTitle>
           <CardDescription>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt,
-            aspernatur.
+           
           </CardDescription>
         </div>
         <div className="flex items-center gap-2">

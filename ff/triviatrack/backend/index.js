@@ -16,6 +16,7 @@ import authRoutes from "./routes/auth.routes.js";
 import financialAidRoutes from "./routes/financialAid.routes.js";
 import forumRoutes from "./routes/forum.routes.js";
 import quizRoutes from "./routes/quiz.routes.js";
+import chatRoutes from "./routes/chatbot.routes.js";
 dotenv.config();
 
 const app = express();
@@ -64,11 +65,12 @@ app.use("/media", mediaRoutes);
 app.use("/students", studentRoutes);
 app.use("/course", courseRoutes);
 app.use("/progress", courseProgressRoute);
-app.use("/purchase", coursePurchaseRoute);
-app.use("/auth", authRoutes);
+app.use("/purchase", coursePurchaseRoute); 
+app.use("/auth", authRoutes); 
 app.use("/financial-aid", financialAidRoutes);
 app.use("/forum", forumRoutes);
 app.use("/api/quizzes", quizRoutes);
+app.use("/api", chatRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);
