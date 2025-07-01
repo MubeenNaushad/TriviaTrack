@@ -55,7 +55,7 @@ const TeacherProfileEdit = () => {
       field: ""
     },
     
-    // Contact info
+    // Contact Info
     contactInfo: {
       phone: "",
       office: "",
@@ -89,22 +89,22 @@ const TeacherProfileEdit = () => {
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    console.log('Current user:', user);
-    console.log('User type:', user?.userType);
-    
-    if (!user) {
-      // Wait for user to load
-      return;
-    }
-    
-    if (user.userType !== "Teacher") {
-      toast.error("Only teachers can access this page.");
-      navigate("/");
-      return;
-    }
-    
-    fetchTeacherProfile();
-  }, [user?.userType, navigate]);
+  console.log('Current user:', user);
+  console.log('User type:', user?.userType);
+  
+  if (!user) {
+    // Wait for user to load
+    return;
+  }
+  
+  if (user.userType !== "Teacher") {
+    toast.error("Only teachers can access this page.");
+    navigate("/");
+    return;
+  }
+  
+  fetchTeacherProfile();
+}, [user?.userType, user?.id]);// Removed navigate from dependencies
 
   const fetchTeacherProfile = async () => {
     try {
@@ -322,7 +322,7 @@ const TeacherProfileEdit = () => {
         });
         
         toast.success("Profile updated successfully!");
-        navigate("/teacher/dashboard");
+        navigate("/teacher/profile/view");
       }
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -434,15 +434,20 @@ const TeacherProfileEdit = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email * 
+                  <span className="text-xs font-normal text-gray-500">(Read-only)</span>
+                </label>
                 <input
                   type="email"
                   value={profileData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-700 cursor-not-allowed"
                   placeholder="Enter your email"
+                  disabled
+                  readOnly
                   required
                 />
+                <p className="text-xs text-gray-500 mt-1">Email is tied to your account and cannot be modified</p>
               </div>
             </div>
             
@@ -704,7 +709,131 @@ const TeacherProfileEdit = () => {
             </div>
           </div>
 
-  
+          {/* Certifications */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-6 flex items-center gap-2">
+              <FaCertificate className="text-blue-600" />
+              Certifications
+            </h2>
+            
+            <div className="space-y-4">
+              {profileData.certifications.map((cert, index) => (
+                <div key={index} className="flex gap-3 items-end">
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Certification Name</label>
+                    <input
+                      type="text"
+                      value={cert.name}
+                      onChange={(e) => handleCertificationChange(index, 'name', e.target.value)}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Certification name"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Issuing Organization</label>
+                    <input
+                      type="text"
+                      value={cert.issuer}
+                      onChange={(e) => handleCertificationChange(index, 'issuer', e.target.value)}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Organization name"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
+                    <input
+                      type="number"
+                      min="1990"
+                      max={new Date().getFullYear()}
+                      value={cert.year}
+                      onChange={(e) => handleCertificationChange(index, 'year', e.target.value)}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Year"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeFromArray('certifications', index)}
+                    className="px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              ))}
+              
+              <button
+                type="button"
+                onClick={() => addToArray('certifications', { name: '', issuer: '', year: '' })}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
+              >
+                <FaPlus /> Add Certification
+              </button>
+            </div>
+          </div>
+
+          {/* Achievements */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-6 flex items-center gap-2">
+              <FaTrophy className="text-blue-600" />
+              Achievements & Awards
+            </h2>
+            
+            <div className="space-y-4">
+              {profileData.achievements.map((achievement, index) => (
+                <div key={index} className="flex gap-3 items-end">
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Achievement Title</label>
+                    <input
+                      type="text"
+                      value={achievement.title}
+                      onChange={(e) => handleAchievementChange(index, 'title', e.target.value)}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Achievement title"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                    <input
+                      type="text"
+                      value={achievement.description}
+                      onChange={(e) => handleAchievementChange(index, 'description', e.target.value)}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Brief description"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
+                    <input
+                      type="number"
+                      min="1990"
+                      max={new Date().getFullYear()}
+                      value={achievement.year}
+                      onChange={(e) => handleAchievementChange(index, 'year', e.target.value)}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Year"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeFromArray('achievements', index)}
+                    className="px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              ))}
+              
+              <button
+                type="button"
+                onClick={() => addToArray('achievements', { title: '', description: '', year: '' })}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
+              >
+                <FaPlus /> Add Achievement
+              </button>
+            </div>
+          </div>
+
+          {/* Profile Visibility */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <h2 className="text-xl font-semibold text-gray-800 mb-6">Profile Visibility</h2>
             
@@ -722,12 +851,12 @@ const TeacherProfileEdit = () => {
             </div>
           </div>
 
-    
+          {/* Save Button */}
           <div className="sticky bottom-0 bg-white border-t border-gray-200 p-6 rounded-xl shadow-sm">
             <div className="flex gap-4 justify-end">
               <button
                 type="button"
-                onClick={() => navigate("/teacher-dashboard")}
+                onClick={() => navigate("/teacher/profile/view")}
                 className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
               >
                 Cancel

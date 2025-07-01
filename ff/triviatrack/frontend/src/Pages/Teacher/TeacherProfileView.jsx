@@ -342,31 +342,8 @@ const TeacherProfileView = () => {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Teaching Stats */}
-            {isOwnProfile && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                  <FaAward className="text-blue-600" />
-                  Teaching Stats
-                </h2>
-                
-                <div className="space-y-4">
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold text-blue-600">{stats.coursesCreated || 0}</h3>
-                    <p className="text-sm text-gray-600">Courses Created</p>
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold text-green-600">{stats.totalStudents || 0}</h3>
-                    <p className="text-sm text-gray-600">Total Students</p>
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold text-purple-600">{stats.quizzesCreated || 0}</h3>
-                    <p className="text-sm text-gray-600">Quizzes Created</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Contact Information */}
+           
+         
             {profile.contactInfo && (profile.contactInfo.phone || profile.contactInfo.office || profile.contactInfo.officeHours) && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                 <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
