@@ -10,18 +10,6 @@ export default function Leaderboard() {
     { id: 3, name: "Arish Amin", rank: 3, score: 8450, quizzes: 35 },
   ];
 
-/*  const globalRankings = [
-    { id: 1, name: "Dr. Adeel Ansari", quizzes: 42, points: 9850 },
-    { id: 2, name: "Mubeen Naushad", quizzes: 38, points: 8720 },
-    { id: 3, name: "Arish Amin", quizzes: 35, points: 8450 },
-    { id: 4, name: "Ali", quizzes: 31, points: 7980 },
-    { id: 5, name: "Shawn", quizzes: 29, points: 7650 },
-    { id: 6, name: "Soban", quizzes: 27, points: 7320 },
-    { id: 7, name: "Umer", quizzes: 25, points: 6890 },
-    { id: 8, name: "Mahad", quizzes: 23, points: 6540 },
-    { id: 9, name: "Waqas", quizzes: 21, points: 6210 },
-    { id: 10, name: "Imran", quizzes: 19, points: 5980 },
-  ]; */
 
   const categoryChampions = [
     { category: "Science", name: "Arish Amin", points: 2450 },

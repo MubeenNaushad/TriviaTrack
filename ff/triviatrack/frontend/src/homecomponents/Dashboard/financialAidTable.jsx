@@ -60,7 +60,6 @@ const FinancialAidTable = () => {
                 <TableHead>Course Name</TableHead>
                 <TableHead>Employment Status</TableHead>
                 <TableHead>Aid Status</TableHead>
-                {/* <TableHead>Aid Reason</TableHead> */}
                 <TableHead>Submitted</TableHead>
                 <TableHead className="text-right">Action</TableHead>
               </TableRow>

@@ -10,35 +10,35 @@ export const getFilteredNavbarMenu = (userType) => {
         id: 2,
         title: "Students Dashboard",
         link: "/students/dashboard",
-        allowedRoles: ["Student"], // Only for students
+        allowedRoles: ["Student"], 
       },
       {
         id: 3,
         title: "Courses",
         link: "/courses",
-        allowedRoles: ["Student", "Teacher"], // Both roles can access
+        allowedRoles: ["Student", "Teacher"], 
       },
       {
         id: 4,
         title: "Teacher Dashboard",
         link: "/teacher/dashboard",
-        allowedRoles: ["Teacher"], // Only for teachers
+        allowedRoles: ["Teacher"], 
       },
       {
         id: 5,
         title: "Contact",
         link: "/contact",
-        allowedRoles: ["Student", "Teacher"], // Both roles can access
+        allowedRoles: ["Student", "Teacher"], 
       },
       {
         id: 6,
         title: "Live Session",
         link: "/live",
-        allowedRoles: ["Student", "Teacher"], // Both roles can access
+        allowedRoles: ["Student", "Teacher"], 
       },
     ];
   
-    // Filter menu items based on userType
+  
     return NavbarMenu.filter((menu) => menu.allowedRoles.includes(userType));
   };
   

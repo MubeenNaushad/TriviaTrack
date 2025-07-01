@@ -60,7 +60,6 @@ const CourseAidTable = () => {
                 <TableHead>Course Name</TableHead>
                 <TableHead>Employment Status</TableHead>
                 <TableHead>Annual Income</TableHead>
-                {/* <TableHead>Aid Reason</TableHead> */}
                 <TableHead>Submitted</TableHead>
                 <TableHead className="text-right">Action</TableHead>
               </TableRow>
@@ -77,7 +76,6 @@ const CourseAidTable = () => {
                   <TableCell className="font-medium">
                     ${app.annualIncome}
                   </TableCell>
-                  {/* <TableCell>{app.aidReason}</TableCell> */}
                   <TableCell>
                     {new Date(app.submittedAt).toLocaleString()}
                   </TableCell>

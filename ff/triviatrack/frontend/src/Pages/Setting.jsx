@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
+
 const Setting = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">

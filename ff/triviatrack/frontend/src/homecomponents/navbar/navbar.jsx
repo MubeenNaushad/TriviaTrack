@@ -131,7 +131,7 @@ const Navbar = () => {
               For Students
             </button>
           )}
-          {(user?.userType === "Teacher") || (user?.userType === "Admin") && (
+          {/* {(user?.userType === "Teacher") || (user?.userType === "Admin") && (
             <>
               <button
                 onClick={() => navigate("/teacher/dashboard")}
@@ -146,7 +146,7 @@ const Navbar = () => {
                 My Profile
               </button>
             </>
-          )}
+          )} */}
         </div>
 
         <div className="hidden lg:flex items-center space-x-4">

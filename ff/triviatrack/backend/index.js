@@ -29,10 +29,10 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      httpOnly: true,           // JS in browser can’t read the cookie
-      secure: true,             // only send over HTTPS
-      sameSite: "none",         // allow cross-site
-      maxAge: 1000 * 60 * 60 * 24 // 1 day
+      httpOnly: true,           
+      secure: true,             
+      sameSite: "none",         
+      maxAge: 1000 * 60 * 60 * 24 
     },
   })
 );

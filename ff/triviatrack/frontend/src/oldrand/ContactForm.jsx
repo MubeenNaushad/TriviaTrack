@@ -14,19 +14,19 @@ function ContactForm() {
     e.preventDefault();
     setSubmitted(true);
 
-    // Reset after a short delay
+
     setTimeout(() => setSubmitted(false), 3000);
     setFormData({ name: "", email: "", message: "" });
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      {/* Card Container */}
+    
       <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row items-center p-8 md:p-10 gap-8 md:gap-12">
 
-        {/* Left Image Section */}
+    
         <div className="flex-1 flex items-center justify-center">
-          {/* Update the src to match your image path or a hosted URL */}
+        
           <img
             src="/src/assets/ContactUs.png"
             alt="Contact Support"
@@ -34,7 +34,7 @@ function ContactForm() {
           />
         </div>
 
-        {/* Form Section with Framer Motion Animation */}
+     
         <motion.div
           className="flex-1"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -49,7 +49,7 @@ function ContactForm() {
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Name Field */}
+           
             <div>
               <input
                 type="text"
@@ -62,7 +62,7 @@ function ContactForm() {
               />
             </div>
 
-            {/* Email Field */}
+        
             <div>
               <input
                 type="email"
@@ -75,7 +75,7 @@ function ContactForm() {
               />
             </div>
 
-            {/* Message Field */}
+         
             <div>
               <textarea
                 name="message"
@@ -88,7 +88,7 @@ function ContactForm() {
               ></textarea>
             </div>
 
-            {/* Submit Button */}
+          
             <button
               type="submit"
               className="w-full py-3 rounded-full bg-blue-600 text-white font-semibold text-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
@@ -97,7 +97,7 @@ function ContactForm() {
             </button>
           </form>
 
-          {/* Success / Additional Links */}
+       
           <div className="mt-6 text-center text-sm text-gray-600">
             {submitted ? (
               <p className="font-medium text-green-600">Your message has been sent! Thank you!</p>

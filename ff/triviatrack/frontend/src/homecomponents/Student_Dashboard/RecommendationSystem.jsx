@@ -18,7 +18,7 @@ const Button = ({ children, onClick, className = "", disabled = false }) => (
   </button>
 );
 
-const Input = ({ value, onChange, placeholder, onKeyPress }) => (
+const Input = ({ value, onChange, placeholder }) => (
   <input
     value={value}
     onChange={onChange}
@@ -59,7 +59,7 @@ export default function LearningPlatform() {
       description: "Learn the fundamentals of React and build interactive UIs",
       image: "https://cdn.worldvectorlogo.com/logos/react-1.svg",
       category: "Programming",
-      progress: 0,
+      progress: 10,
     },
     {
       id: 2,
@@ -78,7 +78,7 @@ export default function LearningPlatform() {
       progress: 98,
     },
   ]);
-  const [userProgress, setUserProgress] = useState(65);
+  const [userProgress, setUserProgress] = useState(85);
 
   const getAIResponse = async (userMessage) => {
     if (!OPENAI_API_KEY) return "API key missing. Configure VITE_OPENAI_API_KEY in your .env.";
@@ -118,8 +118,8 @@ export default function LearningPlatform() {
       return data.choices?.[0]?.message?.content || "Invalid response from OpenAI.";
     } catch (err) {
       const fallback = [
-        "🤖 I'm having trouble. Try exploring React, UX Design, or Data Science courses!",
-        "⚠️ AI is down. Check out our React course to begin your coding journey!",
+        "I'm having trouble. Try exploring React, UX Design, or Data Science courses!",
+        "AI is down. Check out our React course to begin your coding journey!",
       ];
       return fallback[Math.floor(Math.random() * fallback.length)];
     }
@@ -147,11 +147,6 @@ export default function LearningPlatform() {
     }
   };
 
-  const startCourse = (id) => {
-    setCourses((c) => c.map((course) => (course.id === id ? { ...course, progress: 10 } : course)));
-    setUserProgress((p) => Math.min(p + 5, 100));
-  };
-
   return (
     <div className="flex pt-6 mt-6">
       <StudentSidebar />
@@ -173,7 +168,7 @@ export default function LearningPlatform() {
                     {msg.isBot && (
                       <div className="flex items-center gap-2 mb-1">
                         <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <span className="text-xs font-medium text-blue-600">OpenAI Assistant</span>
+                        <span className="text-xs font-medium text-blue-600">TriviaTrack AI Assistant</span>
                       </div>
                     )}
                     <div className="whitespace-pre-wrap">{msg.text}</div>
@@ -186,11 +181,11 @@ export default function LearningPlatform() {
                   <div className="bg-blue-50 border border-blue-200 p-3 rounded-2xl max-w-[80%]">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span className="text-xs font-medium text-blue-600">OpenAI Assistant</span>
+                      <span className="text-xs font-medium text-blue-600">TriviaTrack AI Assistant</span>
                     </div>
                     <div className="flex items-center gap-1 mt-1">
                       <Loader2 size={16} className="animate-spin text-blue-500" />
-                      <span className="text-sm text-gray-600">AI is thinking...</span>
+                      <span className="text-sm text-gray-600">TriviaTrack AI Assistant is thinking...</span>
                     </div>
                   </div>
                 </div>
@@ -252,7 +247,7 @@ export default function LearningPlatform() {
                       <ProgressBar value={course.progress} />
                     </div>
                   ) : (
-                    <Button onClick={() => startCourse(course.id)}>Start Course</Button>
+                    <Button onClick={() => startCourse(course.id)}>Reprogress Course</Button>
                   )}
                 </div>
               </div>

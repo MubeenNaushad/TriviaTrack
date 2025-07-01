@@ -15,7 +15,7 @@ export default function NoticeBoard() {
         _id: "2",
         title: "Notice 2",
         description: "This is the second notice.",
-        urgent: false,
+        urgent: true,
         createdAt: Date.now(),
     },
     {

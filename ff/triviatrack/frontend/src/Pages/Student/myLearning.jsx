@@ -33,11 +33,11 @@ const MyLearning = () => {
         console.log("prog", progressData);
         setProgress((prevProgress) => ({
           ...prevProgress,
-          [courseId]: progressData.filter((p) => p.viewed).length, // Only count viewed lectures
+          [courseId]: progressData.filter((p) => p.viewed).length, 
         }));
         setTotalLectures((prevProgress) => ({
           ...prevProgress,
-          [courseId]: progressData.length, // Only count viewed lectures
+          [courseId]: progressData.length, 
         }));
         console.log("prg", progress);
       })
