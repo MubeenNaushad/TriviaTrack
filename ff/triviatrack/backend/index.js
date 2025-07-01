@@ -72,7 +72,7 @@ app.use("/auth", authRoutes);
 app.use("/financial-aid", financialAidRoutes);
 app.use("/forum", forumRoutes);
 app.use("/api/quizzes", quizRoutes);
-app.use("/api", chatRoutes);
+app.use("/chatbot", chatRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);
