@@ -64,6 +64,7 @@ import RecommendationSystem from "./homecomponents/Student_Dashboard/Recommendat
 import { ToastContainer } from "react-toastify";
 import ForumSearchPage from "./Forum/ForumSearchPage.jsx";
 import ObstacleCourse from "./Pages/admin/games/ObstacleCourse.jsx";
+import IndustryMenu from "./Pages/admin/games/IndustryMenu.jsx";
 
 const BannerData = {
   image: Img1,
@@ -86,7 +87,7 @@ const BannerData2 = {
 function AppRoutes() {
   const location = useLocation();
 
-  const hideNavbar = location.pathname === "/game";
+  const hideNavbar = location.pathname === "/game" || location.pathname === "/industry-ready";
 
   return (
     <>
@@ -134,13 +135,14 @@ function AppRoutes() {
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/financial-aid/:courseId" element={<FinancialAidForm />} />
         <Route path="/game" element={<Game />} />
+        <Route path="/industry-ready" element={<IndustryMenu />} />
         <Route
           path="/course-financial-aid-applications"
           element={<CourseAidTable />}
         />
         <Route
           path="/financial-aid-applications"
-          element={<FinancialAidTable />}
+          element={<FinancialAidTable />} 
         />
         <Route
           path="/financial-aid-view/:appId"
