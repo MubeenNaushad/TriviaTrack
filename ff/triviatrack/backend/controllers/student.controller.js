@@ -56,7 +56,7 @@ export const login = (req, res) => {
 };
 
 export const signup = async (req, res) => { 
-  const { name, email, password, userType } = req.body;
+  const { name, email, password, userType, teacherId } = req.body;
 
   try {
     const existingUser = await StudentModel.findOne({ email });
@@ -76,6 +76,7 @@ export const signup = async (req, res) => {
       userType,
       isVerified: false,
       verificationToken,
+      teacherId,
     });
 
     await newUser.save();

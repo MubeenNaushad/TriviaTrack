@@ -32,7 +32,7 @@ const Login = () => {
           login({
             name: user.name || "Unknown",
             userType: user.userType || "Unknown",
-            profilePhoto: user.photoUrl || "https://via.placeholder.com/40",
+            profilePhoto: user.photoUrl || "https://ui-avatars.com/api/?name=User&background=6366f1&color=ffffff&size=40",
           })
           navigate("/")
           toast.success("Login Successful")

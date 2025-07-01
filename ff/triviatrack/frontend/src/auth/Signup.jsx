@@ -2,12 +2,13 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useState } from "react"
 import { useUser } from "../context/UserContext"
-import { FaGoogle, FaUser, FaEnvelope, FaLock, FaChalkboardTeacher, FaGraduationCap } from "react-icons/fa"
+import { FaGoogle, FaUser, FaEnvelope, FaLock, FaChalkboardTeacher, FaGraduationCap, FaIdCard } from "react-icons/fa"
 
 const Signup = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
+  const [teacherId, setTeacherId] = useState("")
   const [userType, setUserType] = useState("Student")
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -17,6 +18,7 @@ const Signup = () => {
   const validateName = (name) => /^[^\d][\w\s]{3,30}$/.test(name)
   const validateEmail = (email) => /^[^\d][a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
   const validatePassword = (password) => /^(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)
+  const validateTeacherId = (id) => /^[A-Za-z0-9]{4,20}$/.test(id)
 
   axios.defaults.withCredentials = true
 
@@ -33,6 +35,9 @@ const Signup = () => {
     if (!validatePassword(password)) {
       validationErrors.password = "Password must have at least 8 characters with one digit and one uppercase letter"
     }
+    if (userType === "Teacher" && !validateTeacherId(teacherId)) {
+      validationErrors.teacherId = "Teacher ID must be 4-20 alphanumeric characters"
+    }
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors)
@@ -42,13 +47,20 @@ const Signup = () => {
     setErrors({})
     setIsSubmitting(true)
 
+    const signupData = {
+      email,
+      password,
+      name,
+      userType,
+    }
+
+    // Add teacherId only if user is a teacher
+    if (userType === "Teacher") {
+      signupData.teacherId = teacherId
+    }
+
     axios
-      .post(`${import.meta.env.VITE_APP_BASEURL}/students/signup`, {
-        email,
-        password,
-        name,
-        userType,
-      })
+      .post(`${import.meta.env.VITE_APP_BASEURL}/students/signup`, signupData)
       .then((res) => {
         console.log("API Response:", res.data)
         if (res.data.user) {
@@ -56,7 +68,7 @@ const Signup = () => {
           login({
             name: user.name || "Unknown",
             userType: user.userType || "Unknown",
-            profilePhoto: user.photoUrl || "https://via.placeholder.com/40",
+            profilePhoto: user.photoUrl || "https://ui-avatars.com/api/?name=User&background=6366f1&color=ffffff&size=40",
           })
           alert("Verify your account before logging in.")
           navigate("/")
@@ -79,7 +91,7 @@ const Signup = () => {
       <div className="relative w-full max-w-md p-8 space-y-6 bg-white rounded-2xl shadow-xl text-gray-800 text-center animate-fade-in mt-10">
         <div className="absolute inset-0 bg-gray-100 rounded-2xl z-0"></div>
 
-        {/* Decorative elements */}
+      
         <div className="absolute -top-6 -left-6 w-12 h-12 bg-purple-500/20 rounded-full blur-xl"></div>
         <div className="absolute -bottom-6 -right-6 w-12 h-12 bg-pink-500/20 rounded-full blur-xl"></div>
 
@@ -142,6 +154,25 @@ const Signup = () => {
               />
             </div>
             {errors.email && <p className="text-red-500 text-sm text-left pl-1 -mt-2 animate-fadeIn">{errors.email}</p>}
+
+            {userType === "Teacher" && (
+              <>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-500">
+                    <FaIdCard />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Teacher ID"
+                    required
+                    value={teacherId}
+                    onChange={(e) => setTeacherId(e.target.value)}
+                    className="w-full py-3.5 pl-11 pr-4 rounded-xl bg-gray-50 text-gray-800 placeholder-gray-400 border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 focus:outline-none transition-all duration-300"
+                  />
+                </div>
+                {errors.teacherId && <p className="text-red-500 text-sm text-left pl-1 -mt-2 animate-fadeIn">{errors.teacherId}</p>}
+              </>
+            )}
 
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-500">

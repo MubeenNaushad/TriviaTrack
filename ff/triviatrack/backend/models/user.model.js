@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema(
       return !this.googleId; 
     },
   },
+    teacherId: {
+    type: String,
+    unique: true,
+  },
     isVerified: {
       type: Boolean,
       default: false,

@@ -27,7 +27,7 @@ const Navbar = () => {
             userType: response.data.user.userType,
             email: response.data.user.email,
             profilePhoto:
-              response.data.user.photoUrl || "https://via.placeholder.com/40",
+              response.data.user.photoUrl || `https://ui-avatars.com/api/?name=${response.data.user.name}&background=6366f1&color=ffffff&size=40`,
           });
         } else {
           logout();
