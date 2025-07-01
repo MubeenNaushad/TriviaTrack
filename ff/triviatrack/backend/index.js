@@ -18,6 +18,8 @@ import financialAidRoutes from "./routes/financialAid.routes.js";
 import forumRoutes from "./routes/forum.routes.js";
 import quizRoutes from "./routes/quiz.routes.js";
 import chatRoutes from "./routes/chatbot.routes.js";
+import gameRoutes from "./routes/game.routes.js";
+
 dotenv.config();
 
 const app = express();
@@ -73,6 +75,8 @@ app.use("/financial-aid", financialAidRoutes);
 app.use("/forum", forumRoutes);
 app.use("/api/quizzes", quizRoutes);
 app.use("/chatbot", chatRoutes);
+app.use("/api/game", gameRoutes);
+
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);
