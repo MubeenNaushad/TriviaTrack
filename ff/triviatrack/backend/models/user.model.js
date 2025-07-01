@@ -57,6 +57,17 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Pre-save middleware to generate teacherId for teachers
+userSchema.pre('save', function(next) {
+  if (this.userType === 'Teacher' && !this.teacherId) {
+    // Generate a unique teacherId (format: T + timestamp + random)
+    const timestamp = Date.now().toString().slice(-6);
+    const random = Math.random().toString(36).substring(2, 5).toUpperCase();
+    this.teacherId = `T${timestamp}${random}`;
+  }
+  next();
+});
+
 const StudentModel = mongoose.model("User", userSchema);
 
 export default StudentModel;

@@ -48,6 +48,8 @@ import { UserProvider } from "./context/UserContext.jsx";
 import VerifyAccount from "./auth/VerifyAccount.jsx";
 import StudentProfile from "./homecomponents/Dashboard/StudentProfile.jsx";
 import Setting from "./Pages/Setting.jsx";
+import TeacherProfileEdit from "./Pages/Teacher/TeacherProfileEdit.jsx";
+import TeacherProfileView from "./Pages/Teacher/TeacherProfileView.jsx";
 import ProgressTracker from "./homecomponents/Student_Dashboard/ProgressTracker.jsx";
 import CategoryPage from "./Forum/Categories.jsx";
 import Leaderboard from "./homecomponents/Dashboard/Leaderboard.jsx";
@@ -173,6 +175,9 @@ function AppRoutes() {
           element={<StudentProfile />}
         />
         <Route path="/students/profile" element={<Profile />} />
+        <Route path="/teacher/profile/view" element={<TeacherProfileView />} />
+        <Route path="/teacher/profile/edit" element={<TeacherProfileEdit />} />
+        <Route path="/teacher/profile/:teacherId" element={<TeacherProfileView />} />
         <Route path="/students/forgot-password" element={<ForgotPassword />} />
         <Route
           path="/students/verify-account/:token"
@@ -197,6 +202,8 @@ function AppRoutes() {
           path="/list-course/:courseId/lecture/:lectureId"
           element={<EditLecture />}
         />
+        <Route path="/teacher/profile/edit" element={<TeacherProfileEdit />} />
+        <Route path="/teacher/profile/view" element={<TeacherProfileView />} />
       </Routes>
     </>
   );

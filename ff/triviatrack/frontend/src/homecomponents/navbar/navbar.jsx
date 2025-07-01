@@ -132,12 +132,20 @@ const Navbar = () => {
             </button>
           )}
           {(user?.userType === "Teacher") || (user?.userType === "Admin") && (
-            <button
-              onClick={() => navigate("/teacher/dashboard")}
-              className="hover:text-blue-400 transition-all font-medium"
-            >
-              Dashboard
-            </button>
+            <>
+              <button
+                onClick={() => navigate("/teacher/dashboard")}
+                className="hover:text-blue-400 transition-all font-medium"
+              >
+                Dashboard
+              </button>
+              <button
+                onClick={() => navigate("/teacher/profile/view")}
+                className="hover:text-blue-400 transition-all font-medium"
+              >
+                My Profile
+              </button>
+            </>
           )}
         </div>
 
@@ -176,6 +184,14 @@ const Navbar = () => {
                   >
                     My Profile
                   </button>
+                  {user.userType === "Teacher" && (
+                    <button
+                      className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                      onClick={() => navigate("/teacher/profile/view")}
+                    >
+                      Teacher Profile
+                    </button>
+                  )}
                   {(user.userType === "Teacher") || (user.userType === "Admin") ? (
                     <button
                       className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"

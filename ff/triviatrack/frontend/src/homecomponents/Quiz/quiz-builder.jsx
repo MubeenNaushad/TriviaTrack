@@ -13,12 +13,14 @@ import Sidebars from "../Dashboard/Sidebar.jsx";
 import { motion } from "framer-motion";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "react-toastify";
+import { useUser } from "../../context/UserContext";
 
 const API_BASE_URL = import.meta.env.VITE_APP_BASEURL;
 
 export default function QuizBuilder() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useUser();
 
   const [quizTitle, setQuizTitle] = useState("");
   const [quizDescription, setQuizDescription] = useState("");
@@ -28,6 +30,7 @@ export default function QuizBuilder() {
   const [error, setError] = useState("");
   const [courses, setCourses] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState("");
+  const [coursesLoading, setCoursesLoading] = useState(true);
 
   axios.defaults.withCredentials = true;
 

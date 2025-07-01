@@ -35,3 +35,5 @@ export const deleteVideo = async (publicId) => {
         console.log(error);
     }
 }
+
+export default cloudinary;
