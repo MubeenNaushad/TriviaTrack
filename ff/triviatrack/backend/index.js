@@ -18,6 +18,8 @@ import financialAidRoutes from "./routes/financialAid.routes.js";
 import forumRoutes from "./routes/forum.routes.js";
 import quizRoutes from "./routes/quiz.routes.js";
 import chatRoutes from "./routes/chatbot.routes.js";
+import gameRoutes from "./routes/game.routes.js";
+
 dotenv.config();
 
 const app = express();
@@ -29,10 +31,10 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      httpOnly: true,           
-      secure: true,             
-      sameSite: "none",         
-      maxAge: 1000 * 60 * 60 * 24 
+      httpOnly: true,           // JS in browser can’t read the cookie
+      secure: true,             // only send over HTTPS
+      sameSite: "none",         // allow cross-site
+      maxAge: 1000 * 60 * 60 * 24 // 1 day
     },
   })
 );
@@ -73,6 +75,8 @@ app.use("/financial-aid", financialAidRoutes);
 app.use("/forum", forumRoutes);
 app.use("/api/quizzes", quizRoutes);
 app.use("/chatbot", chatRoutes);
+app.use("/api/game", gameRoutes);
+
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);

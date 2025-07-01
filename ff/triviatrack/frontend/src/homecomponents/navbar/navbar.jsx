@@ -184,6 +184,12 @@ const Navbar = () => {
                   >
                     My Profile
                   </button>
+                  <button
+                    className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                    onClick={() => navigate("/industry-ready")}
+                  >
+                    Industry Ready Tests
+                  </button>
                   {user.userType === "Teacher" && (
                     <button
                       className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
