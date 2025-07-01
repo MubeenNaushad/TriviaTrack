@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
 export default function ArrowGame({ onBackToMenu }) {
-  const [gameState, setGameState] = useState("idle"); // "idle", "playing", "finished"
-  const [questionType, setQuestionType] = useState(""); // "pointing" or "moving"
+  const [gameState, setGameState] = useState("idle"); 
+  const [questionType, setQuestionType] = useState(""); 
   const [pointingDirection, setPointingDirection] = useState("");
   const [movingDirection, setMovingDirection] = useState("");
   const [showingArrows, setShowingArrows] = useState(false);
@@ -16,7 +16,7 @@ export default function ArrowGame({ onBackToMenu }) {
   const directions   = ["up", "down", "left", "right"];
   const arrowSymbols = { up: "↑", down: "↓", left: "←", right: "→" };
 
-  // Start new question
+
   const startNewQuestion = useCallback(() => {
     if (gameTimeLeft <= 0) {
       setGameState("finished");
@@ -36,7 +36,7 @@ export default function ArrowGame({ onBackToMenu }) {
     setCanAnswer(true);
   }, [gameTimeLeft]);
 
-  // Handle question timeout
+  
   const handleQuestionTimeout = useCallback(() => {
     if (!canAnswer) return;
     setFeedback("TOO SLOW!");
@@ -49,7 +49,7 @@ export default function ArrowGame({ onBackToMenu }) {
     }, 800);
   }, [canAnswer, startNewQuestion]);
 
-  // Game timer (90s)
+
   useEffect(() => {
     if (gameTimeLeft > 0 && gameState === "playing") {
       const t = setTimeout(() => setGameTimeLeft((p) => p - 1), 1000);
@@ -60,7 +60,7 @@ export default function ArrowGame({ onBackToMenu }) {
     }
   }, [gameTimeLeft, gameState]);
 
-  // Question timer (3s)
+  
   useEffect(() => {
     if (questionTimeLeft > 0 && showingArrows && gameState === "playing") {
       const t = setTimeout(() => setQuestionTimeLeft((p) => p - 1), 1000);
@@ -71,7 +71,7 @@ export default function ArrowGame({ onBackToMenu }) {
     }
   }, [questionTimeLeft, showingArrows, gameState, handleQuestionTimeout]);
 
-  // Key handling
+
   const handleKeyPress = useCallback(
     (e) => {
       if (!canAnswer || !showingArrows || gameState !== "playing") return;
@@ -114,14 +114,14 @@ export default function ArrowGame({ onBackToMenu }) {
     }
   }, [gameState, handleKeyPress]);
 
-  // Kick off first question
+  
   useEffect(() => {
     if (gameState === "playing" && gameTimeLeft === 90 && !showingArrows) {
       startNewQuestion();
     }
   }, [gameState, gameTimeLeft, showingArrows, startNewQuestion]);
 
-  // Start/reset
+ 
   function startGame() {
     setGameState("playing");
     setGameTimeLeft(90);
@@ -141,7 +141,7 @@ export default function ArrowGame({ onBackToMenu }) {
     setCanAnswer(false);
   }
 
-  // Movement animation class
+
   function getMovementClass() {
     switch (movingDirection) {
       case "up":    return "animate-march-up";
@@ -152,7 +152,7 @@ export default function ArrowGame({ onBackToMenu }) {
     }
   }
 
-  // Submit score once, on finish
+ 
   useEffect(() => {
     if (gameState === "finished" && !hasSubmittedRef.current) {
       hasSubmittedRef.current = true;
@@ -167,7 +167,7 @@ export default function ArrowGame({ onBackToMenu }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-teal-900 to-blue-900 flex items-center justify-center p-4">
-      {/* Inline keyframes */}
+
       <style>{`
         @keyframes march-up    { 0% { transform: translateY(60px); } 100% { transform: translateY(-60px); } }
         @keyframes march-down  { 0% { transform: translateY(-60px); } 100% { transform: translateY(60px); } }
@@ -180,7 +180,7 @@ export default function ArrowGame({ onBackToMenu }) {
       `}</style>
 
       <div className="bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-4xl w-full border border-gray-700">
-        {/* Header */}
+       
         <div className="relative text-center mb-8">
           <button
             onClick={onBackToMenu}
@@ -203,7 +203,7 @@ export default function ArrowGame({ onBackToMenu }) {
           )}
         </div>
 
-        {/* Game Area */}
+       
         {gameState === "playing" && (
           <>
             <div className="flex justify-center mb-8">
@@ -259,7 +259,7 @@ export default function ArrowGame({ onBackToMenu }) {
           </>
         )}
 
-        {/* Feedback */}
+        
         {feedback && (
           <div className="text-center mb-6">
             <span
@@ -272,7 +272,7 @@ export default function ArrowGame({ onBackToMenu }) {
           </div>
         )}
 
-        {/* Controls */}
+    
         {gameState === "idle" && (
           <div className="text-center">
             <div className="text-gray-300 text-lg mb-6">
@@ -293,7 +293,7 @@ export default function ArrowGame({ onBackToMenu }) {
           </div>
         )}
 
-        {/* Results */}
+       
         {gameState === "finished" && (
           <div className="text-center">
             <h2 className="text-3xl font-bold text-green-400 mb-4">
@@ -319,7 +319,7 @@ export default function ArrowGame({ onBackToMenu }) {
           </div>
         )}
 
-        {/* HelpTip */}
+   
         {gameState === "playing" && (
           <div className="mt-8 text-center">
             <p className="text-gray-400 text-sm">

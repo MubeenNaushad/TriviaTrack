@@ -9,7 +9,7 @@ export default function ReactorGame({ onBackToMenu }) {
   const [points, setPoints] = useState(0);
   const hasSubmittedRef = useRef(false);
 
-  // Step-by-step display
+  
   const showSequence = useCallback(() => {
     if (currentStep >= sequence.length) {
       setTimeout(() => {
@@ -44,7 +44,7 @@ export default function ReactorGame({ onBackToMenu }) {
     }, 800);
   }, [currentStep, sequence]);
 
-  // Trigger sequence display
+
   useEffect(() => {
     if (gameState === "showing" && currentStep < sequence.length) {
       showSequence();
@@ -56,7 +56,7 @@ export default function ReactorGame({ onBackToMenu }) {
     }
   }, [gameState, currentStep, sequence.length, showSequence]);
 
-  // Start game
+
   function startGame() {
     const newSeq = Array.from({ length: 5 }, () =>
       Math.floor(Math.random() * 9)
@@ -69,7 +69,7 @@ export default function ReactorGame({ onBackToMenu }) {
     hasSubmittedRef.current = false;
   }
 
-  // Handle user click
+ 
   function handleSquareClick(i) {
     if (gameState !== "waiting") return;
 
@@ -89,7 +89,7 @@ export default function ReactorGame({ onBackToMenu }) {
     }
   }
 
-  // Reset
+
   function resetGame() {
     setGameState("idle");
     setSequence([]);
@@ -99,7 +99,7 @@ export default function ReactorGame({ onBackToMenu }) {
     setPoints(0);
   }
 
-  // Submit score once on finish
+  
   useEffect(() => {
     if (gameState === "finished" && !hasSubmittedRef.current) {
       hasSubmittedRef.current = true;
@@ -115,7 +115,7 @@ export default function ReactorGame({ onBackToMenu }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 flex items-center justify-center p-4">
       <div className="bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-6xl w-full border border-gray-700">
-        {/* Header */}
+     
         <div className="relative text-center mb-8">
           <button
             onClick={onBackToMenu}
@@ -133,9 +133,9 @@ export default function ReactorGame({ onBackToMenu }) {
           </div>
         </div>
 
-        {/* Game Panels */}
+      
         <div className="flex justify-center items-start gap-12 mb-8">
-          {/* Display */}
+       
           <div className="text-center">
             <h3 className="text-lg text-gray-300 mb-4">SEQUENCE DISPLAY</h3>
             <div className="bg-black rounded-xl p-6 border-2 border-gray-600">
@@ -158,7 +158,7 @@ export default function ReactorGame({ onBackToMenu }) {
             </div>
           </div>
 
-          {/* Controls */}
+      
           <div className="text-center">
             <h3 className="text-lg text-gray-300 mb-4">CONTROL PANEL</h3>
             <div className="bg-gray-700 rounded-xl p-6 border-2 border-gray-500">
@@ -184,7 +184,7 @@ export default function ReactorGame({ onBackToMenu }) {
           </div>
         </div>
 
-        {/* Status */}
+     
         <div className="text-center mb-6">
           {gameState === "idle" && (
             <div>
@@ -227,7 +227,7 @@ export default function ReactorGame({ onBackToMenu }) {
           )}
         </div>
 
-        {/* Buttons */}
+   
         <div className="flex justify-center space-x-4">
           {gameState === "idle" && (
             <button
