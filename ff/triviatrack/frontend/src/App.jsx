@@ -63,7 +63,7 @@ import CourseAidTable from "./homecomponents/Dashboard/courseAidTable.jsx";
 import RecommendationSystem from "./homecomponents/Student_Dashboard/RecommendationSystem.jsx";
 import { ToastContainer } from "react-toastify";
 import ForumSearchPage from "./Forum/ForumSearchPage.jsx";
-import ObstacleCourse from "./Pages/admin/games/ObstacleCourse.jsx";
+//import ObstacleCourse from "./Pages/admin/games/ObstacleCourse.jsx";
 import IndustryMenu from "./Pages/admin/games/IndustryMenu.jsx";
 
 const BannerData = {
@@ -158,7 +158,7 @@ function AppRoutes() {
         <Route path="/students/dashboard" element={<StudentDashboard />} />
         <Route path="/teacher/dashboard" element={<Dashboard />} />
         <Route path="/generate-quiz/new" element={<QuizBuilder />} />
-        <Route path="/games/web-dev-runner" element={<ObstacleCourse />} />
+       {/* <Route path="/games/web-dev-runner" element={<ObstacleCourse />} /> */}
 
         <Route path="/generate-quiz/:id" element={<QuizBuilder />} />
 
